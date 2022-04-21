@@ -4,11 +4,26 @@
   "private": true,
   "scripts": {
     "dev": "parcel serve src/index.html --open --host localhost --port 1234",
-    "build": "rimraf build && parcel build src/index.html --dist-dir build --public-url ./"
+    "build": "rimraf build && parcel build src/index.html --dist-dir build --public-url ./",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "./src/**/*.{html,css}": [
+      "prettier --write"
+    ],
+    "./src/**/*.{css}": [
+      "stylelint --max-warnings=0"
+    ]
   },
   "devDependencies": {
-    "posthtml-include": "^1.7.3",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.4.0",
     "parcel": "^2.4.1",
-    "rimraf": "^3.0.2"
+    "posthtml-include": "^1.7.3",
+    "prettier": "2.6.2",
+    "rimraf": "^3.0.2",
+    "stylelint": "^14.7.1",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-standard": "^25.0.0"
   }
 }
