@@ -3,3 +3,5 @@
 /node_modules/
 /build/
 /.parcel-cache/
+build
+coverage
