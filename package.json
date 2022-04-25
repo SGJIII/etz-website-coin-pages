@@ -11,7 +11,7 @@
     "./src/**/*.{html,css}": [
       "prettier --write"
     ],
-    "./src/**/*.{css}": [
+    "./src/**/*.css": [
       "stylelint --max-warnings=0"
     ]
   },
