@@ -19,11 +19,15 @@
     "husky": "^7.0.4",
     "lint-staged": "^12.4.0",
     "parcel": "^2.4.1",
+    "postcss-bem-linter": "^3.3.0",
     "posthtml-include": "^1.7.3",
     "prettier": "2.6.2",
     "rimraf": "^3.0.2",
     "stylelint": "^14.7.1",
+    "stylelint-config-css-modules": "^4.1.0",
     "stylelint-config-prettier": "^9.0.3",
-    "stylelint-config-standard": "^25.0.0"
+    "stylelint-config-standard": "^25.0.0",
+    "stylelint-prettier": "^2.0.0",
+    "stylelint-selector-bem-pattern": "^2.1.1"
   }
 }
