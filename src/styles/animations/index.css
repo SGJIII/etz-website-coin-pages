@@ -1,0 +1,19 @@
+@keyframes show-menu {
+  from {
+    background: transparent;
+  }
+
+  to {
+    background: var(--bright);
+  }
+}
+
+@keyframes hide-menu {
+  from {
+    background: var(--bright);
+  }
+
+  to {
+    background: transparent;
+  }
+}

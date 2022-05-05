@@ -12,14 +12,18 @@
   --dark: rgba(1 18 53 / 100%);
   --dark-50: rgba(1 18 53 / 50%);
   --dark-30: rgba(1 18 53 / 30%);
+  --dark-10: rgba(1 18 53 / 10%);
   --neutral: rgba(1 18 53 / 10%);
   --neutral-light: rgba(1 18 53 / 5%);
   --bright: rgba(255 255 255 / 100%);
   --bright-50: rgba(255 255 255 / 50%);
   --highlight: rgba(3 255 58 / 100%);
+  --highlight-20: rgba(3 255 58 / 20%);
   --positive: rgba(0 166 106 / 100%);
   --negative: rgba(255 0 61 / 100%);
   --negative-03: rgba(255 0 61 / 4%);
+  --text-black: rgba(0 0 0 / 100%);
+  --text-white: rgba(255 255 255 / 100%);
 
   /* Gradient */
   --gradient-main: linear-gradient(
