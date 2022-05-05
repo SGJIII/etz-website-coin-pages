@@ -40,15 +40,9 @@ a:hover {
   --z-index-front-img: 50;
 }
 
-.Main {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
-
 .__section {
   display: flex;
-  scroll-snap-align: center;
+  scroll-snap-align: start;
   scroll-snap-stop: always;
   flex-direction: column;
 }
