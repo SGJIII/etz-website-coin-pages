@@ -1,13 +1,24 @@
-@import url("./theme/color-scheme.css");
 @import url("./fonts/index.css");
+@import url("./theme/typography.css");
+@import url("./theme/color-scheme.css");
+@import url("./animations/index.css");
+@import url("./components/button.css");
+@import url("./components/header-section/index.css");
+@import url("./components/benefits-section/index.css");
+@import url("./components/for-employers-section/index.css");
 
 html,
 body {
   padding: 0;
   margin: 0;
   font-family: Rubik, sans-serif;
+  font-style: normal;
+  font-weight: 400;
   font-size: 14px;
-  line-height: normal;
+  line-height: 20px;
+  scroll-snap-type: y mandatory;
+  color: var(--dark);
+  -webkit-overflow-scrolling: touch;
 }
 
 * {
@@ -15,6 +26,35 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
 a:hover {
   text-decoration: none;
+}
+
+:root {
+  --z-index-menu: 100;
+  --z-index-front-img: 50;
+}
+
+.Main {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.__section {
+  display: flex;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  flex-direction: column;
+}
+
+.__container {
+  align-self: center;
+  justify-self: center;
+  width: 1200px;
 }

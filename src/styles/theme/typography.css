@@ -1,0 +1,40 @@
+/*
+  Default:
+    font-family: Rubik, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--dark);
+*/
+
+h2 {
+  font-weight: 400;
+  font-size: 44px;
+  line-height: 48px;
+}
+.__caption-1 {
+}
+
+.__subtitle-1 {
+  display: block;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+}
+
+.__subtitle-2 {
+  display: block;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.__paragraph-2 {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 0.25px;
+}

@@ -1,0 +1,21 @@
+.Button {
+  background: var(--bright);
+  padding: 12px 52px;
+  color: var(--primary);
+  border-radius: 10px;
+  border: 2px solid var(--bright);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  cursor: pointer;
+}
+
+.Button__outlined {
+  background: transparent;
+  color: var(--text-white);
+}
+
+.Button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
