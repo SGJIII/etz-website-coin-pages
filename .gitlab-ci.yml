@@ -1,17 +1,30 @@
 stages:
+  - test
   - build
   - deploy
+
+.test: &test
+  stage: test
+  image: node:14.17.0
+  tags:
+    - docker
+  cache:
+    paths:
+      - node_modules
+  before_script:
+    - yarn install
+  script:
+    - yarn check:tsc
+    - yarn check:lint
+  artifacts:
+    paths:
+      - node_modules
 
 .build: &build
   stage: build
   image: node:14.17.0
   tags:
     - docker
-  cache:
-    paths:
-      - .node_modules
-  before_script:
-    - yarn install
   script:
     - yarn build
   artifacts:
