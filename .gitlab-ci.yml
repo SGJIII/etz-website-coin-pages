@@ -37,8 +37,14 @@ stages:
   script:
     - aws s3 sync ./build s3://etz-dev-landing/ --delete
 
+develop:test:
+  extends: .test
+  only:
+    - develop
+
 develop:build:
   extends: .build
+  needs: ["develop:test"]
   only:
     - develop
 
