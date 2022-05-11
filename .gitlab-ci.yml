@@ -1,0 +1,37 @@
+stages:
+  - build
+  - deploy
+
+.build: &build
+  stage: build
+  image: node:14.17.0
+  tags:
+    - docker
+  cache:
+    paths:
+      - .node_modules
+  before_script:
+    - yarn install
+  script:
+    - yarn build
+  artifacts:
+    paths:
+      - build
+
+.deploy: &deploy
+  stage: deploy
+  image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
+  script:
+    - aws s3 sync ./build s3://etz-dev-landing/ --acl=public-read --delete
+
+develop:build:
+  extends: .build
+  only:
+    - develop
+
+develop:deploy:
+  extends: .deploy
+  needs: ["develop:build"]
+  only:
+    - develop
+  when: manual
