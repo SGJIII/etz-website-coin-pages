@@ -34,4 +34,4 @@ develop:deploy:
   needs: ["develop:build"]
   only:
     - develop
-  when: manual
+  when: on_success
