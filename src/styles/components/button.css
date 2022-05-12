@@ -19,3 +19,8 @@
   padding: 0;
   border: 0;
 }
+
+.Button__primary {
+  background-color: var(--primary);
+  color: var(--text-white);
+}
