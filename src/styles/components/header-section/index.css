@@ -13,6 +13,10 @@
   overflow: hidden;
 }
 
+.HeaderSection_container {
+  z-index: 10;
+}
+
 .HeaderSection_overflow {
   position: absolute;
   top: 0;

@@ -1,0 +1,67 @@
+.EtzMobileSection {
+  height: 878px;
+  padding: 128px 0;
+  background-image: url("../../../assets/pattern-2.svg");
+  background-position: 0;
+  background-repeat: no-repeat;
+}
+
+.EtzMobileSection_picture {
+  position: relative;
+  flex: 1;
+  top: -400px;
+}
+
+.EtzMobileSection_mobile {
+  position: absolute;
+  width: 354px;
+  height: 729px;
+}
+
+.EtzMobileSection_mobile__front {
+  right: 145px;
+  top: 0;
+}
+
+.EtzMobileSection_mobile__buy {
+  right: -100px;
+  top: 70px;
+}
+
+.EtzMobileSection_coin {
+  position: absolute;
+  width: 600px;
+  height: 779px;
+  right: 0;
+  z-index: 10;
+}
+
+.EtzMobileSection_block {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.EtzMobileSection_title {
+  width: 315px;
+}
+
+.EtzMobileSection_text {
+  padding: 30px 0;
+}
+
+.EtzMobileSection_button {
+  display: flex;
+  align-items: center;
+  margin-top: 36px;
+}
+
+.EtzMobileSection_arrow {
+  padding: 1px 0 0 16px;
+}
+
+.EtzMobileSection_description {
+  width: 540px;
+}

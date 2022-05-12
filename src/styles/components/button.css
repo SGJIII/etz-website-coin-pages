@@ -19,3 +19,27 @@
   padding: 0;
   border: 0;
 }
+
+.Button__primary {
+  background-color: var(--primary);
+  color: var(--text-white);
+}
+
+.Button__primary:hover {
+  background-color: var(--primary-70);
+}
+
+.Button__primary:active {
+  background-color: var(--primary);
+}
+
+.Button__primary:disabled {
+  opacity: 0.5;
+  cursor: initial;
+}
+
+.Button__ghost {
+  color: var(--primary);
+  background-color: var(--bright);
+  border-color: var(--bright);
+}
