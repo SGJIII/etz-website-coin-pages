@@ -9,13 +9,12 @@
 .EtzMobileSection_picture {
   position: relative;
   flex: 1;
-  top: -400px;
+  top: -325px;
 }
 
 .EtzMobileSection_mobile {
   position: absolute;
   width: 354px;
-  height: 729px;
 }
 
 .EtzMobileSection_mobile__front {
@@ -31,7 +30,6 @@
 .EtzMobileSection_coin {
   position: absolute;
   width: 600px;
-  height: 779px;
   right: 0;
   z-index: 10;
 }
