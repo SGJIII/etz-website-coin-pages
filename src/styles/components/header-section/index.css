@@ -65,12 +65,13 @@
   z-index: var(--z-index-menu);
   color: var(--bright);
 }
+
 .HeaderSection_menuContainer {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   width: 1200px;
 }
+
 .HeaderSection_menu__sticky.HeaderSection_menu {
   background: var(--bright);
   position: fixed;
@@ -81,6 +82,17 @@
 .HeaderSection_menu__stickyHide.HeaderSection_menu {
   background: transparent;
   animation: hide-menu 200ms ease-in;
+}
+
+.HeaderSection_initial {
+  display: flex;
+  flex-wrap: nowrap;
+  flex: 1;
+  justify-content: end;
+}
+
+.HeaderSection_headerGetStarted {
+  margin-right: 30px;
 }
 
 .HeaderSection_links {
