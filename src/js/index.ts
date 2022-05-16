@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import Accordion from "./accordion";
 import HeaderMenu from "./header-menu";
 import SmoothScroll from "./smooth-scroll";
