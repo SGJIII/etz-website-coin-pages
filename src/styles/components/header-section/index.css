@@ -92,7 +92,13 @@
 }
 
 .HeaderSection_headerGetStarted {
+  display: none;
   margin-right: 30px;
+}
+
+.HeaderSection_menu__sticky .HeaderSection_headerGetStarted {
+  animation: appearance 200ms ease;
+  display: initial;
 }
 
 .HeaderSection_links {

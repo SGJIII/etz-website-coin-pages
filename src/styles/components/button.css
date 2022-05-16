@@ -39,9 +39,29 @@
 }
 
 .Button__secondary {
-  border: 2px solid #226dff;
+  border: 2px solid var(--primary);
   padding: 10px 18px;
   border-radius: 10px;
+  white-space: nowrap;
+}
+
+.Button__secondary:hover {
+  background-color: var(--primary-70);
+  border: none;
+  padding: 12px 20px;
+  color: var(--text-white);
+}
+
+.Button__secondary:active {
+  background-color: var(--primary);
+  color: var(--text-white);
+  padding: 12px 20px;
+  border: none;
+}
+
+.Button__secondary:disabled {
+  opacity: 0.5;
+  cursor: initial;
 }
 
 .Button__ghost {
