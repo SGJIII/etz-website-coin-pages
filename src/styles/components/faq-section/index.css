@@ -79,3 +79,9 @@
 .FAQSection_accordionDetailsDescription {
   color: var(--dark-50);
 }
+
+.FAQSection_arrowIcon {
+  width: 14px;
+  height: 10px;
+  align-self: center;
+}
