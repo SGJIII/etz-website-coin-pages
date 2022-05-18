@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles/index.css" />
     <title>ETZ</title>
+    <script type="module">
+      const package = require("../package.json");
+      console.log("Build version: " + package.version);
+    </script>
   </head>
   <body>
     <main>
