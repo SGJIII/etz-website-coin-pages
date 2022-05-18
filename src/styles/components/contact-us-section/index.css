@@ -1,6 +1,8 @@
 .ContactUsSection {
   height: 675px;
-  padding: 128px 0px;
+  padding-top: 150px;
+  display: flex;
+  align-items: center;
   box-sizing: content-box;
 }
 
