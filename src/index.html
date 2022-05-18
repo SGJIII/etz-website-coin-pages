@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles/index.css" />
     <title>ETZ</title>
+    <script type="module">
+      const config = require("../package.json");
+      console.log("Build version: " + config.version);
+    </script>
   </head>
   <body>
     <main>
@@ -14,6 +18,7 @@
       <include src="components/for-employers-section/index.html"></include>
       <include src="components/etz-mobile-section/index.html"></include>
       <include src="components/faq-section/index.html"></include>
+      <include src="components/contact-us-section/index.html"></include>
     </main>
     <script type="module" src="js/index.ts"></script>
   </body>

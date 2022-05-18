@@ -1,0 +1,10 @@
+.__inputWrapper {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.__inputWrapper input {
+  border: none;
+  outline: none;
+}
