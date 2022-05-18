@@ -8,6 +8,12 @@
     color: var(--dark);
 */
 
+.__heading-1 {
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 52px;
+}
+
 h2 {
   font-weight: 400;
   font-size: 44px;
