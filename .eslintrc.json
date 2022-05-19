@@ -13,6 +13,7 @@
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
+  "ignorePatterns": ["src/assets", "src/js/three.js"],
   "env": {
     "es6": true,
     "node": true,
