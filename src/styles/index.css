@@ -4,12 +4,13 @@
 @import url("./animations/index.css");
 @import url("./components/button.css");
 @import url("./components/input.css");
-@import url("./components/header-section/index.css");
-@import url("./components/benefits-section/index.css");
-@import url("./components/for-employers-section/index.css");
-@import url("./components/etz-mobile-section/index.css");
-@import url("./components/faq-section/index.css");
-@import url("./components/contact-us-section/index.css");
+@import url("./components/header-section.css");
+@import url("./components/benefits-section.css");
+@import url("./components/for-employers-section.css");
+@import url("./components/etz-mobile-section.css");
+@import url("./components/faq-section.css");
+@import url("./components/contact-us-section.css");
+@import url("./components/header-menu.css");
 
 html,
 body {
