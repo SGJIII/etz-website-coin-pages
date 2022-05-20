@@ -29,8 +29,11 @@
 }
 
 .FAQSection_accordion__while {
-  background: var(--bright);
-  border: 1px solid var(--primary);
+  animation: dark-to-light 1s ease-out;
+}
+
+.FAQSection_accordion__dark {
+  animation: light-to-dark 1s ease-out;
 }
 
 .FAQSection_accordionSummary {
@@ -60,16 +63,22 @@
   display: flex;
   flex-wrap: wrap;
   overflow: hidden;
-  height: 0;
+  max-height: 0;
   padding: 0;
 }
 
 .FAQSection_accordionDetailsItem {
   flex-grow: 0;
-  max-width: 50%;
-  flex-basis: 50%;
+  max-width: 100%;
+  flex-basis: 100%;
   margin-bottom: 24px;
   transition: all 100ms ease-in-out;
+}
+
+.FAQSection_accordionDetailsItem__50 {
+  flex-grow: 0;
+  max-width: 50%;
+  flex-basis: 50%;
 }
 
 .FAQSection_accordionDetailsTitle {
