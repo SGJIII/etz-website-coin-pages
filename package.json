@@ -21,6 +21,9 @@
       "prettier --write"
     ]
   },
+  "staticFiles": {
+    "staticPath": "src/assets"
+  },
   "devDependencies": {
     "@alienlebarge/stylelint-config": "^3.1.6",
     "@typescript-eslint/eslint-plugin": "^5.21.0",
@@ -33,10 +36,15 @@
     "husky": "^7.0.4",
     "lint-staged": "^12.4.0",
     "parcel": "^2.4.1",
+    "parcel-reporter-static-files-copy": "^1.3.4",
     "postcss-bem-linter": "^3.3.0",
     "posthtml-include": "^1.7.3",
     "prettier": "2.6.2",
     "rimraf": "^3.0.2",
     "typescript": "^4.6.3"
+  },
+  "dependencies": {
+    "lil-gui": "^0.16.1",
+    "three": "^0.140.2"
   }
 }
