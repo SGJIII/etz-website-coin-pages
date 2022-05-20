@@ -20,7 +20,7 @@
 
 @keyframes slide-down {
   0% {
-    height: 300px;
+    max-height: 1000px;
     padding: 11px 42px;
   }
   70% {
@@ -28,20 +28,20 @@
   }
   100% {
     padding: 0;
-    height: 0;
+    max-height: 0;
   }
 }
 
 @keyframes slide-up {
   0% {
     padding: 0;
-    height: 0;
+    max-height: 0;
   }
   1% {
     padding: 11px 42px;
   }
   100% {
-    height: 300px;
+    max-height: 1000px;
     padding: 11px 42px;
   }
 }
@@ -56,5 +56,27 @@
   }
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes dark-to-light {
+  from {
+    background: var(--primary-5);
+    border: 1px solid transparent;
+  }
+  to {
+    background: var(--bright);
+    border: 1px solid var(--primary);
+  }
+}
+
+@keyframes light-to-dark {
+  from {
+    background: var(--bright);
+    border: 1px solid var(--primary);
+  }
+  to {
+    background: var(--primary-5);
+    border: 1px solid transparent;
   }
 }

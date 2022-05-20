@@ -1,6 +1,7 @@
 import Accordion from "./accordion";
 import HeaderMenu from "./header-menu";
 import SmoothScroll from "./smooth-scroll";
+import "./three";
 
 document.addEventListener(
   "DOMContentLoaded",
