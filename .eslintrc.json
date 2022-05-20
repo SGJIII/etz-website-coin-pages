@@ -13,14 +13,14 @@
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
-  "ignorePatterns": ["src/assets", "src/js/three.js"],
   "env": {
     "es6": true,
     "node": true,
     "browser": true
   },
   "rules": {
-    "import/no-duplicates": ["error"],
+    "jsx-quotes": [2, "prefer-double"],
+    "import/no-anonymous-default-export": "off",
     "no-unused-vars": [
       "warn",
       { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }
@@ -29,7 +29,29 @@
       "warn",
       { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }
     ],
-    "no-console": ["warn", { "allow": ["error"] }]
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/camelcase": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "no-console": ["warn", { "allow": ["error"] }],
+    "@typescript-eslint/consistent-type-definitions": "off",
+    "@typescript-eslint/no-invalid-void-type": "off"
+  },
+  "settings": {
+    "import/extensions": [".ts"],
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts"]
+    },
+    "import/resolver": {
+      "node": {
+        "paths": ["src"],
+        "extensions": [".ts"]
+      },
+      "typescript": {
+        "alwaysTryTypes": true
+      }
+    }
   },
   "root": true
 }

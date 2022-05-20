@@ -4,13 +4,12 @@
 @import url("./animations/index.css");
 @import url("./components/button.css");
 @import url("./components/input.css");
-@import url("./components/header-section.css");
-@import url("./components/benefits-section.css");
-@import url("./components/for-employers-section.css");
-@import url("./components/etz-mobile-section.css");
-@import url("./components/faq-section.css");
-@import url("./components/contact-us-section.css");
-@import url("./components/header-menu.css");
+@import url("./components/header-section/index.css");
+@import url("./components/benefits-section/index.css");
+@import url("./components/for-employers-section/index.css");
+@import url("./components/etz-mobile-section/index.css");
+@import url("./components/faq-section/index.css");
+@import url("./components/contact-us-section/index.css");
 
 html,
 body {
@@ -86,38 +85,4 @@ textarea::-ms-input-placeholder {
   align-self: center;
   justify-self: center;
   width: 1200px;
-}
-
-/* Three classes for phone animation*/
-.section_first {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-}
-
-.section_second {
-  position: relative;
-  height: 100vh;
-  width: 100%;
-}
-
-.section_third {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-}
-
-.webgl {
-  position: fixed;
-  top: 0;
-  left: 0;
-  outline: none;
-  z-index: 50;
-  pointer-events: none;
-}
-
-.lil-gui {
-  display: none !important;
-  left: 15px;
-  right: auto;
 }
