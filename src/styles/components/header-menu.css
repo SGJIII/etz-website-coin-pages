@@ -1,0 +1,124 @@
+.HeaderMenu_entryIconDark {
+  display: none;
+}
+
+.HeaderMenu_logoDark {
+  display: none;
+}
+
+.HeaderMenu_menu__sticky {
+  color: var(--text-black);
+}
+
+.HeaderMenu_menu__sticky .HeaderMenu_logoDark {
+  display: initial;
+}
+
+.HeaderMenu_menu__sticky .HeaderMenu_logoLight {
+  display: none;
+}
+
+.HeaderMenu_menu__sticky .HeaderMenu_entryIconDark {
+  display: initial;
+}
+
+.HeaderMenu_menu__sticky .HeaderMenu_entryIconLight {
+  display: none;
+}
+
+.HeaderMenu_menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: var(--height-menu);
+  z-index: var(--z-index-menu);
+  color: var(--bright);
+}
+
+.HeaderMenu_menuContainer {
+  display: flex;
+  align-items: center;
+  width: 1200px;
+}
+
+.HeaderMenu_menu__sticky.HeaderMenu_menu {
+  background: var(--bright);
+  position: fixed;
+  animation: show-menu 200ms ease-out;
+  color: var(--text-black);
+}
+
+.HeaderMenu_menu__stickyHide.HeaderMenu_menu {
+  background: transparent;
+  animation: hide-menu 200ms ease-in;
+}
+
+.HeaderMenu_initial {
+  display: flex;
+  flex-wrap: nowrap;
+  flex: 1;
+  justify-content: end;
+}
+
+.HeaderMenu_headerGetStarted {
+  display: none;
+  margin-right: 30px;
+}
+
+.HeaderMenu_menu__sticky .HeaderMenu_headerGetStarted {
+  animation: appearance 200ms ease;
+  display: initial;
+}
+
+.HeaderMenu_links {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.HeaderMenu_links .HeaderMenu_link {
+  display: inline;
+  padding: 1px 16px;
+  margin: 0 24px;
+  white-space: nowrap;
+  border-radius: 16px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 30px;
+  letter-spacing: 0.25px;
+  cursor: pointer;
+}
+
+.HeaderMenu_links .HeaderMenu_link:first-child {
+  margin-left: 0;
+}
+
+.HeaderMenu_links .HeaderMenu_link:last-child {
+  margin-right: 0;
+}
+
+.HeaderMenu_link__highlight {
+  color: var(--highlight);
+  background-color: var(--dark-10);
+}
+
+.HeaderMenu_menu__sticky .HeaderMenu_link__highlight {
+  color: var(--positive);
+  background-color: var(--highlight-20);
+}
+
+.HeaderMenu_buttonLink {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  padding: 0.8em;
+  border-radius: 0.8em;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.HeaderMenu_buttonIcon {
+  margin-right: 12px;
+}
