@@ -29,11 +29,11 @@
 }
 
 .FAQSection_accordion__while {
-  animation: dark-to-light 1s ease-out;
+  animation: dark-to-light 1s ease-out forwards;
 }
 
 .FAQSection_accordion__dark {
-  animation: light-to-dark 1s ease-out;
+  animation: light-to-dark 1s ease-out forwards;
 }
 
 .FAQSection_accordionSummary {

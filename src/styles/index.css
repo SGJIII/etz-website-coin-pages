@@ -117,6 +117,7 @@ textarea::-ms-input-placeholder {
 }
 
 .lil-gui {
+  display: none !important;
   left: 15px;
   right: auto;
 }
