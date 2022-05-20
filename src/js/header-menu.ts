@@ -16,7 +16,7 @@ export default class HeaderMenu {
    */
   public init() {
     this.firstLoad = true;
-    this.target = document.querySelector(".HeaderMenu_menu");
+    this.target = document.querySelector(".HeaderSection_menu");
 
     window.addEventListener("scroll", () => {
       this.handlePositionStickyMenu();
@@ -27,15 +27,15 @@ export default class HeaderMenu {
     this.calculatePosition();
 
     if (this.isInitialPosition) {
-      this.target?.classList.add("HeaderMenu_menu__sticky");
-      this.target?.classList.remove("HeaderMenu_menu__stickyHide");
+      this.target?.classList.add("HeaderSection_menu__sticky");
+      this.target?.classList.remove("HeaderSection_menu__stickyHide");
       this.firstLoad = false;
       return;
     }
 
     if (this.firstLoad) return;
-    this.target?.classList.remove("HeaderMenu_menu__sticky");
-    this.target?.classList.add("HeaderMenu_menu__stickyHide");
+    this.target?.classList.remove("HeaderSection_menu__sticky");
+    this.target?.classList.add("HeaderSection_menu__stickyHide");
   }
 
   private calculatePosition() {

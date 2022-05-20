@@ -1,7 +1,7 @@
 .__inputWrapper {
   background: #ffffff;
   border-radius: 10px;
-  overflow: hidden;
+  padding: 16px;
 }
 
 .__inputWrapper input {
