@@ -1,8 +1,8 @@
 type Props = { className: string };
 
 export default class HeaderMenu {
-  private target: Element | null = null;
-
+  private target: HTMLElement | null = null;
+  private className = "";
   private scrollPosition = 0;
 
   private isInitialPosition = true;
@@ -11,13 +11,21 @@ export default class HeaderMenu {
 
   constructor(props: Props) {
     this.firstLoad = true;
-    this.target = document.querySelector(props.className);
+    this.className = props.className;
+    this.target = document.querySelector<HTMLElement>(props.className);
   }
 
   /**
    * init
    */
   public init() {
+    if (!this.target) {
+      throw new Error(
+        `The target does not exist with the ${this.className} class`
+      );
+    }
+
+    this.target.style.display = "flex";
     this.handlePositionStickyMenu();
 
     window.addEventListener("scroll", () => {
