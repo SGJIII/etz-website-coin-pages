@@ -12,7 +12,6 @@ stages:
 
 develop:deploy:
   extends: .deploy
-  needs: ["develop:build"]
   only:
     - develop
   when: on_success
