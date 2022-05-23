@@ -1,24 +1,6 @@
 stages:
-  - test
   - build
   - deploy
-
-.test: &test
-  stage: test
-  image: node:14.17.0
-  tags:
-    - docker
-  cache:
-    paths:
-      - node_modules
-  before_script:
-    - yarn install
-  script:
-    - yarn check:tsc
-    - yarn check:lint
-  artifacts:
-    paths:
-      - node_modules
 
 .build: &build
   stage: build
@@ -26,6 +8,7 @@ stages:
   tags:
     - docker
   script:
+    - yarn install
     - yarn build
   artifacts:
     paths:
@@ -37,14 +20,8 @@ stages:
   script:
     - aws s3 sync ./build s3://etz-dev-landing/ --delete
 
-develop:test:
-  extends: .test
-  only:
-    - develop
-
 develop:build:
   extends: .build
-  needs: ["develop:test"]
   only:
     - develop
 
