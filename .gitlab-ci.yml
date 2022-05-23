@@ -17,6 +17,9 @@ stages:
 .deploy: &deploy
   stage: deploy
   image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
+  before_script:
+    - yarn install
+    - yarn build
   script:
     - aws s3 sync ./build s3://etz-dev-landing/ --delete
 
@@ -27,7 +30,6 @@ develop:build:
 
 develop:deploy:
   extends: .deploy
-  needs: ["develop:build"]
   only:
     - develop
   when: on_success
