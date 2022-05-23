@@ -1,3 +1,5 @@
+type Props = { className: string };
+
 export default class HeaderMenu {
   private target: Element | null = null;
 
@@ -7,16 +9,16 @@ export default class HeaderMenu {
 
   private firstLoad = true;
 
-  constructor() {
+  constructor(props: Props) {
     this.firstLoad = true;
+    this.target = document.querySelector(props.className);
   }
 
   /**
    * init
    */
   public init() {
-    this.firstLoad = true;
-    this.target = document.querySelector(".HeaderMenu_menu");
+    this.handlePositionStickyMenu();
 
     window.addEventListener("scroll", () => {
       this.handlePositionStickyMenu();
