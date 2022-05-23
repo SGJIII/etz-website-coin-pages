@@ -33,7 +33,9 @@ stages:
 
 .deploy: &deploy
   stage: deploy
-  image: "python:3.7"
+  image: python:latest
+  tags:
+    - docker
   before_script:
     - aws configure list
     - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
