@@ -1,22 +1,32 @@
-export default class HeaderMenu {
-  private target: Element | null = null;
+type Props = { className: string };
 
+export default class HeaderMenu {
+  private target: HTMLElement | null = null;
+  private className = "";
   private scrollPosition = 0;
 
   private isInitialPosition = true;
 
   private firstLoad = true;
 
-  constructor() {
+  constructor(props: Props) {
     this.firstLoad = true;
+    this.className = props.className;
+    this.target = document.querySelector<HTMLElement>(props.className);
   }
 
   /**
    * init
    */
   public init() {
-    this.firstLoad = true;
-    this.target = document.querySelector(".HeaderMenu_menu");
+    if (!this.target) {
+      throw new Error(
+        `The target does not exist with the ${this.className} class`
+      );
+    }
+
+    this.target.style.display = "flex";
+    this.handlePositionStickyMenu();
 
     window.addEventListener("scroll", () => {
       this.handlePositionStickyMenu();

@@ -6,7 +6,7 @@ import "./three";
 document.addEventListener(
   "DOMContentLoaded",
   () => {
-    const headerMenu = new HeaderMenu();
+    const headerMenu = new HeaderMenu({ className: ".HeaderMenu_menu" });
     const smoothScroll = new SmoothScroll();
     const accordion = new Accordion();
 
