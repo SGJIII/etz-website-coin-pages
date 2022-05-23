@@ -33,7 +33,7 @@ stages:
 
 .deploy: &deploy
   stage: deploy
-  image: python:latest
+  image: "python:3.7"
   before_script:
     - aws configure list
     - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
