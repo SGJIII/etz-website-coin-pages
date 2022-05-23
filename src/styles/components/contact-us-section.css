@@ -42,6 +42,7 @@
 
 .ContactUsSection_form input {
   width: 100%;
+  padding: 16px;
 }
 
 .ContactUsSection_input__half {
@@ -67,6 +68,7 @@
 .ContactUsSection_textarea textarea {
   width: 100%;
   height: 100%;
+  padding: 16px;
 }
 
 .ContactUsSection_peopleImgBlock {
@@ -124,7 +126,7 @@
 }
 
 .ContactUsSection_checkbox:checked + label::before {
-  background-image: url("../../../assets/check.svg");
+  background-image: url("../../assets/check.svg");
 }
 
 .ContactUsSection_rules {

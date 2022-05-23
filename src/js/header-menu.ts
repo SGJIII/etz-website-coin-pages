@@ -1,22 +1,32 @@
-export default class HeaderMenu {
-  private target: Element | null = null;
+type Props = { className: string };
 
+export default class HeaderMenu {
+  private target: HTMLElement | null = null;
+  private className = "";
   private scrollPosition = 0;
 
   private isInitialPosition = true;
 
   private firstLoad = true;
 
-  constructor() {
+  constructor(props: Props) {
     this.firstLoad = true;
+    this.className = props.className;
+    this.target = document.querySelector<HTMLElement>(props.className);
   }
 
   /**
    * init
    */
   public init() {
-    this.firstLoad = true;
-    this.target = document.querySelector(".HeaderSection_menu");
+    if (!this.target) {
+      throw new Error(
+        `The target does not exist with the ${this.className} class`
+      );
+    }
+
+    this.target.style.display = "flex";
+    this.handlePositionStickyMenu();
 
     window.addEventListener("scroll", () => {
       this.handlePositionStickyMenu();
@@ -27,15 +37,15 @@ export default class HeaderMenu {
     this.calculatePosition();
 
     if (this.isInitialPosition) {
-      this.target?.classList.add("HeaderSection_menu__sticky");
-      this.target?.classList.remove("HeaderSection_menu__stickyHide");
+      this.target?.classList.add("HeaderMenu_menu__sticky");
+      this.target?.classList.remove("HeaderMenu_menu__stickyHide");
       this.firstLoad = false;
       return;
     }
 
     if (this.firstLoad) return;
-    this.target?.classList.remove("HeaderSection_menu__sticky");
-    this.target?.classList.add("HeaderSection_menu__stickyHide");
+    this.target?.classList.remove("HeaderMenu_menu__sticky");
+    this.target?.classList.add("HeaderMenu_menu__stickyHide");
   }
 
   private calculatePosition() {

@@ -1,11 +1,12 @@
 import Accordion from "./accordion";
 import HeaderMenu from "./header-menu";
 import SmoothScroll from "./smooth-scroll";
+import "./three";
 
 document.addEventListener(
   "DOMContentLoaded",
   () => {
-    const headerMenu = new HeaderMenu();
+    const headerMenu = new HeaderMenu({ className: ".HeaderMenu_menu" });
     const smoothScroll = new SmoothScroll();
     const accordion = new Accordion();
 
