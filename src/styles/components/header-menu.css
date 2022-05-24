@@ -7,6 +7,7 @@
 }
 
 .HeaderMenu_menu__sticky {
+  --height-menu: 106px;
   color: var(--text-black);
 }
 
@@ -36,6 +37,7 @@
   height: var(--height-menu);
   z-index: var(--z-index-menu);
   color: var(--bright);
+  transition: height 300ms linear;
 }
 
 .HeaderMenu_menuContainer {
@@ -76,15 +78,17 @@
 .HeaderMenu_links {
   display: flex;
   flex-wrap: nowrap;
+  justify-content: flex-start;
+  padding-left: 56px;
 }
 
 .HeaderMenu_links .HeaderMenu_link {
   display: inline;
   padding: 1px 16px;
-  margin: 0 24px;
+  margin-right: 16px;
   white-space: nowrap;
   border-radius: 16px;
-  font-weight: 400;
+  font-weight: 300;
   font-size: 18px;
   line-height: 30px;
   letter-spacing: 0.25px;

@@ -18,7 +18,7 @@ body {
   margin: 0;
   font-family: Rubik, sans-serif;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   font-size: 14px;
   line-height: 20px;
   scroll-snap-type: y mandatory;
@@ -77,8 +77,6 @@ textarea::-ms-input-placeholder {
 
 .__section {
   display: flex;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
   flex-direction: column;
 }
 
@@ -92,19 +90,16 @@ textarea::-ms-input-placeholder {
 .section_first {
   position: relative;
   width: 100%;
-  height: 100vh;
 }
 
 .section_second {
   position: relative;
-  height: 100vh;
   width: 100%;
 }
 
 .section_third {
   position: relative;
   width: 100%;
-  height: 100vh;
 }
 
 .webgl {

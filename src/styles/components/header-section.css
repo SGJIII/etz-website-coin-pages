@@ -1,14 +1,14 @@
 :root {
-  --height-menu: 106px;
+  --height-menu: 164px;
 }
 
 .HeaderSection {
   position: relative;
   background: var(--gradient-main);
-  padding-top: var(--height-menu);
   height: 847px;
   box-sizing: content-box;
   padding: 128px 0px;
+  padding-top: var(--height-menu);
   color: var(--text-white);
   overflow: hidden;
 }
@@ -30,6 +30,8 @@
   position: relative;
   display: flex;
   margin-right: -210px;
+  width: 688px;
+  height: 457px;
 }
 
 .HeaderSection_title {
@@ -38,7 +40,7 @@
   font-size: 48px;
   line-height: 52px;
   color: var(--text-white);
-  margin: 40px 0;
+  margin-bottom: 40px;
   width: 688px;
 }
 
@@ -50,7 +52,6 @@
   line-height: 30px;
   letter-spacing: 0.25px;
   color: var(--text-white);
-  margin: 40px 0;
 }
 
 .HeaderSection_mobile {
@@ -72,6 +73,11 @@
   height: 15vw;
   background: var(--bright);
   clip-path: polygon(100% 0%, 0% 90%, 100% 100%);
+}
+
+.HeaderSection_buttons {
+  position: absolute;
+  bottom: 0;
 }
 
 .HeaderSection_downloadButton {
