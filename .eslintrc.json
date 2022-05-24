@@ -20,6 +20,8 @@
     "browser": true
   },
   "rules": {
+    "@typescript-eslint/no-this-alias": "off",
+    "no-prototype-builtins": "off",
     "import/no-duplicates": ["error"],
     "no-unused-vars": [
       "warn",
