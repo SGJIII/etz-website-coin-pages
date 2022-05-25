@@ -1,19 +1,18 @@
 :root {
-  --height-menu: 164px;
+  --height-menu: 106px;
 }
 
 .HeaderSection {
   position: relative;
   background: var(--gradient-main);
-  height: 847px;
   box-sizing: content-box;
-  padding: 128px 0px;
-  padding-top: var(--height-menu);
   color: var(--text-white);
   overflow: hidden;
 }
 
 .HeaderSection_container {
+  padding-top: 84px;
+  width: 1167px !important;
   z-index: 10;
 }
 
@@ -40,7 +39,7 @@
   font-size: 48px;
   line-height: 52px;
   color: var(--text-white);
-  margin-bottom: 40px;
+  margin-bottom: 33px;
   width: 688px;
 }
 

@@ -7,7 +7,6 @@
 }
 
 .HeaderMenu_menu__sticky {
-  --height-menu: 106px;
   color: var(--text-black);
 }
 
@@ -31,13 +30,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  position: fixed;
+  position: initial;
   left: 0;
   right: 0;
   height: var(--height-menu);
   z-index: var(--z-index-menu);
   color: var(--bright);
   transition: height 300ms linear;
+  background-color: transparent;
+  margin-top: 29px;
 }
 
 .HeaderMenu_menuContainer {
@@ -85,7 +86,7 @@
 .HeaderMenu_links .HeaderMenu_link {
   display: inline;
   padding: 1px 16px;
-  margin-right: 16px;
+  margin-right: 21px;
   white-space: nowrap;
   border-radius: 16px;
   font-weight: 300;
@@ -111,6 +112,7 @@
 .HeaderMenu_menu__sticky .HeaderMenu_link__highlight {
   color: var(--positive);
   background-color: var(--highlight-20);
+  margin-left: 14px;
 }
 
 .HeaderMenu_buttonLink {

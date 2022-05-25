@@ -1,9 +1,9 @@
 .EtzMobileSection {
-  height: 878px;
-  padding: 128px 0;
+  padding: 45px 0;
   background-image: url("../../assets/pattern-2.svg");
   background-position: 0;
   background-repeat: no-repeat;
+  padding-left: 10px;
 }
 
 .EtzMobileSection_picture {
@@ -36,9 +36,6 @@
 
 .EtzMobileSection_block {
   display: flex;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
   height: 100%;
 }
 
