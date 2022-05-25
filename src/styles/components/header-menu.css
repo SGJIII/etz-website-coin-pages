@@ -47,12 +47,6 @@
   width: 1200px;
 }
 
-.HeaderMenu_menu__sticky .HeaderMenu_menuContainer {
-  position: relative;
-  top: 2px;
-  left: -10px;
-}
-
 .HeaderMenu_menu__sticky.HeaderMenu_menu {
   background: var(--bright);
   position: fixed;

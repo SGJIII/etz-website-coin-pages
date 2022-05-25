@@ -1,9 +1,12 @@
 .ForEmployersSection {
   padding: 52px 0px;
   box-sizing: content-box;
-  margin-left: 10px;
   padding-top: 0;
   margin-top: -20px;
+}
+
+.ForEmployersSection_container {
+  margin-left: 10px;
 }
 
 .ForEmployersSection_title {
