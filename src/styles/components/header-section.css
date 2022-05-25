@@ -10,9 +10,14 @@
   overflow: hidden;
 }
 
+.HeaderSection_menu {
+  min-height: 106px;
+  margin: 29px 0;
+}
+
 .HeaderSection_container {
-  padding-top: 84px;
-  width: 1167px !important;
+  padding-top: 55px;
+  width: 1176px !important;
   z-index: 10;
 }
 

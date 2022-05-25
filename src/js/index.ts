@@ -7,11 +7,11 @@ import Butter from "./butter";
 document.addEventListener(
   "DOMContentLoaded",
   () => {
-    // const headerMenu = new HeaderMenu({ className: ".HeaderMenu_menu" });
+    const headerMenu = new HeaderMenu({ className: ".HeaderMenu_menu" });
     const smoothScroll = new SmoothScroll();
     const accordion = new Accordion();
 
-    // headerMenu.init();
+    headerMenu.init();
     smoothScroll.init();
     accordion.init();
 

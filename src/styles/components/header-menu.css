@@ -6,8 +6,23 @@
   display: none;
 }
 
+.HeaderMenu_menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: initial;
+  left: 0;
+  right: 0;
+  height: var(--height-menu);
+  z-index: var(--z-index-menu);
+  color: var(--bright);
+  background-color: transparent;
+}
+
 .HeaderMenu_menu__sticky {
   color: var(--text-black);
+  margin-top: 0;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .HeaderMenu_menu__sticky .HeaderMenu_logoDark {
@@ -26,37 +41,29 @@
   display: none;
 }
 
-.HeaderMenu_menu {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: initial;
-  left: 0;
-  right: 0;
-  height: var(--height-menu);
-  z-index: var(--z-index-menu);
-  color: var(--bright);
-  transition: height 300ms linear;
-  background-color: transparent;
-  margin-top: 29px;
-}
-
 .HeaderMenu_menuContainer {
   display: flex;
   align-items: center;
   width: 1200px;
 }
 
+.HeaderMenu_menu__sticky .HeaderMenu_menuContainer {
+  position: relative;
+  top: 2px;
+  left: -10px;
+}
+
 .HeaderMenu_menu__sticky.HeaderMenu_menu {
   background: var(--bright);
   position: fixed;
-  animation: show-menu 200ms ease-out;
+  animation: show-menu 100ms linear;
   color: var(--text-black);
+  top: 0;
 }
 
 .HeaderMenu_menu__stickyHide.HeaderMenu_menu {
   background: transparent;
-  animation: hide-menu 200ms ease-in;
+  animation: hide-menu 100ms linear;
 }
 
 .HeaderMenu_initial {
@@ -72,7 +79,7 @@
 }
 
 .HeaderMenu_menu__sticky .HeaderMenu_headerGetStarted {
-  animation: appearance 200ms ease;
+  animation: appearance 100ms ease;
   display: initial;
 }
 
@@ -85,7 +92,7 @@
 
 .HeaderMenu_links .HeaderMenu_link {
   display: inline;
-  padding: 1px 16px;
+  padding: 0 15px;
   margin-right: 21px;
   white-space: nowrap;
   border-radius: 16px;
@@ -107,12 +114,17 @@
 .HeaderMenu_link__highlight {
   color: var(--highlight);
   background-color: var(--dark-10);
+  margin-left: 16px;
 }
 
 .HeaderMenu_menu__sticky .HeaderMenu_link__highlight {
   color: var(--positive);
   background-color: var(--highlight-20);
   margin-left: 14px;
+}
+
+.HeaderMenu_menu__sticky .HeaderMenu_buttonLink {
+  color: var(--primary);
 }
 
 .HeaderMenu_buttonLink {
@@ -122,6 +134,8 @@
   padding: 0.8em;
   border-radius: 0.8em;
   white-space: nowrap;
+  font-size: 18px;
+  font-weight: 400;
   cursor: pointer;
 }
 

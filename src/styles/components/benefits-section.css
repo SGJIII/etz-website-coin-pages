@@ -1,5 +1,6 @@
 .BenefitsSection {
-  height: 696px;
+  height: 100vh;
   padding: 52px 0px;
   box-sizing: content-box;
+  margin-top: 70px;
 }

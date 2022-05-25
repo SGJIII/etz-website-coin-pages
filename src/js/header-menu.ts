@@ -52,6 +52,9 @@ export default class HeaderMenu {
     this.scrollPosition =
       window.pageYOffset || document.documentElement.scrollTop;
     this.isInitialPosition =
-      this.scrollPosition > (this.target?.clientHeight ?? 0) * (3 / 5);
+      this.scrollPosition >
+      (this.target?.clientHeight ?? 0) -
+        (this.target?.clientHeight ?? 0) / 2 -
+        26;
   }
 }
