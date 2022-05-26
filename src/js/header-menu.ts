@@ -79,7 +79,7 @@ export default class HeaderMenu {
     window.addEventListener("scroll", () => {
       this.scrollDistance = window.scrollY;
       if (window.innerWidth > 768) {
-        this.sections.forEach((el, i) => {
+        this.sections.forEach((el) => {
           const element = el as HTMLElement;
 
           const firstElement = this.sections[0] as HTMLElement;
