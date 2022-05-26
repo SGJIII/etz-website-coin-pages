@@ -119,8 +119,8 @@ const gltfLoader = new GLTFLoader();
 gltfLoader.setDRACOLoader(dracoLoader);
 
 gltfLoader.load(MODEL_NAME, (gltf) => {
-  gltf.scene.scale.set(2, 2, 2);
-  gltf.scene.position.set(2, 0, 0);
+  gltf.scene.scale.set(1.7, 1.7, 1.7);
+  gltf.scene.position.set(2.2, -0.2, 0);
   window.scene = gltf.scene;
 
   phoneMesh = gltf.scene.children[0].children[0];
