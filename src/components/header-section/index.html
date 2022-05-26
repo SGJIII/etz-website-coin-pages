@@ -1,7 +1,7 @@
-<article
-  id="header"
-  class="HeaderSection section_first __section __sidePadding"
->
+<article id="header" class="HeaderSection __section __sidePadding">
+  <div class="HeaderSection_menu">
+    <include src="components/header-menu/index.html"></include>
+  </div>
   <div class="HeaderSection_overflow"></div>
   <div class="HeaderSection_container __container">
     <section>
@@ -19,12 +19,15 @@
             well.</span
           >
         </div>
-      </div>
-      <div>
-        <button class="Button Button__ghost">Get Started</button>
-        <button class="Button Button__outlined HeaderSection_downloadButton">
-          Download App
-        </button>
+        <!--Hidden until the release of other projects-->
+        <!-- <div class="HeaderSection_buttons">
+          <button class="Button Button__ghost HeaderSection_getStartedButton">
+            Get Started
+          </button>
+          <button class="Button Button__outlined HeaderSection_downloadButton">
+            Download App
+          </button>
+        </div> -->
       </div>
       <div class="HeaderSection_triangle"></div>
     </section>

@@ -13,13 +13,20 @@
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
-  "ignorePatterns": ["src/assets", "src/js/three.js"],
+  "ignorePatterns": [
+    "src/assets",
+    "src/js/*.js",
+    "src/js/services/universalsmoothscroll-ease-functions-min.js",
+    "src/js/services/universalsmoothscroll-min.js"
+  ],
   "env": {
     "es6": true,
     "node": true,
     "browser": true
   },
   "rules": {
+    "@typescript-eslint/no-this-alias": "off",
+    "no-prototype-builtins": "off",
     "import/no-duplicates": ["error"],
     "no-unused-vars": [
       "warn",
