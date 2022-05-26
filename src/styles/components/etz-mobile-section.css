@@ -33,7 +33,7 @@
 .EtzMobileSection_coin {
   position: absolute;
   z-index: 10;
-  top: -119px;
+  top: -139px;
   right: -39px;
 
   width: 600px;
@@ -74,6 +74,6 @@
 
 .EtzMobileSection_pattern {
   position: absolute;
-  top: -200px;
-  right: -297px;
+  top: -213px;
+  right: -330px;
 }
