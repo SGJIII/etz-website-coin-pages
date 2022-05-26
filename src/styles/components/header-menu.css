@@ -7,22 +7,26 @@
 }
 
 .HeaderMenu_menu {
+  position: initial;
+  z-index: var(--z-index-menu);
+  right: 0;
+  left: 0;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  position: initial;
-  left: 0;
-  right: 0;
+
   height: var(--height-menu);
+
   color: var(--bright);
   background-color: transparent;
-  z-index: var(--z-index-menu);
 }
 
 .HeaderMenu_menu__sticky {
-  color: var(--text-black);
   margin-top: 0;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+
+  color: var(--text-black);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .HeaderMenu_menu__sticky .HeaderMenu_logoDark {
@@ -42,155 +46,136 @@
 }
 
 .HeaderMenu_menuContainer {
+  z-index: var(--z-index-menu);
+
   display: flex;
   align-items: center;
+
   width: 1200px;
-  z-index: var(--z-index-menu);
 }
 
 .HeaderMenu_menu__sticky.HeaderMenu_menu {
-  background: var(--bright);
   position: fixed;
-  animation: show-menu 100ms linear;
-  color: var(--text-black);
   top: 0;
+
+  animation: show-menu 100ms linear;
+
+  color: var(--text-black);
+  background: var(--bright);
 }
 
 .HeaderMenu_menu__stickyHide.HeaderMenu_menu {
   background: transparent;
-  /* animation: hide-menu 1ms linear; */
 }
 
 .HeaderMenu_initial {
   display: flex;
-  flex-wrap: nowrap;
   flex: 1;
+  flex-wrap: nowrap;
   justify-content: end;
 }
 
 .HeaderMenu_headerGetStarted {
   display: none;
+
   margin-right: 30px;
 }
 
 .HeaderMenu_menu__sticky .HeaderMenu_headerGetStarted {
-  animation: appearance 100ms ease;
   display: initial;
+
+  animation: appearance 100ms ease;
 }
 
 .HeaderMenu_links {
   position: relative;
+
   margin-left: 76px;
 }
 
 .HeaderMenu_links .HeaderMenu_link {
-  position: relative;
-  display: inline-block;
-  margin-right: 51px;
-  white-space: nowrap;
-  font-weight: 300;
   font-size: 18px;
+  font-weight: 300;
   line-height: 30px;
-  letter-spacing: 0.25px;
+
+  position: relative;
+
+  display: inline-block;
+
+  margin-right: 51px;
+
   cursor: pointer;
+  white-space: nowrap;
+  letter-spacing: 0.25px;
 }
 .HeaderMenu_menu__sticky
   .HeaderMenu_links
   .HeaderMenu_link
   .HeaderMenu_linkText__black {
   display: inline-block;
+
   color: var(--text-black);
 }
 .HeaderMenu_links .HeaderMenu_link .HeaderMenu_linkText__black {
   display: inline-block;
+
+  transition: all 300ms linear;
+  -webkit-transform: rotateX(0deg) translateY(0px);
+  -ms-transform: rotateX(0deg) translateY(0px);
+  transform: rotateX(0deg) translateY(0px);
+
+  opacity: 1;
   color: var(--bright);
 }
 .HeaderMenu_links .HeaderMenu_link .HeaderMenu_linkText__primary {
   position: absolute;
+
   display: inline-block;
-  opacity: 0;
+
+  transition: all 300ms linear;
+
+  opacity: 1;
 }
 
 .HeaderMenu_link.HeaderMenu_link__active .HeaderMenu_linkText__black {
   position: absolute;
+
+  -webkit-transform: rotateX(90deg) translateY(-10px);
+  -ms-transform: rotateX(90deg) translateY(-10px);
+  transform: rotateX(90deg) translateY(-10px);
+
   opacity: 0;
-  animation: activeFisrt 300ms linear forwards;
-}
-@keyframes activeFisrt {
-  0% {
-    -ms-transform: rotateX(0deg) translateY(0px);
-    -webkit-transform: rotateX(0deg) translateY(0px);
-    transform: rotateX(0deg) translateY(0px);
-    opacity: 1;
-  }
-  100% {
-    -ms-transform: rotateX(90deg) translateY(-10px);
-    -webkit-transform: rotateX(90deg) translateY(-10px);
-    transform: rotateX(90deg) translateY(-10px);
-    opacity: 0;
-  }
 }
 
 .HeaderMenu_link.HeaderMenu_link__deactive .HeaderMenu_linkText__black {
   position: relative;
-  opacity: 0;
-  animation: activeFisrtReverse 300ms linear forwards;
-}
-@keyframes activeFisrtReverse {
-  0% {
-    -ms-transform: rotateX(90deg) translateY(-10px);
-    -webkit-transform: rotateX(90deg) translateY(-10px);
-    transform: rotateX(90deg) translateY(-10px);
-    opacity: 0;
-  }
-  100% {
-    -ms-transform: rotateX(0deg) translateY(0px);
-    -webkit-transform: rotateX(0deg) translateY(0px);
-    transform: rotateX(0deg) translateY(0px);
-    opacity: 1;
-  }
+
+  -webkit-transform: rotateX(0deg) translateY(0px);
+  -ms-transform: rotateX(0deg) translateY(0px);
+  transform: rotateX(0deg) translateY(0px);
+
+  opacity: 1;
 }
 
 .HeaderMenu_link.HeaderMenu_link__active .HeaderMenu_linkText__primary {
   position: relative;
+
+  opacity: 1;
   color: var(--primary);
-  animation: activeSecond 300ms linear forwards;
-}
-@keyframes activeSecond {
-  0% {
-    -ms-transform: rotateX(-90deg) translateY(10px);
-    -webkit-transform: rotateX(-90deg) translateY(10px);
-    transform: rotateX(-90deg) translateY(10px);
-    opacity: 0;
-  }
-  100% {
-    -ms-transform: rotateX(0deg) translateY(0px);
-    -webkit-transform: rotateX(0deg) translateY(0px);
-    transform: rotateX(0deg) translateY(0px);
-    opacity: 1;
-  }
 }
 
 .HeaderMenu_link.HeaderMenu_link__deactive .HeaderMenu_linkText__primary {
-  display: inline-block;
   position: absolute;
-  color: var(--primary);
   left: 0;
-  animation: activeSecondReserve 300ms linear forwards;
-}
-@keyframes activeSecondReserve {
-  0% {
-    -ms-transform: rotateX(0deg) translateY(0px);
-    -webkit-transform: rotateX(0deg) translateY(0px);
-    transform: rotateX(0deg) translateY(0px);
-    opacity: 1;
-  }
-  100% {
-    -ms-transform: rotateX(-90deg) translateY(10px);
-    -webkit-transform: rotateX(-90deg) translateY(10px);
-    transform: rotateX(-90deg) translateY(10px);
-    opacity: 0;
-  }
+
+  display: inline-block;
+
+  -webkit-transform: rotateX(-90deg) translateY(10px);
+  -ms-transform: rotateX(-90deg) translateY(10px);
+  transform: rotateX(-90deg) translateY(10px);
+
+  opacity: 0;
+  color: var(--primary);
 }
 
 .HeaderMenu_links .HeaderMenu_link:first-child {
@@ -202,24 +187,29 @@
 }
 
 .HeaderMenu_link__highlight {
-  display: inline;
-  white-space: nowrap;
-  font-weight: 300;
   font-size: 18px;
+  font-weight: 300;
   line-height: 30px;
-  letter-spacing: 0.25px;
-  cursor: pointer;
-  color: var(--highlight);
-  background-color: var(--dark-10);
-  padding: 1px 15px;
-  border-radius: 16px;
+
+  display: inline;
+
   margin-left: 16px;
+  padding: 1px 15px;
+
+  cursor: pointer;
+  white-space: nowrap;
+  letter-spacing: 0.25px;
+
+  color: var(--highlight);
+  border-radius: 16px;
+  background-color: var(--dark-10);
 }
 
 .HeaderMenu_menu__sticky .HeaderMenu_link__highlight {
+  margin-left: 14px;
+
   color: var(--positive);
   background-color: var(--highlight-20);
-  margin-left: 14px;
 }
 
 .HeaderMenu_menu__sticky .HeaderMenu_buttonLink {
@@ -227,15 +217,19 @@
 }
 
 .HeaderMenu_buttonLink {
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
-  padding: 0.8em;
-  border-radius: 0.8em;
-  white-space: nowrap;
   font-size: 18px;
   font-weight: 400;
+
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+
+  padding: 0.8em;
+
   cursor: pointer;
+  white-space: nowrap;
+
+  border-radius: 0.8em;
 }
 
 .HeaderMenu_buttonIcon {
@@ -244,25 +238,25 @@
 
 .HeaderMenu_dashContainer {
   position: absolute;
-  min-height: 4px;
+  right: 0;
   bottom: -38px;
   left: 0;
-  right: 0;
-  box-sizing: border-box;
+
   overflow: hidden;
+
+  box-sizing: border-box;
+  min-height: 4px;
 }
 
 .HeaderMenu_dash {
-  background-color: var(--primary);
-  min-height: 4px;
   width: 70px;
-  transform: translateX(0);
-  /* transition: transform 300ms linear; */
-  transition-property: width, transform;
+  min-height: 4px;
+
   transition-delay: 0ms, 0ms;
-  transition-duration: 150ms, 300ms;
   transition-timing-function: linear;
+  transition-duration: 150ms, 300ms;
+  transition-property: width, transform;
+  transform: translateX(0);
+
+  background-color: var(--primary);
 }
-/* .HeaderMenu_menu__sticky .HeaderMenu_dash {
-  transition-delay: 100ms, 0ms;
-} */
