@@ -83,8 +83,8 @@ textarea::-ms-input-placeholder {
 
 .__section {
   display: flex;
+  overflow: hidden;
   flex-direction: column;
-
   /* height: 100vh; */
 }
 
@@ -131,8 +131,4 @@ textarea::-ms-input-placeholder {
   left: 15px;
 
   display: none !important;
-}
-
-#butter {
-  overflow: hidden;
 }
