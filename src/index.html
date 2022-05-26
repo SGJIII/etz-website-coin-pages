@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="styles/index.css" />
     <title>ETZ</title>
     <script type="module">
@@ -20,17 +20,29 @@
       autoplay
       width="750"
       height="1624"
-      src="./assets/mobile-2с.mp4"
+      src="./assets/Mobile-1-3.mp4"
+      style="display: none"
+    ></video>
+    <video
+      id="video2"
+      playsinline
+      muted
+      loop
+      autoplay
+      width="750"
+      height="1624"
+      src="./assets/Buying_Mobile-4.mp4"
       style="display: none"
     ></video>
     <canvas class="webgl"></canvas>
-    <include src="components/header-menu/index.html"></include>
-    <include src="components/header-section/index.html"></include>
-    <div class="BenefitsSection section_second __section" id="benefits"></div>
-    <include src="components/for-employers-section/index.html"></include>
-    <include src="components/etz-mobile-section/index.html"></include>
-    <include src="components/faq-section/index.html"></include>
-    <include src="components/contact-us-section/index.html"></include>
-    <script type="module" src="js/index.ts"></script>
+    <div id="butter">
+      <include src="components/header-section/index.html"></include>
+      <div class="BenefitsSection __section" id="benefits"></div>
+      <include src="components/for-employers-section/index.html"></include>
+      <include src="components/etz-mobile-section/index.html"></include>
+      <include src="components/faq-section/index.html"></include>
+      <include src="components/contact-us-section/index.html"></include>
+      <script type="module" src="js/index.ts"></script>
+    </div>
   </body>
 </html>

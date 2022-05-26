@@ -4,17 +4,28 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 
-const MODEL_NAME = "etz-7-5.glb";
-const SECOND_SECTION_CLASS = ".section_second";
+const MODEL_NAME = "etz_8_1.glb";
+const SECOND_SECTION_CLASS = ".BenefitsSection";
+
+const active = window.location.hash === "#debug";
+
+let gui = {};
+
+// Debug
+const debugObject = {};
+debugObject.envMapIntensity = 0.6;
+
+let folderScreen = null;
+
+if (active) {
+  gui = new dat.GUI();
+
+  folderScreen = gui.addFolder("Screen");
+}
 
 /**
  * Base
  */
-// Debug
-const gui = new dat.GUI();
-const debugObject = {};
-debugObject.envMapIntensity = 0.6;
-const folderScreen = gui.addFolder("Screen");
 
 // Canvas
 const canvas = document.querySelector("canvas.webgl");
@@ -29,18 +40,24 @@ const scene = new THREE.Scene();
 const cubeTextureLoader = new THREE.CubeTextureLoader();
 
 let animationDuration = 0;
-let mixer = null;
-let mixer2 = null;
-let mixer3 = null;
-let mixer4 = null;
-let mixer5 = null;
-let mixer6 = null;
-let mixer7 = null;
-let mixer8 = null;
-let mixer9 = null;
+let mixer,
+  mixer2,
+  mixer3,
+  mixer4,
+  mixer5 = null;
+
 let shadowLayer = null;
+// let phoneMesh2 = null;
+
+let phoneMesh,
+  buyBtnMesh,
+  sellBtnMesh,
+  transactionsBtnMesh,
+  assetsMesh,
+  shadowMesh = null;
 
 let video = document.getElementById("video");
+window.video = video;
 let videoTexture = new THREE.VideoTexture(video);
 videoTexture.rotation = Math.PI;
 videoTexture.center.x = 0.5;
@@ -50,6 +67,16 @@ videoTexture.magFilter = THREE.LinearFilter;
 videoTexture.wrapS = THREE.RepeatWrapping;
 videoTexture.repeat.x = -1;
 
+let video2 = document.getElementById("video2");
+window.video2 = video2;
+let videoTexture2 = new THREE.VideoTexture(video2);
+videoTexture2.rotation = Math.PI;
+videoTexture2.center.x = 0.5;
+videoTexture2.center.y = 0.5;
+videoTexture2.minFilter = THREE.LinearFilter;
+videoTexture2.magFilter = THREE.LinearFilter;
+videoTexture2.wrapS = THREE.RepeatWrapping;
+videoTexture2.repeat.x = -1;
 /**
  * Environment map
  */
@@ -65,7 +92,6 @@ const environmentMap = cubeTextureLoader.load([
 environmentMap.rotation = Math.PI * 0.25;
 environmentMap.outputEncoding = THREE.sRGBEncoding;
 
-// scene.background = environmentMap;
 scene.environment = environmentMap;
 
 /**
@@ -93,13 +119,25 @@ const gltfLoader = new GLTFLoader();
 gltfLoader.setDRACOLoader(dracoLoader);
 
 gltfLoader.load(MODEL_NAME, (gltf) => {
-  gltf.scene.scale.set(2, 2, 2);
-  gltf.scene.position.set(2, 0, 0);
-  // gltf.scene.rotation.y = - Math.PI * 0.5
-  scene.add(gltf.scene);
-  console.log(gltf);
+  gltf.scene.scale.set(1.7, 1.7, 1.7);
+  gltf.scene.position.set(2.2, -0.2, 0);
+  window.scene = gltf.scene;
 
-  const phoneMesh = gltf.scene.children[0].children[0];
+  phoneMesh = gltf.scene.children[0].children[0];
+  phoneMesh.material.map = videoTexture;
+
+  // All meshes
+  console.log("All meshes", gltf.scene.children[0].children);
+
+  scene.add(gltf.scene);
+
+  buyBtnMesh = gltf.scene.children[0].children.find((c) => c.name === "buy");
+  sellBtnMesh = gltf.scene.children[0].children.find((c) => c.name === "sell");
+  transactionsBtnMesh = gltf.scene.children[0].children.find(
+    (c) => c.name === "transactions"
+  );
+  assetsMesh = gltf.scene.children[0].children.find((c) => c.name === "assets");
+  shadowMesh = gltf.scene.children[0].children.find((c) => c.name === "shadow");
 
   const movieMaterial = new THREE.MeshStandardMaterial({
     map: videoTexture,
@@ -107,40 +145,18 @@ gltfLoader.load(MODEL_NAME, (gltf) => {
     toneMapped: false,
   });
 
-  // phoneMesh.material = movieMaterial;
-  phoneMesh.material.map = videoTexture;
-
-  // phoneMesh.position.z = -0.0002;
-
-  // console.log(gltf.scene.children[0].children[0].material);
-
-  // phoneMaterial.material.map = videoTexture;
-  // phoneMaterial.material.side = THREE.FrontSide
-
   phoneMesh.material.metalness = 1.2;
   phoneMesh.material.roughness = 1;
 
   phoneMesh.receiveShadow = true;
 
-  folderScreen.add(phoneMesh.material, "metalness").min(0).max(2).step(0.01);
-  folderScreen.add(phoneMesh.material, "roughness").min(0).max(2).step(0.001);
-
-  // gui.add(phoneMaterial.material, 'map', {
-  //     img: phoneMaterial.material.map,
-  //     video: videoTexture,
-  // }).onFinishChange(() => {
-  //     if (phoneMaterial.material.map === videoTexture) {
-  //         phoneMaterial.material.metalness = 1.3
-  //         phoneMaterial.material.roughness = 2
-  //     } else {
-  //         phoneMaterial.material.metalness = 0
-  //         phoneMaterial.material.roughness = 1
-  //     }
-  // })
+  if (active) {
+    folderScreen.add(phoneMesh.material, "metalness").min(0).max(2).step(0.01);
+    folderScreen.add(phoneMesh.material, "roughness").min(0).max(2).step(0.001);
+  }
 
   video.play();
-
-  console.log(gltf);
+  video2.play();
 
   // Animation
   mixer = new THREE.AnimationMixer(gltf.scene);
@@ -158,19 +174,6 @@ gltfLoader.load(MODEL_NAME, (gltf) => {
     (a) => a.name === "shadow"
   );
 
-  console.log(shadowLayer);
-
-  // gui.add(shadowLayer.position, 'x').min(0).max(5).step(0.0001)
-  // gui.add(shadowLayer.position, 'y').min(0).max(5).step(0.0001)
-  // gui.add(shadowLayer.position, 'z').min(0).max(5).step(0.0001)
-
-  // shadowLayer.visible = false
-
-  // const animLevitateBuy = gltf.animations.find(a => a.name === 'levitateBuy');
-  // const animLevitateSell = gltf.animations.find(a => a.name === 'levitateSell');
-  // const animLevitateTransactions = gltf.animations.find(a => a.name === 'levitateTransactions');
-  // const animLevitateAssets = gltf.animations.find(a => a.name === 'levitateAssets');
-
   animationDuration = animIphoneRotation.duration * 0.999;
   const action = mixer.clipAction(animIphoneRotation).play();
 
@@ -186,26 +189,12 @@ gltfLoader.load(MODEL_NAME, (gltf) => {
   mixer5 = new THREE.AnimationMixer(gltf.scene);
   const action5 = mixer5.clipAction(animDropAssets).play();
 
-  // mixer6 = new THREE.AnimationMixer(gltf.scene);
-  // const action6 = mixer6.clipAction(animLevitateBuy).play();
-  //
-  // mixer7 = new THREE.AnimationMixer(gltf.scene);
-  // const action7 = mixer7.clipAction(animLevitateSell).play();
-  //
-  // mixer8 = new THREE.AnimationMixer(gltf.scene);
-  // const action8 = mixer8.clipAction(animLevitateTransactions).play();
-  //
-  // mixer9 = new THREE.AnimationMixer(gltf.scene);
-  // const action9 = mixer9.clipAction(animLevitateAssets).play();
-
   updateAllMaterials();
 });
 
 /**
  * Lights
  */
-// const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
-// scene.add(ambientLight);
 
 const directionalLight = new THREE.DirectionalLight("#ffffff", 1.558);
 directionalLight.position.set(-3.11, 1.56, 5);
@@ -215,18 +204,7 @@ directionalLight.position.set(-3.11, 1.56, 5);
 // directionalLight.shadow.normalBias = 0.05;
 // directionalLight.shadow.radius = 10;
 
-// const directionalLight2 = new THREE.DirectionalLight('#ffffff', 3);
-// directionalLight2.position.set(2.25, 3, 2.25);
-// directionalLight2.shadow.camera.far = 15;
-// directionalLight2.castShadow = true;
-// directionalLight2.shadow.mapSize.set(1024, 1024);
-// directionalLight2.shadow.normalBias = 0.05;
-// directionalLight2.intensity = 0;
-
 scene.add(directionalLight);
-const helper = new THREE.DirectionalLightHelper(directionalLight, 3);
-// const helper2 = new THREE.DirectionalLightHelper(directionalLight2, 3);
-// scene.add(helper, helper2);
 
 /**
  * Sizes
@@ -309,170 +287,170 @@ let mouseWheelRatio = 0;
  * GUI
  */
 
-const folderMapping = gui.addFolder("env map");
-const folderLight1 = gui.addFolder("light 1");
-const folderShadow = gui.addFolder("shadow");
-// const folderLight2 = gui.addFolder('light 2');
-// const folderAmbLight = gui.addFolder('ambient light')
-const folderCamera = gui.addFolder("camera");
+let folderMapping = null;
+let folderLight1 = null;
+let folderShadow = null;
+let folderCamera = null;
 
-folderMapping
-  .add(debugObject, "envMapIntensity")
-  .min(0)
-  .max(40)
-  .step(0.001)
-  .onChange(updateAllMaterials);
-folderMapping
-  .add(scene, "background", {
-    disable: null,
-    enable: environmentMap,
-  })
-  .name("bg envMap");
-folderMapping
-  .add(renderer, "toneMappingExposure")
-  .min(0)
-  .max(10)
-  .step(0.01)
-  .name("toneMappingExposure");
+if (active) {
+  folderMapping = gui.addFolder("env map");
+  folderLight1 = gui.addFolder("light 1");
+  folderShadow = gui.addFolder("shadow");
+  folderCamera = gui.addFolder("camera");
 
-folderMapping
-  .add(renderer, "toneMapping", {
-    NoToneMapping: THREE.NoToneMapping,
-    Linear: THREE.LinearToneMapping,
-    Reinhard: THREE.ReinhardToneMapping,
-    Cineon: THREE.CineonToneMapping,
-    ACES: THREE.ACESFilmicToneMapping,
-  })
-  .onFinishChange(() => {
-    renderer.toneMapping = Number(renderer.toneMapping);
-    updateAllMaterials();
-  });
+  folderMapping
+    .add(debugObject, "envMapIntensity")
+    .min(0)
+    .max(40)
+    .step(0.001)
+    .onChange(updateAllMaterials);
+  folderMapping
+    .add(scene, "background", {
+      disable: null,
+      enable: environmentMap,
+    })
+    .name("bg envMap");
+  folderMapping
+    .add(renderer, "toneMappingExposure")
+    .min(0)
+    .max(10)
+    .step(0.01)
+    .name("toneMappingExposure");
 
-// folderAmbLight.add(ambientLight, 'intensity').min(0).max(5).step(0.0001).name('ambientLight');
+  folderMapping
+    .add(renderer, "toneMapping", {
+      NoToneMapping: THREE.NoToneMapping,
+      Linear: THREE.LinearToneMapping,
+      Reinhard: THREE.ReinhardToneMapping,
+      Cineon: THREE.CineonToneMapping,
+      ACES: THREE.ACESFilmicToneMapping,
+    })
+    .onFinishChange(() => {
+      renderer.toneMapping = Number(renderer.toneMapping);
+      updateAllMaterials();
+    });
 
-folderLight1.add(helper, "visible").name("show helper");
-folderLight1.addColor(directionalLight, "color");
-folderLight1
-  .add(directionalLight.position, "x")
-  .min(-5)
-  .max(5)
-  .step(0.01)
-  .name("lightX");
-folderLight1
-  .add(directionalLight.position, "y")
-  .min(-5)
-  .max(5)
-  .step(0.01)
-  .name("lightY");
-folderLight1
-  .add(directionalLight.position, "z")
-  .min(-5)
-  .max(5)
-  .step(0.01)
-  .name("lightZ");
-folderLight1
-  .add(directionalLight.rotation, "x")
-  .min(-5)
-  .max(5)
-  .step(0.001)
-  .name("rotationX");
-folderLight1
-  .add(directionalLight.rotation, "y")
-  .min(-5)
-  .max(5)
-  .step(0.001)
-  .name("rotationY");
-folderLight1
-  .add(directionalLight.rotation, "z")
-  .min(-5)
-  .max(5)
-  .step(0.001)
-  .name("rotationZ");
-folderLight1
-  .add(directionalLight, "intensity")
-  .min(0)
-  .max(5)
-  .step(0.001)
-  .name("intensity");
+  folderLight1.addColor(directionalLight, "color");
+  folderLight1
+    .add(directionalLight.position, "x")
+    .min(-5)
+    .max(5)
+    .step(0.01)
+    .name("lightX");
+  folderLight1
+    .add(directionalLight.position, "y")
+    .min(-5)
+    .max(5)
+    .step(0.01)
+    .name("lightY");
+  folderLight1
+    .add(directionalLight.position, "z")
+    .min(-5)
+    .max(5)
+    .step(0.01)
+    .name("lightZ");
+  folderLight1
+    .add(directionalLight.rotation, "x")
+    .min(-5)
+    .max(5)
+    .step(0.001)
+    .name("rotationX");
+  folderLight1
+    .add(directionalLight.rotation, "y")
+    .min(-5)
+    .max(5)
+    .step(0.001)
+    .name("rotationY");
+  folderLight1
+    .add(directionalLight.rotation, "z")
+    .min(-5)
+    .max(5)
+    .step(0.001)
+    .name("rotationZ");
+  folderLight1
+    .add(directionalLight, "intensity")
+    .min(0)
+    .max(5)
+    .step(0.001)
+    .name("intensity");
 
-folderShadow
-  .add(directionalLight.shadow, "radius")
-  .min(0)
-  .max(100)
-  .step(0.001)
-  .name("shadowRadius");
-folderShadow
-  .add(directionalLight.shadow.camera, "far")
-  .min(0)
-  .max(100)
-  .step(0.001)
-  .name("shadowCameraFar");
-folderShadow
-  .add(directionalLight.shadow, "normalBias")
-  .min(0)
-  .max(10)
-  .step(0.001)
-  .name("shadowNormalBias");
+  folderShadow
+    .add(directionalLight.shadow, "radius")
+    .min(0)
+    .max(100)
+    .step(0.001)
+    .name("shadowRadius");
+  folderShadow
+    .add(directionalLight.shadow.camera, "far")
+    .min(0)
+    .max(100)
+    .step(0.001)
+    .name("shadowCameraFar");
+  folderShadow
+    .add(directionalLight.shadow, "normalBias")
+    .min(0)
+    .max(10)
+    .step(0.001)
+    .name("shadowNormalBias");
 
-// folderLight2.add(helper2, 'visible').name('show helper');
-// folderLight1.addColor(directionalLight2, 'color');
-// folderLight2.add(directionalLight2.position, 'x').min(-5).max(5).step(0.001).name('position X');
-// folderLight2.add(directionalLight2.position, 'y').min(-5).max(5).step(0.001).name('position Y');
-// folderLight2.add(directionalLight2.position, 'z').min(-5).max(5).step(0.001).name('position Z');
-// folderLight2.add(directionalLight2.rotation, 'x').min(-5).max(5).step(0.001).name('rotationX');
-// folderLight2.add(directionalLight2.rotation, 'y').min(-5).max(5).step(0.001).name('rotationY');
-// folderLight2.add(directionalLight2.rotation, 'z').min(-5).max(5).step(0.001).name('rotationZ');
-// folderLight2.add(directionalLight2, 'intensity').min(0).max(5).step(0.001)
+  gui.add(renderer, "physicallyCorrectLights");
 
-gui.add(renderer, "physicallyCorrectLights");
+  gui.add(controls, "enabled").name("Orbit Controls");
 
-gui.add(controls, "enabled").name("Orbit Controls");
+  folderCamera
+    .add(camera, "far")
+    .min(0)
+    .max(100)
+    .step(1)
+    .onFinishChange(() => {
+      camera.updateProjectionMatrix();
+    });
 
-folderCamera
-  .add(camera, "far")
-  .min(0)
-  .max(100)
-  .step(1)
-  .onFinishChange(() => {
-    camera.updateProjectionMatrix();
-  });
+  folderCamera
+    .add(camera, "fov")
+    .min(0)
+    .max(100)
+    .step(1)
+    .onFinishChange(() => {
+      camera.updateProjectionMatrix();
+    });
 
-folderCamera
-  .add(camera, "fov")
-  .min(0)
-  .max(100)
-  .step(1)
-  .onFinishChange(() => {
-    camera.updateProjectionMatrix();
-  });
+  folderCamera
+    .add(camera, "near")
+    .min(0)
+    .max(1)
+    .step(0.01)
+    .onFinishChange(() => {
+      camera.updateProjectionMatrix();
+    });
 
-folderCamera
-  .add(camera, "near")
-  .min(0)
-  .max(1)
-  .step(0.01)
-  .onFinishChange(() => {
-    camera.updateProjectionMatrix();
-  });
+  folderCamera
+    .add(camera.position, "x", -10, 10, 0.01)
+    .name("PositionX")
+    .onFinishChange(() => {
+      camera.updateProjectionMatrix();
+    });
+  folderCamera
+    .add(camera.position, "y", -10, 10, 0.01)
+    .name("PositionY")
+    .onFinishChange(() => {
+      camera.updateProjectionMatrix();
+    });
+  folderCamera
+    .add(camera.position, "z", -20, 40, 0.01)
+    .name("PositionZ")
+    .onFinishChange(() => {
+      camera.updateProjectionMatrix();
+    });
+}
 
-folderCamera
-  .add(camera.position, "x", -10, 10, 0.01)
-  .name("PositionX")
-  .onFinishChange(() => {
-    camera.updateProjectionMatrix();
-  });
-folderCamera
-  .add(camera.position, "y", -10, 10, 0.01)
-  .name("PositionY")
-  .onFinishChange(() => {
-    camera.updateProjectionMatrix();
-  });
-folderCamera
-  .add(camera.position, "z", -20, 40, 0.01)
-  .name("PositionZ")
-  .onFinishChange(() => {
-    camera.updateProjectionMatrix();
-  });
+function togglePhoneAssets(v) {
+  buyBtnMesh.visible = v;
+  sellBtnMesh.visible = v;
+  transactionsBtnMesh.visible = v;
+  assetsMesh.visible = v;
+  shadowMesh.visible = v;
+}
 
 const tick = () => {
   controls.update();
@@ -512,7 +490,6 @@ const tick = () => {
   }
 
   const START_OPACITY = 0.2;
-  const OPACITY_END = 0.97;
 
   let opacityValue = START_OPACITY;
 
@@ -529,10 +506,22 @@ const tick = () => {
       opacityValue = 0;
     }
 
+    if (mouseWheelRatio >= 1) {
+      phoneMesh.material.map = videoTexture2;
+      video2.play();
+      video.currentTime = 0;
+      video.pause();
+      togglePhoneAssets(false);
+    } else {
+      phoneMesh.material.map = videoTexture;
+      video.play();
+      video2.currentTime = 0;
+      video2.pause();
+      togglePhoneAssets(true);
+    }
+
     shadowLayer.material.opacity = opacityValue;
   }
-
-  // console.log('mouseWheelRatio:', +mouseWheelRatio.toFixed(3), '   opacity: ', +opacityValue.toFixed(3))
 
   // // Model animation
   if (mixer && mixer2 && mixer3 && mixer4 && mixer5) {
@@ -541,15 +530,7 @@ const tick = () => {
     mixer3.setTime(mouseWheelRatio * animationDuration);
     mixer4.setTime(mouseWheelRatio * animationDuration);
     mixer5.setTime(mouseWheelRatio * animationDuration);
-    // mixer.update(deltaTime)
   }
-
-  // if (mixer6 && mixer7 && mixer8 && mixer9 && scrollTopFrame === 0) {
-  //     mixer6.update(deltaTime);
-  //     mixer7.update(deltaTime);
-  //     mixer8.update(deltaTime);
-  //     mixer9.update(deltaTime);
-  // }
 
   videoTexture.needsUpdate = true;
 

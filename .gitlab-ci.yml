@@ -33,7 +33,16 @@ stages:
 
 .deploy: &deploy
   stage: deploy
-  image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
+  image: python:latest
+  tags:
+    - docker
+  before_script:
+    - pip install awscli
+    - aws configure list
+    - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+    - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+    - aws configure set region $AWS_DEFAULT_REGION
+    - aws configure list
   script:
     - aws s3 sync ./build s3://etz-dev-landing/ --delete
 

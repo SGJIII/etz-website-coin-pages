@@ -6,8 +6,27 @@
   display: none;
 }
 
+.HeaderMenu_menu {
+  position: initial;
+  z-index: var(--z-index-menu);
+  right: 0;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: var(--height-menu);
+
+  color: var(--bright);
+  background-color: transparent;
+}
+
 .HeaderMenu_menu__sticky {
+  margin-top: 0;
+
   color: var(--text-black);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .HeaderMenu_menu__sticky .HeaderMenu_logoDark {
@@ -26,69 +45,150 @@
   display: none;
 }
 
-.HeaderMenu_menu {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  left: 0;
-  right: 0;
-  height: var(--height-menu);
-  z-index: var(--z-index-menu);
-  color: var(--bright);
-}
-
 .HeaderMenu_menuContainer {
+  z-index: var(--z-index-menu);
+
   display: flex;
   align-items: center;
+
   width: 1200px;
 }
 
 .HeaderMenu_menu__sticky.HeaderMenu_menu {
-  background: var(--bright);
   position: fixed;
-  animation: show-menu 200ms ease-out;
+  top: 0;
+
+  animation: show-menu 100ms linear;
+
   color: var(--text-black);
+  background: var(--bright);
 }
 
 .HeaderMenu_menu__stickyHide.HeaderMenu_menu {
   background: transparent;
-  animation: hide-menu 200ms ease-in;
 }
 
 .HeaderMenu_initial {
   display: flex;
-  flex-wrap: nowrap;
   flex: 1;
+  flex-wrap: nowrap;
   justify-content: end;
 }
 
 .HeaderMenu_headerGetStarted {
-  display: none;
-  margin-right: 30px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+
+  margin-right: -10px;
+  padding: 12px 26px;
+
+  border-color: transparent;
 }
 
 .HeaderMenu_menu__sticky .HeaderMenu_headerGetStarted {
-  animation: appearance 200ms ease;
   display: initial;
+
+  animation: appearance 100ms ease;
+
+  border-color: var(--primary);
 }
 
 .HeaderMenu_links {
+  position: relative;
+
+  margin-left: 76px;
+}
+
+#HeaderMenu_links {
   display: flex;
-  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .HeaderMenu_links .HeaderMenu_link {
-  display: inline;
-  padding: 1px 16px;
-  margin: 0 24px;
-  white-space: nowrap;
-  border-radius: 16px;
-  font-weight: 400;
   font-size: 18px;
+  font-weight: 300;
   line-height: 30px;
-  letter-spacing: 0.25px;
+
+  position: relative;
+
+  display: inline-block;
+
+  margin-right: 51px;
+
   cursor: pointer;
+  white-space: nowrap;
+  letter-spacing: 0.25px;
+}
+.HeaderMenu_menu__sticky
+  .HeaderMenu_links
+  .HeaderMenu_link
+  .HeaderMenu_linkText__black {
+  display: inline-block;
+
+  color: var(--text-black);
+}
+.HeaderMenu_links .HeaderMenu_link .HeaderMenu_linkText__black {
+  display: inline-block;
+
+  transition: all 300ms linear;
+  -webkit-transform: rotateX(0deg) translateY(0px);
+  -ms-transform: rotateX(0deg) translateY(0px);
+  transform: rotateX(0deg) translateY(0px);
+
+  opacity: 1;
+  color: var(--bright);
+}
+.HeaderMenu_links .HeaderMenu_link .HeaderMenu_linkText__primary {
+  position: absolute;
+
+  display: inline-block;
+
+  transition: all 300ms linear;
+
+  opacity: 0;
+}
+
+.HeaderMenu_link.HeaderMenu_link__active .HeaderMenu_linkText__black {
+  position: absolute;
+
+  -webkit-transform: rotateX(90deg) translateY(-10px);
+  -ms-transform: rotateX(90deg) translateY(-10px);
+  transform: rotateX(90deg) translateY(-10px);
+
+  opacity: 0;
+}
+
+.HeaderMenu_link.HeaderMenu_link__deactive .HeaderMenu_linkText__black {
+  position: relative;
+
+  -webkit-transform: rotateX(0deg) translateY(0px);
+  -ms-transform: rotateX(0deg) translateY(0px);
+  transform: rotateX(0deg) translateY(0px);
+
+  opacity: 1;
+}
+
+.HeaderMenu_link.HeaderMenu_link__active .HeaderMenu_linkText__primary {
+  position: relative;
+
+  opacity: 1;
+  color: var(--primary);
+}
+
+.HeaderMenu_link.HeaderMenu_link__deactive .HeaderMenu_linkText__primary {
+  position: absolute;
+  left: 0;
+
+  display: inline-block;
+
+  -webkit-transform: rotateX(-90deg) translateY(10px);
+  -ms-transform: rotateX(-90deg) translateY(10px);
+  transform: rotateX(-90deg) translateY(10px);
+
+  opacity: 0;
+  color: var(--primary);
 }
 
 .HeaderMenu_links .HeaderMenu_link:first-child {
@@ -100,7 +200,21 @@
 }
 
 .HeaderMenu_link__highlight {
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 30px;
+
+  display: inline;
+
+  margin-left: -1px;
+  padding: 2px 16px;
+
+  cursor: pointer;
+  white-space: nowrap;
+  letter-spacing: 0.25px;
+
   color: var(--highlight);
+  border-radius: 16px;
   background-color: var(--dark-10);
 }
 
@@ -109,16 +223,51 @@
   background-color: var(--highlight-20);
 }
 
+.HeaderMenu_menu__sticky .HeaderMenu_buttonLink {
+  color: var(--primary);
+}
+
 .HeaderMenu_buttonLink {
+  font-size: 18px;
+  font-weight: 400;
+
   display: flex;
-  flex-wrap: nowrap;
   align-items: center;
+  flex-wrap: nowrap;
+
   padding: 0.8em;
-  border-radius: 0.8em;
-  white-space: nowrap;
+
   cursor: pointer;
+  white-space: nowrap;
+
+  border-radius: 0.8em;
 }
 
 .HeaderMenu_buttonIcon {
   margin-right: 12px;
+}
+
+.HeaderMenu_dashContainer {
+  position: absolute;
+  right: 0;
+  bottom: -38px;
+  left: 0;
+
+  overflow: hidden;
+
+  box-sizing: border-box;
+  min-height: 4px;
+}
+
+.HeaderMenu_dash {
+  width: 70px;
+  min-height: 4px;
+
+  transition-delay: 0ms, 0ms;
+  transition-timing-function: linear;
+  transition-duration: 150ms, 300ms;
+  transition-property: width, transform;
+  transform: translateX(-80px);
+
+  background-color: var(--primary);
 }

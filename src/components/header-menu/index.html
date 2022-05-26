@@ -1,4 +1,4 @@
-<header class="HeaderMenu_menu __sidePadding" style="display: none">
+<header class="HeaderMenu_menu __sidePadding">
   <div class="HeaderMenu_menuContainer">
     <a href="#header">
       <span class="HeaderMenu_logoDark">
@@ -7,17 +7,38 @@
       <span class="HeaderMenu_logoLight">
         <include src="assets/logo-light.svg"> </include> </span
     ></a>
-    <ul class="HeaderMenu_links">
-      <li class="HeaderMenu_link"><a href="#benefits">Benefits</a></li>
-      <li class="HeaderMenu_link"><a href="#employers">For Employers</a></li>
-      <li class="HeaderMenu_link"><a href="#etz-mobile">ETZ Mobile</a></li>
-      <li class="HeaderMenu_link HeaderMenu_link__highlight">50+ Cryptos</li>
-    </ul>
+    <div class="HeaderMenu_links">
+      <div id="HeaderMenu_links">
+        <div class="HeaderMenu_link">
+          <a href="#benefits">
+            <span class="HeaderMenu_linkText__black">Benefits</span>
+            <span class="HeaderMenu_linkText__primary">Benefits</span></a
+          >
+        </div>
+        <div class="HeaderMenu_link">
+          <a href="#employers">
+            <span class="HeaderMenu_linkText__black">For Employers</span>
+            <span class="HeaderMenu_linkText__primary">For Employers</span></a
+          >
+        </div>
+        <div class="HeaderMenu_link">
+          <a href="#etz-mobile">
+            <span class="HeaderMenu_linkText__black">ETZ Mobile</span>
+            <span class="HeaderMenu_linkText__primary">ETZ Mobile</span></a
+          >
+        </div>
+        <span class="HeaderMenu_link__highlight">50+ Cryptos</span>
+      </div>
+
+      <div class="HeaderMenu_dashContainer">
+        <div class="HeaderMenu_dash"></div>
+      </div>
+    </div>
     <span class="HeaderMenu_initial">
       <span class="HeaderMenu_headerGetStarted Button Button__secondary"
-        >Get Started</span
+        >Join the Waitlist</span
       >
-      <span class="HeaderMenu_buttonLink">
+      <!-- <span class="HeaderMenu_buttonLink">
         <div class="HeaderMenu_buttonIcon HeaderMenu_entryIconDark">
           <include src="assets/entry-dark.svg"> </include>
         </div>
@@ -25,7 +46,7 @@
           <include src="assets/entry-light.svg"> </include>
         </div>
         Sign In
-      </span>
+      </span> -->
     </span>
   </div>
 </header>
