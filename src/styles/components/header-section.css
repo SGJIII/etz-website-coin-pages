@@ -8,6 +8,7 @@
   box-sizing: content-box;
   color: var(--text-white);
   overflow: hidden;
+  height: 890px !important;
 }
 
 .HeaderSection_menu {
@@ -16,9 +17,9 @@
 }
 
 .HeaderSection_container {
+  z-index: 10;
   padding-top: 55px;
   width: 1176px !important;
-  z-index: 10;
 }
 
 .HeaderSection_overflow {
@@ -70,13 +71,13 @@
 }
 
 .HeaderSection_triangle {
+  height: 270px;
+  background: var(--bright);
+  clip-path: polygon(100% 0%, 0% 73%, 100% 100%);
   position: absolute;
   bottom: -10%;
   left: -50%;
   right: 0;
-  height: 15vw;
-  background: var(--bright);
-  clip-path: polygon(100% 0%, 0% 90%, 100% 100%);
 }
 
 .HeaderSection_buttons {

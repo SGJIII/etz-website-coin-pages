@@ -2,7 +2,7 @@ import Accordion from "./accordion";
 import HeaderMenu from "./header-menu";
 import SmoothScroll from "./smooth-scroll";
 import "./three";
-import Butter from "./butter";
+// import Butter from "./butter";
 
 document.addEventListener(
   "DOMContentLoaded",
@@ -15,8 +15,8 @@ document.addEventListener(
     smoothScroll.init();
     accordion.init();
 
-    const butter = new Butter();
-    // butter.init();
+    // const butter = new Butter();
+    // // butter.init();
   },
   false
 );

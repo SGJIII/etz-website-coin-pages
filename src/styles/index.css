@@ -71,7 +71,7 @@ textarea::-ms-input-placeholder {
 }
 
 :root {
-  --z-index-menu: 100;
+  --z-index-menu: 500;
   --z-index-front-img: 50;
 }
 
