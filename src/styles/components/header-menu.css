@@ -76,15 +76,22 @@
 }
 
 .HeaderMenu_headerGetStarted {
-  display: none;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
 
-  margin-right: 30px;
+  margin-right: -10px;
+  padding: 12px 26px;
+
+  border-color: transparent;
 }
 
 .HeaderMenu_menu__sticky .HeaderMenu_headerGetStarted {
   display: initial;
 
   animation: appearance 100ms ease;
+
+  border-color: var(--primary);
 }
 
 .HeaderMenu_links {
@@ -212,8 +219,6 @@
 }
 
 .HeaderMenu_menu__sticky .HeaderMenu_link__highlight {
-  margin-left: 14px;
-
   color: var(--positive);
   background-color: var(--highlight-20);
 }
