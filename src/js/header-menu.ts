@@ -1,3 +1,7 @@
+import { getCoords } from "./utils/getCoords";
+import { outerHeight } from "./utils/outerHeight";
+import { outerWidth } from "./utils/outerWidth";
+
 type Props = { className: string };
 
 export default class HeaderMenu {
@@ -7,14 +11,15 @@ export default class HeaderMenu {
   private isInitialPosition = true;
   private firstLoad = true;
   private sections: NodeListOf<Element>;
-  private lastLink: Element | null = null;
-  private idRequest = 0;
+  private links: NodeListOf<Element>;
+  private scrollDistance = 0;
 
   constructor(props: Props) {
     this.firstLoad = true;
     this.className = props.className;
     this.target = document.querySelector<HTMLElement>(props.className);
     this.sections = document.querySelectorAll(".__section");
+    this.links = document.querySelectorAll(".HeaderMenu_link");
   }
 
   /**
@@ -34,7 +39,7 @@ export default class HeaderMenu {
       this.handlePositionStickyMenu();
     });
 
-    this.activeMenu();
+    this.handleAnimationMenu();
   }
 
   private handlePositionStickyMenu() {
@@ -62,110 +67,22 @@ export default class HeaderMenu {
         26;
   }
 
-  private activeMenu() {
-    function outerHeight(el: HTMLElement) {
-      let height = el.offsetHeight;
-      const style = getComputedStyle(el);
-      height += parseInt(style.marginTop) + parseInt(style.marginBottom);
-      return height;
-    }
-
-    function outerWidth(el: HTMLElement) {
-      let width = el.offsetWidth;
-      const style = getComputedStyle(el);
-      width += parseInt(style.marginLeft) + parseInt(style.marginRight);
-      return width;
-    }
-    const getCoords = (element: Element | undefined, position: string) => {
-      let point = { x: 0, y: 0 };
-      if (!element) return point;
-      const { top, left, width, height } = element.getBoundingClientRect();
-      switch (position) {
-        case "top left":
-          point = {
-            x: left + window.pageXOffset,
-            y: top + window.pageYOffset,
-          };
-          break;
-        case "top center":
-          point = {
-            x: left + width / 2 + window.pageXOffset,
-            y: top + window.pageYOffset,
-          };
-          break;
-        case "top right":
-          point = {
-            x: left + width + window.pageXOffset,
-            y: top + window.pageYOffset,
-          };
-          break;
-        case "center left":
-          point = {
-            x: left + window.pageXOffset,
-            y: top + height / 2 + window.pageYOffset,
-          };
-          break;
-        case "center":
-          point = {
-            x: left + width / 2 + window.pageXOffset,
-            y: top + height / 2 + window.pageYOffset,
-          };
-          break;
-        case "center right":
-          point = {
-            x: left + width + window.pageXOffset,
-            y: top + height / 2 + window.pageYOffset,
-          };
-          break;
-        case "bottom left":
-          point = {
-            x: left + window.pageXOffset,
-            y: top + height + window.pageYOffset,
-          };
-          break;
-        case "bottom center":
-          point = {
-            x: left + width / 2 + window.pageXOffset,
-            y: top + height + window.pageYOffset,
-          };
-          break;
-        case "bottom right":
-          point = {
-            x: left + width + window.pageXOffset,
-            y: top + height + window.pageYOffset,
-          };
-          break;
-      }
-      return point;
-    };
-
-    const sections = document.querySelectorAll(".__section");
-    const links = document.querySelectorAll(".HeaderMenu_link");
-
-    // for (const link of links) {
-    //   const child = link.querySelector("a") as Element;
-    //   (link as HTMLElement).style.width = getComputedStyle(
-    //     child,
-    //     ":before"
-    //   ).width;
-    // }
-
-    const dash = document.querySelector(".HeaderMenu_dash") as HTMLElement;
+  private handleAnimationMenu() {
     const dashContainer = document.querySelector(
       ".HeaderMenu_dashContainer"
     ) as HTMLElement;
     const widthDashContainer =
-      getCoords(links[links.length - 1], "bottom right")?.x -
-      getCoords(links[0], "bottom left")?.x;
+      getCoords(this.links[this.links.length - 1], "bottom right")?.x -
+      getCoords(this.links[0], "bottom left")?.x;
     dashContainer.style.width = `${widthDashContainer}px`;
 
     window.addEventListener("scroll", () => {
-      const scrollDistance = window.scrollY;
+      this.scrollDistance = window.scrollY;
       if (window.innerWidth > 768) {
-        sections.forEach((el, i) => {
+        this.sections.forEach((el, i) => {
           const element = el as HTMLElement;
 
-          const firstElement = sections[0] as HTMLElement;
+          const firstElement = this.sections[0] as HTMLElement;
           const style = getComputedStyle(element);
           const elementStart =
             element.offsetTop -
@@ -181,45 +98,14 @@ export default class HeaderMenu {
             .querySelectorAll(`a[href="#${el.id}"]`)[0]
             ?.closest(".HeaderMenu_link");
 
-          const parentPos = document
-            .getElementById("HeaderMenu_links")
-            ?.getBoundingClientRect();
-          const childPos = activeElement?.getBoundingClientRect();
-
-          const relativePosLeft =
-            (childPos?.left ?? 0) - (parentPos?.left ?? 0);
-          if (i <= 0) {
-            dash.style.opacity = "0";
-          } else {
-            dash.style.opacity = "1";
-          }
-
-          if (elementStart <= scrollDistance && scrollDistance <= elementEnd) {
+          if (
+            elementStart <= this.scrollDistance &&
+            this.scrollDistance <= elementEnd
+          ) {
             activeElement?.classList.add("HeaderMenu_link__active");
             activeElement?.classList.remove("HeaderMenu_link__deactive");
 
-            if (dash) {
-              if (activeElement) {
-                dash.style.transform = `translate(${relativePosLeft}px,0)`;
-              } else {
-                if (scrollDistance > getCoords(sections[0], "bottom left")?.y) {
-                  dash.style.transform = `translate(${
-                    getCoords(links[links.length - 1], "bottom left")?.x
-                  }px,0)`;
-                } else {
-                  dash.style.transform = `translate(-${outerWidth(
-                    links[0] as HTMLElement
-                  )}px,0)`;
-                }
-              }
-              dash.style.width = `${activeElement?.clientWidth}px`;
-              if (i === 0) {
-                dash.style.transitionDelay = "0ms, 0ms";
-              } else {
-                dash.style.transitionDelay = "50ms, 0ms";
-              }
-            }
-
+            this.handleAnimationDash(activeElement);
             return;
           }
           activeElement?.classList.add("HeaderMenu_link__deactive");
@@ -227,5 +113,32 @@ export default class HeaderMenu {
         });
       }
     });
+  }
+
+  private handleAnimationDash(activeElement: Element | null) {
+    const dash = document.querySelector(".HeaderMenu_dash") as HTMLElement;
+    const parentPos = document
+      .getElementById("HeaderMenu_links")
+      ?.getBoundingClientRect();
+    const childPos = activeElement?.getBoundingClientRect();
+
+    const relativePosLeft = (childPos?.left ?? 0) - (parentPos?.left ?? 0);
+
+    if (!dash) return;
+
+    if (activeElement) {
+      dash.style.transform = `translate(${relativePosLeft}px,0)`;
+    } else {
+      if (this.scrollDistance > getCoords(this.sections[0], "bottom left")?.y) {
+        dash.style.transform = `translate(${
+          getCoords(this.links[this.links.length - 1], "bottom left")?.x
+        }px,0)`;
+      } else {
+        dash.style.transform = `translate(-${outerWidth(
+          this.links[0] as HTMLElement
+        )}px,0)`;
+      }
+    }
+    dash.style.width = `${activeElement?.clientWidth}px`;
   }
 }
