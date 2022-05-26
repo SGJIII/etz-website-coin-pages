@@ -80,18 +80,12 @@
 
 .HeaderMenu_links {
   position: relative;
-  margin-left: 36px;
-}
-
-.HeaderMenu_links ul {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
+  margin-left: 76px;
 }
 
 .HeaderMenu_links .HeaderMenu_link {
   position: relative;
-  display: inline;
+  display: inline-block;
   margin-right: 51px;
   white-space: nowrap;
   font-weight: 300;
@@ -109,13 +103,11 @@
 }
 .HeaderMenu_links .HeaderMenu_link .HeaderMenu_linkText__black {
   display: inline-block;
-  content: attr(data-arial);
   color: var(--bright);
 }
 .HeaderMenu_links .HeaderMenu_link .HeaderMenu_linkText__primary {
   position: absolute;
   display: inline-block;
-  content: attr(data-arial);
   opacity: 0;
 }
 
@@ -180,6 +172,7 @@
 }
 
 .HeaderMenu_link.HeaderMenu_link__deactive .HeaderMenu_linkText__primary {
+  display: inline-block;
   position: absolute;
   color: var(--primary);
   left: 0;
@@ -252,8 +245,8 @@
 .HeaderMenu_dashContainer {
   position: absolute;
   min-height: 4px;
-  bottom: -24px;
-  left: 40px;
+  bottom: -38px;
+  left: 0;
   right: 0;
   box-sizing: border-box;
   overflow: hidden;

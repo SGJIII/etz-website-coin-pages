@@ -200,7 +200,7 @@ export default class HeaderMenu {
 
             if (dash) {
               if (activeElement) {
-                dash.style.transform = `translate(${relativePosLeft - 40}px,0)`;
+                dash.style.transform = `translate(${relativePosLeft}px,0)`;
               } else {
                 if (scrollDistance > getCoords(sections[0], "bottom left")?.y) {
                   dash.style.transform = `translate(${
