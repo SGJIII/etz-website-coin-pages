@@ -1,5 +1,5 @@
 .BenefitsSection {
-  height: 696px;
-  padding: 128px 0px;
   box-sizing: content-box;
+  height: 875px !important;
+  padding: 16px 0;
 }

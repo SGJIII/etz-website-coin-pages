@@ -1,7 +1,12 @@
 .ForEmployersSection {
-  height: 552px;
-  padding: 128px 0px;
   box-sizing: content-box;
+  /* margin-top: -20px; */
+  padding: 52px 0;
+  padding-top: 0;
+}
+
+.ForEmployersSection_container {
+  /* margin-left: 10px; */
 }
 
 .ForEmployersSection_title {
@@ -10,24 +15,28 @@
 
 .ForEmployersSection_steps {
   position: relative;
+
   width: 1200px;
   height: 400px;
 }
 
 .ForEmployersSection_step {
   position: absolute;
-  padding: 67px 25px 28px 25px;
+
   width: 380px;
-  background: var(--primary-5);
+  padding: 66px 25px 28px 30px;
+
   border-radius: 20px;
+  background: var(--primary-5);
 }
 
 .ForEmployersSection_step__first {
-  bottom: 0;
+  bottom: -17px;
+  left: -4px;
 }
 
 .ForEmployersSection_step__second {
-  bottom: 100px;
+  bottom: 90px;
   left: 410;
 }
 
@@ -47,16 +56,17 @@
 }
 
 .ForEmployersSection_arrow__first {
-  right: -11px;
-  top: -32px;
+  top: -37px;
+  right: -21px;
 }
 
 .ForEmployersSection_arrow__second {
-  right: -25px;
-  top: 25px;
+  top: 26px;
+  right: -29px;
+
+  -webkit-transform: scale(1, -1) rotate(45deg);
   -moz-transform: scale(1, -1) rotate(45deg);
   -o-transform: scale(1, -1) rotate(45deg);
-  -webkit-transform: scale(1, -1) rotate(45deg);
   transform: scale(1, -1) rotate(45deg);
 }
 
