@@ -108,6 +108,11 @@
   bottom: 0;
 }
 
+.HeaderSection_getStartedButton {
+  padding: 10px 53px;
+}
+
 .HeaderSection_downloadButton {
-  margin-left: 4px;
+  margin-left: 12px;
+  padding: 10px 43px;
 }
