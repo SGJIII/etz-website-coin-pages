@@ -1,41 +1,45 @@
 .EtzMobileSection {
   padding: 45px 0;
+
   background-image: url("../../assets/pattern-2.svg");
-  background-position: 0;
   background-repeat: no-repeat;
-  padding-left: 10px;
+  background-position: 0;
 }
 
 .EtzMobileSection_picture {
   position: relative;
-  flex: 1;
   top: -325px;
+
+  flex: 1;
 }
 
 .EtzMobileSection_mobile {
   position: absolute;
+
   width: 354px;
 }
 
 .EtzMobileSection_mobile__front {
-  right: 145px;
   top: 0;
+  right: 145px;
 }
 
 .EtzMobileSection_mobile__buy {
-  right: -100px;
   top: 70px;
+  right: -100px;
 }
 
 .EtzMobileSection_coin {
   position: absolute;
-  width: 600px;
-  right: 0;
   z-index: 10;
+  right: 0;
+
+  width: 600px;
 }
 
 .EtzMobileSection_block {
   display: flex;
+
   height: 100%;
 }
 
@@ -50,6 +54,7 @@
 .EtzMobileSection_button {
   display: flex;
   align-items: center;
+
   margin-top: 36px;
 }
 
