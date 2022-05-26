@@ -73,6 +73,8 @@
   flex: 1;
   flex-wrap: nowrap;
   justify-content: end;
+
+  padding-left: 50px;
 }
 
 .HeaderMenu_headerGetStarted {
