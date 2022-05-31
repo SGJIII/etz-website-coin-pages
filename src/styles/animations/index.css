@@ -27,15 +27,15 @@
     padding: 11px 42px;
   }
   100% {
-    padding: 0;
     max-height: 0;
+    padding: 0;
   }
 }
 
 @keyframes slide-up {
   0% {
-    padding: 0;
     max-height: 0;
+    padding: 0;
   }
   1% {
     padding: 11px 42px;
@@ -48,8 +48,9 @@
 
 @keyframes appearance {
   0% {
-    opacity: 0;
     display: initial;
+
+    opacity: 0;
   }
   1% {
     opacity: 0;
@@ -61,22 +62,22 @@
 
 @keyframes dark-to-light {
   from {
-    background: var(--primary-5);
     border: 1px solid transparent;
+    background: var(--primary-05);
   }
   to {
-    background: var(--bright);
     border: 1px solid var(--primary);
+    background: var(--bright);
   }
 }
 
 @keyframes light-to-dark {
   from {
-    background: var(--bright);
     border: 1px solid var(--primary);
+    background: var(--bright);
   }
   to {
-    background: var(--primary-5);
     border: 1px solid transparent;
+    background: var(--primary-05);
   }
 }

@@ -1,0 +1,137 @@
+.SupportedCryptoSection_container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.SupportedCryptoSection_title {
+  text-align: center;
+
+  color: var(--primary);
+}
+
+.SupportedCryptoSection_subtitle {
+  text-align: center;
+}
+
+.SupportedCryptoSection_searchBlock {
+  display: flex;
+  justify-content: center;
+}
+
+.SupportedCryptoSection_search {
+  position: relative;
+
+  overflow: hidden;
+
+  box-sizing: content-box;
+  width: 790px;
+  height: 80px;
+  margin-top: 12px;
+
+  border: 1px solid var(--dark-30);
+  border-radius: 20px;
+  background: var(--bright-50);
+}
+
+.SupportedCryptoSection_exit {
+  position: absolute;
+  top: 29px;
+  right: 36px;
+}
+
+.SupportedCryptoSection_input {
+  font-family: "Rubik";
+  font-size: 24px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 28px;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  padding: 2px 32px;
+
+  border: none;
+  outline: none;
+}
+
+.SupportedCryptoSection_input::placeholder {
+  font-family: "Rubik";
+  font-size: 24px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 28px;
+
+  color: var(--dark-50);
+}
+
+.SupportedCryptoSection_table {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  width: 1200px;
+  height: 386px;
+  margin-top: 40px;
+  padding: 23px 54px;
+
+  border-radius: 20px;
+  /* brand/@primary:05 */
+  background: var(--primary-05);
+}
+
+.SupportedCryptoSection_item {
+  display: flex;
+  align-items: center;
+
+  min-width: 50%;
+  min-height: 38px;
+  margin: 15px 0;
+  padding-left: 17px;
+
+  color: var(--dark-30);
+}
+
+.SupportedCryptoSection_numberCoin {
+  min-width: 40px;
+}
+
+.SupportedCryptoSection_imgCoin {
+  min-width: 38px;
+  min-height: 38px;
+  margin: 0 12px 0 9px;
+}
+
+.SupportedCryptoSection_nameCoin {
+  margin-right: 12px;
+
+  color: var(--dark);
+}
+
+.SupportedCryptoSection_buttonContainer {
+  display: flex;
+  justify-content: center;
+
+  margin-top: 34px;
+}
+
+.SupportedCryptoSection_button {
+  width: 40px;
+  height: 40px;
+
+  cursor: pointer;
+
+  border: none;
+  border-radius: 50%;
+  outline: none;
+  background-color: transparent;
+}
+
+.SupportedCryptoSection_button__active {
+  color: var(--text-white);
+  background-color: var(--primary);
+}

@@ -11,6 +11,7 @@
 @import url("./components/faq-section.css");
 @import url("./components/contact-us-section.css");
 @import url("./components/header-menu.css");
+@import url("./components/supported-crypto-section.css");
 
 html,
 body {
@@ -22,8 +23,6 @@ body {
 
   margin: 0;
   padding: 0;
-
-  color: var(--dark);
 
   -webkit-overflow-scrolling: touch;
   scroll-snap-type: y mandatory;
