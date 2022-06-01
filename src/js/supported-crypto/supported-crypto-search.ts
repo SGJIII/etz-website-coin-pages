@@ -77,9 +77,12 @@ class SupportedCryptoSearch extends SupportedCryptoPagination {
       ? this.backupData?.filter(
           (el) =>
             this.searchValue &&
-            ~el.name
+            (~el.name
               .toLocaleLowerCase()
-              .search(this.searchValue.toLocaleLowerCase())
+              .search(this.searchValue.toLocaleLowerCase()) ||
+              ~el.tag
+                .toLocaleLowerCase()
+                .search(this.searchValue.toLocaleLowerCase()))
         )
       : [...(this.backupData ?? [])];
     this.changePage(1);
