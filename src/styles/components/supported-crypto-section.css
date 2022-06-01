@@ -38,6 +38,8 @@
   position: absolute;
   top: 29px;
   right: 36px;
+
+  cursor: pointer;
 }
 
 .SupportedCryptoSection_input {
@@ -134,4 +136,10 @@
 .SupportedCryptoSection_button__active {
   color: var(--text-white);
   background-color: var(--primary);
+}
+
+.SupportedCryptoTable_textEmprty {
+  margin: auto 0;
+
+  text-align: center;
 }

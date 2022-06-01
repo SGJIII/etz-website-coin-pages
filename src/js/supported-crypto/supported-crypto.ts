@@ -1,47 +1,43 @@
 import { createElement } from "../utils/createElement";
 import cryptos from "./mock";
+import { CryptoData } from "./supported-crypto.types";
 
 class SupportedCrypto {
   queryName: string | null = null;
   container: Element | null = null;
+  cryptos: CryptoData[] = [];
+  renderData: CryptoData[] = [];
   limit = 10;
   offset = 0;
-  page = 1;
-  cryptos: { name: string; tag: string; url: string }[] = [];
-  buttons: NodeListOf<HTMLButtonElement> | undefined[] = [];
 
   constructor(name: string) {
     this.queryName = name;
     this.cryptos = cryptos;
+    this.renderData = cryptos;
   }
 
-  init() {
-    this.findContainer();
-    this.render();
+  init(): typeof this {
+    this.initialContainer();
+    return this;
   }
 
   render() {
     this.renderCoins();
-    this.createPagination();
   }
 
   rerender() {
     if (this.container === null) return;
-
-    const childern = this.container.childNodes;
-    const cryptoRenderFor = [...this.cryptos].splice(this.offset, this.limit);
-
-    cryptoRenderFor.forEach((crypto, idx) => {
-      const numberCoin = idx + 1 + this.offset;
-      const coin = this.createCoin(crypto, numberCoin);
-      this.container?.replaceChild(coin, childern[idx]);
-    });
+    this.renderCoins();
   }
 
   renderCoins() {
     if (this.container === null) return;
+    this.removeAllChild(this.container);
 
-    const cryptoRenderFor = [...this.cryptos].splice(this.offset, this.limit);
+    const cryptoRenderFor = [...this.renderData].splice(
+      this.offset,
+      this.limit
+    );
 
     cryptoRenderFor.forEach((crypto, idx) => {
       const numberCoin = idx + 1 + this.offset;
@@ -84,52 +80,18 @@ class SupportedCrypto {
     return coin;
   }
 
-  createPagination() {
-    const pagination = document.querySelector(
-      "[data-name=SupportedCryptoPagination]"
-    );
-    if (pagination === null) return;
-
-    const pages = Math.round(this.cryptos.length / this.limit);
-    Array.from({ length: pages }, (_, idx) => {
-      const button = createElement("button");
-      button.className = "SupportedCryptoSection_button";
-      if (idx === 0)
-        button.classList.add("SupportedCryptoSection_button__active");
-      const textNode = document.createTextNode(String(idx + 1));
-      button.appendChild(textNode);
-
-      button.addEventListener("click", () => {
-        this.buttons.forEach((button) => {
-          if (button === undefined) return;
-          button.classList.remove("SupportedCryptoSection_button__active");
-        });
-        button.classList.add("SupportedCryptoSection_button__active");
-        this.changePage(idx + 1);
-      });
-
-      pagination.appendChild(button);
-    });
-
-    this.buttons = pagination.querySelectorAll("button");
-  }
-
-  changePage(number: number) {
-    if (number === this.page) return;
-
-    this.offset =
-      number > this.page ? this.offset + this.limit : this.offset - this.limit;
-
-    this.rerender();
-
-    this.page = number;
-  }
-
-  findContainer() {
+  initialContainer() {
     if (this.queryName === null) return;
 
     const container = document.querySelector(this.queryName);
     this.container = container;
+  }
+
+  removeAllChild(parantElement: Element | null) {
+    while (parantElement?.firstChild) {
+      if (parantElement.lastChild === null) break;
+      parantElement.removeChild(parantElement.lastChild);
+    }
   }
 }
 

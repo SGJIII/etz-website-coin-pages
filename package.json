@@ -15,7 +15,7 @@
       "tsc --noemit --lib dom,es6"
     ],
     "./src/**/*.{ts,js}": [
-      "eslint --debug"
+      "eslint --fix"
     ],
     "./src/**/*.{js,ts,html,css,json}": [
       "prettier --write"
