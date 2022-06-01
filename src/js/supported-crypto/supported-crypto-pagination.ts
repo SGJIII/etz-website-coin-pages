@@ -75,13 +75,10 @@ class SupportedCryptoPagination extends SupportedCrypto {
   changePage(number: number) {
     if (number === this.currentPage) return;
 
-    this.offset =
-      number > this.currentPage
-        ? this.offset + this.limit
-        : this.offset - this.limit;
+    this.offset = (number - 1) * this.limit;
 
-    this.rerender();
     this.currentPage = number;
+    this.rerender();
   }
 }
 

@@ -9,6 +9,7 @@ class SupportedCrypto {
   renderData: CryptoData[] = [];
   limit = 10;
   offset = 0;
+  currentPage = 1;
 
   constructor(name: string) {
     this.queryName = name;

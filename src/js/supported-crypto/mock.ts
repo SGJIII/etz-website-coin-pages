@@ -99,6 +99,206 @@ const mockData = [
     tag: "FC",
     url: "crypto-currencies/ellipse-2.png",
   },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-1.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-2.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-1.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-2.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-1.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-2.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-1.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-2.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-1.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-2.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-1.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-2.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-1.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-2.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-1.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-2.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-1.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-2.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-1.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-2.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-1.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-2.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-1.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-2.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-1.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-2.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-1.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-2.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-1.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-2.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-1.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-2.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-1.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-2.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-1.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-2.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-1.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-2.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-1.png",
+  },
+  {
+    name: "FakeCrypto",
+    tag: "FC",
+    url: "crypto-currencies/ellipse-2.png",
+  },
 ];
 
 export default mockData;
