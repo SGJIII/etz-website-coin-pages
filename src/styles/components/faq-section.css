@@ -1,11 +1,12 @@
 .FAQSection {
-  height: 100%;
-  padding: 128px 0px;
   box-sizing: content-box;
+  height: 100%;
+  padding: 128px 0;
 }
 
 .FAQSection_title {
   text-align: center;
+
   color: var(--secondary);
 }
 
@@ -20,12 +21,16 @@
 
 .FAQSection_accordion {
   position: relative;
+
   flex: 1;
-  border-radius: 20px;
+
   margin-bottom: 32px;
-  background: var(--primary-5);
-  transition: all 400ms ease;
+
   cursor: pointer;
+  transition: all 400ms ease;
+
+  border-radius: 20px;
+  background: var(--primary-05);
 }
 
 .FAQSection_accordion__while {
@@ -39,7 +44,9 @@
 .FAQSection_accordionSummary {
   display: flex;
   justify-content: space-between;
+
   padding: 23px 41px;
+
   color: var(--primary);
 }
 
@@ -61,24 +68,28 @@
 
 .FAQSection_accordionDetails {
   display: flex;
-  flex-wrap: wrap;
   overflow: hidden;
+  flex-wrap: wrap;
+
   max-height: 0;
   padding: 0;
 }
 
 .FAQSection_accordionDetailsItem {
-  flex-grow: 0;
-  max-width: 100%;
   flex-basis: 100%;
+  flex-grow: 0;
+
+  max-width: 100%;
   margin-bottom: 24px;
+
   transition: all 100ms ease-in-out;
 }
 
 .FAQSection_accordionDetailsItem__50 {
-  flex-grow: 0;
-  max-width: 50%;
   flex-basis: 50%;
+  flex-grow: 0;
+
+  max-width: 50%;
 }
 
 .FAQSection_accordionDetailsTitle {
@@ -90,7 +101,8 @@
 }
 
 .FAQSection_arrowIcon {
+  align-self: center;
+
   width: 14px;
   height: 10px;
-  align-self: center;
 }

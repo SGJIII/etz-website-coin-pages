@@ -6,16 +6,16 @@
     "dev": "parcel serve src/index.html --open --host localhost --port 1234",
     "build": "rimraf build && parcel build src/index.html --dist-dir build --public-url ./",
     "prepare": "husky install",
-    "check:tsc": "tsc --noemit ./src/**/*.ts",
+    "check:tsc": "tsc --noemit --lib dom,es6 ./src/**/*.ts",
     "check:lint": "eslint ./src --ext .js,.ts",
     "check:format": "prettier --ignore-path .gitignore --write \"./src/**/*.+(js|ts|json|css|html)\""
   },
   "lint-staged": {
     "./src/**/*.ts": [
-      "tsc --noemit"
+      "tsc --noemit --lib dom,es6"
     ],
     "./src/**/*.{ts,js}": [
-      "eslint --debug"
+      "eslint --fix"
     ],
     "./src/**/*.{js,ts,html,css,json}": [
       "prettier --write"
