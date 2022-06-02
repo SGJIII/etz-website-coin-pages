@@ -1,34 +1,30 @@
 :root {
-  /* Brand colors */
-  --primary: rgba(34 109 255 / 100%);
-  --primary-70: rgba(34 109 255 / 70%);
-  --primary-50: rgba(34 109 255 / 50%);
-  --primary-20: rgba(34 109 255 / 20%);
-  --primary-10: rgba(34 109 255 / 10%);
-  --primary-5: rgba(34 109 255 / 5%);
-  --secondary: rgba(40 145 255 / 100%);
-
-  /* System colors */
-  --dark: rgba(1 18 53 / 100%);
-  --dark-50: rgba(1 18 53 / 50%);
-  --dark-30: rgba(1 18 53 / 30%);
-  --dark-10: rgba(1 18 53 / 10%);
-  --neutral: rgba(1 18 53 / 10%);
-  --neutral-light: rgba(1 18 53 / 5%);
   --bright: rgba(255 255 255 / 100%);
   --bright-50: rgba(255 255 255 / 50%);
-  --highlight: rgba(3 255 58 / 100%);
-  --highlight-20: rgba(3 255 58 / 20%);
-  --positive: rgba(0 166 106 / 100%);
-  --negative: rgba(255 0 61 / 100%);
-  --negative-03: rgba(255 0 61 / 4%);
-  --text-black: rgba(0 0 0 / 100%);
-  --text-white: rgba(255 255 255 / 100%);
-
-  /* Gradient */
+  --dark: rgba(1 18 53 / 100%);
+  --dark-10: rgba(1 18 53 / 10%);
+  --dark-30: rgba(1 18 53 / 30%);
+  --dark-50: rgba(1 18 53 / 50%);
   --gradient-main: linear-gradient(
     90deg,
     var(--primary) 0%,
     var(--secondary) 100%
   );
+  --highlight: rgba(3 255 58 / 100%);
+  --highlight-20: rgba(3 255 58 / 20%);
+  --negative: rgba(255 0 61 / 100%);
+  --negative-03: rgba(255 0 61 / 4%);
+  --neutral: rgba(1 18 53 / 10%);
+  --neutral-light: rgba(1 18 53 / 5%);
+  --positive: rgba(0 166 106 / 100%);
+  /* Brand colors */
+  --primary: rgba(34 109 255 / 100%);
+  --primary-05: rgba(34 109 255 / 5%);
+  --primary-050: rgba(34 109 255 / 50%);
+  --primary-10: rgba(34 109 255 / 10%);
+  --primary-20: rgba(34 109 255 / 20%);
+  --primary-70: rgba(34 109 255 / 70%);
+  --secondary: rgba(40 145 255 / 100%);
+  --text-black: rgba(0 0 0 / 100%);
+  --text-white: rgba(255 255 255 / 100%);
 }
