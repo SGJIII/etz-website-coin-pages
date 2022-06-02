@@ -143,3 +143,52 @@
 
   text-align: center;
 }
+.SupportedCryptoSection_placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 100%;
+}
+.SupportedCryptoSection_placeholderPerson {
+  width: 60px;
+  margin-right: 34px;
+
+  transform: rotate(-5deg);
+}
+.SupportedCryptoSection_placeholderCloud {
+  position: relative;
+
+  display: block;
+
+  max-width: 401px;
+  max-height: 100%;
+  padding: 22px 25px;
+
+  border-radius: 20px;
+  background: var(--primary-05);
+}
+.SupportedCryptoSection_placeholderCloud span {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+
+  text-overflow: ellipsis;
+
+  -webkit-line-clamp: 15;
+}
+.SupportedCryptoSection_placeholderCloud::after {
+  position: absolute;
+  top: 50%;
+  left: -21px;
+
+  display: block;
+
+  width: 21px;
+  height: 17px;
+
+  content: "";
+  transform: translateY(-50%);
+
+  background-image: url("data:image/svg+xml,%3Csvg width='22' height='18' viewBox='0 0 22 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21.0876 0.28125C13.7384 3.38263 5.51406 7.95968 0.0876465 13.9196C10.4715 11.0128 17.2294 13.9606 21.0876 17.6859V0.28125Z' fill='%23226DFF' fill-opacity='0.05'/%3E%3C/svg%3E%0A");
+}

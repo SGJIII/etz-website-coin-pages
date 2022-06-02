@@ -100,13 +100,28 @@ class SupportedCryptoSearch extends SupportedCryptoPagination {
 
   showNoResult() {
     this.removeAllChild(this.container);
+
+    const placeholderElement = createElement("div");
+    placeholderElement.className = "SupportedCryptoSection_placeholder";
+
+    const imgElement = createElement("img");
+    imgElement.className = "SupportedCryptoSection_placeholderPerson";
+    imgElement.setAttribute("src", "/placeholder-person.png");
+
+    const textBlockElement = createElement("div");
+    textBlockElement.className = "SupportedCryptoSection_placeholderCloud";
     const textElement = createElement("span");
-    textElement.className = "SupportedCryptoTable_textEmprty __paragraph-1";
     const innerTextNode = document.createTextNode(
-      `No results for "${this.searchValue}"`
+      `Sorry, there is no ${this.searchValue} in our crypto list yet. We’re working on it!`
     );
+
     textElement.appendChild(innerTextNode);
-    this.container?.appendChild(textElement);
+    textBlockElement.appendChild(textElement);
+
+    placeholderElement.appendChild(imgElement);
+    placeholderElement.appendChild(textBlockElement);
+
+    this.container?.appendChild(placeholderElement);
   }
 }
 
