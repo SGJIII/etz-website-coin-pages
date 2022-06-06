@@ -19,15 +19,11 @@
 .EtzMobileSection_mobile__front {
   top: -155px;
   right: 119px;
-
-  transform: scale(1.6);
 }
 
 .EtzMobileSection_mobile__buy {
   top: -6px;
-  right: -266px;
-
-  transform: scale(1.6);
+  right: -126px;
 }
 
 .EtzMobileSection_coin {
@@ -37,8 +33,6 @@
   right: -39px;
 
   width: 600px;
-
-  transform: scale(1.5);
 }
 
 .EtzMobileSection_block {
