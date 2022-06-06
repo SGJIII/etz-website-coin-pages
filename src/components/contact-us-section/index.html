@@ -2,34 +2,34 @@
   <div class="__container">
     <section class="ContactUsSection_card">
       <div class="ContactUsSection_formBlock">
-        <span class="ContactUsSection_title __heading-1"> Contact Us </span>
+        <span class="ContactUsSection_title __heading-1"
+          >Join the Waitlist</span
+        >
         <span class="ContactUsSection_subtitle __subtitle-1"
           >Fill out this form and we will get in touch with you</span
         >
 
-        <div class="ContactUsSection_form">
+        <form class="ContactUsSection_form" data-name="ContactUsForm">
           <div
-            class="ContactUsSection_input__half ContactUsSection_input__left __inputWrapper"
-          >
-            <input placeholder="Name" />
+            class="ContactUsSection_input__half ContactUsSection_input__left __inputWrapper">
+            <input placeholder="Name" name="name" />
           </div>
           <div
-            class="ContactUsSection_input__half ContactUsSection_input__right __inputWrapper"
-          >
-            <input placeholder="Company / Position" />
+            class="ContactUsSection_input__half ContactUsSection_input__right __inputWrapper">
+            <input placeholder="Company / Position" name="companyPosition" />
           </div>
           <div
-            class="ContactUsSection_input__half ContactUsSection_input__left __inputWrapper"
-          >
-            <input placeholder="Email" />
+            class="ContactUsSection_input__half ContactUsSection_input__left __inputWrapper">
+            <input placeholder="Email" name="email" />
           </div>
           <div
-            class="ContactUsSection_input__half ContactUsSection_input__right __inputWrapper"
-          >
-            <input placeholder="Phone Number" />
+            class="ContactUsSection_input__half ContactUsSection_input__right __inputWrapper">
+            <input placeholder="Phone Number" name="phone" />
           </div>
           <div class="ContactUsSection_textarea __inputWrapper">
-            <textarea placeholder="I would like to discuss..."></textarea>
+            <textarea
+              placeholder="I would like to discuss..."
+              name="note"></textarea>
           </div>
 
           <div class="ContactUsSection_formFooter">
@@ -38,8 +38,7 @@
                 type="checkbox"
                 class="ContactUsSection_checkbox"
                 id="check"
-                name="check"
-              />
+                name="check" />
               <label for="check"></label>
               <span class="ContactUsSection_rules __caption-1"
                 >I have read the SMS Policy and I agree that ETZ can send
@@ -50,7 +49,7 @@
               <button class="Button Button__outlined">Submit</button>
             </div>
           </div>
-        </div>
+        </form>
       </div>
       <div class="ContactUsSection_peopleImgBlock">
         <img src="assets/people.png" class="ContactUsSection_peopleImg" />

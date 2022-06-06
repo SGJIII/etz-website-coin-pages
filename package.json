@@ -1,9 +1,9 @@
 {
   "name": "etz",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "private": true,
   "scripts": {
-    "dev": "parcel serve src/index.html --open --host localhost --port 1234",
+    "dev": "parcel serve src/index.html --open --host localhost --port 5140",
     "build": "rimraf build && parcel build src/index.html --dist-dir build --public-url ./",
     "prepare": "husky install",
     "check:tsc": "tsc --noemit --lib dom,es6 ./src/**/*.ts",
@@ -29,6 +29,7 @@
     "@types/smoothscroll-polyfill": "^0.3.1",
     "@typescript-eslint/eslint-plugin": "^5.21.0",
     "@typescript-eslint/parser": "^5.21.0",
+    "buffer": "^6.0.3",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
@@ -41,10 +42,12 @@
     "postcss-bem-linter": "^3.3.0",
     "posthtml-include": "^1.7.3",
     "prettier": "2.6.2",
+    "process": "^0.11.10",
     "rimraf": "^3.0.2",
     "typescript": "^4.6.3"
   },
   "dependencies": {
+    "axios": "^0.27.2",
     "lil-gui": "^0.16.1",
     "smoothscroll-polyfill": "^0.4.4",
     "three": "^0.140.2",
