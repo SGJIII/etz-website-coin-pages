@@ -6,6 +6,7 @@
 .EtzMobileSection_picture {
   position: relative;
   /* top: -325px; */
+  top: -50px;
 
   flex: 1;
 }
