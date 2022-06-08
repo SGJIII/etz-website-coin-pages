@@ -3,6 +3,9 @@ stages:
   - build
   - deploy
 
+variables:
+  API_URL: $API_URL
+
 .test: &test
   stage: test
   image: node:14.17.0
