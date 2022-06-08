@@ -1,0 +1,74 @@
+.Notification {
+  position: fixed;
+  /* align the content to the rigth */
+  z-index: 5000;
+  right: 1rem;
+  bottom: 0.5rem;
+
+  display: flex;
+  /* hide the overflow to conceal the message when translated to the right of the container */
+  overflow-x: hidden;
+  align-items: flex-end;
+  flex-direction: column;
+  /* padding to avoid cropping the box-shadow on the message */
+
+  padding: 32px;
+}
+
+.Notification_messageContainer {
+  font-family: "Rubik";
+  font-size: 14px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 20px;
+
+  display: flex;
+  visibility: hidden;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  width: 340px;
+  margin: 8px 0;
+  padding: 14px 14px 14px 24px;
+
+  transition-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  transition-duration: 700ms;
+  transition-property: transform, opacity, visibility;
+  transform: translateX(100%);
+
+  opacity: 0;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+.Notification_content {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+}
+
+.Notification_messageContainer__error {
+  color: #ff3440;
+}
+.Notification_messageContainer__success {
+  color: #fff;
+  background: #226dff;
+}
+
+.Notification_exit {
+  order: 1;
+
+  width: 14px;
+  height: 14px;
+  margin: 5px 5px 0 21px;
+
+  cursor: pointer;
+}
+
+.Notification_messageContainer.Notification_messageContainer__received {
+  visibility: visible;
+
+  transform: translateX(0%);
+
+  opacity: 1;
+}

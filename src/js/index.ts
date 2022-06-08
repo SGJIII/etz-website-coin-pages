@@ -4,6 +4,8 @@ import HeaderMenu from "./header-menu";
 import SupportedCrypto from "./supported-crypto/supported-crypto-search";
 import "./three";
 import "universalsmoothscroll";
+import ContactFrom from "./contact";
+import Notification from "./notification";
 
 document.addEventListener(
   "DOMContentLoaded",
@@ -16,9 +18,13 @@ document.addEventListener(
       namePagination: "[data-name=SupportedCryptoPagination]",
     });
 
+    const contactFrom = new ContactFrom();
+    const notification = new Notification();
+
     headerMenu.init();
     accordion.init();
     supportedCrypto.init().render();
+    contactFrom.init();
 
     //@ts-ignore
     uss.setPageScroller(document.body);
