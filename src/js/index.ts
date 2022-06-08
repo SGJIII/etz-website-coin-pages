@@ -5,6 +5,7 @@ import SupportedCrypto from "./supported-crypto/supported-crypto-search";
 import "./three";
 import "universalsmoothscroll";
 import ContactFrom from "./contact";
+import Notification from "./notification";
 
 document.addEventListener(
   "DOMContentLoaded",
@@ -18,6 +19,7 @@ document.addEventListener(
     });
 
     const contactFrom = new ContactFrom();
+    const notification = new Notification();
 
     headerMenu.init();
     accordion.init();

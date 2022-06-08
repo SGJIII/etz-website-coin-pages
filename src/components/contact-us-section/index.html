@@ -9,22 +9,25 @@
           >Fill out this form and we will get in touch with you</span
         >
 
-        <form class="ContactUsSection_form" data-name="ContactUsForm">
+        <div class="ContactUsSection_form" data-name="ContactUsForm">
           <div
-            class="ContactUsSection_input__half ContactUsSection_input__left __inputWrapper">
-            <input placeholder="Name" name="name" />
+            class="ContactUsSection_input__half ContactUsSection_input__left __inputWrapper"
+            data-name="ContactUsInputName">
+            <input placeholder="Name*" name="name" />
           </div>
           <div
             class="ContactUsSection_input__half ContactUsSection_input__right __inputWrapper">
             <input placeholder="Company / Position" name="companyPosition" />
           </div>
           <div
-            class="ContactUsSection_input__half ContactUsSection_input__left __inputWrapper">
-            <input placeholder="Email" name="email" />
+            class="ContactUsSection_input__half ContactUsSection_input__left __inputWrapper"
+            data-name="ContactUsInputEmail">
+            <input placeholder="Email*" name="email" type="email" />
           </div>
           <div
-            class="ContactUsSection_input__half ContactUsSection_input__right __inputWrapper">
-            <input placeholder="Phone Number" name="phone" />
+            class="ContactUsSection_input__half ContactUsSection_input__right __inputWrapper"
+            data-name="ContactUsInputPhone">
+            <input placeholder="Phone Number" name="phone" type="tel" />
           </div>
           <div class="ContactUsSection_textarea __inputWrapper">
             <textarea
@@ -38,7 +41,8 @@
                 type="checkbox"
                 class="ContactUsSection_checkbox"
                 id="check"
-                name="check" />
+                name="check"
+                data-name="ContactUsInputCheck" />
               <label for="check"></label>
               <span class="ContactUsSection_rules __caption-1"
                 >I have read the SMS Policy and I agree that ETZ can send
@@ -46,10 +50,17 @@
               >
             </div>
             <div class="ContactUsSection_formButtonBlock">
-              <button class="Button Button__outlined">Submit</button>
+              <button
+                class="Button Button__outlined ContactUsSection_submit"
+                data-name="ContactUsInputSubmit">
+                <span class="Button_text">Submit</span
+                ><img
+                  class="Button_loader"
+                  src="assets/white_loader_anim.svg" />
+              </button>
             </div>
           </div>
-        </form>
+        </div>
       </div>
       <div class="ContactUsSection_peopleImgBlock">
         <img src="assets/people.png" class="ContactUsSection_peopleImg" />

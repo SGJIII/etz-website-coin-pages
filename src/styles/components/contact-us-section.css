@@ -1,43 +1,53 @@
 .ContactUsSection {
-  height: 675px;
-  padding-top: 150px;
   display: flex;
   align-items: center;
+
   box-sizing: content-box;
+  height: 675px;
+  padding-top: 150px;
 }
 
 .ContactUsSection_card {
-  display: flex;
   position: relative;
-  background: linear-gradient(95.2deg, #226dff 0%, #2891ff 100%);
-  border-radius: 20px;
+
+  display: flex;
+
   width: 1200px;
   height: 560px;
   padding: 60px 72px;
+
+  border-radius: 20px;
+  background: linear-gradient(95.2deg, #226dff 0%, #2891ff 100%);
 }
 
 .ContactUsSection_formBlock {
-  flex-grow: 0;
-  max-width: 70%;
   flex-basis: 550px;
+  flex-grow: 0;
+
+  max-width: 70%;
 }
 
 .ContactUsSection_title {
   display: block;
-  color: var(--bright);
+
   margin-bottom: 16px;
+
+  color: var(--bright);
 }
 
 .ContactUsSection_subtitle {
   display: block;
-  color: var(--bright);
+
   margin-bottom: 32px;
+
+  color: var(--bright);
 }
 
 .ContactUsSection_form {
   display: flex;
-  width: 100%;
   flex-wrap: wrap;
+
+  width: 100%;
 }
 
 .ContactUsSection_form input {
@@ -46,9 +56,10 @@
 }
 
 .ContactUsSection_input__half {
-  flex-grow: 0;
-  min-width: 265px;
   flex-basis: 265px;
+  flex-grow: 0;
+
+  min-width: 265px;
   margin-bottom: 16px;
 }
 
@@ -59,10 +70,12 @@
 .ContactUsSection_input__right {
   margin-left: 8px;
 }
-
+.ContactUsSection_input__error {
+  border: 1px solid #ff3440;
+}
 .ContactUsSection_textarea {
-  height: 88px;
   width: 546px;
+  height: 88px;
 }
 
 .ContactUsSection_textarea textarea {
@@ -72,21 +85,24 @@
 }
 
 .ContactUsSection_peopleImgBlock {
-  flex-grow: 0;
-  max-width: 30%;
   flex-basis: 30%;
+  flex-grow: 0;
+
+  max-width: 30%;
 }
 
 .ContactUsSection_peopleImg {
   position: absolute;
   top: -57px;
   right: 61px;
+
   width: 422px;
   height: 675px;
 }
 
 .ContactUsSection_formFooter {
   display: flex;
+
   margin-top: 32px;
 }
 
@@ -98,29 +114,40 @@
 .ContactUsSection_checkbox {
   position: absolute;
   z-index: -1;
+
+  cursor: pointer;
+
   opacity: 0;
 }
 
+.ContactUsSection_checkbox__error + label::before {
+  border: 1px solid #ff3440;
+}
 .ContactUsSection_checkbox + label {
   display: inline-flex;
   align-items: flex-start;
-  user-select: none;
+
+  min-width: 24px;
   height: 24px;
   margin-right: 12px;
-  min-width: 24px;
+
+  user-select: none;
 }
 
 .ContactUsSection_checkbox + label::before {
-  content: "";
   display: inline-block;
-  background-color: var(--bright);
-  cursor: pointer;
-  height: 24px;
-  min-width: 24px;
-  background-color: white;
-  flex-grow: 0;
   flex-basis: 24px;
+  flex-grow: 0;
+
+  min-width: 24px;
+  height: 24px;
+
+  content: "";
+  cursor: pointer;
+
   border-radius: 6px;
+  background-color: var(--bright);
+  background-color: white;
   background-repeat: no-repeat;
   background-position: center center;
 }
@@ -131,4 +158,8 @@
 
 .ContactUsSection_rules {
   color: var(--bright);
+}
+
+.ContactUsSection_submit {
+  min-width: 116px;
 }

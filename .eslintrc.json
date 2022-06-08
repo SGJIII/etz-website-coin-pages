@@ -1,8 +1,8 @@
 {
   "extends": [
     "prettier",
-    "eslint:recommended",
     "plugin:import/typescript",
+    "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended"
   ],
@@ -28,10 +28,6 @@
     "@typescript-eslint/no-this-alias": "off",
     "no-prototype-builtins": "off",
     "import/no-duplicates": ["error"],
-    "no-unused-vars": [
-      "warn",
-      { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }
-    ],
     "@typescript-eslint/no-unused-vars": [
       "warn",
       { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }
