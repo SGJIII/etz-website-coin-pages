@@ -17,7 +17,7 @@
   padding: 60px 72px;
 
   border-radius: 20px;
-  background: linear-gradient(95.2deg, #226dff 0%, #2891ff 100%);
+  background: var(--gradient-main);
 }
 
 .ContactUsSection_formBlock {
@@ -70,9 +70,11 @@
 .ContactUsSection_input__right {
   margin-left: 8px;
 }
+
 .ContactUsSection_input__error {
-  border: 1px solid #ff3440;
+  border: 1px solid var(--negative);
 }
+
 .ContactUsSection_textarea {
   width: 546px;
   height: 88px;
@@ -93,7 +95,7 @@
 
 .ContactUsSection_peopleImg {
   position: absolute;
-  top: -57px;
+  top: -39px;
   right: 61px;
 
   width: 422px;
@@ -120,9 +122,6 @@
   opacity: 0;
 }
 
-.ContactUsSection_checkbox__error + label::before {
-  border: 1px solid #ff3440;
-}
 .ContactUsSection_checkbox + label {
   display: inline-flex;
   align-items: flex-start;
@@ -145,11 +144,15 @@
   content: "";
   cursor: pointer;
 
+  border-color: 1px solid transparent;
   border-radius: 6px;
   background-color: var(--bright);
-  background-color: white;
   background-repeat: no-repeat;
   background-position: center center;
+}
+
+.ContactUsSection_checkbox__error + label::before {
+  border-color: var(--negative);
 }
 
 .ContactUsSection_checkbox:checked + label::before {

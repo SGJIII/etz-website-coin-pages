@@ -38,7 +38,7 @@
 
   opacity: 0;
   border-radius: 10px;
-  background: #fff;
+  background: var(--bright);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 .Notification_content {
@@ -48,11 +48,11 @@
 }
 
 .Notification_messageContainer__error {
-  color: #ff3440;
+  color: var(--negative);
 }
 .Notification_messageContainer__success {
-  color: #fff;
-  background: #226dff;
+  color: var(--bright);
+  background: var(--primary);
 }
 
 .Notification_exit {
