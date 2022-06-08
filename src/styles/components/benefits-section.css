@@ -24,6 +24,7 @@
   width: 320px;
   height: 413px;
   margin-top: calc(72px - 36px);
+  margin-left: -20px;
   padding: 0 20px;
 }
 .BenefitsSection_shadow {
