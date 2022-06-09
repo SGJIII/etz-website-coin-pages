@@ -6,10 +6,12 @@ import "./three";
 import "universalsmoothscroll";
 import ContactFrom from "./contact";
 import Notification from "./notification";
+import BenefitsSlider from "./benefits-slider";
 
 document.addEventListener(
   "DOMContentLoaded",
   () => {
+    new Notification();
     const headerMenu = new HeaderMenu({ className: ".HeaderMenu_menu" });
     const accordion = new Accordion();
     const supportedCrypto = new SupportedCrypto({
@@ -17,14 +19,14 @@ document.addEventListener(
       nameSearch: "[data-name=SupportedCryptoSearchInput]",
       namePagination: "[data-name=SupportedCryptoPagination]",
     });
-
+    const benefitsSlider = new BenefitsSlider();
     const contactFrom = new ContactFrom();
-    const notification = new Notification();
 
     headerMenu.init();
     accordion.init();
     supportedCrypto.init().render();
     contactFrom.init();
+    benefitsSlider.init();
 
     //@ts-ignore
     uss.setPageScroller(document.body);
