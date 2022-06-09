@@ -1,5 +1,105 @@
 .BenefitsSection {
+  display: flex;
+  justify-content: center;
+
   box-sizing: content-box;
-  height: 875px !important;
+  height: 100vh;
   padding: 16px 0;
+}
+
+.BenefitsSection_container {
+  height: 300px;
+}
+
+.BenefitsSection_title {
+  color: var(--secondary);
+}
+
+.BenefitsSection_viewSlider {
+  position: relative;
+
+  display: inline-block;
+  overflow: hidden;
+
+  width: 320px;
+  height: 413px;
+  margin-top: calc(72px - 36px);
+  margin-left: -20px;
+  padding: 0 20px;
+}
+.BenefitsSection_shadow {
+  position: absolute;
+  z-index: 1;
+  right: 0;
+
+  width: 1px;
+  height: 100%;
+
+  background-color: var(--bright);
+  box-shadow: 0 0 10px 10px var(--bright);
+}
+
+.BenefitsSection_shadow:first-child {
+  left: 0;
+}
+.BenefitsSection_slideContainer {
+  --position: 0;
+  position: relative;
+
+  display: flex;
+  flex-wrap: nowrap;
+
+  max-width: 300px;
+  min-height: 100px;
+
+  -webkit-transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -moz-transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -o-transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transform: translateX(var(--position));
+}
+.BenefitsSection_slide {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 300px;
+}
+
+.BenefitsSection_text__gray {
+  color: var(--dark-30);
+}
+
+.BenefitsSection_slideImg {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 8px;
+}
+
+.BenefitsSection_dot {
+  display: inline-block;
+
+  width: 10px;
+  height: 10px;
+  margin: 46px 10px 0 10px;
+
+  cursor: pointer;
+  -webkit-transition: background-color 500ms ease;
+  -moz-transition: background-color 500ms ease;
+  -o-transition: background-color 500ms ease;
+  transition: background-color 500ms ease;
+
+  border-radius: 50%;
+  background-color: var(--dark-30);
+}
+
+.BenefitsSection_dot__active {
+  background-color: var(--primary);
+}
+
+.BenefitsSection_dot:first-child {
+  margin-left: 0;
+}
+
+.BenefitsSection_dot:last-child {
+  margin-right: 0;
 }

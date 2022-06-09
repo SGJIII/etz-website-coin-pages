@@ -58,13 +58,16 @@ class SupportedCryptoSearch extends SupportedCryptoPagination {
   }
 
   initialSearchInput() {
-    const debounceEvent = (e: HTMLElementEvent<HTMLInputElement>) => {
-      const value = e.currentTarget?.value;
+    const debounceEvent = (e: Event) => {
+      const value = (e as HTMLElementEvent<HTMLInputElement>).currentTarget
+        ?.value;
       if (this.nextEvent !== null) clearTimeout(this.nextEvent);
 
-      this.nextEvent = setTimeout(() => {
-        this.handleChangeSearch(value);
-      }, 300);
+      this.nextEvent = Number(
+        setTimeout(() => {
+          this.handleChangeSearch(value);
+        }, 300)
+      );
     };
 
     this.searchElement?.addEventListener("input", debounceEvent);
