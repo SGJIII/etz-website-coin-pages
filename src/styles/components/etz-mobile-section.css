@@ -1,45 +1,99 @@
 .EtzMobileSection {
-  min-height: 649px;
-  padding: 320px 0;
+  overflow: initial !important;
+
+  height: 100vh;
+
+  --coin-position: 1px;
 }
 
-.EtzMobileSection_picture {
+.EtzMobileSection_mobiles {
   position: relative;
-  /* top: -325px; */
-  top: -50px;
 
-  flex: 1;
+  display: flex;
+  justify-content: center;
+
+  min-width: 938px;
+  height: 1078px;
+  max-height: 1078px;
+
+  transform: scale(calc((var(--vh) - 200) / var(--vh)));
 }
 
-.EtzMobileSection_mobile {
-  position: absolute;
-
-  width: 354px;
-}
-
-.EtzMobileSection_mobile__front {
-  top: -155px;
-  right: 119px;
-}
-
-.EtzMobileSection_mobile__buy {
-  top: -6px;
-  right: -126px;
+.EtzMobileSection_img {
+  width: 100%;
+  height: 100%;
 }
 
 .EtzMobileSection_coin {
   position: absolute;
-  z-index: 10;
-  top: -139px;
-  right: -39px;
+  z-index: 1;
 
-  width: 600px;
+  --name: pulse;
+  --time-function: ease-in-out;
+}
+
+.EtzMobileSection_ada {
+  top: calc(613px + var(--coin-position));
+  left: -21px;
+
+  animation: var(--name) 4900ms var(--time-function) infinite;
+}
+
+.EtzMobileSection_avax {
+  top: calc(340px + var(--coin-position));
+  left: 687px;
+
+  animation: var(--name) 5200ms var(--time-function) infinite;
+}
+
+.EtzMobileSection_bnb {
+  top: calc(220px + var(--coin-position));
+  left: -35px;
+
+  animation: var(--name) 4800ms 40ms var(--time-function) infinite;
+}
+
+.EtzMobileSection_btc {
+  top: calc(280px + var(--coin-position));
+  left: 390px;
+
+  animation: var(--name) 4700ms 10ms var(--time-function) infinite;
+}
+
+.EtzMobileSection_eth {
+  right: 246px;
+  bottom: calc(312px - var(--coin-position));
+
+  animation: var(--name) 5000ms 20ms var(--time-function) infinite;
+}
+
+.EtzMobileSection_ftm {
+  top: calc(163px + var(--coin-position));
+  left: -120px;
+
+  animation: var(--name) 4500ms 10ms var(--time-function) infinite;
+}
+
+.EtzMobileSection_sol {
+  top: calc(70px + var(--coin-position));
+  right: 345px;
+
+  animation: var(--name) 4000ms 5ms var(--time-function) infinite;
+}
+
+.EtzMobileSection_usdc {
+  bottom: calc(203px - var(--coin-position));
+  left: 369px;
+
+  animation: var(--name) 5500ms var(--time-function) infinite;
 }
 
 .EtzMobileSection_block {
   position: relative;
 
   display: flex;
+  align-items: center;
+  justify-content: flex-start;
 
   height: 100%;
 }
@@ -64,11 +118,15 @@
 }
 
 .EtzMobileSection_description {
-  width: 540px;
+  min-width: 540px;
 }
 
 .EtzMobileSection_pattern {
   position: absolute;
-  top: -213px;
-  right: -330px;
+  top: 50%;
+  right: 0;
+  bottom: 0;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
 }
