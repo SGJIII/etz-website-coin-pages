@@ -1,12 +1,9 @@
 .ForEmployersSection {
-  box-sizing: content-box;
-  /* margin-top: -20px; */
-  padding: 52px 0;
-  padding-top: 0;
-}
+  align-items: center;
+  justify-content: center;
 
-.ForEmployersSection_container {
-  /* margin-left: 10px; */
+  box-sizing: content-box;
+  height: 100vh;
 }
 
 .ForEmployersSection_title {
