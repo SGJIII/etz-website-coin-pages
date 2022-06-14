@@ -1,9 +1,10 @@
 .SupportedCryptoSection {
-  display: flex;
   align-items: center;
   justify-content: center;
 
-  height: 100vh;
+  height: 912px;
+  margin-bottom: 100px;
+  padding-top: 30px;
 }
 
 .SupportedCryptoSection_container {
