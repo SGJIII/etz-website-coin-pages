@@ -39,6 +39,7 @@
   min-height: 1px;
   max-height: 1px;
 
+  opacity: 0.2;
   background-color: var(--dark-50);
 }
 
