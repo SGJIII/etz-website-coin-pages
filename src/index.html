@@ -43,6 +43,22 @@
     <include src="components/supported-crypto-section/index.html"></include>
     <include src="components/contact-us-section/index.html"></include>
     <include src="components/footer/index.html"></include>
+    <script>
+      const setupSize = () => {
+        const vw = Math.max(
+          document.documentElement.clientWidth || 0,
+          window.innerWidth || 0
+        );
+        const vh = Math.max(
+          document.documentElement.clientHeight || 0,
+          window.innerHeight || 0
+        );
+        document.documentElement.style.setProperty("--vw", `${vw}`);
+        document.documentElement.style.setProperty("--vh", `${vh}`);
+      };
+      setupSize();
+      document.addEventListener("resize", setupSize);
+    </script>
     <script type="module" src="js/index.ts"></script>
   </body>
 </html>

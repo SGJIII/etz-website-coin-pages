@@ -28,12 +28,32 @@ document.addEventListener(
     contactFrom.init();
     benefitsSlider.init();
 
+    const sec = document.querySelector<HTMLDivElement>(".EtzMobileSection");
+
+    window?.addEventListener("scroll", () => {
+      function animation_loop() {
+        const current_offset = window.pageYOffset;
+        const object__offset = sec?.offsetTop ?? 0;
+        const object__height = sec?.getBoundingClientRect().height ?? 0;
+        if (
+          current_offset < object__offset + object__height &&
+          current_offset > object__offset - object__height
+        ) {
+          sec?.setAttribute(
+            "style",
+            `--coin-position: ${(current_offset - object__offset) / 7}px`
+          );
+        }
+      }
+      requestAnimationFrame(animation_loop);
+    });
+
     //@ts-ignore
     uss.setPageScroller(document.body);
     //@ts-ignore
     uss.hrefSetup();
     //@ts-ignore
-    window.addEventListener("wheel", () => uss.stopScrolling());
+    // window.addEventListener("wheel", () => uss.stopScrolling());
   },
   false
 );
