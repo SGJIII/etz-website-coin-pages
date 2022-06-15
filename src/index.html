@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="styles/index.css" />
     <title>ETZ</title>
-    <script src="./js/services/universalsmoothscroll-min.js"></script>
-    <script src="./js/services/universalsmoothscroll-ease-functions-min.js"></script>
+    <script src="./js/services/universalsmoothscroll-min.js" async></script>
+    <script
+      src="./js/services/universalsmoothscroll-ease-functions-min.js"
+      async></script>
     <script type="module">
       const config = require("../package.json");
       console.log("Build version: " + config.version);
@@ -20,6 +22,7 @@
       muted
       loop
       autoplay
+      preload="auto"
       width="750"
       height="1624"
       src="./assets/Mobile-1-3.mp4"
@@ -29,12 +32,14 @@
       playsinline
       muted
       loop
+      preload="auto"
       autoplay
       width="750"
       height="1624"
       src="./assets/Buying_Mobile-4.mp4"
       style="display: none"></video>
     <canvas class="webgl"></canvas>
+    <script src="./js/three.js" type="module"></script>
     <include src="components/header-section/index.html"></include>
     <include src="components/benefits-section/index.html"></include>
     <include src="components/for-employers-section/index.html"></include>
@@ -59,6 +64,6 @@
       setupSize();
       document.addEventListener("resize", setupSize);
     </script>
-    <script type="module" src="js/index.ts"></script>
+    <script type="module" src="js/index.ts" defer></script>
   </body>
 </html>

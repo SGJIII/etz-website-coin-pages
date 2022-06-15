@@ -4,7 +4,8 @@
   align-items: center;
 
   box-sizing: content-box;
-  height: 100vh;
+  margin-bottom: 106px;
+  padding-top: 150px;
 }
 
 .ContactUsSection_card {

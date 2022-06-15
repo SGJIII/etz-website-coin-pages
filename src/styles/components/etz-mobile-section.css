@@ -1,7 +1,6 @@
 .EtzMobileSection {
-  overflow: initial !important;
-
   height: 100vh;
+  padding: 460px 0;
 
   --coin-position: 1px;
 }

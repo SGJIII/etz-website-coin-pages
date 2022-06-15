@@ -2,7 +2,6 @@
 import Accordion from "./accordion";
 import HeaderMenu from "./header-menu";
 import SupportedCrypto from "./supported-crypto/supported-crypto-search";
-import "./three";
 import "universalsmoothscroll";
 import ContactFrom from "./contact";
 import Notification from "./notification";
