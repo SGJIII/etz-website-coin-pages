@@ -15,7 +15,7 @@
   height: 1078px;
   max-height: 1078px;
 
-  transform: scale(calc((var(--vh) - 200) / var(--vh)));
+  transform: scale(calc((var(--vh) - 306) / var(--vh)));
 }
 
 .EtzMobileSection_img {

@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles/fonts/index.css" />
     <link rel="stylesheet" href="styles/index.css" />
     <title>ETZ</title>
     <script src="./js/services/universalsmoothscroll-min.js" async></script>
@@ -62,7 +63,9 @@
         document.documentElement.style.setProperty("--vh", `${vh}`);
       };
       setupSize();
-      document.addEventListener("resize", setupSize);
+      window.addEventListener("resize", () => {
+        setupSize();
+      });
     </script>
     <script type="module" src="js/index.ts" defer></script>
   </body>
