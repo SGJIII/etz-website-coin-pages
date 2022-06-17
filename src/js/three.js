@@ -5,6 +5,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 
 const MODEL_NAME = "etz_8_1.glb";
+const FIRST_SECTION_CLASS = ".HeaderSection";
 const SECOND_SECTION_CLASS = ".BenefitsSection";
 
 const active = window.location.hash === "#debug";
@@ -205,19 +206,19 @@ directionalLight.position.set(-3.11, 1.56, 5);
 // directionalLight.shadow.radius = 10;
 
 scene.add(directionalLight);
-
+const mainSection = document.querySelector(FIRST_SECTION_CLASS);
 /**
  * Sizes
  */
 const sizes = {
   width: window.innerWidth,
-  height: window.innerHeight,
+  height: mainSection.getBoundingClientRect().height,
 };
 
 window.addEventListener("resize", () => {
   // Update sizes
   sizes.width = window.innerWidth;
-  sizes.height = window.innerHeight;
+  sizes.height = mainSection.getBoundingClientRect().height;
 
   // Update camera
   camera.aspect = sizes.width / sizes.height;

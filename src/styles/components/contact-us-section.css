@@ -1,7 +1,7 @@
 .ContactUsSection {
   display: flex;
   overflow: initial !important;
-  align-items: center;
+  justify-content: center;
 
   box-sizing: content-box;
   height: 100vh;
