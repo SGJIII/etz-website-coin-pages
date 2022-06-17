@@ -3,8 +3,8 @@
   align-items: center;
   justify-content: center;
 
-  box-sizing: content-box;
   height: 100vh;
+  padding-top: 106px;
 }
 
 .FAQSection_title {
