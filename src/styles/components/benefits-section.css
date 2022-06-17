@@ -7,7 +7,7 @@
 }
 
 .BenefitsSection_container {
-  height: 300px;
+  height: 360px;
 }
 
 .BenefitsSection_title {
@@ -20,7 +20,7 @@
   display: inline-block;
   overflow: hidden;
 
-  width: 320px;
+  width: 360px;
   height: 413px;
   margin-top: calc(72px - 36px);
   margin-left: -20px;
@@ -48,7 +48,7 @@
   display: flex;
   flex-wrap: nowrap;
 
-  max-width: 300px;
+  min-width: 350px;
   min-height: 100px;
 
   -webkit-transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -61,7 +61,8 @@
   display: flex;
   flex-direction: column;
 
-  min-width: 300px;
+  min-width: 340px;
+  padding-right: 10px;
 }
 
 .BenefitsSection_text__gray {

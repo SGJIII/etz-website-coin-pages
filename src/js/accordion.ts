@@ -40,9 +40,46 @@ export default class Accordion {
 
   private addEventListener(accordion: Accordion, idx: number) {
     this.isFirstArray[idx] = true;
-    // eslint-disable-next-line no-unused-vars
-    this.accordions[idx].addEventListener("click", function (this: Element) {
+    const acc = this.accordions[idx];
+    const itemsAcc = this.accordions;
+    acc.addEventListener("click", function (this: Element) {
+      let i = 0;
+      for (i = 0; i < itemsAcc.length; i++) {
+        if (i === idx) continue;
+        if (itemsAcc[i].classList.contains("FAQSection_accordion__while")) {
+          itemsAcc[i].classList.toggle("FAQSection_accordion__while");
+          itemsAcc[i].classList.toggle("FAQSection_accordion__dark");
+
+          const details = itemsAcc[i].querySelector<HTMLElement>(
+            ".FAQSection_accordionDetails"
+          );
+          const summary = itemsAcc[i].querySelector<HTMLElement>(
+            ".FAQSection_accordionSummary"
+          );
+
+          if (!details) return;
+
+          details.classList.toggle("FAQSection_accordion__slideUp");
+          details.classList.toggle("FAQSection_accordion__slideDown");
+          summary?.classList.toggle("FAQSection_accordionSummary__open");
+          if (details.style.maxHeight) {
+            details.style.maxHeight = "";
+          } else {
+            details.style.maxHeight = details.scrollHeight + "px";
+          }
+        }
+      }
+
       accordion.handleClasses(this, idx);
+      const panel = acc.querySelector<HTMLElement>(
+        ".FAQSection_accordionDetails"
+      );
+      if (!panel) return;
+      if (panel.style.maxHeight) {
+        panel.style.maxHeight = "";
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + "px";
+      }
     });
   }
 
