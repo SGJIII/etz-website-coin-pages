@@ -2,9 +2,7 @@
   align-items: center;
   justify-content: center;
 
-  height: 912px;
-  margin-bottom: 30px;
-  padding-top: 30px;
+  height: 100vh;
 }
 
 .SupportedCryptoSection_container {

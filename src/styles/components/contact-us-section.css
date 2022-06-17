@@ -1,11 +1,10 @@
 .ContactUsSection {
   display: flex;
   overflow: initial !important;
-  align-items: center;
+  justify-content: center;
 
   box-sizing: content-box;
-  margin-bottom: 106px;
-  padding-top: 150px;
+  height: 100vh;
 }
 
 .ContactUsSection_card {
