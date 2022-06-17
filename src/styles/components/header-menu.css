@@ -129,6 +129,8 @@
   .HeaderMenu_linkText__black {
   display: inline-block;
 
+  transition: all 300ms linear;
+
   color: var(--text-black);
 }
 .HeaderMenu_links .HeaderMenu_link .HeaderMenu_linkText__black {

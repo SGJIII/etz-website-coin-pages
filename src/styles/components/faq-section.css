@@ -1,7 +1,10 @@
 .FAQSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   box-sizing: content-box;
-  height: 100%;
-  padding: 128px 0;
+  height: 100vh;
 }
 
 .FAQSection_title {
