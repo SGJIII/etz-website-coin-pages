@@ -52,11 +52,11 @@ document.addEventListener(
     //@ts-ignore
     uss.hrefSetup();
     //@ts-ignore
-    window.addEventListener("wheel", (e) => {
-      e.preventDefault();
-      //@ts-ignore
-      uss.stopScrollingAll(document.body);
-    });
+    // window.addEventListener("wheel", (e) => {
+    //   e.preventDefault();
+    //   //@ts-ignore
+    //   uss.stopScrollingAll(document.body);
+    // });
 
     benefitsSlider.setPosition();
   },

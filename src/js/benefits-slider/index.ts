@@ -93,9 +93,7 @@ class BenefitsSlider {
       });
     });
 
-    let id: string | number | NodeJS.Timeout | undefined,
-      _scrollTimeout: string | number | NodeJS.Timeout | undefined;
-
+    let id: string | number | NodeJS.Timeout | undefined;
     window.addEventListener("wheel", (e) => {
       if (this.section === null || this.elementDot === null) return;
       e.preventDefault();
