@@ -48,11 +48,17 @@ document.addEventListener(
     });
 
     //@ts-ignore
-    uss.setPageScroller(document.body);
+    // uss.setPageScroller(document.body);
     //@ts-ignore
     uss.hrefSetup();
     //@ts-ignore
-    // window.addEventListener("wheel", () => uss.stopScrolling());
+    window.addEventListener("wheel", (e) => {
+      e.preventDefault();
+      //@ts-ignore
+      uss.stopScrollingAll(document.body);
+    });
+
+    benefitsSlider.setPosition();
   },
   false
 );

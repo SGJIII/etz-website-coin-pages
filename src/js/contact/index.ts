@@ -133,7 +133,7 @@ class ContactFrom {
     const res = await API.post("/landing/contact", data);
     if (!res?.data?.success) return;
 
-    if (this.buttonSubmit) this.buttonSubmit.disabled = true;
+    // if (this.buttonSubmit) this.buttonSubmit.disabled = true;
 
     generateMessage({
       id: "success",

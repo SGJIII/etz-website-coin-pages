@@ -65,12 +65,12 @@ export default class Accordion {
           if (details.style.maxHeight) {
             details.style.maxHeight = "";
           } else {
-            details.style.maxHeight = details.scrollHeight + "px";
+            details.style.maxHeight =
+              String(Number(details.scrollHeight) + 37) + "px";
           }
         }
       }
 
-      accordion.handleClasses(this, idx);
       const panel = acc.querySelector<HTMLElement>(
         ".FAQSection_accordionDetails"
       );
@@ -78,8 +78,9 @@ export default class Accordion {
       if (panel.style.maxHeight) {
         panel.style.maxHeight = "";
       } else {
-        panel.style.maxHeight = panel.scrollHeight + "px";
+        panel.style.maxHeight = String(Number(panel.scrollHeight) + 37) + "px";
       }
+      accordion.handleClasses(this, idx);
     });
   }
 
