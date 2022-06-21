@@ -233,7 +233,10 @@ class BenefitsSlider {
       }
 
       if (e.deltaY < 0) {
-        if (rect.top >= 0 && rect.top <= 200 && this.rangeOut) {
+        if (
+          rect.top >= 0 &&
+          this.activeElement === this.elementDot?.length - 1
+        ) {
           if (this.freeze === false) {
             disableScroll();
             this.rangeOut = false;
@@ -241,7 +244,7 @@ class BenefitsSlider {
           }
         }
       } else if (e.deltaY > 0) {
-        if (rect.top <= 0 && rect.top > -200 && this.rangeOut) {
+        if (rect.top <= 0 && this.activeElement === 0) {
           // console.log("yes")
           if (this.freeze === false) {
             disableScroll();

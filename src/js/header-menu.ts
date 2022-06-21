@@ -143,11 +143,5 @@ export default class HeaderMenu {
   }
 }
 
-document.addEventListener(
-  "DOMContentLoaded",
-  () => {
-    const headerMenu = new HeaderMenu({ className: ".HeaderMenu_menu" });
-    headerMenu.init();
-  },
-  false
-);
+const headerMenu = new HeaderMenu({ className: ".HeaderMenu_menu" });
+headerMenu.init();
