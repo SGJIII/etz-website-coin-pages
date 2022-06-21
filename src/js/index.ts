@@ -11,21 +11,19 @@ document.addEventListener(
   "DOMContentLoaded",
   () => {
     new Notification();
-    const headerMenu = new HeaderMenu({ className: ".HeaderMenu_menu" });
     const accordion = new Accordion();
     const supportedCrypto = new SupportedCrypto({
       nameContainer: "[data-name=SupportedCryptoTable]",
       nameSearch: "[data-name=SupportedCryptoSearchInput]",
       namePagination: "[data-name=SupportedCryptoPagination]",
     });
-    const benefitsSlider = new BenefitsSlider();
+    // const benefitsSlider = new BenefitsSlider();
     const contactFrom = new ContactFrom();
 
-    headerMenu.init();
     accordion.init();
     supportedCrypto.init().render();
     contactFrom.init();
-    benefitsSlider.init();
+    // benefitsSlider.init();
 
     const sec = document.querySelector<HTMLDivElement>(".EtzMobileSection");
 
@@ -58,7 +56,8 @@ document.addEventListener(
     //   uss.stopScrollingAll(document.body);
     // });
 
-    benefitsSlider.setPosition();
+    // benefitsSlider.setPosition();
+    // benefitsSlider.uploadPositionSlideAfterLinks();
   },
   false
 );
