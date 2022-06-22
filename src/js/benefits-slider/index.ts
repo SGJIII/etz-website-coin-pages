@@ -1,6 +1,6 @@
 import { getDataName } from "../utils/getDataName";
 import { createElement } from "../utils/createElement";
-import { enableScroll, disableScroll, wheelOpt } from "../utils/scroll";
+import { wheelOpt } from "../utils/scroll";
 
 class BenefitsSlider {
   elementContainder: HTMLDivElement | null = null;
@@ -15,11 +15,13 @@ class BenefitsSlider {
   activeElement = 0;
   __scrollId: string | number | NodeJS.Timeout | undefined;
   offSetTopSection = 0;
+  deltaY = 0;
+  deltaY2 = 0;
 
   isDisabledScroll = false;
   isFirst = true;
   isScrolling = false;
-  isInside = false;
+  isOutside = true;
 
   constructor() {
     this.elementContainder = document.querySelector<HTMLDivElement>(
@@ -48,6 +50,29 @@ class BenefitsSlider {
     return newPositon;
   }
 
+  turnActive(idx: number, hidden?: boolean) {
+    if (this.elementDot === null) return;
+    this.calcPosition(idx);
+
+    const style = hidden
+      ? `--position: -${this.positon}px; transition-duration: 0ms;`
+      : `--position: -${this.positon}px`;
+    this.elementContainder?.setAttribute("style", style);
+
+    if (hidden) {
+      setTimeout(() => {
+        if (this.elementContainder === null) return;
+        this.elementContainder.style.transitionDuration = "1s";
+      }, 100);
+    }
+
+    this.elementDot.forEach((el) => {
+      el.classList.remove("BenefitsSection_dot__active");
+    });
+    this.elementDot[idx].classList.add("BenefitsSection_dot__active");
+    this.activeElement = idx;
+  }
+
   private createDots() {
     this.elementSlide?.forEach((el, idx) => {
       this.widthSlides.push(el.getBoundingClientRect().width);
@@ -59,16 +84,7 @@ class BenefitsSlider {
 
       dot.setAttribute("data-name", "BenefitsSliderDot");
       dot.addEventListener("click", () => {
-        this.calcPosition(idx);
-        this.elementContainder?.setAttribute(
-          "style",
-          `--position: -${this.positon}px`
-        );
-        this.elementDot?.forEach((el) => {
-          el.classList.remove("BenefitsSection_dot__active");
-        });
-        dot.classList.add("BenefitsSection_dot__active");
-        this.activeElement = idx;
+        this.turnActive(idx);
       });
 
       this.elementDotsContainder?.appendChild(dot);
@@ -80,38 +96,35 @@ class BenefitsSlider {
     if (this.section === null || this.elementDot === null) return;
 
     if (e.deltaY < 0) {
-      if (this.activeElement > 0) {
-        this.isInside = true;
-        this.activeElement--;
-        this.elementDot[this.activeElement]?.click();
-      }
-
       if (this.activeElement === 0) {
         this.scrollTurnOn();
       }
-    } else if (e.deltaY > 0) {
-      if (this.activeElement < this.elementDot?.length - 1) {
-        this.isInside = true;
-        this.activeElement++;
+      if (this.activeElement > 0) {
+        this.activeElement--;
         this.elementDot[this.activeElement]?.click();
       }
-
+    } else if (e.deltaY > 0) {
       if (this.activeElement === this.elementDot?.length - 1) {
         this.scrollTurnOn();
+      }
+
+      if (this.activeElement < this.elementDot?.length - 1) {
+        this.activeElement++;
+        this.elementDot[this.activeElement]?.click();
       }
     }
   }
 
-  private slideSwitcher(e: WheelEvent) {
-    if (this.isDisabledScroll === false) return false;
+  __idFirstInput = 0;
 
-    if (this.isFirst) {
-      setTimeout(() => {
-        this.isFirst = false;
-      }, 600);
-      return true;
-    }
-    if (this.isScrolling === true) return false;
+  private slideSwitcher(e: WheelEvent) {
+    if (
+      this.isDisabledScroll === false ||
+      this.isFirst === true ||
+      this.isScrolling === true
+    )
+      return false;
+
     this.isScrolling = true;
 
     clearTimeout(this.__scrollId);
@@ -126,98 +139,101 @@ class BenefitsSlider {
     return true;
   }
 
-  private handleStateScroll(e: WheelEvent) {
-    if (this.section === null || this.elementDot === null) return;
-
-    if (this.isDisabledScroll) {
-      const rect = this.section.getBoundingClientRect();
-      const isOutsideSection =
-        rect.top >= window.innerHeight / 2 ||
-        rect.top < -window.innerHeight / 2;
-
-      if (isOutsideSection) {
-        this.activeElement = rect.top >= 0 ? 0 : this.elementDot?.length - 1;
-        this.elementDot[this.activeElement]?.click();
-      }
-
-      return window.scrollTo({
-        top: window.pageYOffset + rect.top,
-        left: 0,
-        behavior: "auto",
-      });
-    }
-
-    this.checkForDisableScroll(e);
-  }
-
-  private checkForDisableScroll(e: WheelEvent) {
-    if (
-      this.section === null ||
-      this.elementDot === null ||
-      this.isDisabledScroll === true
-    )
-      return;
-
-    const rect = this.section.getBoundingClientRect();
-    if (e.deltaY < 0) {
-      if (
-        rect.top >= -window.innerHeight / 2 &&
-        this.activeElement === this.elementDot?.length - 1
-      ) {
-        return this.scrollTurnOff();
-      }
-    }
-    if (e.deltaY > 0) {
-      if (
-        rect.top <= window.innerHeight / 2 &&
-        rect.top > 0 &&
-        this.activeElement === 0
-      ) {
-        this.scrollTurnOff();
-      }
-    }
-  }
-
-  private scrollTurnOff() {
-    disableScroll();
+  private scrollTurnOff(_name?: string) {
     document.body.style.overflow = "hidden";
     this.isDisabledScroll = true;
   }
 
   private scrollTurnOn() {
+    if (this.isDisabledScroll === false) return;
+
     document.body.style.overflow = "initial";
-    enableScroll();
     this.isFirst = true;
     this.isDisabledScroll = false;
-    this.isInside = false;
+    this.isOutside = true;
   }
 
   private uploadPositionSlideAfterLinks() {
     const links = document.querySelectorAll("a");
     links.forEach((el) => {
       el.addEventListener("click", () => {
-        if (this.section === null || this.elementDot === null) return;
-        enableScroll();
-        this.isDisabledScroll = false;
-
-        const rect = this.section.getBoundingClientRect();
-        if (
-          rect.top >= window.innerHeight / 5 ||
-          rect.top < -window.innerHeight / 5
-        ) {
-          this.activeElement = rect.top >= 0 ? 0 : this.elementDot?.length - 1;
-          this.elementDot[this.activeElement]?.click();
-        }
+        this.scrollTurnOff();
       });
     });
   }
-
+  positionVertical = true;
   public watchToWheel() {
     this.uploadPositionSlideAfterLinks();
 
+    const start = () => {
+      const rect = this.section?.getBoundingClientRect();
+      const rectBody = document.body.getBoundingClientRect();
+      const scrollTopFrame =
+        document.body.scrollTop || document.documentElement.scrollTop;
+
+      const mouseWheelDistance = Math.abs(rectBody.top - (rect?.top ?? 0));
+
+      const isActiveLastElement =
+        this.activeElement === (this.elementDot?.length ?? 0) - 1;
+      const isActiveFirstElement = this.activeElement === 0;
+
+      if (
+        scrollTopFrame + (rect?.height ?? 0) <= mouseWheelDistance * 1.5 ||
+        scrollTopFrame >= mouseWheelDistance / 0.5 + (rect?.height ?? 0)
+      ) {
+        this.scrollTurnOn();
+      }
+      if (scrollTopFrame >= mouseWheelDistance + (rect?.height ?? 0)) {
+        this.scrollTurnOn();
+        if (this.positionVertical) {
+          this.positionVertical = false;
+          this.activeElement = (this.elementDot?.length ?? 0) - 1;
+          this.turnActive(this.activeElement, true);
+        }
+      }
+
+      if (scrollTopFrame < mouseWheelDistance / 2) {
+        if (this.positionVertical === false) {
+          this.positionVertical = true;
+          this.activeElement = 0;
+          this.turnActive(this.activeElement, true);
+        }
+      }
+      // UP
+      if (this.deltaY < 0) {
+        if (!isActiveFirstElement && scrollTopFrame < mouseWheelDistance) {
+          this.scrollTurnOff("up");
+        }
+      }
+      // DOWN
+      if (this.deltaY > 0) {
+        if (
+          scrollTopFrame > mouseWheelDistance &&
+          scrollTopFrame < mouseWheelDistance + (rect?.height ?? 0) &&
+          !isActiveLastElement
+        ) {
+          this.scrollTurnOff("down");
+        }
+      }
+
+      if (this.isOutside && this.isDisabledScroll) {
+        this.isOutside = false;
+        setTimeout(() => {
+          window.scrollTo({
+            top: mouseWheelDistance,
+            behavior: "smooth",
+          });
+        }, 0);
+        setTimeout(() => {
+          this.isFirst = false;
+        }, 1400);
+      }
+      requestAnimationFrame(start);
+    };
+    start();
+
     const rect = this.section?.getBoundingClientRect();
     const rectBody = document.body.getBoundingClientRect();
-
     this.offSetTopSection = (rect?.top ?? 0) - rectBody?.top;
 
     window.addEventListener(
@@ -227,9 +243,14 @@ class BenefitsSlider {
           e.preventDefault();
         }
 
-        console.log("this.isDisabledScroll", this.isDisabledScroll);
+        this.deltaY = e.deltaY;
+
+        if (this.isFirst) {
+          this.deltaY2 = e.deltaY;
+        }
+
+        // console.log("this.isDisabledScroll", this.isDisabledScroll);
         this.slideSwitcher(e);
-        this.handleStateScroll(e);
       },
       wheelOpt
     );
