@@ -49,14 +49,14 @@ variables:
   script:
     - aws s3 sync ./build s3://etz-dev-landing/ --delete
 
-develop:test:
+common:test:
   extends: .test
   only:
     - develop
 
 develop:build:
   extends: .build
-  needs: ["develop:test"]
+  needs: ["common:test"]
   when: manual
   only:
     - develop
@@ -70,7 +70,7 @@ develop:deploy:
 
 production:build:
   extends: .build
-  needs: ["develop:test"]
+  needs: ["common:test"]
   when: manual
   only:
     - develop
