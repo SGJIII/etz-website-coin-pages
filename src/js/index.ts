@@ -40,11 +40,11 @@ document.addEventListener(
       }
       requestAnimationFrame(animation_loop);
     });
-
-    //@ts-ignore
-    uss.setPageScroller(document.body);
-    //@ts-ignore
-    uss.hrefSetup();
   },
   false
 );
+
+//@ts-ignore
+uss.setPageScroller(document.body);
+//@ts-ignore
+uss.hrefSetup();
