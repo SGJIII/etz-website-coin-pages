@@ -46,7 +46,7 @@ variables:
     - aws configure set region $AWS_DEFAULT_REGION
     - aws configure list
   script:
-    - aws s3 sync ./build s3://etz-dev-landing/ --delete
+    - aws s3 sync ./build $DEPLOY_TARGET --delete
 
 common:test:
   extends: .test
@@ -67,6 +67,8 @@ develop:deploy:
   needs: ["develop:build"]
   only:
     - develop
+  variables:
+    DEPLOY_TARGET: s3://etz-dev-landing/
   when: on_success
 
 production:build:
@@ -83,4 +85,6 @@ production:deploy:
   needs: ["production:build"]
   only:
     - develop
+  variables:
+    DEPLOY_TARGET: s3://etz-production-landing/
   when: on_success
