@@ -20,9 +20,9 @@
   /* Brand colors */
   --primary: rgba(34 109 255 / 100%);
   --primary-05: rgba(34 109 255 / 5%);
-  --primary-050: rgba(34 109 255 / 50%);
   --primary-10: rgba(34 109 255 / 10%);
   --primary-20: rgba(34 109 255 / 20%);
+  --primary-50: rgba(34 109 255 / 50%);
   --primary-70: rgba(34 109 255 / 70%);
   --secondary: rgba(40 145 255 / 100%);
   --text-black: rgba(0 0 0 / 100%);
