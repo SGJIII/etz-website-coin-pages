@@ -47,7 +47,7 @@ variables:
     - aws configure list
   script:
     - aws s3 sync ./build $DEPLOY_TARGET --delete
-    - ECHO "$URL_AWS"
+    - echo "$URL_AWS"
 
 common:test:
   extends: .test
