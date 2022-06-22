@@ -160,9 +160,6 @@ class BenefitsSlider {
 
     const rect = this.section.getBoundingClientRect();
     if (e.deltaY < 0) {
-      if (Math.abs(e.deltaY) > Math.abs(rect.top) && rect.top < 0) {
-        return this.scrollTurnOff();
-      }
       if (
         rect.top >= -window.innerHeight / 2 &&
         this.activeElement === this.elementDot?.length - 1
@@ -170,9 +167,6 @@ class BenefitsSlider {
         return this.scrollTurnOff();
     }
     if (e.deltaY > 0) {
-      if (e.deltaY > rect.top && rect.top > 0) {
-        return this.scrollTurnOff();
-      }
       if (rect.top <= window.innerHeight / 2 && this.activeElement === 0)
         this.scrollTurnOff();
     }

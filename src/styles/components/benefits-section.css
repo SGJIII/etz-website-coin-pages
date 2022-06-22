@@ -29,17 +29,17 @@
 .BenefitsSection_shadow {
   position: absolute;
   z-index: 1;
-  right: 0;
+  right: -10px;
 
   width: 1px;
   height: 100%;
 
   background-color: var(--bright);
-  box-shadow: 0 0 10px 10px var(--bright);
+  box-shadow: 0 0 10px 20px var(--bright);
 }
 
 .BenefitsSection_shadow:first-child {
-  left: 0;
+  left: -10px;
 }
 .BenefitsSection_slideContainer {
   --position: 0;
