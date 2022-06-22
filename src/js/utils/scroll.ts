@@ -1,4 +1,4 @@
-function preventDefault(e: Event) {
+export function preventDefault(e: Event) {
   e.preventDefault();
 }
 
@@ -26,7 +26,7 @@ try {
   supportsPassive = false;
 }
 
-const wheelOpt = supportsPassive ? { passive: false } : false;
+export const wheelOpt = supportsPassive ? { passive: false } : false;
 const wheelEvent =
   "onwheel" in document.createElement("div") ? "wheel" : "mousewheel";
 

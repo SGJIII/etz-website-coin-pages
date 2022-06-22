@@ -1,6 +1,6 @@
 import { getDataName } from "../utils/getDataName";
 import { createElement } from "../utils/createElement";
-import { enableScroll, disableScroll } from "../utils/scroll";
+import { enableScroll, disableScroll, wheelOpt } from "../utils/scroll";
 
 class BenefitsSlider {
   elementContainder: HTMLDivElement | null = null;
@@ -8,11 +8,13 @@ class BenefitsSlider {
   elementDotsContainder: HTMLDivElement | null = null;
   elementDot: Array<HTMLElement> | null = [];
   section: HTMLDivElement | null = null;
+  event: WheelEvent | null = null;
 
   widthSlides: number[] = [];
   positon = 0;
   activeElement = 0;
   __scrollId: string | number | NodeJS.Timeout | undefined;
+  offSetTopSection = 0;
 
   isDisabledScroll = false;
   isFirst = true;
@@ -210,10 +212,23 @@ class BenefitsSlider {
 
   public watchToWheel() {
     this.uploadPositionSlideAfterLinks();
-    window.addEventListener("wheel", (e) => {
-      this.slideSwitcher(e);
-      this.handleStateScroll(e);
-    });
+
+    const rect = this.section?.getBoundingClientRect();
+    const rectBody = document.body.getBoundingClientRect();
+
+    this.offSetTopSection = (rect?.top ?? 0) - rectBody?.top;
+
+    window.addEventListener(
+      "wheel",
+      (e) => {
+        if (this.isDisabledScroll) {
+          e.preventDefault();
+        }
+        this.slideSwitcher(e);
+        this.handleStateScroll(e);
+      },
+      wheelOpt
+    );
   }
 
   public init() {

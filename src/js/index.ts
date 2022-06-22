@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import Accordion from "./accordion";
 import SupportedCrypto from "./supported-crypto/supported-crypto-search";
-import "universalsmoothscroll";
 import ContactFrom from "./contact";
 import Notification from "./notification";
 
@@ -44,6 +43,10 @@ document.addEventListener(
   false
 );
 
+window.addEventListener("wheel", (e) => {
+  //@ts-ignore
+  uss.stopScrollingAll(document.body);
+});
 //@ts-ignore
 uss.setPageScroller(document.body);
 //@ts-ignore
