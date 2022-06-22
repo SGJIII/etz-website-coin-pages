@@ -49,15 +49,7 @@ document.addEventListener(
     // uss.setPageScroller(document.body);
     //@ts-ignore
     uss.hrefSetup();
-    //@ts-ignore
-    // window.addEventListener("wheel", (e) => {
-    //   e.preventDefault();
-    //   //@ts-ignore
-    //   uss.stopScrollingAll(document.body);
-    // });
-
-    // benefitsSlider.setPosition();
-    // benefitsSlider.uploadPositionSlideAfterLinks();
+    console.log(process.env.API_URL);
   },
   false
 );
