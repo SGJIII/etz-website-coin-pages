@@ -1,11 +1,9 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import Accordion from "./accordion";
-import HeaderMenu from "./header-menu";
 import SupportedCrypto from "./supported-crypto/supported-crypto-search";
 import "universalsmoothscroll";
 import ContactFrom from "./contact";
 import Notification from "./notification";
-import BenefitsSlider from "./benefits-slider";
 
 document.addEventListener(
   "DOMContentLoaded",
@@ -17,13 +15,11 @@ document.addEventListener(
       nameSearch: "[data-name=SupportedCryptoSearchInput]",
       namePagination: "[data-name=SupportedCryptoPagination]",
     });
-    // const benefitsSlider = new BenefitsSlider();
     const contactFrom = new ContactFrom();
 
     accordion.init();
     supportedCrypto.init().render();
     contactFrom.init();
-    // benefitsSlider.init();
 
     const sec = document.querySelector<HTMLDivElement>(".EtzMobileSection");
 
@@ -46,10 +42,9 @@ document.addEventListener(
     });
 
     //@ts-ignore
-    // uss.setPageScroller(document.body);
+    uss.setPageScroller(document.body);
     //@ts-ignore
     uss.hrefSetup();
-    console.log(process.env.API_URL);
   },
   false
 );
