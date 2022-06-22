@@ -28,7 +28,7 @@ class ContactFrom {
       .string()
       .required("Please fill in all the required fields")
       .email("Please provide a valid email address")
-      .max(256),
+      .max(255),
     name: yup.string().required("Please fill in all the required fields"),
     phone: yup.string(),
     companyPosition: yup.string(),
@@ -56,21 +56,21 @@ class ContactFrom {
 
       this.inputElements = [...inputs, ...textareas];
 
-      const handleValidateInput = (el: HTMLInputElement) => (e: Event) => {
-        const event = e as HTMLElementEvent<HTMLInputElement>;
+      // const handleValidateInput = (el: HTMLInputElement) => (e: Event) => {
+      //   const event = e as HTMLElementEvent<HTMLInputElement>;
 
-        if (event.currentTarget?.value === undefined) return;
-        this.validateField(
-          event.srcElement.name,
-          event.srcElement.type === "checkbox"
-            ? el.checked
-            : event.currentTarget?.value
-        );
-      };
-      this.inputElements.forEach((el) => {
-        el.addEventListener("change", handleValidateInput(el));
-        el.addEventListener("focusout", handleValidateInput(el));
-      });
+      //   if (event.currentTarget?.value === undefined) return;
+      //   this.validateField(
+      //     event.srcElement.name,
+      //     event.srcElement.type === "checkbox"
+      //       ? el.checked
+      //       : event.currentTarget?.value
+      //   );
+      // };
+      // this.inputElements.forEach((el) => {
+      //   el.addEventListener("change", handleValidateInput(el));
+      //   el.addEventListener("focusout", handleValidateInput(el));
+      // });
 
       this.buttonSubmit?.addEventListener("click", async (event) => {
         event.preventDefault();
