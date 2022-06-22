@@ -180,10 +180,12 @@ class BenefitsSlider {
 
   private scrollTurnOff() {
     disableScroll();
+    document.body.style.overflow = "hidden";
     this.isDisabledScroll = true;
   }
 
   private scrollTurnOn() {
+    document.body.style.overflow = "initial";
     enableScroll();
     this.isFirst = true;
     this.isDisabledScroll = false;
