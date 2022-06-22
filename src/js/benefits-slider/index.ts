@@ -163,12 +163,18 @@ class BenefitsSlider {
       if (
         rect.top >= -window.innerHeight / 2 &&
         this.activeElement === this.elementDot?.length - 1
-      )
+      ) {
         return this.scrollTurnOff();
+      }
     }
     if (e.deltaY > 0) {
-      if (rect.top <= window.innerHeight / 2 && this.activeElement === 0)
+      if (
+        rect.top <= window.innerHeight / 2 &&
+        rect.top > 0 &&
+        this.activeElement === 0
+      ) {
         this.scrollTurnOff();
+      }
     }
   }
 
@@ -220,6 +226,8 @@ class BenefitsSlider {
         if (this.isDisabledScroll) {
           e.preventDefault();
         }
+
+        console.log("this.isDisabledScroll", this.isDisabledScroll);
         this.slideSwitcher(e);
         this.handleStateScroll(e);
       },
