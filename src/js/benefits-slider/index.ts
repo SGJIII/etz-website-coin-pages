@@ -15,7 +15,7 @@ class BenefitsSlider {
   __scrollId: string | number | NodeJS.Timeout | undefined;
 
   isDisabledScroll = false;
-  isFirst = false;
+  isFirst = true;
   isScrolling = false;
   isInside = false;
 
@@ -82,22 +82,21 @@ class BenefitsSlider {
         this.isInside = true;
         this.activeElement--;
         this.elementDot[this.activeElement]?.click();
-        if (this.activeElement === 0) {
-          this.scrollTurnOn();
-          return true;
-        }
       }
 
-      return true;
-    }
+      if (this.activeElement === 0) {
+        this.scrollTurnOn();
+      }
+    } else if (e.deltaY > 0) {
+      if (this.activeElement < this.elementDot?.length - 1) {
+        this.isInside = true;
+        this.activeElement++;
+        this.elementDot[this.activeElement]?.click();
+      }
 
-    if (this.activeElement >= this.elementDot?.length - 1) return true;
-    this.isInside = true;
-    this.activeElement++;
-    this.elementDot[this.activeElement]?.click();
-
-    if (this.activeElement === this.elementDot?.length - 1) {
-      this.scrollTurnOn();
+      if (this.activeElement === this.elementDot?.length - 1) {
+        this.scrollTurnOn();
+      }
     }
   }
 
@@ -110,7 +109,6 @@ class BenefitsSlider {
       }, 600);
       return true;
     }
-
     if (this.isScrolling === true) return false;
     this.isScrolling = true;
 
@@ -160,11 +158,21 @@ class BenefitsSlider {
 
     const rect = this.section.getBoundingClientRect();
     if (e.deltaY < 0) {
-      if (rect.top >= 0 && this.activeElement === this.elementDot?.length - 1)
+      if (Math.abs(e.deltaY) > Math.abs(rect.top) && rect.top < 0) {
+        return this.scrollTurnOff();
+      }
+      if (
+        rect.top >= -window.innerHeight / 2 &&
+        this.activeElement === this.elementDot?.length - 1
+      )
         return this.scrollTurnOff();
     }
     if (e.deltaY > 0) {
-      if (rect.top <= 0 && this.activeElement === 0) this.scrollTurnOff();
+      if (e.deltaY > rect.top && rect.top > 0) {
+        return this.scrollTurnOff();
+      }
+      if (rect.top <= window.innerHeight / 2 && this.activeElement === 0)
+        this.scrollTurnOff();
     }
   }
 
