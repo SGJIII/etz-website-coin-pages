@@ -57,12 +57,27 @@ develop:test:
 develop:build:
   extends: .build
   needs: ["develop:test"]
+  when: manual
   only:
     - develop
 
 develop:deploy:
   extends: .deploy
   needs: ["develop:build"]
+  only:
+    - develop
+  when: on_success
+
+production:build:
+  extends: .build
+  needs: ["develop:test"]
+  when: manual
+  only:
+    - develop
+
+production:deploy:
+  extends: .deploy
+  needs: ["production:build"]
   only:
     - develop
   when: on_success
