@@ -30,6 +30,10 @@ body {
   scroll-snap-type: y mandatory;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 * {
   box-sizing: border-box;
 
