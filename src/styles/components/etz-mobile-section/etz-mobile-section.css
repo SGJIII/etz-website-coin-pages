@@ -1,6 +1,6 @@
 .EtzMobileSection {
-  height: 100vh;
-  padding: 460px 0;
+  min-height: calc(100vh + var(--height-menu));
+  /* padding: 460px 0; */
 
   --coin-position: 1px;
 }
@@ -92,12 +92,20 @@
 
   display: flex;
   align-items: center;
+  align-self: center;
   justify-content: flex-start;
 
+  width: 1180px;
   height: 100%;
+
+  justify-self: center;
 }
 
 .EtzMobileSection_title {
+  color: var(--secondary);
+}
+
+.EtzMobileSection_subTitle {
   width: 315px;
 }
 

@@ -120,8 +120,20 @@ const gltfLoader = new GLTFLoader();
 gltfLoader.setDRACOLoader(dracoLoader);
 
 gltfLoader.load(MODEL_NAME, (gltf) => {
-  gltf.scene.scale.set(1.7, 1.7, 1.7);
-  gltf.scene.position.set(2.2, -0.2, 0);
+  const setupInitialValue = () => {
+    if (window.innerWidth < 768) {
+      const scaleSize = Number(window.innerHeight * 0.001421800947867).toFixed(
+        3
+      );
+      gltf.scene.scale.set(scaleSize, scaleSize, scaleSize);
+      gltf.scene.position.set(0, 0, 0);
+    } else {
+      gltf.scene.scale.set(1.7, 1.7, 1.7);
+      gltf.scene.position.set(2.2, -0.2, 0);
+    }
+  };
+  setupInitialValue();
+  window.addEventListener("resize", setupInitialValue);
   window.scene = gltf.scene;
 
   phoneMesh = gltf.scene.children[0].children[0];
@@ -464,10 +476,8 @@ const tick = () => {
   previousTime = elapsedTime;
 
   const phoneBlock = document.querySelector("canvas");
-
-  const mouseWheelDistance = getElementOffsetTop(
-    document.querySelector(SECOND_SECTION_CLASS)
-  );
+  const secondSection = document.querySelector(SECOND_SECTION_CLASS);
+  const mouseWheelDistance = getElementOffsetTop(secondSection);
 
   if (scrollTopFrame >= 0 && scrollTopFrame <= mouseWheelDistance) {
     mouseWheelDeltaDistance = scrollTopFrame;
@@ -480,14 +490,52 @@ const tick = () => {
 
     mouseWheelRatio = mouseWheelDeltaDistance / mouseWheelDistance;
   }
-
-  if (scrollTopFrame > mouseWheelDistance) {
-    mouseWheelRatio = 1;
-    phoneBlock.style.transform = `translate3d(0,${mouseWheelDistance}px,0)`;
-    phoneBlock.style.position = "absolute";
+  const calculatePosition = () => {};
+  if (window.innerWidth < 768) {
+    if (phoneBlock.getAttribute("stop") === "stop") {
+      mouseWheelRatio = 1;
+      phoneBlock.style.transform = `translate3d(0,${
+        -mouseWheelDistance - 100
+      }px,0)`;
+      phoneBlock.style.position = "absolute";
+    } else {
+      phoneBlock.style.transform = ``;
+      phoneBlock.style.top = "-139px";
+      phoneBlock.style.position = "fixed";
+    }
+    if (scrollTopFrame > mouseWheelDistance) {
+      mouseWheelRatio = 1;
+      phoneBlock.style.transform = `translate3d(0,${
+        mouseWheelDistance - 100
+      }px,0)`;
+      phoneBlock.style.position = "absolute";
+      phoneBlock.style.top = "";
+    } else {
+      if (
+        window.innerHeight / 4 - scrollTopFrame > 0 &&
+        phoneBlock.getAttribute("stop") !== "stop"
+      ) {
+        phoneBlock.style.transform = `translate3d(0,${350}px,0)`;
+        phoneBlock.style.position = "absolute";
+      } else {
+        phoneBlock.style.transform = "";
+        if (phoneBlock.getAttribute("stop") !== "stop") {
+          phoneBlock.style.top = "";
+        }
+        phoneBlock.style.top = "-100px";
+        phoneBlock.style.position = "fixed";
+      }
+    }
   } else {
-    phoneBlock.style.transform = ``;
-    phoneBlock.style.position = "fixed";
+    phoneBlock.style.top = "";
+    if (scrollTopFrame > mouseWheelDistance) {
+      mouseWheelRatio = 1;
+      phoneBlock.style.transform = `translate3d(0,${mouseWheelDistance}px,0)`;
+      phoneBlock.style.position = "absolute";
+    } else {
+      phoneBlock.style.transform = ``;
+      phoneBlock.style.position = "fixed";
+    }
   }
 
   const START_OPACITY = 0.2;

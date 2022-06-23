@@ -3,8 +3,8 @@
   overflow: initial !important;
   justify-content: center;
 
-  height: 100vh;
-  padding-top: 106px;
+  min-height: calc(100vh + var(--height-menu) - 120px);
+  padding: 60px 0;
 }
 
 .ContactUsSection_card {
@@ -158,7 +158,7 @@
 }
 
 .ContactUsSection_checkbox:checked + label::before {
-  background-image: url("../../assets/check.svg");
+  background-image: url("../../../assets/check.svg");
 }
 
 .ContactUsSection_rules {

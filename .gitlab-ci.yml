@@ -70,7 +70,7 @@ develop:deploy:
     - develop
   variables:
     DEPLOY_TARGET: s3://etz-dev-landing/
-    URL_AWS: http://etz-production-landing.s3-website-us-east-1.amazonaws.com
+    URL_AWS: http://etz-dev-landing.s3-website-us-east-1.amazonaws.com
   when: on_success
 
 production:build:
@@ -89,5 +89,5 @@ production:deploy:
     - develop
   variables:
     DEPLOY_TARGET: s3://etz-production-landing/
-    URL_AWS: http://etz-dev-landing.s3-website-us-east-1.amazonaws.com
+    URL_AWS: http://etz-production-landing.s3-website-us-east-1.amazonaws.com
   when: on_success

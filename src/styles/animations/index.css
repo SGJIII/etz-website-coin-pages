@@ -93,3 +93,33 @@
     transform: scale(0.85);
   }
 }
+
+@media screen and (max-width: 768px) {
+  @keyframes pulse {
+    from {
+      transform: scale(0.65);
+    }
+    50% {
+      transform: scale(0.5);
+    }
+    to {
+      transform: scale(0.65);
+    }
+  }
+}
+
+@keyframes a0_o {
+  0% {
+    animation-timing-function: cubic-bezier(0.4, 0, 0.6, 1);
+
+    opacity: 1;
+  }
+  50% {
+    animation-timing-function: cubic-bezier(0.4, 0, 0.6, 1);
+
+    opacity: 0.2;
+  }
+  to {
+    opacity: 1;
+  }
+}

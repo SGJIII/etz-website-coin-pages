@@ -1,6 +1,7 @@
 import { getCoords } from "./utils/getCoords";
 import { outerHeight } from "./utils/outerHeight";
 import { outerWidth } from "./utils/outerWidth";
+import { toggleDisableScroll } from "./utils/scroll";
 
 type Props = { className: string };
 
@@ -31,20 +32,56 @@ export default class HeaderMenu {
         `The target does not exist with the ${this.className} class`
       );
     }
+    const eventLinstener = () => {
+      this.handlePositionStickyMenu();
+    };
 
     this.target.style.display = "flex";
     this.handlePositionStickyMenu();
 
-    window.addEventListener("scroll", () => {
-      this.handlePositionStickyMenu();
+    window.addEventListener("scroll", eventLinstener);
+    this.handleAnimationMenu();
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth < 1200) {
+        this.target?.classList.remove("HeaderMenu_menu__sticky");
+        this.target?.classList.remove("HeaderMenu_menu__stickyHide");
+      }
     });
 
-    this.handleAnimationMenu();
+    const burger = document.querySelector<HTMLElement>(
+      "[data-name=HeaderMenuBurger]"
+    );
+    const menu = document.querySelector(".HeaderMenu_menu");
+
+    burger?.addEventListener("click", () => {
+      menu?.classList.toggle("HeaderMenu_menuContainer__open");
+      toggleDisableScroll();
+    });
+
+    const links = document.querySelectorAll<HTMLLinkElement>(
+      "[data-name=HeaderMenuLink]"
+    );
+    links.forEach((el) => {
+      el.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const href = el.getAttribute("href") ?? "";
+        const element = document.querySelector(href)?.getBoundingClientRect();
+        const rectBody = document.body.getBoundingClientRect();
+        window.scrollTo({
+          top: (element?.top ?? 0) - rectBody.top,
+        });
+        burger?.click();
+
+        return false;
+      });
+    });
   }
 
   private handlePositionStickyMenu() {
+    if (window.innerWidth < 1200) return;
     this.calculatePosition();
-
     if (this.isInitialPosition) {
       this.target?.classList.add("HeaderMenu_menu__sticky");
       this.target?.classList.remove("HeaderMenu_menu__stickyHide");

@@ -5,15 +5,15 @@
 @import url("./components/button.css");
 @import url("./components/notification.css");
 @import url("./components/input.css");
-@import url("./components/header-section.css");
-@import url("./components/benefits-section.css");
-@import url("./components/for-employers-section.css");
-@import url("./components/etz-mobile-section.css");
-@import url("./components/faq-section.css");
-@import url("./components/contact-us-section.css");
-@import url("./components/header-menu.css");
-@import url("./components/supported-crypto-section.css");
-@import url("./components/footer.css");
+@import url("./components/footer/footer.css");
+@import url("./components/contact-us-section/contact-us-section.css");
+@import url("./components/faq-section/faq-section.css");
+@import url("./components//supported-crypto-section/supported-crypto-section.css");
+@import url("./components/etz-mobile-section/etz-mobile-section.css");
+@import url("./components/for-employers-section/for-employers-section.css");
+@import url("./components/benefit-section/benefits-section.css");
+@import url("./components/header-menu/header-menu.css");
+@import url("./components/header-section/header-section.css");
 
 html,
 body {
@@ -82,6 +82,7 @@ textarea::-ms-input-placeholder {
 }
 
 :root {
+  --height-men: 106px;
   --z-index-front-img: 50;
   --z-index-menu: 500;
 }
@@ -90,7 +91,8 @@ textarea::-ms-input-placeholder {
   display: flex;
   overflow: hidden;
   flex-direction: column;
-  /* height: 100vh; */
+
+  box-sizing: content-box;
 }
 
 .__container {
@@ -129,6 +131,10 @@ textarea::-ms-input-placeholder {
   pointer-events: none;
 
   outline: none;
+}
+@media screen and (max-width: 768px) {
+  .webgl {
+  }
 }
 
 .lil-gui {
