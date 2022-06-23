@@ -9,48 +9,59 @@
 */
 
 .__heading-1 {
-  font-weight: 500;
   font-size: 48px;
+  font-weight: 500;
   line-height: 52px;
 }
 
 h2 {
-  font-weight: 400;
   font-size: 44px;
+  font-weight: 400;
   line-height: 48px;
+
   margin-top: 16px;
   margin-bottom: 36px;
 }
-.__caption-1 {
-}
 
 .__subtitle-1 {
-  display: block;
-  font-weight: 400;
   font-size: 24px;
+  font-weight: 400;
   line-height: 28px;
+
+  display: block;
 }
 
 .__subtitle-2 {
-  display: block;
-  font-weight: 500;
   font-size: 16px;
+  font-weight: 500;
   line-height: 20px;
+
+  display: block;
+
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
 .__paragraph-1 {
-  font-weight: 400;
   font-size: 18px;
+  font-weight: 400;
   line-height: 30px;
+
   letter-spacing: 0.25px;
+
   color: var(--dark);
 }
 
 .__paragraph-2 {
-  font-weight: 400;
   font-size: 16px;
+  font-weight: 400;
   line-height: 22px;
+
   letter-spacing: 0.25px;
+}
+.__mobile-accent-2 {
+  font-size: 32px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 38px;
 }

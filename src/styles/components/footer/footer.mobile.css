@@ -1,0 +1,54 @@
+@media screen and (max-width: 768px) {
+  .Footer {
+    align-items: initial;
+  }
+  .Footer_nav {
+    flex-direction: column;
+
+    width: 100%;
+    padding: 40px 16px 32px 16px;
+  }
+
+  .Footer_nav a {
+    margin-right: 0;
+  }
+  .Footer_nav .Footer_logoLink {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 34px;
+  }
+
+  .Footer_links a {
+    font-size: 16px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 22px;
+
+    float: left;
+
+    width: 50%;
+    margin: 0 0 16px 0;
+  }
+  .Footer_privacy {
+    font-size: 12px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 18px;
+
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-start;
+
+    width: initial;
+    margin: 32px 16px 19px;
+
+    color: var(--dark-50);
+  }
+  .Footer_copyright {
+    margin: 24px 0;
+  }
+  .Footer_descriptionBlock {
+    width: 100%;
+    padding: 0 16px 40px 16px;
+  }
+}

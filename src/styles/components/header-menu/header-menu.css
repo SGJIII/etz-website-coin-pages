@@ -2,7 +2,23 @@
   display: none;
 }
 
+.HeaderMenu_logoLight {
+  display: flex;
+}
+
 .HeaderMenu_logoDark {
+  display: none;
+}
+
+.HeaderMenu_burgerBlock {
+  display: none;
+}
+
+.HeaderMenu_linksBlockMobile {
+  display: none;
+}
+
+.HeaderMenu_overflow {
   display: none;
 }
 
@@ -30,7 +46,7 @@
 }
 
 .HeaderMenu_menu__sticky .HeaderMenu_logoDark {
-  display: initial;
+  display: flex;
 }
 
 .HeaderMenu_menu__sticky .HeaderMenu_logoLight {

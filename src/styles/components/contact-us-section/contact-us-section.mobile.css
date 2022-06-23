@@ -1,0 +1,89 @@
+@media screen and (max-width: 768px) {
+  .ContactUsSection {
+    min-height: calc(100vh + 32px);
+    padding: 0;
+  }
+
+  .ContactUsSection_container {
+    width: 100%;
+    padding: 0 16px;
+
+    place-self: initial;
+  }
+
+  .ContactUsSection_card {
+    width: 100%;
+    height: initial;
+    padding: 48px 16px;
+  }
+  .ContactUsSection_peopleImgBlock {
+    display: none;
+  }
+  .ContactUsSection_input {
+    width: 100%;
+  }
+  .ContactUsSection_input__left {
+    margin-right: 0;
+  }
+
+  .ContactUsSection_input__right {
+    margin-left: 0;
+  }
+  .ContactUsSection_input__half {
+    flex-basis: initial;
+    flex-grow: initial;
+
+    min-width: initial;
+  }
+  .ContactUsSection_formBlock {
+    flex-basis: initial;
+    flex-grow: initial;
+
+    max-width: initial;
+  }
+  .ContactUsSection_title {
+    font-size: 24px;
+    font-weight: 500;
+    font-style: normal;
+    line-height: 28px;
+
+    margin-bottom: 28px;
+
+    text-align: center;
+  }
+  .ContactUsSection_subtitle {
+    font-size: 18px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 22px;
+
+    text-align: center;
+  }
+  .ContactUsSection_textarea {
+    width: 100%;
+    height: 90px;
+  }
+  .ContactUsSection_formFooter {
+    flex-direction: column;
+  }
+  .ContactUsSection_formButtonBlock {
+    align-self: center;
+
+    margin-top: 24px;
+  }
+
+  .ContactUsSection_submit {
+    width: 180px;
+    height: 56px;
+  }
+  .ContactUsSection_form input {
+    width: initial;
+    /* padding: 16px; */
+  }
+  .Button_text {
+    font-size: 18px;
+    font-weight: 500;
+    font-style: normal;
+    line-height: 24px;
+  }
+}
