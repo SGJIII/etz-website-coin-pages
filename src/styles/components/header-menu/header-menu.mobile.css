@@ -22,7 +22,7 @@
 
     background-image: var(--pattern-svg);
     background-position: right;
-    background-size: cover;
+    background-size: 100vh;
 
     touch-action: none;
   }
@@ -149,7 +149,7 @@
     justify-content: space-between;
 
     width: 100vw;
-    height: 100vh;
+    height: calc(100vh - 75px);
   }
 
   .HeaderMenu_linksMobile {
