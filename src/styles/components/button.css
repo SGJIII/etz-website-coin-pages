@@ -97,6 +97,7 @@
 
   border: 2px solid var(--primary);
   border-radius: 10px;
+  background-color: var(--bright);
 }
 
 .Button__secondary:hover {

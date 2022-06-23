@@ -30,16 +30,31 @@ export const wheelOpt = supportsPassive ? { passive: false } : false;
 const wheelEvent =
   "onwheel" in document.createElement("div") ? "wheel" : "mousewheel";
 
-export function disableScroll() {
+export function disableScrollEvent() {
   window.addEventListener("DOMMouseScroll", preventDefault, false);
   window.addEventListener(wheelEvent, preventDefault, wheelOpt);
   window.addEventListener("touchmove", preventDefault, wheelOpt);
   window.addEventListener("keydown", preventDefaultForScrollKeys, false);
 }
 
-export function enableScroll() {
+export function enableScrollEvent() {
   window.removeEventListener("DOMMouseScroll", preventDefault, false);
   window.removeEventListener(wheelEvent, preventDefault);
   window.removeEventListener("touchmove", preventDefault);
   window.removeEventListener("keydown", preventDefaultForScrollKeys, false);
+}
+
+export function disableScroll() {
+  document.body.style.overflow = "hidden";
+}
+
+export function enableScroll() {
+  document.body.style.overflow = "";
+}
+
+export function toggleDisableScroll() {
+  if (document.body.style.getPropertyValue("overflow") === "hidden")
+    return enableScroll();
+
+  disableScroll();
 }
