@@ -1,11 +1,11 @@
 @media screen and (max-width: 768px) {
   .EtzMobileSection {
+    /* overflow: initial; */
     justify-content: center;
 
     box-sizing: border-box;
-    /* overflow: initial; */
     height: initial;
-    min-height: 100vh;
+    min-height: calc(100vh + 106px);
     padding: 0 16px;
   }
   .EtzMobileSection_block {

@@ -123,7 +123,7 @@ textarea::-ms-input-placeholder {
 }
 
 .webgl {
-  position: sticky;
+  position: fixed;
   z-index: 50;
   top: 0;
   left: 0;
@@ -134,9 +134,6 @@ textarea::-ms-input-placeholder {
 }
 @media screen and (max-width: 768px) {
   .webgl {
-    position: sticky;
-    position: -webkit-sticky;
-    top: 0;
   }
 }
 

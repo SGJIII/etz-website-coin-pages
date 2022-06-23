@@ -107,3 +107,19 @@
     }
   }
 }
+
+@keyframes a0_o {
+  0% {
+    animation-timing-function: cubic-bezier(0.4, 0, 0.6, 1);
+
+    opacity: 1;
+  }
+  50% {
+    animation-timing-function: cubic-bezier(0.4, 0, 0.6, 1);
+
+    opacity: 0.2;
+  }
+  to {
+    opacity: 1;
+  }
+}
