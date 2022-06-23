@@ -90,7 +90,8 @@ textarea::-ms-input-placeholder {
   display: flex;
   overflow: hidden;
   flex-direction: column;
-  /* height: 100vh; */
+
+  box-sizing: content-box;
 }
 
 .__container {

@@ -4,6 +4,7 @@
 
   box-sizing: content-box;
   height: 100vh;
+  min-height: 650px;
 }
 
 .ForEmployersSection_title {
