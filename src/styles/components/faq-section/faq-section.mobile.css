@@ -31,6 +31,10 @@
 
     place-self: initial;
   }
+
+  .FAQSection_accordion {
+    margin-bottom: 16px;
+  }
   .FAQSection_accordionSummary {
     font-size: 18px;
     font-weight: 400;
