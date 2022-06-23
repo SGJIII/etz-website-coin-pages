@@ -6,6 +6,7 @@
   position: relative;
 
   overflow: hidden;
+  align-items: center;
 
   box-sizing: content-box;
   height: 100vh;
@@ -23,8 +24,11 @@
   display: flex;
   align-items: center;
 
+  width: 1180px;
   height: 100vh;
   margin-top: -106px;
+
+  justify-self: center;
 }
 .HeaderSection_container {
   z-index: 10;

@@ -1,4 +1,4 @@
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 768px) {
   .HeaderMenu_burgerBlock {
     display: initial;
   }
@@ -6,6 +6,7 @@
   .HeaderSection_menu {
     box-sizing: content-box;
     height: 32px;
+    min-height: 32px;
     margin: 20px 16px;
   }
 

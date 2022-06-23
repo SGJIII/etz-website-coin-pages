@@ -7,7 +7,12 @@
 }
 
 .BenefitsSection_container {
+  align-self: center;
+
+  width: 1180px;
   height: 360px;
+
+  justify-self: center;
 }
 
 .BenefitsSection_title {

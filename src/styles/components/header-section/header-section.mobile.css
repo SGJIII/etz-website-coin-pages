@@ -1,12 +1,11 @@
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 768px) {
   .HeaderSection {
     position: relative;
-    z-index: 500;
 
     overflow: hidden;
 
     box-sizing: content-box;
-    height: 100vh;
+    height: 200vh;
 
     color: var(--text-white);
     background: var(--gradient-main);
@@ -15,12 +14,47 @@
     position: absolute;
     z-index: -1;
     top: 0;
-    right: 0;
-    bottom: 0;
+    /* right: 0;
+    bottom: 0; */
     left: 0;
 
     height: 100vh;
 
     touch-action: none;
+  }
+  .HeaderSection_main {
+    align-items: self-start;
+
+    width: 100vw;
+    margin-top: 0;
+    padding-top: 60px;
+
+    justify-self: center;
+  }
+  .HeaderSection_container {
+    padding: 0 16px;
+  }
+  .HeaderSection_welcome {
+    width: 100%;
+  }
+  .HeaderSection_title {
+    font-size: 24px;
+    font-weight: 500;
+    font-style: normal;
+    line-height: 28px;
+
+    width: 100%;
+
+    text-align: center;
+  }
+  .HeaderSection_description {
+    font-size: 16px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 22px;
+
+    width: 100%;
+
+    text-align: center;
   }
 }
