@@ -49,7 +49,9 @@ export default class HeaderMenu {
       }
     });
 
-    const burger = document.querySelector("[data-name=HeaderMenuBurger]");
+    const burger = document.querySelector<HTMLElement>(
+      "[data-name=HeaderMenuBurger]"
+    );
     const menu = document.querySelector(".HeaderMenu_menu");
 
     burger?.addEventListener("click", () => {
@@ -70,8 +72,7 @@ export default class HeaderMenu {
         window.scrollTo({
           top: (element?.top ?? 0) - rectBody.top,
         });
-        menu?.classList.remove("HeaderMenu_menuContainer__open");
-        toggleDisableScroll();
+        burger?.click();
 
         return false;
       });
