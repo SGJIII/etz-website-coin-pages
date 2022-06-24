@@ -102,3 +102,7 @@
 .Footer_checkbox:checked ~ .Footer_description__hidden {
   display: block;
 }
+
+.Footer_linksMobile {
+  display: none;
+}

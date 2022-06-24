@@ -17,7 +17,25 @@
     margin-right: 0;
     margin-bottom: 34px;
   }
+  .Footer_linksMobile {
+    display: initial;
+  }
+  .Footer_linksMobile span {
+    font-size: 16px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 22px;
 
+    float: left;
+
+    width: 50%;
+    margin: 0 0 16px 0;
+
+    cursor: pointer;
+  }
+  .Footer_links {
+    display: none;
+  }
   .Footer_links a {
     font-size: 16px;
     font-weight: 400;

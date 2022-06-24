@@ -378,6 +378,22 @@ class BenefitsSlider {
   public init() {
     this.createDots();
     this.watchToWheel();
+    const links =
+      document.querySelectorAll<HTMLLinkElement>("[data-name=Link]");
+    links.forEach((el) => {
+      el.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const href = el.getAttribute("href") ?? "";
+        const element = document.querySelector(href)?.getBoundingClientRect();
+        const rectBody = document.body.getBoundingClientRect();
+
+        window.scrollTo({
+          top: (element?.top ?? 0) - rectBody.top,
+        });
+        return false;
+      });
+    });
   }
 }
 
