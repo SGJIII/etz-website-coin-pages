@@ -3,7 +3,7 @@
 @import url("./theme/color-scheme.css");
 @import url("./animations/index.css");
 @import url("./components/button.css");
-@import url("./components/notification.css");
+@import url("./components/notification/notification.css");
 @import url("./components/input.css");
 @import url("./components/footer/footer.css");
 @import url("./components/contact-us-section/contact-us-section.css");
@@ -131,10 +131,6 @@ textarea::-ms-input-placeholder {
   pointer-events: none;
 
   outline: none;
-}
-@media screen and (max-width: 768px) {
-  .webgl {
-  }
 }
 
 .lil-gui {

@@ -142,7 +142,10 @@ class BenefitsSlider {
       return false;
 
     this.isScrolling = true;
-    if (window.innerWidth < 768) {
+    if (
+      window.innerWidth < 768 ||
+      window.matchMedia("(orientation: landscape)").matches
+    ) {
       clearTimeout(this.__scrollId);
       this.__scrollId = setTimeout(() => {
         this.nextSlide();
@@ -169,7 +172,10 @@ class BenefitsSlider {
 
     const mouseWheelDistance = Math.abs(rectBody.top - (rect?.top ?? 0));
 
-    if (window.innerWidth < 768) {
+    if (
+      window.innerWidth < 768 ||
+      window.matchMedia("(orientation: landscape)").matches
+    ) {
       document.body.style.position = "fixed";
       document.body.style.top = `${-mouseWheelDistance}px`;
       document.body.style.left = "-5px";
@@ -189,7 +195,10 @@ class BenefitsSlider {
   private scrollTurnOn() {
     if (this.isDisabledScroll === false) return;
 
-    if (window.innerWidth < 768) {
+    if (
+      window.innerWidth < 768 ||
+      window.matchMedia("(orientation: landscape)").matches
+    ) {
       const y = -parseInt(document.body.style.top, 10);
       const x = -parseInt(document.body.style.left, 10);
       document.body.style.position = "";
@@ -212,18 +221,8 @@ class BenefitsSlider {
     this.isOutside = true;
   }
 
-  private uploadPositionSlideAfterLinks() {
-    const links = document.querySelectorAll("a");
-    links.forEach((el) => {
-      el.addEventListener("click", () => {
-        this.scrollTurnOff();
-      });
-    });
-  }
   positionVertical = true;
   public watchToWheel() {
-    this.uploadPositionSlideAfterLinks();
-    let prevPos = 0;
     const start = () => {
       const rect = this.section?.getBoundingClientRect();
       const rectBody = document.body.getBoundingClientRect();
@@ -260,14 +259,14 @@ class BenefitsSlider {
           this.turnActive(this.activeElement);
         }
       }
-      // UP
-      if (scrollTopFrame - prevPos < 0) {
+
+      if (this.deltaY < 0) {
         if (!isActiveFirstElement && scrollTopFrame < mouseWheelDistance) {
           this.scrollTurnOff("up");
         }
       }
-      // DOWN
-      if (scrollTopFrame - prevPos > 0) {
+
+      if (this.deltaY > 0) {
         if (
           scrollTopFrame > mouseWheelDistance &&
           scrollTopFrame < mouseWheelDistance + (rect?.height ?? 0) &&
@@ -276,7 +275,6 @@ class BenefitsSlider {
           this.scrollTurnOff("down");
         }
       }
-      prevPos = scrollTopFrame;
       if (this.isOutside && this.isDisabledScroll) {
         this.isOutside = false;
         setTimeout(() => {
@@ -378,22 +376,6 @@ class BenefitsSlider {
   public init() {
     this.createDots();
     this.watchToWheel();
-    const links =
-      document.querySelectorAll<HTMLLinkElement>("[data-name=Link]");
-    links.forEach((el) => {
-      el.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const href = el.getAttribute("href") ?? "";
-        const element = document.querySelector(href)?.getBoundingClientRect();
-        const rectBody = document.body.getBoundingClientRect();
-
-        window.scrollTo({
-          top: (element?.top ?? 0) - rectBody.top,
-        });
-        return false;
-      });
-    });
   }
 }
 

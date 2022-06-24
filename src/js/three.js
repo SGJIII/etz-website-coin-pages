@@ -122,11 +122,16 @@ gltfLoader.setDRACOLoader(dracoLoader);
 gltfLoader.load(MODEL_NAME, (gltf) => {
   const setupInitialValue = () => {
     if (window.innerWidth < 768) {
-      const scaleSize = Number(window.innerHeight * 0.001421800947867).toFixed(
-        3
-      );
-      gltf.scene.scale.set(scaleSize, scaleSize, scaleSize);
-      gltf.scene.position.set(0, 0, 0);
+      if (window.matchMedia("(orientation: landscape)").matches) {
+        gltf.scene.scale.set(1.7, 1.7, 1.7);
+        gltf.scene.position.set(2.2, -0.2, 0);
+      } else {
+        const scaleSize = Number(
+          window.innerHeight * 0.001421800947867
+        ).toFixed(3);
+        gltf.scene.scale.set(scaleSize, scaleSize, scaleSize);
+        gltf.scene.position.set(0, 0, 0);
+      }
     } else {
       gltf.scene.scale.set(1.7, 1.7, 1.7);
       gltf.scene.position.set(2.2, -0.2, 0);

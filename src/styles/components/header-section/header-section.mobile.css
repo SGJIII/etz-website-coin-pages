@@ -1,4 +1,4 @@
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 768px), (orientation: landscape) {
   .HeaderSection {
     position: relative;
 
@@ -57,5 +57,55 @@
     width: 100%;
 
     text-align: center;
+  }
+}
+
+@media screen and (max-device-width: 1000px) and (orientation: landscape) {
+  .HeaderSection {
+    position: relative;
+
+    overflow: hidden;
+    align-items: flex-start;
+
+    box-sizing: content-box;
+    height: 100vh;
+
+    color: var(--text-white);
+    background: var(--gradient-main);
+  }
+  .HeaderSection_overflow {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: initial;
+    left: initial;
+
+    height: 100vh;
+
+    transform: scale(1);
+
+    touch-action: none;
+  }
+  .HeaderSection_main {
+    width: 50vw;
+    padding-top: 0;
+
+    justify-self: left;
+  }
+  .HeaderSection_container {
+    padding: 0 16px;
+  }
+  .HeaderSection_welcome {
+    width: initial;
+    width: 100%;
+  }
+  .HeaderSection_title {
+    text-align: left;
+  }
+  .HeaderSection_description {
+    text-align: left;
+  }
+  .HeaderSection_triangle {
+    clip-path: polygon(265% 1%, 0% 55%, 100% 100%);
   }
 }

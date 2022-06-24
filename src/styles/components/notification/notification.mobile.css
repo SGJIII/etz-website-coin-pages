@@ -1,0 +1,19 @@
+@media screen and (max-width: 768px), (orientation: landscape) {
+  .Notification {
+    padding: 0;
+  }
+
+  .Notification_messageContainer {
+    max-width: calc(100vw - 32px);
+    padding: 14px 14px 14px 24px;
+  }
+
+  .Notification_exit {
+    width: initial;
+    min-width: 14px;
+    height: initial;
+    min-height: 14px;
+    margin: 0;
+    padding: 5px 5px 10px 15px;
+  }
+}

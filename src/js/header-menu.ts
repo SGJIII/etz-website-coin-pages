@@ -43,7 +43,10 @@ export default class HeaderMenu {
     this.handleAnimationMenu();
 
     window.addEventListener("resize", () => {
-      if (window.innerWidth < 1200) {
+      if (
+        window.innerWidth < 768 ||
+        window.matchMedia("(orientation: landscape)").matches
+      ) {
         this.target?.classList.remove("HeaderMenu_menu__sticky");
         this.target?.classList.remove("HeaderMenu_menu__stickyHide");
       }
@@ -80,7 +83,11 @@ export default class HeaderMenu {
   }
 
   private handlePositionStickyMenu() {
-    if (window.innerWidth < 1200) return;
+    if (
+      window.innerWidth < 768 ||
+      window.matchMedia("(orientation: landscape)").matches
+    )
+      return;
     this.calculatePosition();
     if (this.isInitialPosition) {
       this.target?.classList.add("HeaderMenu_menu__sticky");
