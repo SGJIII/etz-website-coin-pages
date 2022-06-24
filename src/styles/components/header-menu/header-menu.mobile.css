@@ -176,7 +176,13 @@
 }
 
 @media screen and (orientation: landscape) {
+  .HeaderMenu_menuContainer__open .HeaderMenu_linksBlockMobile {
+    padding: 0 48px;
+  }
   .HeaderMenu_menuContainer {
     padding: 0 48px;
+  }
+  .HeaderMenu_linkMobile {
+    margin-bottom: 10px;
   }
 }
