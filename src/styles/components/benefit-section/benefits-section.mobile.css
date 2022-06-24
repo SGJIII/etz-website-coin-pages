@@ -79,8 +79,10 @@
   }
 }
 
-@media screen and (-webkit-min-device-pixel-ratio: 3) and (orientation: landscape),
-  (-webkit-device-pixel-ratio: 4) and (orientation: landscape) {
+@media screen and (orientation: landscape) {
+  .BenefitsSection {
+    padding: 48px;
+  }
   .BenefitsSection_title {
     text-align: left;
   }

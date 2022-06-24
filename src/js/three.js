@@ -122,19 +122,19 @@ gltfLoader.setDRACOLoader(dracoLoader);
 gltfLoader.load(MODEL_NAME, (gltf) => {
   const setupInitialValue = () => {
     if (window.innerWidth < 768) {
+      const scaleSize = Number(window.innerHeight * 0.001421800947867).toFixed(
+        3
+      );
+      gltf.scene.scale.set(scaleSize, scaleSize, scaleSize);
+      gltf.scene.position.set(0, 0, 0);
+    } else {
       if (window.matchMedia("(orientation: landscape)").matches) {
         gltf.scene.scale.set(1.7, 1.7, 1.7);
-        gltf.scene.position.set(2.2, -0.2, 0);
+        gltf.scene.position.set(3.2, 0, 0);
       } else {
-        const scaleSize = Number(
-          window.innerHeight * 0.001421800947867
-        ).toFixed(3);
-        gltf.scene.scale.set(scaleSize, scaleSize, scaleSize);
-        gltf.scene.position.set(0, 0, 0);
+        gltf.scene.scale.set(1.7, 1.7, 1.7);
+        gltf.scene.position.set(2.2, -0.2, 0);
       }
-    } else {
-      gltf.scene.scale.set(1.7, 1.7, 1.7);
-      gltf.scene.position.set(2.2, -0.2, 0);
     }
   };
   setupInitialValue();
@@ -495,7 +495,7 @@ const tick = () => {
 
     mouseWheelRatio = mouseWheelDeltaDistance / mouseWheelDistance;
   }
-  const calculatePosition = () => {};
+
   if (window.innerWidth < 768) {
     if (phoneBlock.getAttribute("stop") === "stop") {
       mouseWheelRatio = 1;
@@ -532,14 +532,29 @@ const tick = () => {
       }
     }
   } else {
-    phoneBlock.style.top = "";
-    if (scrollTopFrame > mouseWheelDistance) {
-      mouseWheelRatio = 1;
-      phoneBlock.style.transform = `translate3d(0,${mouseWheelDistance}px,0)`;
-      phoneBlock.style.position = "absolute";
+    if (window.matchMedia("(orientation: landscape)").matches) {
+      phoneBlock.style.top = "";
+      if (scrollTopFrame > mouseWheelDistance) {
+        mouseWheelRatio = 1;
+        phoneBlock.style.transform = `translate3d(0,${mouseWheelDistance}px,0)`;
+        phoneBlock.style.position = "absolute";
+      } else {
+        if (phoneBlock.getAttribute("stop") === "stop") {
+          mouseWheelRatio = 1;
+        }
+        phoneBlock.style.transform = ``;
+        phoneBlock.style.position = "fixed";
+      }
     } else {
-      phoneBlock.style.transform = ``;
-      phoneBlock.style.position = "fixed";
+      phoneBlock.style.top = "";
+      if (scrollTopFrame > mouseWheelDistance) {
+        mouseWheelRatio = 1;
+        phoneBlock.style.transform = `translate3d(0,${mouseWheelDistance}px,0)`;
+        phoneBlock.style.position = "absolute";
+      } else {
+        phoneBlock.style.transform = ``;
+        phoneBlock.style.position = "fixed";
+      }
     }
   }
 

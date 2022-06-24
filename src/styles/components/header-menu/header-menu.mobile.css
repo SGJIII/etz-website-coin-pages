@@ -174,3 +174,9 @@
     margin: 40px 0;
   }
 }
+
+@media screen and (orientation: landscape) {
+  .HeaderMenu_menuContainer {
+    padding: 0 48px;
+  }
+}

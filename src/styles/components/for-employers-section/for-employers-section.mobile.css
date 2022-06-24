@@ -110,3 +110,13 @@
     transform: scale(1, -1) rotate(285deg);
   }
 }
+
+@media screen and (orientation: landscape) {
+  .ForEmployersSection_container {
+    padding: 48px;
+  }
+
+  .ForEmployersSection_step {
+    width: calc(100vw - 149px);
+  }
+}

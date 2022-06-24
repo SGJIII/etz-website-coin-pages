@@ -60,7 +60,7 @@
   }
 }
 
-@media screen and (max-device-width: 1000px) and (orientation: landscape) {
+@media screen and (orientation: landscape) {
   .HeaderSection {
     position: relative;
 
@@ -68,6 +68,7 @@
     align-items: flex-start;
 
     box-sizing: content-box;
+    min-width: calc(100vw - 64px);
     height: 100vh;
 
     color: var(--text-white);
@@ -87,13 +88,13 @@
     touch-action: none;
   }
   .HeaderSection_main {
-    width: 50vw;
+    width: 65vw;
     padding-top: 0;
 
     justify-self: left;
   }
   .HeaderSection_container {
-    padding: 0 16px;
+    padding: 0 48px;
   }
   .HeaderSection_welcome {
     width: initial;

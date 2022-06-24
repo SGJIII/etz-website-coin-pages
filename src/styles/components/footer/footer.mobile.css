@@ -13,7 +13,7 @@
     margin-right: 0;
   }
   .Footer_nav .Footer_logoLink {
-    width: 100%;
+    width: 100px;
     margin-right: 0;
     margin-bottom: 34px;
   }
@@ -68,5 +68,18 @@
 
   .Footer_checkbox {
     width: 60px;
+  }
+}
+
+@media screen and (max-width: 768px), (orientation: landscape) {
+  .Footer_nav {
+    padding: 40px 48px 32px 48px;
+  }
+
+  .Footer_privacy {
+    margin: 32px 48px 19px;
+  }
+  .Footer_descriptionBlock {
+    padding: 0 48px 40px 48px;
   }
 }

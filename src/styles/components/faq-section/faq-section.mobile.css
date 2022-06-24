@@ -89,3 +89,12 @@
     padding: 0 16px;
   }
 }
+
+@media screen and (orientation: landscape) {
+  .FAQSection_container {
+    width: calc(100vw - 48px);
+    padding: 48px;
+
+    place-self: initial;
+  }
+}
