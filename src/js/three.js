@@ -128,7 +128,10 @@ gltfLoader.load(MODEL_NAME, (gltf) => {
       gltf.scene.scale.set(scaleSize, scaleSize, scaleSize);
       gltf.scene.position.set(0, 0, 0);
     } else {
-      if (window.matchMedia("(orientation: landscape)").matches) {
+      if (
+        window.innerWidth < 1000 &&
+        window.matchMedia("(orientation: landscape)").matches
+      ) {
         gltf.scene.scale.set(1.7, 1.7, 1.7);
         gltf.scene.position.set(3.2, 0, 0);
       } else {

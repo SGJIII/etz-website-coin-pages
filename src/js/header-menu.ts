@@ -41,11 +41,19 @@ export default class HeaderMenu {
 
     window.addEventListener("scroll", eventLinstener);
     this.handleAnimationMenu();
-
+    window.addEventListener(
+      "orientationchange",
+      () => {
+        this.target?.classList.remove("HeaderMenu_menu__sticky");
+        this.target?.classList.remove("HeaderMenu_menu__stickyHide");
+      },
+      false
+    );
     window.addEventListener("resize", () => {
       if (
         window.innerWidth < 768 ||
-        window.matchMedia("(orientation: landscape)").matches
+        (window.innerWidth < 1000 &&
+          window.matchMedia("(orientation: landscape)").matches)
       ) {
         this.target?.classList.remove("HeaderMenu_menu__sticky");
         this.target?.classList.remove("HeaderMenu_menu__stickyHide");
@@ -85,9 +93,14 @@ export default class HeaderMenu {
   private handlePositionStickyMenu() {
     if (
       window.innerWidth < 768 ||
-      window.matchMedia("(orientation: landscape)").matches
-    )
+      (window.innerWidth < 1000 &&
+        window.matchMedia("(orientation: landscape)").matches)
+    ) {
+      this.target?.classList.remove("HeaderMenu_menu__sticky");
+      this.target?.classList.remove("HeaderMenu_menu__stickyHide");
       return;
+    }
+
     this.calculatePosition();
     if (this.isInitialPosition) {
       this.target?.classList.add("HeaderMenu_menu__sticky");
