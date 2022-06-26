@@ -3,6 +3,7 @@ import * as dat from "lil-gui";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
+import { detectDevice } from "./utils/detectDevice";
 
 const MODEL_NAME = "etz_8_1.glb";
 const FIRST_SECTION_CLASS = ".HeaderSection";
@@ -141,7 +142,18 @@ gltfLoader.load(MODEL_NAME, (gltf) => {
     }
   };
   setupInitialValue();
-  window.addEventListener("resize", setupInitialValue);
+  window.addEventListener(
+    "orientationchange",
+    () => {
+      setTimeout(() => {
+        setupInitialValue();
+      }, 0);
+    },
+    false
+  );
+  if (!detectDevice()) {
+    window.addEventListener("resize", setupInitialValue);
+  }
   window.scene = gltf.scene;
 
   phoneMesh = gltf.scene.children[0].children[0];
@@ -499,66 +511,54 @@ const tick = () => {
     mouseWheelRatio = mouseWheelDeltaDistance / mouseWheelDistance;
   }
 
-  if (window.innerWidth < 768) {
-    if (phoneBlock.getAttribute("stop") === "stop") {
+  const handleMotionForMobile = () => {
+    const statusProcess = phoneBlock.getAttribute("data-status");
+    const endPositionY = -100;
+    const startPositionY = -phoneBlock.getAttribute("data-start-position");
+    if (statusProcess === "stop") {
       mouseWheelRatio = 1;
-      phoneBlock.style.transform = `translate3d(0,${
-        -mouseWheelDistance - 100
-      }px,0)`;
+      phoneBlock.style.transform = `translate3d(0,${endPositionY}px,0)`;
+    } else {
+      const deltaY =
+        -startPositionY +
+        (startPositionY / mouseWheelDistance) * scrollTopFrame +
+        (endPositionY / mouseWheelDistance) * scrollTopFrame;
+      phoneBlock.style.transform = `translate3d(0,${deltaY}px,0)`;
+    }
+
+    phoneBlock.style.position = "fixed";
+  };
+
+  const handleMotionForDesktop = () => {
+    if (scrollTopFrame > mouseWheelDistance) {
+      mouseWheelRatio = 1;
+      phoneBlock.style.transform = `translate3d(0,${mouseWheelDistance}px,0)`;
       phoneBlock.style.position = "absolute";
     } else {
       phoneBlock.style.transform = ``;
-      phoneBlock.style.top = "-139px";
       phoneBlock.style.position = "fixed";
     }
-    if (scrollTopFrame > mouseWheelDistance) {
-      mouseWheelRatio = 1;
-      phoneBlock.style.transform = `translate3d(0,${
-        mouseWheelDistance - 100
-      }px,0)`;
-      phoneBlock.style.position = "absolute";
-      phoneBlock.style.top = "";
-    } else {
-      if (
-        window.innerHeight / 4 - scrollTopFrame > 0 &&
-        phoneBlock.getAttribute("stop") !== "stop"
-      ) {
-        phoneBlock.style.transform = `translate3d(0,${350}px,0)`;
-        phoneBlock.style.position = "absolute";
-      } else {
-        phoneBlock.style.transform = "";
-        if (phoneBlock.getAttribute("stop") !== "stop") {
-          phoneBlock.style.top = "";
-        }
-        phoneBlock.style.top = "-100px";
-        phoneBlock.style.position = "fixed";
+  };
+
+  if (detectDevice()) {
+    if (window.innerWidth > 768) {
+      const statusProcess = phoneBlock.getAttribute("data-status");
+      if (statusProcess === "stop") {
+        mouseWheelRatio = 1;
       }
+      phoneBlock.style.transform = ``;
+      phoneBlock.style.position = "fixed";
+
+      if (statusProcess === "start" && scrollTopFrame > mouseWheelDistance) {
+        mouseWheelRatio = 1;
+        phoneBlock.style.transform = `translate3d(0,${mouseWheelDistance}px,0)`;
+        phoneBlock.style.position = "absolute";
+      }
+    } else {
+      handleMotionForMobile();
     }
   } else {
-    if (window.matchMedia("(orientation: landscape)").matches) {
-      phoneBlock.style.top = "";
-      if (scrollTopFrame > mouseWheelDistance) {
-        mouseWheelRatio = 1;
-        phoneBlock.style.transform = `translate3d(0,${mouseWheelDistance}px,0)`;
-        phoneBlock.style.position = "absolute";
-      } else {
-        if (phoneBlock.getAttribute("stop") === "stop") {
-          mouseWheelRatio = 1;
-        }
-        phoneBlock.style.transform = ``;
-        phoneBlock.style.position = "fixed";
-      }
-    } else {
-      phoneBlock.style.top = "";
-      if (scrollTopFrame > mouseWheelDistance) {
-        mouseWheelRatio = 1;
-        phoneBlock.style.transform = `translate3d(0,${mouseWheelDistance}px,0)`;
-        phoneBlock.style.position = "absolute";
-      } else {
-        phoneBlock.style.transform = ``;
-        phoneBlock.style.position = "fixed";
-      }
-    }
+    handleMotionForDesktop();
   }
 
   const START_OPACITY = 0.2;
