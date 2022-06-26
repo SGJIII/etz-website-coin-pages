@@ -11,9 +11,6 @@
     "check:format": "prettier --ignore-path .gitignore --write \"./src/**/*.+(js|ts|json|css|html)\""
   },
   "lint-staged": {
-    "./src/**/*.ts": [
-      "tsc --noemit -t es5"
-    ],
     "./src/**/*.{ts,js}": [
       "eslint --fix"
     ],

@@ -120,8 +120,14 @@ dracoLoader.setDecoderPath("/draco/");
 const gltfLoader = new GLTFLoader();
 gltfLoader.setDRACOLoader(dracoLoader);
 
+const phoneBlock = document.querySelector("canvas");
+const secondSection = document.querySelector(SECOND_SECTION_CLASS);
+
+const endPositionY = -100;
+let startPositionY = -phoneBlock.getAttribute("data-start-position");
 gltfLoader.load(MODEL_NAME, (gltf) => {
   const setupInitialValue = () => {
+    startPositionY = -phoneBlock.getAttribute("data-start-position");
     if (window.innerWidth < 768) {
       const scaleSize = Number(window.innerHeight * 0.001421800947867).toFixed(
         3
@@ -151,9 +157,7 @@ gltfLoader.load(MODEL_NAME, (gltf) => {
     },
     false
   );
-  if (!detectDevice()) {
-    window.addEventListener("resize", setupInitialValue);
-  }
+  window.addEventListener("resize", setupInitialValue);
   window.scene = gltf.scene;
 
   phoneMesh = gltf.scene.children[0].children[0];
@@ -495,8 +499,6 @@ const tick = () => {
   const deltaTime = elapsedTime - previousTime;
   previousTime = elapsedTime;
 
-  const phoneBlock = document.querySelector("canvas");
-  const secondSection = document.querySelector(SECOND_SECTION_CLASS);
   const mouseWheelDistance = getElementOffsetTop(secondSection);
 
   if (scrollTopFrame >= 0 && scrollTopFrame <= mouseWheelDistance) {
@@ -513,8 +515,6 @@ const tick = () => {
 
   const handleMotionForMobile = () => {
     const statusProcess = phoneBlock.getAttribute("data-status");
-    const endPositionY = -100;
-    const startPositionY = -phoneBlock.getAttribute("data-start-position");
     if (statusProcess === "stop") {
       mouseWheelRatio = 1;
       phoneBlock.style.transform = `translate3d(0,${endPositionY}px,0)`;
@@ -540,7 +540,7 @@ const tick = () => {
     }
   };
 
-  if (detectDevice()) {
+  if (detectDevice() || window.innerWidth < 768) {
     if (window.innerWidth > 768) {
       const statusProcess = phoneBlock.getAttribute("data-status");
       if (statusProcess === "stop") {

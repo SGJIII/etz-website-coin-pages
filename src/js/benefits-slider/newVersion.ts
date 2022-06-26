@@ -43,7 +43,20 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
         String(this.pageOffset.top + description.top - description?.height + 40)
       );
     }
-
+    window.addEventListener("resize", () => {
+      const description = document
+        .querySelector("[ name-header-section-description]")
+        ?.getBoundingClientRect();
+      const phoneBlock = document.querySelector(".webgl");
+      if (description) {
+        phoneBlock?.setAttribute(
+          "data-start-position",
+          String(
+            this.pageOffset.top + description.top - description?.height + 40
+          )
+        );
+      }
+    });
     window.addEventListener(
       "orientationchange",
       () => {
