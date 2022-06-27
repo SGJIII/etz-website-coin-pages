@@ -45,10 +45,10 @@ document.addEventListener(
 
 window.addEventListener("wheel", (e) => {
   //@ts-ignore
-  uss.stopScrollingAll(document.body);
+  uss.stopScrollingAll(window);
 });
 //@ts-ignore
-uss.setPageScroller(document.body);
+uss.setPageScroller(window);
 //@ts-ignore
 uss.hrefSetup();
 
@@ -62,10 +62,13 @@ links.forEach((link) => {
   const sectionWithoutMargin = ["#etz-mobile", "#contact-us"];
   link.addEventListener("click", function (e) {
     e.preventDefault();
+    uss.stopScrollingAll(window);
     const marginBottomMenu =
       href && sectionWithoutMargin.includes(href) ? 0 : 64;
     const position =
-      Math.abs((rect?.top ?? 0) - body.top) - heightMenu - marginBottomMenu;
+      href === "#header"
+        ? 0
+        : Math.abs((rect?.top ?? 0) - body.top) - heightMenu - marginBottomMenu;
     uss.scrollYTo(position, window);
   });
 });

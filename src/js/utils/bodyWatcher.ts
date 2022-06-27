@@ -72,29 +72,24 @@ class BodyWatcher<T extends HTMLElement> extends DocumentElement<T> {
     return false;
   }
   public scrollBodyDisable(top: undefined | number = 0) {
+    document.body.style.overflow = "hidden";
     if (this.detectDevice) {
-      document.body.style.overflow = "hidden";
       document.body.style.position = "fixed";
       document.body.style.top = `${-top}px`;
-      document.body.style.left = "0px";
+      document.body.style.width = "100vw";
       this.phoneBlock?.setAttribute("data-status", "stop");
-    } else {
-      document.body.style.overflow = "hidden";
     }
   }
 
-  public scrollBodyEnable(deltaY: number) {
+  public scrollBodyEnable() {
+    document.body.style.overflow = "initial";
     if (this.detectDevice) {
-      document.body.style.overflow = "initial";
       const y = -parseInt(document.body.style.top, 10);
-      const x = -parseInt(document.body.style.left, 10);
       document.body.style.position = "";
       document.body.style.top = "";
-      document.body.style.left = "";
+      document.body.style.width = "";
       this.phoneBlock?.setAttribute("data-status", "start");
-      window.scroll(x, y + deltaY * 1.5);
-    } else {
-      document.body.style.overflow = "initial";
+      window.scroll(0, y);
     }
   }
 }

@@ -15,7 +15,7 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
   containder: HTMLElement | null = null;
   timeSlideWithoutPause = 2000;
   timeSlideWithPause = 5000;
-  timeSlide = this.timeSlideWithoutPause;
+  timeSlide = 3000;
   __scrollId: TimeoutId = 0;
   __firstScrollId: TimeoutId = 0;
   __idScrollMotion: TimeoutId = 0;
@@ -26,6 +26,8 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
   isFirstSlideSwitch = true;
   isDisabledScroll = false;
   isScrollingOnLink = false;
+  isStartSlide = false;
+
   constructor(props: string) {
     super(props);
   }
@@ -52,6 +54,7 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
     const description = document
       .querySelector("[ name-header-section-description]")
       ?.getBoundingClientRect();
+
     const phoneBlock = document.querySelector(".webgl");
     if (description) {
       phoneBlock?.setAttribute(
@@ -189,7 +192,7 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
     clearTimeout(this.__firstScrollId);
     this.deltaY = 0;
 
-    super.scrollBodyEnable(this.deltaY);
+    super.scrollBodyEnable();
   }
 
   public scrollBodyDisable(): void {
@@ -203,10 +206,23 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
       top: this.initialOffset.top,
       behavior: "smooth",
     });
+
+    this.isStartSlide = true;
   }
+
+  prevTop = 0;
+  deltaYPage = 0;
   private watchPositionScroll() {
-    if (this.deltaY < 0 || this.isScrollMotion) {
+    if (this.isScrollMotion) {
+      this.deltaYPage = this.prevTop - this.pageOffset.top;
+      this.prevTop = this.pageOffset.top;
+    } else {
+      this.deltaYPage = 0;
+    }
+
+    if (this.deltaYPage > 0 || this.deltaY < 0) {
       if (
+        !this.isScrollingOnLink &&
         this.pageOffset.top < this.initialOffset.top &&
         this.pageOffset.top + this.height > this.initialOffset.top &&
         this.pageOffset.top + this.height < this.initialOffset.bottom &&
@@ -219,7 +235,7 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
       if (this.pageOffset.top + this.height <= this.initialOffset.top) {
         this.isFirstSlideSwitch = true;
       }
-    } else if (this.deltaY > 0 || this.isScrollMotion) {
+    } else if (this.deltaYPage < 0 || this.deltaY > 0) {
       if (
         !this.isScrollingOnLink &&
         this.isTopLineUnder &&
@@ -234,8 +250,8 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
         this.isFirstSlideSwitch = true;
       }
     }
-    const play = this.element?.getAttribute("data-play");
-    if (this.isLaunchNextSlide === false && play) {
+
+    if (this.isLaunchNextSlide === false && this.isStartSlide) {
       this.isLaunchNextSlide = true;
       clearTimeout(this.__idNextSlide);
       this.__idNextSlide = setTimeout(() => {
@@ -255,9 +271,19 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
       "[name-benefits-slider-dots-container]"
     );
     this.containder = this.querySelector("[name-benefits-slider-container]");
-    slides.forEach((slide, idx) => {
+    const calculateWidthDots = (slide: HTMLElement) => {
       const width = slide.getBoundingClientRect().width;
       this.widthSlides.push(width);
+    };
+
+    AddEventOrientationChange(() => {
+      this.widthSlides = [];
+      slides.forEach((slide) => {
+        calculateWidthDots(slide);
+      });
+    });
+    slides.forEach((slide, idx) => {
+      calculateWidthDots(slide);
       const dot = this.createElement("span");
       dot.setAttribute("data-status", idx === 0 ? "active" : "idle");
       dot.setAttribute("name-benefits-slider-dot", "");

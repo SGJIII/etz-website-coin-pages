@@ -124,7 +124,7 @@ gltfLoader.setDRACOLoader(dracoLoader);
 const phoneBlock = document.querySelector("canvas");
 const secondSection = document.querySelector(SECOND_SECTION_CLASS);
 
-const endPositionY = -100;
+const endPositionY = -50;
 let startPositionY = -phoneBlock.getAttribute("data-start-position");
 gltfLoader.load(MODEL_NAME, (gltf) => {
   const setupInitialValue = () => {
@@ -150,7 +150,7 @@ gltfLoader.load(MODEL_NAME, (gltf) => {
         gltf.scene.position.set(3.2, 0, 0);
       } else {
         gltf.scene.scale.set(1.7, 1.7, 1.7);
-        gltf.scene.position.set(2.2, -0.2, 0);
+        gltf.scene.position.set(2.2, -0.3, 0);
       }
     }
   };
@@ -255,10 +255,10 @@ const sizes = {
   height: mainSection.getBoundingClientRect().height,
 };
 const setSizesScene = () => {
+  const isMobileDevice = !detectDevice();
   // Update sizes
-  sizes.width = window.innerWidth;
+  sizes.width = isMobileDevice ? window.innerWidth : screen.width;
   sizes.height = mainSection.getBoundingClientRect().height;
-
   // Update camera
   camera.aspect = sizes.width / sizes.height;
   camera.updateProjectionMatrix();
@@ -549,9 +549,13 @@ const tick = () => {
       phoneBlock.style.position = "absolute";
     }
   };
+  const statusProcess = phoneBlock.getAttribute("data-status");
 
   const handleMotionForDesktop = () => {
-    if (scrollTopFrame > mouseWheelDistance) {
+    if (
+      scrollTopFrame > mouseWheelDistance ||
+      (statusProcess === "stop" && scrollTopFrame === 0)
+    ) {
       launchAnimation();
       phoneBlock.style.transform = `translate3d(0,${mouseWheelDistance}px,0)`;
       phoneBlock.style.position = "absolute";
@@ -562,11 +566,10 @@ const tick = () => {
   };
 
   if (
-    (detectDevice() || window.innerWidth < 1200) &&
+    (detectDevice() || window.innerWidth < 1200 || screen.width < 900) &&
     !window.matchMedia("(orientation: landscape)").matches
   ) {
     if (window.innerWidth > 768) {
-      const statusProcess = phoneBlock.getAttribute("data-status");
       if (statusProcess === "stop") {
         launchAnimation();
       }

@@ -8,6 +8,3 @@
 @import url("./components/contact-us-section/contact-us-section.mobile.css");
 @import url("./components/footer/footer.mobile.css");
 @import url("./components/notification/notification.mobile.css");
-
-@media screen and (max-width: 768px), (orientation: landscape) {
-}
