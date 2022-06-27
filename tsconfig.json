@@ -2,8 +2,8 @@
   "compilerOptions": {
     "outDir": "dist",
     "noImplicitAny": true,
-    "target": "ES2020",
-    "lib": ["es5", "es6", "dom", "dom.iterable"],
+    "target": "es5",
+    "lib": ["es5", "dom", "dom.iterable"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,

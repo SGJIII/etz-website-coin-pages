@@ -32,7 +32,7 @@
       "warn",
       { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }
     ],
-    "no-console": ["warn", { "allow": ["error"] }]
+    "no-console": ["warn", { "allow": ["error", "warn"] }]
   },
   "settings": {
     "import/extensions": [".ts"],

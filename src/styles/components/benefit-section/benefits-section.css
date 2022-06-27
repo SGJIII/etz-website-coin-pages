@@ -101,7 +101,7 @@
   background-color: var(--dark-30);
 }
 
-.BenefitsSection_dot__active {
+[data-status="active"] {
   background-color: var(--primary);
 }
 

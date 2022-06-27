@@ -1,7 +1,5 @@
 @media screen and (max-width: 768px),
-  (max-device-height: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: landscape),
-  (max-device-height: 812px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape),
-  (max-width: 1000px) and (orientation: landscape) {
+  (max-device-height: 812px) and (orientation: landscape) {
   .EtzMobileSection {
     /* overflow: initial; */
     justify-content: center;
