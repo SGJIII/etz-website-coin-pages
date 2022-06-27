@@ -64,7 +64,6 @@ links.forEach((link) => {
     e.preventDefault();
     const marginBottomMenu =
       href && sectionWithoutMargin.includes(href) ? 0 : 64;
-    console.log(marginBottomMenu);
     const position =
       Math.abs((rect?.top ?? 0) - body.top) - heightMenu - marginBottomMenu;
     uss.scrollYTo(position, window);

@@ -131,7 +131,6 @@ gltfLoader.load(MODEL_NAME, (gltf) => {
     startPositionY = -phoneBlock.getAttribute("data-start-position");
 
     if (window.innerWidth < 1200 || detectDevice()) {
-      console.log(1);
       if (window.matchMedia("(orientation: landscape)").matches) {
         gltf.scene.scale.set(1.7, 1.7, 1.7);
         gltf.scene.position.set(3.2, 0, 0);
@@ -499,6 +498,11 @@ function togglePhoneAssets(v) {
   shadowMesh.visible = v;
 }
 
+const slider = document.querySelector("[name-benefits-section]");
+const launchAnimation = () => {
+  mouseWheelRatio = 1;
+  slider.setAttribute("data-play", "1");
+};
 const tick = () => {
   controls.update();
 
@@ -526,7 +530,7 @@ const tick = () => {
   const handleMotionForMobile = () => {
     const statusProcess = phoneBlock.getAttribute("data-status");
     if (statusProcess === "stop") {
-      mouseWheelRatio = 1;
+      launchAnimation();
       phoneBlock.style.transform = `translate3d(0,${endPositionY}px,0)`;
       phoneBlock.style.position = "fixed";
     } else {
@@ -538,7 +542,7 @@ const tick = () => {
       phoneBlock.style.position = "fixed";
     }
     if (scrollTopFrame > mouseWheelDistance) {
-      mouseWheelRatio = 1;
+      launchAnimation();
       phoneBlock.style.transform = `translate3d(0,${
         mouseWheelDistance + endPositionY
       }px,0)`;
@@ -548,7 +552,7 @@ const tick = () => {
 
   const handleMotionForDesktop = () => {
     if (scrollTopFrame > mouseWheelDistance) {
-      mouseWheelRatio = 1;
+      launchAnimation();
       phoneBlock.style.transform = `translate3d(0,${mouseWheelDistance}px,0)`;
       phoneBlock.style.position = "absolute";
     } else {
@@ -564,13 +568,13 @@ const tick = () => {
     if (window.innerWidth > 768) {
       const statusProcess = phoneBlock.getAttribute("data-status");
       if (statusProcess === "stop") {
-        mouseWheelRatio = 1;
+        launchAnimation();
       }
       phoneBlock.style.transform = ``;
       phoneBlock.style.position = "fixed";
 
       if (statusProcess === "start" && scrollTopFrame > mouseWheelDistance) {
-        mouseWheelRatio = 1;
+        launchAnimation();
         phoneBlock.style.transform = `translate3d(0,${mouseWheelDistance}px,0)`;
         phoneBlock.style.position = "absolute";
       }
