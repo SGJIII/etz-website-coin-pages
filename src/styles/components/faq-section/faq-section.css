@@ -114,11 +114,9 @@
 }
 
 .FAQSection_accordionDetailsItem__50 {
-  flex-basis: 512px;
+  flex-basis: 50%;
   flex-grow: 0;
 
-  min-width: 512px;
-  max-width: 512px;
   margin-right: 64px;
 }
 

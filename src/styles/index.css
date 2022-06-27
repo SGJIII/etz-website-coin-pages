@@ -32,9 +32,6 @@ body {
 html {
   padding: env(safe-area-inset);
 }
-body {
-  overflow-x: hidden;
-}
 
 * {
   box-sizing: border-box;
@@ -92,9 +89,15 @@ textarea::-ms-input-placeholder {
 .__section {
   display: flex;
   overflow: hidden;
+  align-items: center;
   flex-direction: column;
 
   box-sizing: content-box;
+  min-width: 1200px;
+}
+
+.__container {
+  width: 1200px;
 }
 
 /* Three classes for phone animation*/
