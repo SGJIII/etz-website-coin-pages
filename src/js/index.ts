@@ -54,20 +54,19 @@ uss.hrefSetup();
 
 const links = document.querySelectorAll("[name-link]");
 links.forEach((link) => {
+  const href = link.getAttribute("href");
+  const element = href ? document.querySelector(href) : null;
+  const body = document.body.getBoundingClientRect();
+  const rect = element?.getBoundingClientRect();
+  const heightMenu = 106;
+  const sectionWithoutMargin = ["#etz-mobile", "#contact-us"];
   link.addEventListener("click", function (e) {
     e.preventDefault();
-    const href = link.getAttribute("href");
-    if (href) {
-      const element = document.querySelector(href);
-      const body = document.body.getBoundingClientRect();
-      const rect = element?.getBoundingClientRect();
-
-      uss.scrollYTo(
-        Math.abs((rect?.top ?? 0) - body.top) -
-          (window.innerHeight / 2 - (rect?.height ?? 0) / 2) -
-          53,
-        window
-      );
-    }
+    const marginBottomMenu =
+      href && sectionWithoutMargin.includes(href) ? 0 : 64;
+    console.log(marginBottomMenu);
+    const position =
+      Math.abs((rect?.top ?? 0) - body.top) - heightMenu - marginBottomMenu;
+    uss.scrollYTo(position, window);
   });
 });
