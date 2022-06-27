@@ -51,3 +51,23 @@ window.addEventListener("wheel", (e) => {
 uss.setPageScroller(document.body);
 //@ts-ignore
 uss.hrefSetup();
+
+const links = document.querySelectorAll("[name-link]");
+links.forEach((link) => {
+  link.addEventListener("click", function (e) {
+    e.preventDefault();
+    const href = link.getAttribute("href");
+    if (href) {
+      const element = document.querySelector(href);
+      const body = document.body.getBoundingClientRect();
+      const rect = element?.getBoundingClientRect();
+
+      uss.scrollYTo(
+        Math.abs((rect?.top ?? 0) - body.top) -
+          (window.innerHeight / 2 - (rect?.height ?? 0) / 2) -
+          53,
+        window
+      );
+    }
+  });
+});

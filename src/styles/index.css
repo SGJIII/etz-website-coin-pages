@@ -97,14 +97,6 @@ textarea::-ms-input-placeholder {
   box-sizing: content-box;
 }
 
-.__container {
-  align-self: center;
-
-  width: 1180px;
-
-  justify-self: center;
-}
-
 /* Three classes for phone animation*/
 .section_first {
   position: relative;
