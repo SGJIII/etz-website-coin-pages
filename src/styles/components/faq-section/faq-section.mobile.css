@@ -1,5 +1,5 @@
 @media screen and (max-width: 768px),
-  (max-device-height: 500px) and (orientation: landscape) {
+  (max-device-height: 812px) and (orientation: landscape) {
   .FAQSection {
     min-height: 100vh;
     padding: 0;
@@ -91,7 +91,7 @@
   }
 }
 
-@media screen and (max-device-height: 500px) and (orientation: landscape) {
+@media screen and (max-device-height: 812px) and (orientation: landscape) {
   .FAQSection_container {
     width: calc(100vw - 48px);
     padding: 48px;

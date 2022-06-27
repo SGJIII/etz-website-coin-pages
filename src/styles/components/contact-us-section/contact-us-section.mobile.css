@@ -1,5 +1,5 @@
 @media screen and (max-width: 768px),
-  (max-device-height: 500px) and (orientation: landscape) {
+  (max-device-height: 812px) and (orientation: landscape) {
   .ContactUsSection {
     min-height: calc(100vh + 32px);
     padding: 0;
@@ -86,7 +86,7 @@
   }
 }
 
-@media screen and (max-device-height: 500px) and (orientation: landscape) {
+@media screen and (max-device-height: 812px) and (orientation: landscape) {
   .ContactUsSection_container {
     width: 100%;
     padding: 48px;
