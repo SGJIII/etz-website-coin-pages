@@ -1,3 +1,4 @@
+import { AddEventOrientationChange } from "./utils/addEventOrientationchange";
 import { getCoords } from "./utils/getCoords";
 import { outerHeight } from "./utils/outerHeight";
 import { outerWidth } from "./utils/outerWidth";
@@ -41,14 +42,10 @@ export default class HeaderMenu {
 
     window.addEventListener("scroll", eventLinstener);
     this.handleAnimationMenu();
-    window.addEventListener(
-      "orientationchange",
-      () => {
-        this.target?.classList.remove("HeaderMenu_menu__sticky");
-        this.target?.classList.remove("HeaderMenu_menu__stickyHide");
-      },
-      false
-    );
+    AddEventOrientationChange(() => {
+      this.target?.classList.remove("HeaderMenu_menu__sticky");
+      this.target?.classList.remove("HeaderMenu_menu__stickyHide");
+    });
     window.addEventListener("resize", () => {
       if (
         window.innerWidth < 768 ||

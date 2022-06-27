@@ -4,6 +4,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { detectDevice } from "./utils/detectDevice";
+import { AddEventOrientationChange } from "./utils/addEventOrientationchange";
 
 const MODEL_NAME = "etz_8_1.glb";
 const FIRST_SECTION_CLASS = ".HeaderSection";
@@ -154,15 +155,8 @@ gltfLoader.load(MODEL_NAME, (gltf) => {
     }
   };
   setupInitialValue();
-  window.addEventListener(
-    "orientationchange",
-    () => {
-      setTimeout(() => {
-        setupInitialValue();
-      }, 0);
-    },
-    false
-  );
+  AddEventOrientationChange(setupInitialValue);
+
   window.addEventListener("resize", () => {
     if (!detectDevice()) {
       setupInitialValue();
@@ -278,11 +272,8 @@ window.addEventListener("resize", () => {
   setSizesScene();
 });
 
-window.addEventListener("orientationchange", () => {
-  setTimeout(() => {
-    setSizesScene();
-  }, 0);
-});
+AddEventOrientationChange(setSizesScene);
+
 /**
  * Camera
  */

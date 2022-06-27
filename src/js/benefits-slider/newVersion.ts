@@ -1,6 +1,7 @@
 import { easeInOutQuad } from "../utils/easeInOutQuad";
 import BodyWatcher from "../utils/bodyWatcher";
 import { checkTouchEvent } from "../utils/typeGuards";
+import { AddEventOrientationChange } from "../utils/addEventOrientationchange";
 
 type TimeoutId = string | number | NodeJS.Timeout | undefined;
 class BenefitsSlider extends BodyWatcher<HTMLElement> {
@@ -49,45 +50,16 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
 
   private watchWindowResize() {
     window.addEventListener("resize", () => {
-      const description = document
-        .querySelector("[ name-header-section-description]")
-        ?.getBoundingClientRect();
-      const phoneBlock = document.querySelector(".webgl");
-      if (description && !this.detectDevice) {
-        phoneBlock?.setAttribute(
-          "data-start-position",
-          String(
-            this.pageOffset.top + description.top - description?.height + 40
-          )
-        );
-      }
+      this.setDefaultPositionCanvas();
     });
   }
 
   private watchWindowOrientation() {
-    window.addEventListener(
-      "orientationchange",
-      () => {
-        setTimeout(() => {
-          this.scrollBodyEnable();
-          this.setInitialOffsetElement();
-
-          const description = document
-            .querySelector("[ name-header-section-description]")
-            ?.getBoundingClientRect();
-          const phoneBlock = document.querySelector(".webgl");
-          if (description) {
-            phoneBlock?.setAttribute(
-              "data-start-position",
-              String(
-                this.pageOffset.top + description.top - description?.height + 40
-              )
-            );
-          }
-        }, 50);
-      },
-      false
-    );
+    AddEventOrientationChange(() => {
+      this.scrollBodyEnable();
+      this.setInitialOffsetElement();
+      this.setDefaultPositionCanvas();
+    });
   }
 
   private watchScrolling() {
