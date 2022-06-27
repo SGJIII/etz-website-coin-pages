@@ -21,7 +21,7 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
   isScrolling = false;
   isFirstSlideSwitch = true;
   isDisabledScroll = false;
-
+  isScrollingOnLink = false;
   constructor(props: string) {
     super(props);
   }
@@ -33,8 +33,17 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
     this.watchPositionScroll();
     this.watchWindowResize();
     this.watchWindowOrientation();
+    this.setCustomBehavierLink();
   }
 
+  private setCustomBehavierLink() {
+    const links = document.querySelectorAll("[name-link]");
+    links.forEach((link) => {
+      link?.addEventListener("click", () => {
+        this.isScrollingOnLink = true;
+      });
+    });
+  }
   private setDefaultPositionCanvas() {
     const description = document
       .querySelector("[ name-header-section-description]")
@@ -99,6 +108,7 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
 
         this.__idScrollMotion = setTimeout(() => {
           this.isScrollMotion = false;
+          this.isScrollingOnLink = false;
         }, 500);
       });
 
@@ -232,6 +242,7 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
   private watchPositionScroll() {
     if (
       (this.deltaY < 0 || this.isScrollMotion) &&
+      !this.isScrollingOnLink &&
       this.isTopLineOver &&
       this.isBottomLineInside &&
       !this.isFirstSlideActive
@@ -239,6 +250,7 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
       this.scrollBodyDisable();
     } else if (
       (this.deltaY > 0 || this.isScrollMotion) &&
+      !this.isScrollingOnLink &&
       this.isTopLineUnder &&
       !this.isLastSlideActive
     ) {
