@@ -259,7 +259,6 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
   }
 
   private watchPositionScroll() {
-    console.log(this.deltaY, this.isScrollMotion);
     if (
       (this.deltaY < 0 || this.isScrollMotion) &&
       this.isTopLineOver &&
