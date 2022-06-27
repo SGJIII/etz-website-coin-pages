@@ -1,12 +1,11 @@
-@media screen and (max-width: 768px),
-  (max-device-height: 812px) and (orientation: landscape) {
+@media screen and (max-width: 768px), (max-width: 1200px) {
   .EtzMobileSection {
     /* overflow: initial; */
     justify-content: center;
 
     box-sizing: border-box;
     height: initial;
-    min-height: calc(100vh + 106px);
+    min-height: calc(100vh + 156px);
     padding: 0 16px;
   }
   .EtzMobileSection_block {
@@ -56,7 +55,7 @@
     text-align: center;
   }
   .EtzMobileSection_mobiles {
-    top: 30px;
+    top: -54px;
     left: 50%;
 
     width: 367.78px;

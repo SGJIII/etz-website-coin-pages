@@ -2,14 +2,12 @@
   align-items: center;
   justify-content: center;
 
-  box-sizing: content-box;
-  min-height: calc(100vh + var(--height-menu));
+  box-sizing: border-box;
+  height: 552px;
 }
 
 .ForEmployersSection_container {
   align-self: center;
-
-  width: 1180px;
 
   justify-self: center;
 }

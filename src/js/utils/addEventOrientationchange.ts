@@ -1,7 +1,9 @@
 export const AddEventOrientationChange = (callback: () => void) => {
   window.addEventListener("orientationchange", () => {
     const afterOrientationChange = function () {
-      callback();
+      setTimeout(() => {
+        callback();
+      }, 50);
 
       window.removeEventListener("resize", afterOrientationChange);
     };

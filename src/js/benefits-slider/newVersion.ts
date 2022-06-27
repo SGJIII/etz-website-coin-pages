@@ -13,15 +13,21 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
   dots: Array<HTMLElement> | null = [];
   dotsContainder: HTMLElement | null = null;
   containder: HTMLElement | null = null;
-
+  timeSlideWithoutPause = 2000;
+  timeSlideWithPause = 5000;
+  timeSlide = 3000;
   __scrollId: TimeoutId = 0;
   __firstScrollId: TimeoutId = 0;
   __idScrollMotion: TimeoutId = 0;
+  __idNextSlide: TimeoutId = 0;
+  isLaunchNextSlide = false;
   isScrollMotion = false;
   isScrolling = false;
   isFirstSlideSwitch = true;
   isDisabledScroll = false;
   isScrollingOnLink = false;
+  isStartSlide = false;
+
   constructor(props: string) {
     super(props);
   }
@@ -48,6 +54,7 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
     const description = document
       .querySelector("[ name-header-section-description]")
       ?.getBoundingClientRect();
+
     const phoneBlock = document.querySelector(".webgl");
     if (description) {
       phoneBlock?.setAttribute(
@@ -113,9 +120,6 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
       });
 
       addTouchEvent(document);
-      addTouchEvent(this.element, () => {
-        this.handleSlideMobile();
-      });
     } else {
       let __idDelta: string | number | NodeJS.Timeout | undefined = 0;
       let isFisrtWheel = false;
@@ -173,57 +177,22 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
     return "ontouchstart" in window;
   }
 
-  private handleSlideDesktop() {
-    if (
-      this.isScrolling === false &&
-      this.isFirstSlideSwitch === false &&
-      this.isTouchDevice === false
-    ) {
-      this.nextSlide();
-    }
-  }
-
-  private handleSlideMobile() {
-    if (
-      this.isScrolling === false &&
-      this.isFirstSlideSwitch === false &&
-      this.isTouchDevice === true
-    ) {
-      this.isScrolling = true;
-      this.nextSlide();
-    }
-  }
-
   private nextSlide() {
-    clearTimeout(this.__scrollId);
-    this.__scrollId = setTimeout(() => {
-      if (!this.dots || this.deltaY === 0) return;
-
-      if (this.deltaY < 0) {
-        if (this.isFirstSlideActive) {
-          return this.scrollBodyEnable();
-        }
-        this.activeSlideIdx--;
-        this.dots[this.activeSlideIdx]?.click();
-      } else if (this.deltaY > 0) {
-        if (this.isLastSlideActive) {
-          return this.scrollBodyEnable();
-        }
-
-        this.activeSlideIdx++;
-        this.dots[this.activeSlideIdx]?.click();
-      }
-    }, 300);
+    if (!this.dots) return;
+    this.activeSlideIdx++;
+    if (this.activeSlideIdx > this.dots.length - 1) {
+      this.activeSlideIdx = 0;
+    }
+    this.dots[this.activeSlideIdx]?.click();
   }
 
   public scrollBodyEnable(): void {
     if (this.isDisabledScroll === false) return;
     this.isDisabledScroll = false;
     clearTimeout(this.__firstScrollId);
-    this.isFirstSlideSwitch = true;
     this.deltaY = 0;
 
-    super.scrollBodyEnable(this.deltaY);
+    super.scrollBodyEnable();
   }
 
   public scrollBodyDisable(): void {
@@ -231,34 +200,66 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
     super.scrollBodyDisable(this.initialOffset.top);
     this.isDisabledScroll = true;
     this.__firstScrollId = setTimeout(() => {
-      this.isFirstSlideSwitch = false;
+      this.scrollBodyEnable();
     }, 1000);
     window.scrollTo({
       top: this.initialOffset.top,
       behavior: "smooth",
     });
+
+    this.isStartSlide = true;
   }
 
+  prevTop = 0;
+  deltaYPage = 0;
   private watchPositionScroll() {
-    if (
-      (this.deltaY < 0 || this.isScrollMotion) &&
-      !this.isScrollingOnLink &&
-      this.isTopLineOver &&
-      this.isBottomLineInside &&
-      !this.isFirstSlideActive
-    ) {
-      this.scrollBodyDisable();
-    } else if (
-      (this.deltaY > 0 || this.isScrollMotion) &&
-      !this.isScrollingOnLink &&
-      this.isTopLineUnder &&
-      !this.isLastSlideActive
-    ) {
-      this.scrollBodyDisable();
+    if (this.isScrollMotion) {
+      this.deltaYPage = this.prevTop - this.pageOffset.top;
+      this.prevTop = this.pageOffset.top;
+    } else {
+      this.deltaYPage = 0;
     }
 
-    this.handleSlideDesktop();
+    if (this.deltaYPage > 0 || this.deltaY < 0) {
+      if (
+        !this.isScrollingOnLink &&
+        this.pageOffset.top < this.initialOffset.top &&
+        this.pageOffset.top + this.height > this.initialOffset.top &&
+        this.pageOffset.top + this.height < this.initialOffset.bottom &&
+        this.isFirstSlideSwitch
+      ) {
+        this.isFirstSlideSwitch = false;
+        this.scrollBodyDisable();
+      }
 
+      if (this.pageOffset.top + this.height <= this.initialOffset.top) {
+        this.isFirstSlideSwitch = true;
+      }
+    } else if (this.deltaYPage < 0 || this.deltaY > 0) {
+      if (
+        !this.isScrollingOnLink &&
+        this.isTopLineUnder &&
+        this.pageOffset.top < this.initialOffset.bottom &&
+        this.isFirstSlideSwitch
+      ) {
+        this.isFirstSlideSwitch = false;
+        this.scrollBodyDisable();
+      }
+
+      if (this.pageOffset.top > this.initialOffset.bottom) {
+        this.isFirstSlideSwitch = true;
+      }
+    }
+
+    if (this.isLaunchNextSlide === false && this.isStartSlide) {
+      this.isLaunchNextSlide = true;
+      clearTimeout(this.__idNextSlide);
+      this.__idNextSlide = setTimeout(() => {
+        this.nextSlide();
+        this.isLaunchNextSlide = false;
+        this.timeSlide = this.timeSlideWithoutPause;
+      }, this.timeSlide);
+    }
     requestAnimationFrame(() => {
       this.watchPositionScroll();
     });
@@ -270,14 +271,27 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
       "[name-benefits-slider-dots-container]"
     );
     this.containder = this.querySelector("[name-benefits-slider-container]");
-    slides.forEach((slide, idx) => {
+    const calculateWidthDots = (slide: HTMLElement) => {
       const width = slide.getBoundingClientRect().width;
       this.widthSlides.push(width);
+    };
+
+    AddEventOrientationChange(() => {
+      this.widthSlides = [];
+      slides.forEach((slide) => {
+        calculateWidthDots(slide);
+      });
+    });
+    slides.forEach((slide, idx) => {
+      calculateWidthDots(slide);
       const dot = this.createElement("span");
       dot.setAttribute("data-status", idx === 0 ? "active" : "idle");
       dot.setAttribute("name-benefits-slider-dot", "");
       dot.className = "BenefitsSection_dot";
       dot.addEventListener("click", () => {
+        clearTimeout(this.__idNextSlide);
+        this.timeSlide = this.timeSlideWithPause;
+        this.isLaunchNextSlide = false;
         this.changeActiveSlide(idx);
       });
       this.dotsContainder?.appendChild(dot);

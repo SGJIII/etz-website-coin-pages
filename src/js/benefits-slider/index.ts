@@ -143,7 +143,7 @@ class BenefitsSlider {
 
     this.isScrolling = true;
     if (
-      window.innerWidth < 768 ||
+      window.innerWidth < 1200 ||
       window.matchMedia("(orientation: landscape)").matches
     ) {
       clearTimeout(this.__scrollId);
@@ -173,7 +173,7 @@ class BenefitsSlider {
     const mouseWheelDistance = Math.abs(rectBody.top - (rect?.top ?? 0));
 
     if (
-      window.innerWidth < 768 ||
+      window.innerWidth < 1200 ||
       window.matchMedia("(orientation: landscape)").matches
     ) {
       document.body.style.position = "fixed";
@@ -196,7 +196,7 @@ class BenefitsSlider {
     if (this.isDisabledScroll === false) return;
 
     if (
-      window.innerWidth < 768 ||
+      window.innerWidth < 1200 ||
       window.matchMedia("(orientation: landscape)").matches
     ) {
       const y = -parseInt(document.body.style.top, 10);

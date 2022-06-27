@@ -1,9 +1,9 @@
 .ContactUsSection {
   display: flex;
-  overflow: initial !important;
   justify-content: center;
 
-  min-height: calc(100vh + var(--height-menu) - 120px);
+  height: 675px;
+  margin-top: 120px;
   padding: 60px 0;
 }
 

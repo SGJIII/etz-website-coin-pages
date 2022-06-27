@@ -1,5 +1,4 @@
-@media screen and (max-width: 768px),
-  (max-device-height: 812px) and (orientation: landscape) {
+@media screen and (max-width: 768px), (max-width: 1200px) {
   .BenefitsSection {
     position: relative;
 
@@ -7,6 +6,7 @@
     min-height: 100vh;
     margin-top: 96px;
     padding: 16px;
+    padding-top: 64px;
   }
   .BenefitsSection_container {
     width: calc(100vw - 32px);
@@ -78,12 +78,18 @@
   }
 }
 
-@media screen and (max-device-height: 812px) and (orientation: landscape) {
+@media screen and (min-width: 768px) and (max-width: 1200px) {
   .BenefitsSection {
     padding: 48px;
   }
   .BenefitsSection_title {
     text-align: left;
+  }
+
+  .BenefitsSection_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
   .BenefitsSection_container h2 {
     width: calc(50vw - 32px);
@@ -91,6 +97,9 @@
     text-align: left;
   }
   .BenefitsSection_viewSlider {
+    position: initial;
+    bottom: initial;
+
     width: calc(50vw - 55px);
   }
   .BenefitsSection_slide {
