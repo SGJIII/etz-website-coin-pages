@@ -254,9 +254,7 @@ const sizes = {
   width: window.innerWidth,
   height: mainSection.getBoundingClientRect().height,
 };
-
-window.addEventListener("resize", () => {
-  if (detectDevice) return;
+const setSizesScene = () => {
   // Update sizes
   sizes.width = window.innerWidth;
   sizes.height = mainSection.getBoundingClientRect().height;
@@ -268,8 +266,17 @@ window.addEventListener("resize", () => {
   // Update renderer
   renderer.setSize(sizes.width, sizes.height);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+};
+window.addEventListener("resize", () => {
+  if (detectDevice) return;
+  setSizesScene();
 });
 
+window.addEventListener("orientationchange", () => {
+  setTimeout(() => {
+    setSizesScene();
+  }, 0);
+});
 /**
  * Camera
  */
