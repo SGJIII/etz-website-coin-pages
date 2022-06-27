@@ -255,9 +255,8 @@ const sizes = {
   height: mainSection.getBoundingClientRect().height,
 };
 const setSizesScene = () => {
-  const isMobileDevice = !detectDevice();
   // Update sizes
-  sizes.width = isMobileDevice ? window.innerWidth : screen.width;
+  sizes.width = window.innerWidth;
   sizes.height = mainSection.getBoundingClientRect().height;
   // Update camera
   camera.aspect = sizes.width / sizes.height;
