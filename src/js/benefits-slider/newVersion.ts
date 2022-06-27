@@ -1,11 +1,9 @@
 import { easeInOutQuad } from "../utils/easeInOutQuad";
 import BodyWatcher from "../utils/bodyWatcher";
+import { checkTouchEvent } from "../utils/typeGuards";
 
+type TimeoutId = string | number | NodeJS.Timeout | undefined;
 class BenefitsSlider extends BodyWatcher<HTMLElement> {
-  initialOffset = {
-    top: 0,
-    bottom: 0,
-  };
   activeSlideIdx = 0;
   deltaY = 0;
   positon = 0;
@@ -15,24 +13,28 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
   dotsContainder: HTMLElement | null = null;
   containder: HTMLElement | null = null;
 
-  __scrollId: string | number | NodeJS.Timeout | undefined = 0;
-  __firstScrollId: string | number | NodeJS.Timeout | undefined = 0;
+  __scrollId: TimeoutId = 0;
+  __firstScrollId: TimeoutId = 0;
+  __idScrollMotion: TimeoutId = 0;
+  isScrollMotion = false;
   isScrolling = false;
-  isFist = true;
+  isFirstSlideSwitch = true;
+  isDisabledScroll = false;
 
   constructor(props: string) {
     super(props);
-    this.initialOffset = {
-      top: this.pageOffset.top + (this.rect?.top ?? 0),
-      bottom: this.pageOffset.top + (this.rect?.top ?? 0) + this.height,
-    };
   }
 
   public init() {
+    this.setDefaultPositionCanvas();
     this.createDots();
-    this.addListenerScrolling();
-    this.addListenerPosition();
+    this.watchScrolling();
+    this.watchPositionScroll();
+    this.watchWindowResize();
+    this.watchWindowOrientation();
+  }
 
+  private setDefaultPositionCanvas() {
     const description = document
       .querySelector("[ name-header-section-description]")
       ?.getBoundingClientRect();
@@ -43,12 +45,15 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
         String(this.pageOffset.top + description.top - description?.height + 40)
       );
     }
+  }
+
+  private watchWindowResize() {
     window.addEventListener("resize", () => {
       const description = document
         .querySelector("[ name-header-section-description]")
         ?.getBoundingClientRect();
       const phoneBlock = document.querySelector(".webgl");
-      if (description) {
+      if (description && !this.detectDevice) {
         phoneBlock?.setAttribute(
           "data-start-position",
           String(
@@ -57,15 +62,15 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
         );
       }
     });
+  }
+
+  private watchWindowOrientation() {
     window.addEventListener(
       "orientationchange",
       () => {
         setTimeout(() => {
           this.scrollBodyEnable();
-          this.initialOffset = {
-            top: this.pageOffset.top + (this.rect?.top ?? 0),
-            bottom: this.pageOffset.top + (this.rect?.top ?? 0) + this.height,
-          };
+          this.setInitialOffsetElement();
 
           const description = document
             .querySelector("[ name-header-section-description]")
@@ -85,29 +90,50 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
     );
   }
 
-  private addListenerScrolling() {
+  private watchScrolling() {
     if (this.isTouchDevice) {
-      let event: TouchEvent | null = null;
-      document.addEventListener(
-        "touchstart",
-        (e) => {
-          event = e;
-          this.isScrolling = false;
-        },
-        { passive: false }
-      );
-      document.addEventListener(
-        "touchmove",
-        (e) => {
-          if (event) {
-            this.deltaY = event.touches[0].pageY - e.touches[0].pageY;
-          }
-          this.handleSlideMobile();
-        },
-        { passive: false }
-      );
-      document.addEventListener("pointerleave", () => {
-        event = null;
+      const addTouchEvent = <T extends Document | HTMLElement | null>(
+        element: T,
+        fn?: () => void
+      ) => {
+        if (element === null) return;
+
+        let event: TouchEvent | null = null;
+        element.addEventListener(
+          "touchstart",
+          (e) => {
+            checkTouchEvent(e);
+            event = e;
+            this.isScrolling = false;
+          },
+          { passive: false }
+        );
+        element.addEventListener(
+          "touchmove",
+          (e) => {
+            checkTouchEvent(e);
+            if (event) {
+              this.deltaY = event.touches[0].pageY - e.touches[0].pageY;
+            }
+
+            if (fn) fn();
+          },
+          { passive: false }
+        );
+      };
+
+      document.addEventListener("scroll", () => {
+        this.isScrollMotion = true;
+        clearTimeout(this.__idScrollMotion);
+
+        this.__idScrollMotion = setTimeout(() => {
+          this.isScrollMotion = false;
+        }, 500);
+      });
+
+      addTouchEvent(document);
+      addTouchEvent(this.element, () => {
+        this.handleSlideMobile();
       });
     } else {
       let __idDelta: string | number | NodeJS.Timeout | undefined = 0;
@@ -115,6 +141,7 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
       window.addEventListener("wheel", (e) => {
         isFisrtWheel = true;
         this.deltaY = e.deltaY;
+
         clearTimeout(__idDelta);
         __idDelta = setTimeout(() => {
           this.deltaY = 0;
@@ -160,7 +187,6 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
   get isFirstSlideActive() {
     return this.activeSlideIdx === 0;
   }
-  isDisabledScroll = false;
 
   get isTouchDevice() {
     return "ontouchstart" in window;
@@ -169,7 +195,7 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
   private handleSlideDesktop() {
     if (
       this.isScrolling === false &&
-      this.isFist === false &&
+      this.isFirstSlideSwitch === false &&
       this.isTouchDevice === false
     ) {
       this.nextSlide();
@@ -179,7 +205,7 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
   private handleSlideMobile() {
     if (
       this.isScrolling === false &&
-      this.isFist === false &&
+      this.isFirstSlideSwitch === false &&
       this.isTouchDevice === true
     ) {
       this.isScrolling = true;
@@ -208,11 +234,13 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
       }
     }, 300);
   }
+
   public scrollBodyEnable(): void {
     if (this.isDisabledScroll === false) return;
     this.isDisabledScroll = false;
     clearTimeout(this.__firstScrollId);
-    this.isFist = true;
+    this.isFirstSlideSwitch = true;
+    this.deltaY = 0;
 
     super.scrollBodyEnable(this.deltaY);
   }
@@ -221,9 +249,8 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
     if (this.isDisabledScroll === true) return;
     super.scrollBodyDisable(this.initialOffset.top);
     this.isDisabledScroll = true;
-    this.deltaY = 0;
     this.__firstScrollId = setTimeout(() => {
-      this.isFist = false;
+      this.isFirstSlideSwitch = false;
     }, 1000);
     window.scrollTo({
       top: this.initialOffset.top,
@@ -231,28 +258,27 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
     });
   }
 
-  private addListenerPosition() {
-    if (this.deltaY !== 0) {
-      if (
-        this.deltaY < 0 &&
-        this.isTopLineOver &&
-        this.isBottomLineInside &&
-        !this.isFirstSlideActive
-      ) {
-        this.scrollBodyDisable();
-      } else if (
-        this.deltaY > 0 &&
-        this.isTopLineUnder &&
-        !this.isLastSlideActive
-      ) {
-        this.scrollBodyDisable();
-      }
+  private watchPositionScroll() {
+    console.log(this.deltaY, this.isScrollMotion);
+    if (
+      (this.deltaY < 0 || this.isScrollMotion) &&
+      this.isTopLineOver &&
+      this.isBottomLineInside &&
+      !this.isFirstSlideActive
+    ) {
+      this.scrollBodyDisable();
+    } else if (
+      (this.deltaY > 0 || this.isScrollMotion) &&
+      this.isTopLineUnder &&
+      !this.isLastSlideActive
+    ) {
+      this.scrollBodyDisable();
     }
 
     this.handleSlideDesktop();
 
     requestAnimationFrame(() => {
-      this.addListenerPosition();
+      this.watchPositionScroll();
     });
   }
 

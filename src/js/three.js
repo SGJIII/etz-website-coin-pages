@@ -157,7 +157,11 @@ gltfLoader.load(MODEL_NAME, (gltf) => {
     },
     false
   );
-  window.addEventListener("resize", setupInitialValue);
+  window.addEventListener("resize", () => {
+    if (!detectDevice()) {
+      setupInitialValue();
+    }
+  });
   window.scene = gltf.scene;
 
   phoneMesh = gltf.scene.children[0].children[0];
@@ -252,6 +256,7 @@ const sizes = {
 };
 
 window.addEventListener("resize", () => {
+  if (detectDevice) return;
   // Update sizes
   sizes.width = window.innerWidth;
   sizes.height = mainSection.getBoundingClientRect().height;
@@ -518,15 +523,22 @@ const tick = () => {
     if (statusProcess === "stop") {
       mouseWheelRatio = 1;
       phoneBlock.style.transform = `translate3d(0,${endPositionY}px,0)`;
+      phoneBlock.style.position = "fixed";
     } else {
       const deltaY =
         -startPositionY +
         (startPositionY / mouseWheelDistance) * scrollTopFrame +
         (endPositionY / mouseWheelDistance) * scrollTopFrame;
       phoneBlock.style.transform = `translate3d(0,${deltaY}px,0)`;
+      phoneBlock.style.position = "fixed";
     }
-
-    phoneBlock.style.position = "fixed";
+    if (scrollTopFrame > mouseWheelDistance) {
+      mouseWheelRatio = 1;
+      phoneBlock.style.transform = `translate3d(0,${
+        mouseWheelDistance + endPositionY
+      }px,0)`;
+      phoneBlock.style.position = "absolute";
+    }
   };
 
   const handleMotionForDesktop = () => {

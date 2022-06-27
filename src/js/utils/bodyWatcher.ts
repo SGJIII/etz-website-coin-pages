@@ -7,6 +7,10 @@ class BodyWatcher<T extends HTMLElement> extends DocumentElement<T> {
   public static bottom = 0;
   public static x = 0;
   public static y = 0;
+  public initialOffset = {
+    top: 0,
+    bottom: 0,
+  };
   phoneBlock: HTMLElement | null = null;
   constructor(props: string) {
     super(props);
@@ -18,6 +22,14 @@ class BodyWatcher<T extends HTMLElement> extends DocumentElement<T> {
       this.phoneBlock?.setAttribute("data-device", "desktop");
     }
     this.phoneBlock?.setAttribute("data-status", "start");
+    this.setInitialOffsetElement();
+  }
+
+  public setInitialOffsetElement() {
+    this.initialOffset = {
+      top: this.pageOffset.top + (this.rect?.top ?? 0),
+      bottom: this.pageOffset.top + (this.rect?.top ?? 0) + this.height,
+    };
   }
 
   public startWatchBody() {
@@ -57,6 +69,7 @@ class BodyWatcher<T extends HTMLElement> extends DocumentElement<T> {
   }
   public scrollBodyDisable(top: undefined | number = 0) {
     if (this.detectDevice) {
+      document.body.style.overflow = "hidden";
       document.body.style.position = "fixed";
       document.body.style.top = `${-top}px`;
       document.body.style.left = "0px";
@@ -68,6 +81,7 @@ class BodyWatcher<T extends HTMLElement> extends DocumentElement<T> {
 
   public scrollBodyEnable(deltaY: number) {
     if (this.detectDevice) {
+      document.body.style.overflow = "initial";
       const y = -parseInt(document.body.style.top, 10);
       const x = -parseInt(document.body.style.left, 10);
       document.body.style.position = "";
