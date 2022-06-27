@@ -130,7 +130,8 @@ gltfLoader.load(MODEL_NAME, (gltf) => {
   const setupInitialValue = () => {
     startPositionY = -phoneBlock.getAttribute("data-start-position");
 
-    if (window.innerWidth < 768 || detectDevice()) {
+    if (window.innerWidth < 1200 || detectDevice()) {
+      console.log(1);
       if (window.matchMedia("(orientation: landscape)").matches) {
         gltf.scene.scale.set(1.7, 1.7, 1.7);
         gltf.scene.position.set(3.2, 0, 0);
@@ -268,7 +269,7 @@ const setSizesScene = () => {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 };
 window.addEventListener("resize", () => {
-  if (detectDevice) return;
+  if (detectDevice()) return;
   setSizesScene();
 });
 
@@ -557,7 +558,7 @@ const tick = () => {
   };
 
   if (
-    (detectDevice() || window.innerWidth < 768) &&
+    (detectDevice() || window.innerWidth < 1200) &&
     !window.matchMedia("(orientation: landscape)").matches
   ) {
     if (window.innerWidth > 768) {

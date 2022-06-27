@@ -1,5 +1,4 @@
-@media screen and (max-width: 768px),
-  (max-device-height: 812px) and (orientation: landscape) {
+@media screen and (max-width: 768px), (max-width: 1200px) {
   .Footer {
     align-items: initial;
   }
@@ -76,7 +75,7 @@
   }
 }
 
-@media screen and (max-device-height: 812px) and (orientation: landscape) {
+@media screen and (max-width: 1200px) {
   .Footer_nav {
     padding: 40px 48px 32px 48px;
   }
