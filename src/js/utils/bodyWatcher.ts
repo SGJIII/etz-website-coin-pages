@@ -1,3 +1,4 @@
+import { AddEventOrientationChange } from "./addEventOrientationchange";
 import DocumentElement from "./documentElement";
 
 class BodyWatcher<T extends HTMLElement> extends DocumentElement<T> {
@@ -23,6 +24,9 @@ class BodyWatcher<T extends HTMLElement> extends DocumentElement<T> {
     }
     this.phoneBlock?.setAttribute("data-status", "start");
     this.setInitialOffsetElement();
+    AddEventOrientationChange(() => {
+      this.setInitialOffsetElement();
+    });
   }
 
   public setInitialOffsetElement() {

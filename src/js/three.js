@@ -556,7 +556,10 @@ const tick = () => {
     }
   };
 
-  if (detectDevice() || window.innerWidth < 768) {
+  if (
+    (detectDevice() || window.innerWidth < 768) &&
+    !window.matchMedia("(orientation: landscape)").matches
+  ) {
     if (window.innerWidth > 768) {
       const statusProcess = phoneBlock.getAttribute("data-status");
       if (statusProcess === "stop") {

@@ -1,3 +1,5 @@
+import { AddEventOrientationChange } from "./addEventOrientationchange";
+
 class DocumentElement<T extends Element> {
   element: T | null = null;
   height = 0;
@@ -18,6 +20,9 @@ class DocumentElement<T extends Element> {
       this.__IdcalculateRect = requestAnimationFrame(calculateRect);
     };
     calculateRect();
+    AddEventOrientationChange(() => {
+      calculateRect();
+    });
   }
 
   public querySelector<T extends HTMLElement>(selectors: string) {

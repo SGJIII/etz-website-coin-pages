@@ -57,7 +57,6 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
   private watchWindowOrientation() {
     AddEventOrientationChange(() => {
       this.scrollBodyEnable();
-      this.setInitialOffsetElement();
       this.setDefaultPositionCanvas();
     });
   }
