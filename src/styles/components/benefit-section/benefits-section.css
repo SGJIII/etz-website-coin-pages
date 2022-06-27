@@ -24,7 +24,7 @@
   display: inline-block;
   overflow: hidden;
 
-  width: 360px;
+  width: 630px;
   height: 413px;
   margin-top: calc(72px - 36px);
   margin-left: -20px;
@@ -52,7 +52,7 @@
   display: flex;
   flex-wrap: nowrap;
 
-  min-width: 350px;
+  min-width: 610px;
   min-height: 100px;
 
   /* -webkit-transition: -webkit-transform 1s cubic-bezier(.645, .045, .355, 1);
@@ -69,11 +69,15 @@
   display: flex;
   flex-direction: column;
 
-  min-width: 340px;
+  min-width: 610px;
   padding-right: 10px;
 }
 
 .BenefitsSection_text__gray {
+  color: var(--dark-30);
+}
+
+.BenefitsSection_text__secondary {
   color: var(--dark-30);
 }
 
