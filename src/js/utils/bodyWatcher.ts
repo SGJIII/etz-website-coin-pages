@@ -1,5 +1,5 @@
 import { AddEventOrientationChange } from "./addEventOrientationchange";
-import DocumentElement from "./documentElement";
+import DocumentElement from "./workspaceElement";
 
 class BodyWatcher<T extends HTMLElement> extends DocumentElement<T> {
   static __idWather: number | null = null;
@@ -12,6 +12,9 @@ class BodyWatcher<T extends HTMLElement> extends DocumentElement<T> {
     top: 0,
     bottom: 0,
   };
+
+  public static isScrollDisabled = false;
+
   phoneBlock: HTMLElement | null = null;
   constructor(props: string) {
     super(props);
@@ -79,6 +82,7 @@ class BodyWatcher<T extends HTMLElement> extends DocumentElement<T> {
       document.body.style.width = "100vw";
       this.phoneBlock?.setAttribute("data-status", "stop");
     }
+    BodyWatcher.isScrollDisabled = true;
   }
 
   public scrollBodyEnable() {
@@ -91,6 +95,7 @@ class BodyWatcher<T extends HTMLElement> extends DocumentElement<T> {
       this.phoneBlock?.setAttribute("data-status", "start");
       window.scroll(0, y);
     }
+    BodyWatcher.isScrollDisabled = false;
   }
 }
 

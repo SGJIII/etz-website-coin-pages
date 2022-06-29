@@ -2,6 +2,7 @@ import { easeInOutQuad } from "../utils/easeInOutQuad";
 import BodyWatcher from "../utils/bodyWatcher";
 import { checkTouchEvent } from "../utils/typeGuards";
 import { AddEventOrientationChange } from "../utils/addEventOrientationchange";
+import { addLinkClickCallback } from "../links/links";
 
 type TimeoutId = string | number | NodeJS.Timeout | undefined;
 class BenefitsSlider extends BodyWatcher<HTMLElement> {
@@ -43,13 +44,11 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
   }
 
   private setCustomBehavierLink() {
-    const links = document.querySelectorAll("[name-link]");
-    links.forEach((link) => {
-      link?.addEventListener("click", () => {
-        this.isScrollingOnLink = true;
-      });
+    addLinkClickCallback(() => {
+      this.isScrollingOnLink = true;
     });
   }
+
   private setDefaultPositionCanvas() {
     const description = document
       .querySelector("[ name-header-section-description]")
@@ -266,7 +265,8 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
   }
 
   private createDots() {
-    const slides = this.querySelectorAll("[ name-benefits-slide]");
+    const slides = this.querySelectorAll<HTMLElement>("[ name-benefits-slide]");
+
     this.dotsContainder = this.querySelector(
       "[name-benefits-slider-dots-container]"
     );

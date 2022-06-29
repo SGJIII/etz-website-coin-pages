@@ -82,6 +82,7 @@ textarea::-ms-input-placeholder {
 
 :root {
   --height-men: 106px;
+  --section-margin-top: 120px;
   --z-index-front-img: 50;
   --z-index-menu: 500;
 }

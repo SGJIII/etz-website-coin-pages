@@ -43,18 +43,3 @@ export function enableScrollEvent() {
   window.removeEventListener("touchmove", preventDefault);
   window.removeEventListener("keydown", preventDefaultForScrollKeys, false);
 }
-
-export function disableScroll() {
-  document.body.style.overflow = "hidden";
-}
-
-export function enableScroll() {
-  document.body.style.overflow = "";
-}
-
-export function toggleDisableScroll() {
-  if (document.body.style.getPropertyValue("overflow") === "hidden")
-    return enableScroll();
-
-  disableScroll();
-}

@@ -43,32 +43,11 @@ document.addEventListener(
   false
 );
 
-window.addEventListener("wheel", (e) => {
-  //@ts-ignore
-  uss.stopScrollingAll(window);
-});
-//@ts-ignore
-uss.setPageScroller(window);
-//@ts-ignore
-uss.hrefSetup();
-
-const links = document.querySelectorAll("[name-link]");
-links.forEach((link) => {
-  const href = link.getAttribute("href");
-  const element = href ? document.querySelector(href) : null;
-  const body = document.body.getBoundingClientRect();
-  const rect = element?.getBoundingClientRect();
-  const heightMenu = 106;
-  const sectionWithoutMargin = ["#etz-mobile", "#contact-us"];
-  link.addEventListener("click", function (e) {
-    e.preventDefault();
-    uss.stopScrollingAll(window);
-    const marginBottomMenu =
-      href && sectionWithoutMargin.includes(href) ? 0 : 64;
-    const position =
-      href === "#header"
-        ? 0
-        : Math.abs((rect?.top ?? 0) - body.top) - heightMenu - marginBottomMenu;
-    uss.scrollYTo(position, window);
-  });
-});
+// window.addEventListener("wheel", (e) => {
+//   //@ts-ignore
+//   uss.stopScrollingAll(window);
+// });
+// //@ts-ignore
+// uss.setPageScroller(window);
+// //@ts-ignore
+// uss.hrefSetup();

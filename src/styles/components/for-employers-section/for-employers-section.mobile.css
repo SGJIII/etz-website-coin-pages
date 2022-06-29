@@ -80,7 +80,7 @@
     bottom: initial;
     left: initial;
 
-    margin-top: 64px;
+    margin-top: var(--section-margin-top);
   }
   .ForEmployersSection_step__second {
     bottom: initial;

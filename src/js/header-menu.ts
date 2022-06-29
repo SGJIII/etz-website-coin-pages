@@ -1,12 +1,13 @@
+import { addLinkClickCallback } from "./links/links";
 import { AddEventOrientationChange } from "./utils/addEventOrientationchange";
+import BodyWatcher from "./utils/bodyWatcher";
 import { getCoords } from "./utils/getCoords";
 import { outerHeight } from "./utils/outerHeight";
 import { outerWidth } from "./utils/outerWidth";
-import { toggleDisableScroll } from "./utils/scroll";
 
 type Props = { className: string };
 
-export default class HeaderMenu {
+export default class HeaderMenu extends BodyWatcher<HTMLElement> {
   private target: HTMLElement | null = null;
   private className = "";
   private scrollPosition = 0;
@@ -17,6 +18,7 @@ export default class HeaderMenu {
   private scrollDistance = 0;
 
   constructor(props: Props) {
+    super(props.className);
     this.firstLoad = true;
     this.className = props.className;
     this.target = document.querySelector<HTMLElement>(props.className);
@@ -64,26 +66,13 @@ export default class HeaderMenu {
 
     burger?.addEventListener("click", () => {
       menu?.classList.toggle("HeaderMenu_menuContainer__open");
-      toggleDisableScroll();
+      this.scrollBodyDisable();
     });
-
-    const links = document.querySelectorAll<HTMLLinkElement>(
-      "[data-name=HeaderMenuLink]"
-    );
-    links.forEach((el) => {
-      el.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const href = el.getAttribute("href") ?? "";
-        const element = document.querySelector(href)?.getBoundingClientRect();
-        const rectBody = document.body.getBoundingClientRect();
-        window.scrollTo({
-          top: (element?.top ?? 0) - rectBody.top,
-        });
-        burger?.click();
-
-        return false;
-      });
+    addLinkClickCallback(() => {
+      if (HeaderMenu.isScrollDisabled) {
+        menu?.classList.toggle("HeaderMenu_menuContainer__open");
+        this.scrollBodyEnable();
+      }
     });
   }
 
