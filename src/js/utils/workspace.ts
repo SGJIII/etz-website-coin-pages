@@ -7,10 +7,10 @@ class Workspace {
   constructor() {
     Workspace.isMobileDevice = detectDevice();
     window.addEventListener("resize", () => {
-      Workspace.isMobileDevice = detectDevice();
+      Workspace.isMobileDevice = !detectDevice();
     });
     AddEventOrientationChange(() => {
-      Workspace.isMobileDevice = detectDevice();
+      Workspace.isMobileDevice = !detectDevice();
     });
   }
 

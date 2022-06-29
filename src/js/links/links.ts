@@ -5,11 +5,6 @@ class Links extends WorkspaceElementAll<HTMLLinkElement> {
   private static arrayCallback: (() => void | never)[] = [];
   init() {
     this.initClickEvent(this);
-
-    const margin = getComputedStyle(document.documentElement).getPropertyValue(
-      "--section-margin-top"
-    );
-    console.log(margin);
   }
 
   public static addLinkClickCallback(callback: Callback) {
@@ -24,28 +19,33 @@ class Links extends WorkspaceElementAll<HTMLLinkElement> {
     let position = Math.abs((rect?.top ?? 0) - body.top);
     const heightMenu = 106;
     let marginBottomMenu = 0;
-    switch (name) {
-      case "#contact-us":
-        marginBottomMenu = 0;
-        position = position - marginBottomMenu - heightMenu;
 
-        break;
-      case "#benefits":
-        marginBottomMenu = 0;
-        break;
-      case "#etz-mobile":
-        marginBottomMenu = 0;
-        position = position - marginBottomMenu - heightMenu;
-
-        position =
-          position -
-          (window.innerHeight / 2 - ((rect?.height ?? 0) + heightMenu) / 2);
-        break;
-      default:
-        marginBottomMenu = 64;
-        position = position - marginBottomMenu - heightMenu;
-        break;
+    if (window.innerWidth > 1200) {
+      switch (name) {
+        case "#contact-us":
+          marginBottomMenu = 0;
+          position = position - marginBottomMenu - heightMenu;
+          break;
+        case "#benefits":
+          marginBottomMenu = 0;
+          break;
+        case "#etz-mobile":
+          marginBottomMenu = 0;
+          position = position - marginBottomMenu - heightMenu;
+          position =
+            position -
+            (window.innerHeight / 2 - ((rect?.height ?? 0) + heightMenu) / 2);
+          break;
+        default:
+          marginBottomMenu = 64;
+          position = position - marginBottomMenu - heightMenu;
+          break;
+      }
+    } else if (window.innerWidth <= 1200) {
+      marginBottomMenu = 20;
+      position = position - marginBottomMenu;
     }
+
     return position;
   }
 

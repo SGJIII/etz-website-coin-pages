@@ -1,7 +1,7 @@
 @media screen and (max-width: 768px), (max-width: 1200px) {
   .EtzMobileSection {
     /* overflow: initial; */
-    justify-content: center;
+    justify-content: flex-start;
 
     box-sizing: border-box;
     height: initial;
