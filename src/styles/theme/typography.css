@@ -59,12 +59,14 @@ h2 {
 
   letter-spacing: 0.25px;
 }
+
 .__mobile-accent-2 {
   font-size: 32px;
   font-weight: 500;
   font-style: normal;
   line-height: 38px;
 }
+
 .__caption-2 {
   font-size: 12px;
   font-weight: 400;
@@ -72,4 +74,19 @@ h2 {
   line-height: 18px;
 
   letter-spacing: 0.25px;
+}
+
+@media screen and (max-width: 1200px) {
+  .__subtitle-1 {
+    font-size: 18px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 22px;
+  }
+  .__caption-2 {
+    font-size: 10px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 16px;
+  }
 }

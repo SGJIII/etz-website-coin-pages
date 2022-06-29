@@ -43,7 +43,6 @@
     justify-content: space-between;
 
     width: calc(100vw - 32px);
-    height: 156px;
     margin-top: 0;
     margin-left: 0;
     padding: 0 15px;
@@ -64,16 +63,13 @@
   .BenefitsSection_dots {
     display: flex;
     justify-content: center;
+
+    margin-top: 18px;
   }
   .BenefitsSection_dot {
     margin: 0 5px;
   }
   .BenefitsSection_slide span {
-    font-size: 18px;
-    font-weight: 400;
-    font-style: normal;
-    line-height: 22px;
-
     text-align: center;
   }
 }
