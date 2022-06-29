@@ -21,20 +21,21 @@ class Links extends WorkspaceElementAll<HTMLLinkElement> {
     let marginBottomMenu = 0;
 
     if (window.innerWidth > 1200) {
+      const deltaYCenter =
+        window.innerHeight / 2 - ((rect?.height ?? 0) + heightMenu) / 2;
       switch (name) {
         case "#contact-us":
           marginBottomMenu = 0;
           position = position - marginBottomMenu - heightMenu;
           break;
         case "#benefits":
-          marginBottomMenu = 0;
+          marginBottomMenu = -1;
+          position = position - marginBottomMenu;
           break;
         case "#etz-mobile":
           marginBottomMenu = 0;
           position = position - marginBottomMenu - heightMenu;
-          position =
-            position -
-            (window.innerHeight / 2 - ((rect?.height ?? 0) + heightMenu) / 2);
+          position = position - deltaYCenter;
           break;
         default:
           marginBottomMenu = 64;

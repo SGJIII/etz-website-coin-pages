@@ -525,7 +525,6 @@ const tick = () => {
 
     mouseWheelRatio = mouseWheelDeltaDistance / mouseWheelDistance;
   }
-
   const handleMotionForMobile = () => {
     const statusProcess = phoneBlock.getAttribute("data-status");
     if (statusProcess === "stop") {
@@ -552,7 +551,7 @@ const tick = () => {
 
   const handleMotionForDesktop = () => {
     if (
-      scrollTopFrame > mouseWheelDistance ||
+      scrollTopFrame >= mouseWheelDistance ||
       (statusProcess === "stop" && scrollTopFrame === 0)
     ) {
       launchAnimation();
