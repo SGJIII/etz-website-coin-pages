@@ -2,52 +2,52 @@ const mockData = [
   {
     name: "Bitcoin",
     tag: "BTC",
-    url: "crypto-currencies/btc_ic.png",
+    url: "support-crypto/btc_ic.svg",
   },
   {
     name: "Ethereum",
     tag: "ETH",
-    url: "crypto-currencies/eth_ic.png",
+    url: "support-crypto/eth_ic.svg",
   },
   // {
   //   name: "Binance Coin",
   //   tag: "BNB",
-  //   url: "crypto-currencies/bnb_ic.png",
+  //   url: "support-crypto/bnb_ic.svg",
   // },
   {
     name: "USD Coin",
     tag: "USDC",
-    url: "crypto-currencies/usdc_ic.png",
+    url: "support-crypto/usdc_ic.svg",
   },
   // {
   //   name: "Solana",
   //   tag: "SOL",
-  //   url: "crypto-currencies/sol_ic.png",
+  //   url: "support-crypto/sol_ic.svg",
   // },
   // {
   //   name: "Ripple",
   //   tag: "XRP",
-  //   url: "crypto-currencies/xrp_ic.png",
+  //   url: "support-crypto/xrp_ic.svg",
   // },
   // {
   //   name: "Terra",
   //   tag: "LUNA",
-  //   url: "crypto-currencies/luna_ic.png",
+  //   url: "support-crypto/luna_ic.svg",
   // },
   {
     name: "Cardano",
     tag: "ADA",
-    url: "crypto-currencies/ada_ic.png",
+    url: "support-crypto/ada_ic.svg",
   },
   {
     name: "Dogecoin",
     tag: "DOGE",
-    url: "crypto-currencies/doge_ic.png",
+    url: "support-crypto/doge_ic.svg",
   },
   {
     name: "Litecoin",
     tag: "LTC",
-    url: "crypto-currencies/ltc_ic.png",
+    url: "support-crypto/ltc_ic.svg",
   },
 ];
 

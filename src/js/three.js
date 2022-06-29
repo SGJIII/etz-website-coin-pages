@@ -500,7 +500,7 @@ function togglePhoneAssets(v) {
 const slider = document.querySelector("[name-benefits-section]");
 const launchAnimation = () => {
   mouseWheelRatio = 1;
-  slider.setAttribute("data-play", "1");
+  slider?.setAttribute("data-play", "1");
 };
 const tick = () => {
   controls.update();

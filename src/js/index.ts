@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import Accordion from "./accordion";
-import SupportedCrypto from "./supported-crypto/supported-crypto-search";
+// import SupportedCrypto from "./supported-crypto/supported-crypto-search";
 import ContactFrom from "./contact";
 import Notification from "./notification";
 
@@ -9,15 +9,15 @@ document.addEventListener(
   () => {
     new Notification();
     const accordion = new Accordion();
-    const supportedCrypto = new SupportedCrypto({
-      nameContainer: "[data-name=SupportedCryptoTable]",
-      nameSearch: "[data-name=SupportedCryptoSearchInput]",
-      namePagination: "[data-name=SupportedCryptoPagination]",
-    });
+    // const supportedCrypto = new SupportedCrypto({
+    //   nameContainer: "[data-name=SupportedCryptoTable]",
+    //   nameSearch: "[data-name=SupportedCryptoSearchInput]",
+    //   namePagination: "[data-name=SupportedCryptoPagination]",
+    // });
     const contactFrom = new ContactFrom();
 
     accordion.init();
-    supportedCrypto.init().render();
+    // supportedCrypto.init().render();
     contactFrom.init();
 
     const sec = document.querySelector<HTMLDivElement>(".EtzMobileSection");

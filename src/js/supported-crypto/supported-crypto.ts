@@ -60,8 +60,8 @@ class SupportedCrypto {
     numberCoin.appendChild(numberTextNode);
 
     const imgCoin = createElement("img");
-    imgCoin.className = "SupportedCryptoSection_imgCoin";
-    imgCoin.setAttribute("src", url);
+    imgCoin.className = "SupportedCryptoSection_imgCoin lazy";
+    imgCoin.setAttribute("data-src", url);
 
     const nameCoin = createElement("span");
     nameCoin.className = "SupportedCryptoSection_nameCoin";
