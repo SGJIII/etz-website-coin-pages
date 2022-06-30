@@ -48,9 +48,11 @@
   cursor: initial;
 }
 
-.Button__outlined:hover:enabled:not(.Button__loading) {
-  color: var(--primary);
-  background-color: var(--bright);
+@media (hover: hover) {
+  .Button__outlined:hover:enabled:not(.Button__loading) {
+    color: var(--primary);
+    background-color: var(--bright);
+  }
 }
 
 .Button__outlined:active:enabled:not(.Button__loading) {

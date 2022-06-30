@@ -25,7 +25,6 @@
   overflow: hidden;
 
   width: 630px;
-  height: 413px;
   margin-top: calc(72px - 36px);
   margin-left: -20px;
   padding: 0 20px;
@@ -86,13 +85,17 @@
   height: 32px;
   margin-bottom: 8px;
 }
-
+.BenefitsSection_dots {
+  height: 10px;
+  margin-top: 46px;
+  margin-bottom: 20px;
+}
 .BenefitsSection_dot {
   display: inline-block;
 
   width: 10px;
   height: 10px;
-  margin: 46px 10px 0 10px;
+  margin: 0 10px 0 10px;
 
   cursor: pointer;
   -webkit-transition: background-color 700ms cubic-bezier(0.45, 0, 0.55, 1);

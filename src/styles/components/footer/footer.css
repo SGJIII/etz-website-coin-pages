@@ -4,6 +4,8 @@
   flex-direction: column;
   flex-wrap: wrap;
 
+  margin-top: var(--section-margin-top);
+
   background-color: var(--primary-05);
 }
 

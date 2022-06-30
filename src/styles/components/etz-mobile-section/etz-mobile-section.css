@@ -1,9 +1,10 @@
 .EtzMobileSection {
   justify-content: center;
-  /* min-height: calc(100vh + var(--height-menu)); */
-  /* padding: 460px 0; */
 
   height: 878px;
+  /* min-height: calc(100vh + var(--height-menu)); */
+  /* padding: 460px 0; */
+  margin-top: var(--section-margin-top);
 
   --coin-position: 1px;
 }

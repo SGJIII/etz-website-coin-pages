@@ -1,6 +1,7 @@
 import { AddEventOrientationChange } from "./addEventOrientationchange";
+import Workspace from "./workspace";
 
-class DocumentElement<T extends Element> {
+class WorkspaceElement<T extends Element> extends Workspace {
   element: T | null = null;
   height = 0;
   width = 0;
@@ -8,6 +9,7 @@ class DocumentElement<T extends Element> {
   __IdcalculateRect = 0;
 
   constructor(name: string) {
+    super();
     this.element = document.querySelector<T>(name);
     cancelAnimationFrame(this.__IdcalculateRect);
     const calculateRect = () => {
@@ -24,21 +26,6 @@ class DocumentElement<T extends Element> {
       calculateRect();
     });
   }
-
-  public querySelector<T extends HTMLElement>(selectors: string) {
-    return document.querySelector<T>(selectors);
-  }
-
-  public querySelectorAll<T extends HTMLElement>(selectors: string) {
-    return document.querySelectorAll<T>(selectors);
-  }
-
-  public createElement<T extends keyof HTMLElementTagNameMap>(
-    tagName: T,
-    options?: ElementCreationOptions | undefined
-  ) {
-    return document.createElement(tagName, options);
-  }
 }
 
-export default DocumentElement;
+export default WorkspaceElement;

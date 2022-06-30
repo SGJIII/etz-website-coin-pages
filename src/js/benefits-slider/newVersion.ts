@@ -2,6 +2,7 @@ import { easeInOutQuad } from "../utils/easeInOutQuad";
 import BodyWatcher from "../utils/bodyWatcher";
 import { checkTouchEvent } from "../utils/typeGuards";
 import { AddEventOrientationChange } from "../utils/addEventOrientationchange";
+import { addLinkClickCallback } from "../links/links";
 
 type TimeoutId = string | number | NodeJS.Timeout | undefined;
 class BenefitsSlider extends BodyWatcher<HTMLElement> {
@@ -15,7 +16,7 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
   containder: HTMLElement | null = null;
   timeSlideWithoutPause = 2000;
   timeSlideWithPause = 5000;
-  timeSlide = 3000;
+  timeSlide = 2000;
   __scrollId: TimeoutId = 0;
   __firstScrollId: TimeoutId = 0;
   __idScrollMotion: TimeoutId = 0;
@@ -43,13 +44,11 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
   }
 
   private setCustomBehavierLink() {
-    const links = document.querySelectorAll("[name-link]");
-    links.forEach((link) => {
-      link?.addEventListener("click", () => {
-        this.isScrollingOnLink = true;
-      });
+    addLinkClickCallback(() => {
+      this.isScrollingOnLink = true;
     });
   }
+
   private setDefaultPositionCanvas() {
     const description = document
       .querySelector("[ name-header-section-description]")
@@ -109,7 +108,7 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
         );
       };
 
-      document.addEventListener("scroll", () => {
+      window.addEventListener("scroll", () => {
         this.isScrollMotion = true;
         clearTimeout(this.__idScrollMotion);
 
@@ -139,6 +138,15 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
             isFisrtWheel = false;
           }, 1000);
         }
+      });
+      window.addEventListener("scroll", () => {
+        this.isScrollMotion = true;
+        clearTimeout(this.__idScrollMotion);
+
+        this.__idScrollMotion = setTimeout(() => {
+          this.isScrollMotion = false;
+          this.isScrollingOnLink = false;
+        }, 500);
       });
     }
   }
@@ -250,8 +258,8 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
         this.isFirstSlideSwitch = true;
       }
     }
-
-    if (this.isLaunchNextSlide === false && this.isStartSlide) {
+    const isPlay = this.element?.getAttribute("data-play");
+    if (this.isLaunchNextSlide === false && (this.isStartSlide || isPlay)) {
       this.isLaunchNextSlide = true;
       clearTimeout(this.__idNextSlide);
       this.__idNextSlide = setTimeout(() => {
@@ -266,7 +274,8 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
   }
 
   private createDots() {
-    const slides = this.querySelectorAll("[ name-benefits-slide]");
+    const slides = this.querySelectorAll<HTMLElement>("[ name-benefits-slide]");
+
     this.dotsContainder = this.querySelector(
       "[name-benefits-slider-dots-container]"
     );
