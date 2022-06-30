@@ -7,10 +7,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <link rel="stylesheet" href="styles/index.css" media="screen" />
-    <link
-      rel="stylesheet"
-      href="styles/index.desktop.css"
-      media="screen and (min-width: 1200px)" />
+    <link rel="stylesheet" href="styles/index.desktop.css" />
     <link
       rel="stylesheet"
       href="styles/index.mobile.css"
@@ -19,12 +16,9 @@
     <script type="module">
       const config = require("../package.json");
       console.log("Build version: " + config.version);
-
-      window.lazyLoadOptions = {
-        threshold: 0,
-        elements_selector: "img",
-      };
     </script>
+    <script src="./js/services/universalsmoothscroll-min.js"></script>
+    <script src="./js/services/universalsmoothscroll-ease-functions-min.js"></script>
   </head>
   <body>
     <video
@@ -48,14 +42,8 @@
       src="./assets/Buying_Mobile-4.mp4"
       style="display: none"></video>
     <canvas class="webgl"></canvas>
-
     <include src="components/header-section/index.html"></include>
     <include src="components/benefits-section/index.html"></include>
-
-    <script type="module" src="js/links/links.ts" async></script>
-    <script type="module" src="js/header-menu.ts" async></script>
-    <script src="./js/three.js" type="module" async></script>
-
     <include src="components/for-employers-section/index.html"></include>
     <include src="components/etz-mobile-section/index.html"></include>
     <include src="components/supported-crypto-section/index.html"></include>
@@ -80,8 +68,10 @@
         setupSize();
       });
     </script>
+    <script type="module" src="js/links/links.ts" async></script>
+    <script type="module" src="js/header-menu.ts" async></script>
+    <script type="module" src="./js/three.js" async></script>
     <script type="module" src="js/benefits-slider/newVersion.ts" async></script>
     <script type="module" src="js/index.ts" async></script>
-    <script src="./js/services/lazyload.min.js"></script>
   </body>
 </html>
