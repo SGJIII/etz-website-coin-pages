@@ -143,3 +143,54 @@ img:not([src]) {
     visibility: hidden;
   }
 }
+
+.Loader {
+  position: absolute;
+  z-index: 1000;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  transition: opacity 400ms ease-in-out;
+
+  background: var(--gradient-main);
+}
+.Loader_leaves {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.Loader_logo {
+  position: absolute;
+  z-index: 1000;
+  z-index: 500;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 50%;
+
+  width: 25vw;
+
+  transform: translateX(-50%);
+}
+
+.Loader__disapoint {
+  opacity: 0;
+}
+
+.Loader_leaves__mobile {
+  display: none;
+}
+
+@media screen and (max-width: 1200px) {
+  .Loader_leaves__web {
+    display: none;
+  }
+
+  .Loader_leaves__mobile {
+    display: initial;
+
+    height: 100vh;
+  }
+}

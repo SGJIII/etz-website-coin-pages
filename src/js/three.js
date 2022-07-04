@@ -172,8 +172,6 @@ const startHandleMobileAnimation = () => {
       phoneMesh.material.map = videoTexture;
 
       // All meshes
-      console.log("All meshes", gltf.scene.children[0].children);
-
       scene.add(gltf.scene);
 
       buyBtnMesh = gltf.scene.children[0].children.find(
@@ -191,12 +189,6 @@ const startHandleMobileAnimation = () => {
       shadowMesh = gltf.scene.children[0].children.find(
         (c) => c.name === "shadow"
       );
-
-      const movieMaterial = new THREE.MeshStandardMaterial({
-        map: videoTexture,
-        side: THREE.FrontSide,
-        toneMapped: false,
-      });
 
       phoneMesh.material.metalness = 1.2;
       phoneMesh.material.roughness = 1;
@@ -238,21 +230,28 @@ const startHandleMobileAnimation = () => {
       );
 
       animationDuration = animIphoneRotation.duration * 0.999;
-      const action = mixer.clipAction(animIphoneRotation).play();
+      mixer.clipAction(animIphoneRotation).play();
 
       mixer2 = new THREE.AnimationMixer(gltf.scene);
-      const action2 = mixer2.clipAction(animDropBuy).play();
+      mixer2.clipAction(animDropBuy).play();
 
       mixer3 = new THREE.AnimationMixer(gltf.scene);
-      const action3 = mixer3.clipAction(animDropSell).play();
+      mixer3.clipAction(animDropSell).play();
 
       mixer4 = new THREE.AnimationMixer(gltf.scene);
-      const action4 = mixer4.clipAction(animDropTransactions).play();
+      mixer4.clipAction(animDropTransactions).play();
 
       mixer5 = new THREE.AnimationMixer(gltf.scene);
-      const action5 = mixer5.clipAction(animDropAssets).play();
+      mixer5.clipAction(animDropAssets).play();
 
       updateAllMaterials();
+
+      const loader = document.querySelector("[name-loader]");
+      document.body.style.overflow = "";
+      loader.classList.add("Loader__disapoint");
+      setTimeout(() => {
+        loader.style.display = "none";
+      }, 400);
     });
 
     /**
@@ -261,11 +260,6 @@ const startHandleMobileAnimation = () => {
 
     const directionalLight = new THREE.DirectionalLight("#ffffff", 1.558);
     directionalLight.position.set(-3.11, 1.56, 5);
-    // directionalLight.shadow.camera.far = 15;
-    // directionalLight.castShadow = true;
-    // directionalLight.shadow.mapSize.set(1024, 1024);
-    // directionalLight.shadow.normalBias = 0.05;
-    // directionalLight.shadow.radius = 10;
 
     scene.add(directionalLight);
     const mainSection = document.querySelector(FIRST_SECTION_CLASS);
@@ -531,7 +525,6 @@ const startHandleMobileAnimation = () => {
         document.body.scrollTop || document.documentElement.scrollTop;
 
       const elapsedTime = clock.getElapsedTime();
-      const deltaTime = elapsedTime - previousTime;
       previousTime = elapsedTime;
 
       const mouseWheelDistance = getElementOffsetTop(secondSection);
