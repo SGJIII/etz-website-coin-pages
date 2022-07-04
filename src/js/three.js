@@ -134,7 +134,7 @@ const startHandleMobileAnimation = () => {
       const setupInitialValue = () => {
         startPositionY = -phoneBlock.getAttribute("data-start-position");
 
-        if (window.innerWidth < 1200 || detectDevice()) {
+        if (window.innerWidth <= 1200 || detectDevice()) {
           if (window.matchMedia("(orientation: landscape)").matches) {
             gltf.scene.scale.set(1.7, 1.7, 1.7);
             gltf.scene.position.set(3.2, 0, 0);
@@ -579,7 +579,7 @@ const startHandleMobileAnimation = () => {
       };
 
       if (
-        (detectDevice() || window.innerWidth < 1200 || screen.width < 900) &&
+        (detectDevice() || window.innerWidth <= 1200 || screen.width < 900) &&
         !window.matchMedia("(orientation: landscape)").matches
       ) {
         if (window.innerWidth > 768) {

@@ -50,7 +50,7 @@ export default class HeaderMenu extends BodyWatcher<HTMLElement> {
     });
     window.addEventListener("resize", () => {
       if (
-        window.innerWidth < 1200 ||
+        window.innerWidth <= 1200 ||
         (window.innerWidth < 1000 &&
           window.matchMedia("(orientation: landscape)").matches)
       ) {
@@ -78,7 +78,7 @@ export default class HeaderMenu extends BodyWatcher<HTMLElement> {
 
   private handlePositionStickyMenu() {
     if (
-      window.innerWidth < 1200 ||
+      window.innerWidth <= 1200 ||
       (window.innerWidth < 1000 &&
         window.matchMedia("(orientation: landscape)").matches) ||
       screen.width < 900
