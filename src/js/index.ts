@@ -36,12 +36,3 @@ window?.addEventListener("scroll", () => {
   }
   requestAnimationFrame(animation_loop);
 });
-
-window.addEventListener("wheel", (e) => {
-  //@ts-ignore
-  uss.stopScrollingAll(window);
-});
-// //@ts-ignore
-uss.setPageScroller(window);
-// //@ts-ignore
-uss.hrefSetup();
