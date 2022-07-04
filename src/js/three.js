@@ -53,6 +53,8 @@ class MobileModel extends BodyWatcher {
   isLoadedVideoGraph = false;
   isLoadedVideoFlow = false;
 
+  prevStatus = "start";
+
   constructor(props) {
     super(props);
     this.gltfLoader = new GLTFLoader();
@@ -77,6 +79,11 @@ class MobileModel extends BodyWatcher {
   }
 
   checkLoader() {
+    console.log(
+      this.isLoadedModel,
+      this.isLoadedVideoFlow,
+      this.isLoadedVideoGraph
+    );
     if (
       this.isLoadedModel &&
       this.isLoadedVideoFlow &&
@@ -216,7 +223,6 @@ class MobileModel extends BodyWatcher {
       this.updateAllMaterials();
 
       this.isLoadedModel = true;
-      this.checkLoader();
     });
   }
 
@@ -301,11 +307,6 @@ class MobileModel extends BodyWatcher {
 
     let video = document.getElementById("video");
 
-    if (video.readyState === 4) {
-      this.isLoadedVideoGraph = true;
-      this.checkLoader();
-    }
-
     window.video = video;
     this.videoTexture = new THREE.VideoTexture(video);
     this.videoTexture.rotation = Math.PI;
@@ -317,11 +318,6 @@ class MobileModel extends BodyWatcher {
     this.videoTexture.repeat.x = -1;
 
     let video2 = document.getElementById("video2");
-
-    if (video2.readyState === 4) {
-      this.isLoadedVideoFlow = true;
-      this.checkLoader();
-    }
 
     window.video2 = video2;
     this.videoTexture2 = new THREE.VideoTexture(video2);
@@ -442,6 +438,14 @@ class MobileModel extends BodyWatcher {
       slider?.setAttribute("data-play", "1");
     };
     const tick = () => {
+      if (video.readyState === 4) {
+        this.isLoadedVideoGraph = true;
+      }
+      if (video2.readyState === 4) {
+        this.isLoadedVideoFlow = true;
+      }
+
+      this.checkLoader();
       controls.update();
 
       let scrollTopFrame =
@@ -474,6 +478,10 @@ class MobileModel extends BodyWatcher {
           phoneBlock.style.position = "absolute";
         } else {
           if (statusProcess === "start") {
+            if (scrollTopFrame >= mouseWheelDistance - 50) {
+              launchAnimation();
+            }
+            this.prevStatus = statusProcess;
             const deltaY =
               this.startPositionY +
               ((this.endPositionY - this.startPositionY) / mouseWheelDistance) *
@@ -482,6 +490,7 @@ class MobileModel extends BodyWatcher {
             phoneBlock.style.transform = `translate3d(0,${deltaY}px,0)`;
             phoneBlock.style.position = "fixed";
           } else if (statusProcess === "stop") {
+            this.prevStatus = statusProcess;
             launchAnimation();
             phoneBlock.style.transform = `translate3d(0,${this.endPositionY}px,0)`;
             phoneBlock.style.position = "fixed";

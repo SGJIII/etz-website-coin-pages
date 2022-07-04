@@ -94,7 +94,7 @@
   }
 }
 
-@media screen and (max-width: 768px), (orientation: landscape) {
+@media screen and (max-width: 1200px) {
   @keyframes pulse {
     from {
       transform: scale(0.65);
