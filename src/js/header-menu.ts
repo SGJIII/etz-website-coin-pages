@@ -66,12 +66,15 @@ export default class HeaderMenu extends BodyWatcher<HTMLElement> {
 
     burger?.addEventListener("click", () => {
       menu?.classList.toggle("HeaderMenu_menuContainer__open");
-      this.scrollBodyDisable();
+      if (menu?.classList.contains("HeaderMenu_menuContainer__open")) {
+        this.scrollBodyDisable();
+      } else {
+        this.scrollBodyEnable();
+      }
     });
     addLinkClickCallback(() => {
       if (HeaderMenu.isScrollDisabled) {
-        menu?.classList.toggle("HeaderMenu_menuContainer__open");
-        this.scrollBodyEnable();
+        burger?.click();
       }
     });
   }

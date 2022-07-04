@@ -1,0 +1,72 @@
+@media screen and (max-width: 768px), (max-width: 1200px) {
+  .SupportedCryptoSection {
+    min-height: 500px;
+    margin-top: 40px;
+    padding: 0;
+  }
+
+  .SupportedCryptoSection_title {
+    font-size: 14px;
+    font-weight: 500;
+    font-style: normal;
+    line-height: 18px;
+
+    letter-spacing: 0.1em;
+  }
+
+  .SupportedCryptoSection_subtitle {
+    font-size: 22px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 26px;
+  }
+
+  .SupportedCryptoSection_container {
+    /* padding: 0 16px; */
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    width: calc(100vw - 32px);
+
+    place-self: initial;
+  }
+
+  .SupportedCryptoSection_table {
+    display: flex;
+    flex-flow: column wrap;
+
+    width: calc(100vw - 32px);
+    height: initial;
+    margin-top: 40px;
+    padding: 23px 8px;
+
+    border-radius: 20px;
+    background: var(--primary-05);
+  }
+
+  .SupportedCryptoSection_item {
+    font-size: 16px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 22px;
+
+    margin: 8px 0;
+  }
+  .SupportedCryptoSection_numberCoin {
+    min-width: 16px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1200px) {
+  .SupportedCryptoSection_container {
+    padding: 48px;
+  }
+  .SupportedCryptoSection_table {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    width: 100%;
+  }
+}

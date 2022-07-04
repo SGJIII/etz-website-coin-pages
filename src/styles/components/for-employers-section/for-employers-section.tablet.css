@@ -1,10 +1,10 @@
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1200px) {
   .ForEmployersSection {
     overflow: initial;
     justify-content: center;
 
     height: initial;
-    min-height: 100vh;
+    height: 862px;
   }
 
   .ForEmployersSection_container {
@@ -108,5 +108,13 @@
     bottom: -32px;
 
     transform: scale(1, -1) rotate(285deg);
+  }
+
+  .ForEmployersSection_container {
+    padding: 48px;
+  }
+
+  .ForEmployersSection_step {
+    width: calc(100vw - 149px);
   }
 }

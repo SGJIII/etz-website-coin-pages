@@ -1,2 +1,11 @@
 @import url("./components/header-menu/header-menu.tablet.css");
 @import url("./components/header-section/header-section.tablet.css");
+@import url("./components/benefit-section/benefits-section.tablet.css");
+@import url("./components/for-employers-section/for-employers-section.tablet.css");
+
+@import url("./components/etz-mobile-section/etz-mobile-section.tablet.css");
+@import url("./components/supported-crypto-section/supported-crypto-section.tablet.css");
+@import url("./components/faq-section/faq-section.tablet.css");
+@import url("./components/contact-us-section/contact-us-section.tablet.css");
+@import url("./components/footer/footer.tablet.css");
+@import url("./components/notification/notification.tablet.css");
