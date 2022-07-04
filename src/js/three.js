@@ -79,11 +79,6 @@ class MobileModel extends BodyWatcher {
   }
 
   checkLoader() {
-    console.log(
-      this.isLoadedModel,
-      this.isLoadedVideoFlow,
-      this.isLoadedVideoGraph
-    );
     if (
       this.isLoadedModel &&
       this.isLoadedVideoFlow &&

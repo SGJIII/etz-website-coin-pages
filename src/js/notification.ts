@@ -88,7 +88,7 @@ class Notification {
     setTimeout(() => {
       messageContainer.classList.add("Notification_messageContainer__received");
       setTimeout(() => {
-        this.dismissMessage(id);
+        Notification.dismissMessage(id);
       }, 5000);
     }, 10);
   }

@@ -155,15 +155,19 @@
   content: "";
   cursor: pointer;
 
-  border-color: 1px solid transparent;
+  border: 1px solid transparent;
   border-radius: 6px;
   background-color: var(--bright);
   background-repeat: no-repeat;
   background-position: center center;
 }
 
-.ContactUsSection_checkbox__error + label::before {
+.ContactUsSection_checkbox.ContactUsSection_checkbox__error + label::before {
   border-color: var(--negative);
+}
+
+.ContactUsSection_checkbox:focus-visible + label::before {
+  border: 1px solid rgba(34, 109, 255, 0.2);
 }
 
 .ContactUsSection_checkbox:checked + label::before {

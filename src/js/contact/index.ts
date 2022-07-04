@@ -85,7 +85,6 @@ class ContactFrom {
       document
         .querySelector<HTMLInputElement>(".ContactUsSection_form")
         ?.addEventListener("keyup", (e) => {
-          e.preventDefault();
           if (e.key === "Enter" && !e.shiftKey) {
             this.buttonSubmit?.click();
           }
