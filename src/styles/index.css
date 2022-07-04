@@ -185,7 +185,7 @@ img:not([src]) {
   display: none;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 768px) {
   .Loader_leaves__web {
     display: none;
   }

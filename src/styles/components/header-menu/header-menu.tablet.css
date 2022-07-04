@@ -1,4 +1,4 @@
-@media screen and (max-width: 768px), (max-width: 1200px) {
+@media screen and (min-width: 768px) and (max-width: 1200px) {
   .HeaderMenu_burgerBlock {
     display: initial;
   }
@@ -18,8 +18,8 @@
 
     pointer-events: none;
     /* background-image: var(--pattern-svg);
-    background-position: right;
-    background-size: 100vh; */
+  background-position: right;
+  background-size: 100vh; */
 
     touch-action: none;
   }
@@ -172,5 +172,14 @@
     justify-content: center;
 
     margin: 40px 0;
+  }
+  .HeaderMenu_menuContainer__open .HeaderMenu_linksBlockMobile {
+    padding: 0 48px;
+  }
+  .HeaderMenu_menuContainer {
+    padding: 0 48px;
+  }
+  .HeaderMenu_linkMobile {
+    margin-bottom: 10px;
   }
 }
