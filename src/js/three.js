@@ -237,7 +237,7 @@ class MobileModel extends BodyWatcher {
         this.startPositionY = -offset - elemRect.height;
       }
     }
-    console.log(this.startPositionY);
+
     this.startPositionX = window.innerWidth / 2 - 300;
   }
 
@@ -300,14 +300,11 @@ class MobileModel extends BodyWatcher {
      */
 
     let video = document.getElementById("video");
-    video.addEventListener(
-      "loadeddata",
-      () => {
-        this.isLoadedVideoGraph = true;
-        this.checkLoader();
-      },
-      false
-    );
+
+    if (video.readyState === 4) {
+      this.isLoadedVideoGraph = true;
+      this.checkLoader();
+    }
 
     window.video = video;
     this.videoTexture = new THREE.VideoTexture(video);
@@ -320,14 +317,11 @@ class MobileModel extends BodyWatcher {
     this.videoTexture.repeat.x = -1;
 
     let video2 = document.getElementById("video2");
-    video.addEventListener(
-      "loadeddata",
-      () => {
-        this.isLoadedVideoFlow = true;
-        this.checkLoader();
-      },
-      false
-    );
+
+    if (video2.readyState === 4) {
+      this.isLoadedVideoFlow = true;
+      this.checkLoader();
+    }
 
     window.video2 = video2;
     this.videoTexture2 = new THREE.VideoTexture(video2);
@@ -472,7 +466,7 @@ class MobileModel extends BodyWatcher {
 
       const handleMotionForMobile = () => {
         const statusProcess = phoneBlock.getAttribute("data-status");
-        if (scrollTopFrame > mouseWheelDistance) {
+        if (scrollTopFrame >= mouseWheelDistance) {
           launchAnimation();
           phoneBlock.style.transform = `translate3d(0,${
             mouseWheelDistance + this.endPositionY
@@ -494,6 +488,7 @@ class MobileModel extends BodyWatcher {
           }
         }
       };
+
       const statusProcess = phoneBlock.getAttribute("data-status");
 
       const handleMotionForDesktop = () => {

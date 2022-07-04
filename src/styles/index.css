@@ -152,6 +152,10 @@ img:not([src]) {
   bottom: 0;
   left: 0;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   min-height: 100vh;
 
   transition: opacity 400ms ease-in-out;
@@ -163,6 +167,14 @@ img:not([src]) {
   position: absolute;
   top: 0;
   right: 0;
+}
+
+.Loader_leaves__svg {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  height: 100vh;
 }
 
 .Loader_logo {
@@ -186,5 +198,12 @@ img:not([src]) {
 @media screen and (max-width: 768px) {
   .Loader_leaves {
     transform: scale(3) !important;
+  }
+  .Loader_leaves__svg {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    height: 100vh;
   }
 }
