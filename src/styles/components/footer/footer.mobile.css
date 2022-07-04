@@ -66,6 +66,10 @@
     font-weight: 400;
     line-height: 18px;
 
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
     width: 100%;
     padding: 0 16px 40px 16px;
   }

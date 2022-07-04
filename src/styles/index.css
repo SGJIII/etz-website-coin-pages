@@ -152,6 +152,8 @@ img:not([src]) {
   bottom: 0;
   left: 0;
 
+  min-height: 100vh;
+
   transition: opacity 400ms ease-in-out;
 
   background: var(--gradient-main);

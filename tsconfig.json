@@ -20,6 +20,6 @@
     "allowSyntheticDefaultImports": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["*.ts"],
+  "include": ["./src/**/*.ts"],
   "exclude": ["node_modules", "**/*.config.js", "*.js", "src/assets"]
 }
