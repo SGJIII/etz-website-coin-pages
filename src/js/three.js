@@ -12,7 +12,16 @@ let __idTrick = 0;
 const FIRST_SECTION_CLASS = ".HeaderSection";
 const SECOND_SECTION_CLASS = ".BenefitsSection";
 const MODEL_NAME = "etz_8_1.glb";
+function getElementOffsetTop(element) {
+  let offsetTop = 0;
 
+  while (element && typeof element.offsetTop === "number") {
+    offsetTop += element.offsetTop;
+    element = element.parentNode;
+  }
+
+  return offsetTop;
+}
 class MobileModel extends BodyWatcher {
   gltfLoader = null;
   phoneMesh = null;
@@ -57,14 +66,14 @@ class MobileModel extends BodyWatcher {
 
     window.addEventListener("resize", () => {
       this.calculateStartPosition();
-      this.calculateEndPositionY();
+      this.calculateEndPosition();
     });
     AddEventOrientationChange(() => {
       this.calculateStartPosition();
-      this.calculateEndPositionY();
+      this.calculateEndPosition();
     });
     this.calculateStartPosition();
-    this.calculateEndPositionY();
+    this.calculateEndPosition();
   }
 
   checkLoader() {
@@ -212,26 +221,27 @@ class MobileModel extends BodyWatcher {
   }
 
   calculateStartPosition() {
-    const description = document
-      .querySelector("[ name-header-section-description]")
-      ?.getBoundingClientRect();
+    const description = document.querySelector(
+      "[ name-header-section-description]"
+    );
+    const bodyRect = document.body.getBoundingClientRect();
+    const elemRect = description.getBoundingClientRect();
+    const offset = elemRect.top - bodyRect.top;
+
     if (window.innerWidth > window.innerHeight) {
-      this.startPositionY =
-        this.pageOffset.top - description.top - description.height;
+      this.startPositionY = -offset - elemRect.height;
     } else {
       if (window.innerWidth <= 768) {
-        this.startPositionY =
-          this.pageOffset.top - description.top + window.innerHeight * 0.09;
+        this.startPositionY = offset - 40;
       } else {
-        this.startPositionY =
-          this.pageOffset.top - description.top - description.height;
+        this.startPositionY = -offset - elemRect.height;
       }
     }
-
+    console.log(this.startPositionY);
     this.startPositionX = window.innerWidth / 2 - 300;
   }
 
-  calculateEndPositionY() {
+  calculateEndPosition() {
     if (window.innerWidth > window.innerHeight) {
       this.endPositionY = 0;
       this.endPositionX = window.innerWidth - 450;
@@ -426,17 +436,6 @@ class MobileModel extends BodyWatcher {
     const clock = new THREE.Clock();
     let previousTime = 0;
 
-    function getElementOffsetTop(element) {
-      let offsetTop = 0;
-
-      while (element && typeof element.offsetTop === "number") {
-        offsetTop += element.offsetTop;
-        element = element.parentNode;
-      }
-
-      return offsetTop;
-    }
-
     let mouseWheelDeltaDistance = 0;
     let mouseWheelRatio = 0;
 
@@ -482,8 +481,8 @@ class MobileModel extends BodyWatcher {
         } else {
           if (statusProcess === "start") {
             const deltaY =
-              -this.startPositionY +
-              ((this.endPositionY + this.startPositionY) / mouseWheelDistance) *
+              this.startPositionY +
+              ((this.endPositionY - this.startPositionY) / mouseWheelDistance) *
                 scrollTopFrame;
 
             phoneBlock.style.transform = `translate3d(0,${deltaY}px,0)`;
