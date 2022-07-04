@@ -158,11 +158,13 @@ img:not([src]) {
 
   background: var(--gradient-main);
 }
+
 .Loader_leaves {
   position: absolute;
   top: 0;
   right: 0;
 }
+
 .Loader_logo {
   position: absolute;
   z-index: 1000;
@@ -181,18 +183,8 @@ img:not([src]) {
   opacity: 0;
 }
 
-.Loader_leaves__mobile {
-  display: none;
-}
-
 @media screen and (max-width: 768px) {
-  .Loader_leaves__web {
-    display: none;
-  }
-
-  .Loader_leaves__mobile {
-    display: initial;
-
-    height: 100vh;
+  .Loader_leaves {
+    transform: scale(3) !important;
   }
 }
