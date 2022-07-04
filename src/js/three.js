@@ -40,6 +40,10 @@ class MobileModel extends BodyWatcher {
   endPositionY = 0;
   endPositionX = 0;
 
+  isLoadedModel = false;
+  isLoadedVideoGraph = false;
+  isLoadedVideoFlow = false;
+
   constructor(props) {
     super(props);
     this.gltfLoader = new GLTFLoader();
@@ -61,6 +65,21 @@ class MobileModel extends BodyWatcher {
     });
     this.calculateStartPosition();
     this.calculateEndPositionY();
+  }
+
+  checkLoader() {
+    if (
+      this.isLoadedModel &&
+      this.isLoadedVideoFlow &&
+      this.isLoadedVideoGraph
+    ) {
+      const loader = document.querySelector("[name-loader]");
+      document.body.style.overflow = "";
+      loader.classList.add("Loader__disapoint");
+      setTimeout(() => {
+        loader.style.display = "none";
+      }, 400);
+    }
   }
 
   setupInitialValue(gltf) {
@@ -187,12 +206,8 @@ class MobileModel extends BodyWatcher {
 
       this.updateAllMaterials();
 
-      const loader = document.querySelector("[name-loader]");
-      document.body.style.overflow = "";
-      loader.classList.add("Loader__disapoint");
-      setTimeout(() => {
-        loader.style.display = "none";
-      }, 400);
+      this.isLoadedModel = true;
+      this.checkLoader();
     });
   }
 
@@ -275,6 +290,15 @@ class MobileModel extends BodyWatcher {
      */
 
     let video = document.getElementById("video");
+    video.addEventListener(
+      "loadeddata",
+      () => {
+        this.isLoadedVideoGraph = true;
+        this.checkLoader();
+      },
+      false
+    );
+
     window.video = video;
     this.videoTexture = new THREE.VideoTexture(video);
     this.videoTexture.rotation = Math.PI;
@@ -286,6 +310,15 @@ class MobileModel extends BodyWatcher {
     this.videoTexture.repeat.x = -1;
 
     let video2 = document.getElementById("video2");
+    video.addEventListener(
+      "loadeddata",
+      () => {
+        this.isLoadedVideoFlow = true;
+        this.checkLoader();
+      },
+      false
+    );
+
     window.video2 = video2;
     this.videoTexture2 = new THREE.VideoTexture(video2);
     this.videoTexture2.rotation = Math.PI;
