@@ -1,4 +1,4 @@
-@media screen and (max-width: 768px), (max-width: 1200px) {
+@media screen and (min-width: 768px) and (max-width: 1200px) {
   .ContactUsSection {
     min-height: 740px;
     margin-top: 0;
@@ -15,7 +15,7 @@
   .ContactUsSection_card {
     width: 100%;
     height: initial;
-    padding: 48px 16px;
+    padding: 48px 32px;
   }
   .ContactUsSection_peopleImgBlock {
     display: none;
@@ -24,17 +24,18 @@
     width: 100%;
   }
   .ContactUsSection_input__left {
-    margin-right: 0;
+    margin-right: 8px;
   }
 
   .ContactUsSection_input__right {
     margin-left: 0;
   }
   .ContactUsSection_input__half {
-    flex-basis: initial;
-    flex-grow: initial;
+    flex-basis: 265px;
+    flex-grow: 0;
 
-    min-width: initial;
+    min-width: calc(50% - 4px);
+    margin-bottom: 16px;
   }
   .ContactUsSection_formBlock {
     flex-basis: initial;
@@ -50,7 +51,7 @@
 
     margin-bottom: 28px;
 
-    text-align: center;
+    text-align: left;
   }
   .ContactUsSection_subtitle {
     font-size: 18px;
@@ -58,19 +59,22 @@
     font-style: normal;
     line-height: 22px;
 
-    text-align: center;
+    text-align: left;
   }
   .ContactUsSection_textarea {
     width: 100%;
     height: 90px;
   }
   .ContactUsSection_formFooter {
-    flex-direction: column;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    justify-content: space-between;
+
+    margin-top: 32px;
   }
   .ContactUsSection_formButtonBlock {
     align-self: center;
-
-    margin-top: 24px;
   }
 
   .ContactUsSection_submit {
@@ -84,9 +88,7 @@
     font-style: normal;
     line-height: 24px;
   }
-}
 
-@media screen and (min-width: 768px) and (max-width: 1200px) {
   .ContactUsSection_container {
     width: 100%;
     padding: 48px;

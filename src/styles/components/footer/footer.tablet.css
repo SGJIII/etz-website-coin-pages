@@ -1,4 +1,4 @@
-@media screen and (max-width: 768px), (max-width: 1200px) {
+@media screen and (min-width: 768px) and (max-width: 1200px) {
   .Footer {
     align-items: initial;
   }
@@ -40,7 +40,6 @@
 
     float: left;
 
-    width: 50%;
     margin: 0 0 16px 0;
   }
   .Footer_privacy {
@@ -50,8 +49,6 @@
     line-height: 18px;
 
     display: flex;
-    flex-direction: column-reverse;
-    justify-content: flex-start;
 
     width: initial;
     margin: 32px 16px 19px;
@@ -59,7 +56,7 @@
     color: var(--dark-50);
   }
   .Footer_copyright {
-    margin: 24px 0;
+    margin: 0;
   }
   .Footer_descriptionBlock {
     font-size: 12px;
@@ -77,9 +74,7 @@
   .Footer_checkbox {
     width: 60px;
   }
-}
 
-@media screen and (min-width: 768px) and (max-width: 1200px) {
   .Footer_nav {
     padding: 40px 48px 32px 48px;
   }
@@ -89,5 +84,9 @@
   }
   .Footer_descriptionBlock {
     padding: 0 48px 40px 48px;
+  }
+  .Footer_links {
+    display: flex;
+    justify-content: space-between;
   }
 }

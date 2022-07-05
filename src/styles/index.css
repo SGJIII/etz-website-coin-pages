@@ -18,6 +18,7 @@ body {
 
   -webkit-overflow-scrolling: touch;
   scroll-snap-type: y mandatory;
+  -webkit-text-size-adjust: 100%;
 }
 html {
   padding: env(safe-area-inset);

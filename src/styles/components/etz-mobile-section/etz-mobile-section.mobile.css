@@ -15,6 +15,7 @@
 
     width: 100%;
     height: initial;
+    padding-top: 50px;
 
     place-self: initial;
   }
@@ -103,5 +104,13 @@
   .EtzMobileSection_usdc {
     bottom: calc(68px - var(--coin-position));
     left: 125px;
+  }
+
+  .EtzMobileSection_pattern {
+    top: 0;
+    right: 0;
+    left: initial;
+
+    transform: initial;
   }
 }
