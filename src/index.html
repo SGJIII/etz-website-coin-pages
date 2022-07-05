@@ -15,7 +15,6 @@
     <script type="module">
       const config = require("../package.json");
       console.group("App info:");
-      console.log(process.env.BIULD_STATUS);
       if (process.env.BIULD_STATUS === "DEPLOY") {
         console.log("Build version: " + config.version);
       } else {
