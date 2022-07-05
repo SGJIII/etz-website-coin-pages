@@ -60,6 +60,7 @@ develop:build:
   when: manual
   variables:
     API_URL: $API_URL_DEV
+    BIULD_STATUS: DEPLOY
   only:
     - develop
 
@@ -79,6 +80,7 @@ production:build:
   when: manual
   variables:
     API_URL: $API_URL_PROD
+    BIULD_STATUS: DEPLOY
   only:
     - develop
 

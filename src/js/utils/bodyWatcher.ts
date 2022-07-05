@@ -1,4 +1,9 @@
 import { AddEventOrientationChange } from "./addEventOrientationchange";
+import {
+  disableBodyScroll,
+  enableBodyScroll,
+  clearAllBodyScrollLocks,
+} from "./scroll";
 import DocumentElement from "./workspaceElement";
 
 class BodyWatcher<T extends HTMLElement> extends DocumentElement<T> {
@@ -74,27 +79,25 @@ class BodyWatcher<T extends HTMLElement> extends DocumentElement<T> {
     }
     return false;
   }
-  public scrollBodyDisable(top: undefined | number = 0) {
-    document.body.style.overflow = "hidden";
-    if (this.detectDevice) {
-      document.body.style.position = "fixed";
-      document.body.style.top = `${-top}px`;
-      document.body.style.width = "100vw";
-      this.phoneBlock?.setAttribute("data-status", "stop");
+  public scrollBodyDisable() {
+    const targetElement = document.querySelector<HTMLElement>(
+      "[name-benefits-section]"
+    );
+    if (targetElement) {
+      disableBodyScroll(targetElement);
     }
+    this.phoneBlock?.setAttribute("data-status", "stop");
     BodyWatcher.isScrollDisabled = true;
   }
 
   public scrollBodyEnable() {
-    document.body.style.overflow = "initial";
-    if (this.detectDevice) {
-      const y = -parseInt(document.body.style.top, 10);
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.width = "";
-      this.phoneBlock?.setAttribute("data-status", "start");
-      window.scroll(0, y);
+    const targetElement = document.querySelector<HTMLElement>(
+      "[name-benefits-section]"
+    );
+    if (targetElement) {
+      enableBodyScroll(targetElement);
     }
+    this.phoneBlock?.setAttribute("data-status", "start");
     BodyWatcher.isScrollDisabled = false;
   }
 }

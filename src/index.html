@@ -14,7 +14,13 @@
     <title>ETZ</title>
     <script type="module">
       const config = require("../package.json");
-      console.log("Build version: " + config.version);
+      console.group("App info:");
+      if (process.env.BUILD_STATUS === "DEPLOY") {
+        console.log("Build version: " + config.version);
+      } else {
+        console.log("Build version:" + " " + "NOT FOR TESTING");
+      }
+      console.groupEnd();
     </script>
   </head>
   <body style="overflow: hidden">

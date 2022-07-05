@@ -205,7 +205,7 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
 
   public scrollBodyDisable(): void {
     if (this.isDisabledScroll === true) return;
-    super.scrollBodyDisable(this.initialOffset.top);
+    super.scrollBodyDisable();
     this.isDisabledScroll = true;
     this.__firstScrollId = setTimeout(() => {
       this.scrollBodyEnable();

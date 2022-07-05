@@ -4,6 +4,8 @@
 
   box-sizing: content-box;
   height: 100vh;
+
+  -webkit-overflow-scrolling: touch;
 }
 
 .BenefitsSection_container {

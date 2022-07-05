@@ -15,7 +15,7 @@
   },
   "ignorePatterns": [
     "src/assets",
-    "src/js/*.js",
+    "src/js/**/*.js",
     "src/js/services/*.js"
   ],
   "env": {

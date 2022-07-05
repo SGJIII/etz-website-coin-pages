@@ -85,8 +85,11 @@ class MobileModel extends BodyWatcher {
       this.isLoadedVideoGraph
     ) {
       const loader = document.querySelector("[name-loader]");
+      const loaderStatus = loader.getAttribute("data-status");
+      if (loaderStatus === "hidden") return;
       document.body.style.overflow = "";
       loader.classList.add("Loader__disapoint");
+      loader.setAttribute("data-status", "hidden");
       setTimeout(() => {
         loader.style.display = "none";
       }, 400);
@@ -154,7 +157,6 @@ class MobileModel extends BodyWatcher {
       });
       this.phoneMesh = gltf.scene.children[0].children[0];
       this.phoneMesh.material.map = this.videoTexture;
-
       // All meshes
       this.scene.add(gltf.scene);
 
@@ -228,9 +230,8 @@ class MobileModel extends BodyWatcher {
     const bodyRect = document.body.getBoundingClientRect();
     const elemRect = description.getBoundingClientRect();
     const offset = elemRect.top - bodyRect.top;
-
     if (window.innerWidth > window.innerHeight) {
-      this.startPositionY = -offset - elemRect.height;
+      this.startPositionY = offset + elemRect.height;
     } else {
       if (window.innerWidth <= 768) {
         this.startPositionY = offset - 40;
@@ -251,11 +252,7 @@ class MobileModel extends BodyWatcher {
       } else if (window.innerWidth <= 768) {
         this.endPositionY = -50;
       } else {
-        this.endPositionY =
-          this.secondSection.getBoundingClientRect().top -
-          document.body.getBoundingClientRect().top -
-          window.innerHeight / 2 +
-          300;
+        this.endPositionY = window.innerHeight / 2 - 300;
         this.endPositionX = window.innerWidth - 450;
       }
     }
@@ -362,7 +359,8 @@ class MobileModel extends BodyWatcher {
       } else {
         // Update sizes
         sizes.width = window.innerWidth;
-        sizes.height = mainSection.getBoundingClientRect().height;
+        sizes.height = sizes.height =
+          mainSection.getBoundingClientRect().height;
       }
 
       // Update camera
@@ -511,17 +509,22 @@ class MobileModel extends BodyWatcher {
 
       const handleMotionForTablet = () => {
         const statusProcess = phoneBlock.getAttribute("data-status");
-        if (scrollTopFrame > mouseWheelDistance) {
+        if (scrollTopFrame >= mouseWheelDistance) {
           launchAnimation();
           phoneBlock.style.transform = `translate3d(${this.endPositionX}px,${
             mouseWheelDistance + this.endPositionY
           }px,0)`;
           phoneBlock.style.position = "absolute";
         } else {
-          if (statusProcess === "start") {
+          if (statusProcess === "stop") {
+            launchAnimation();
+            phoneBlock.style.transform = `translate3d(${this.endPositionX}px,${this.endPositionY}px,0)`;
+            phoneBlock.style.position = "fixed";
+          } else {
             const deltaY =
-              -this.startPositionY +
-              ((this.endPositionY + this.startPositionY) / mouseWheelDistance) *
+              Math.abs(this.startPositionY) +
+              ((this.endPositionY - Math.abs(this.startPositionY)) /
+                mouseWheelDistance) *
                 scrollTopFrame;
 
             const deltaX =
@@ -529,10 +532,6 @@ class MobileModel extends BodyWatcher {
               ((this.endPositionX - this.startPositionX) / mouseWheelDistance) *
                 scrollTopFrame;
             phoneBlock.style.transform = `translate3d(${deltaX}px,${deltaY}px,0)`;
-            phoneBlock.style.position = "fixed";
-          } else if (statusProcess === "stop") {
-            launchAnimation();
-            phoneBlock.style.transform = `translate3d(${this.endPositionX}px,${this.endPositionY}px,0)`;
             phoneBlock.style.position = "fixed";
           }
         }
