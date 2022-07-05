@@ -511,15 +511,13 @@ class MobileModel extends BodyWatcher {
         const statusProcess = phoneBlock.getAttribute("data-status");
         if (scrollTopFrame >= mouseWheelDistance) {
           launchAnimation();
-          phoneBlock.style.transform = `translate3d(${this.endPositionX}px,${
-            mouseWheelDistance + this.endPositionY
-          }px,0)`;
-          phoneBlock.style.position = "absolute";
+          const deltaY =
+            this.endPositionY - scrollTopFrame + mouseWheelDistance;
+          phoneBlock.style.transform = `translate3d(${this.endPositionX}px,${deltaY}px,0)`;
         } else {
           if (statusProcess === "stop") {
             launchAnimation();
             phoneBlock.style.transform = `translate3d(${this.endPositionX}px,${this.endPositionY}px,0)`;
-            phoneBlock.style.position = "fixed";
           } else {
             const deltaY =
               Math.abs(this.startPositionY) +
@@ -532,7 +530,6 @@ class MobileModel extends BodyWatcher {
               ((this.endPositionX - this.startPositionX) / mouseWheelDistance) *
                 scrollTopFrame;
             phoneBlock.style.transform = `translate3d(${deltaX}px,${deltaY}px,0)`;
-            phoneBlock.style.position = "fixed";
           }
         }
       };

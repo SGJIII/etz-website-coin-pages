@@ -1,4 +1,4 @@
-@media screen and (max-width: 768px), (max-width: 1200px) {
+@media screen and (max-width: 768px) {
   .Footer {
     align-items: initial;
   }
@@ -76,18 +76,5 @@
 
   .Footer_checkbox {
     width: 60px;
-  }
-}
-
-@media screen and (min-width: 768px) and (max-width: 1200px) {
-  .Footer_nav {
-    padding: 40px 48px 32px 48px;
-  }
-
-  .Footer_privacy {
-    margin: 32px 48px 19px;
-  }
-  .Footer_descriptionBlock {
-    padding: 0 48px 40px 48px;
   }
 }

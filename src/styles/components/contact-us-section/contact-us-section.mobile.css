@@ -1,4 +1,4 @@
-@media screen and (max-width: 768px), (max-width: 1200px) {
+@media screen and (max-width: 768px) {
   .ContactUsSection {
     min-height: calc(100vh + 32px);
     margin-top: 0;
@@ -83,14 +83,5 @@
     font-weight: 500;
     font-style: normal;
     line-height: 24px;
-  }
-}
-
-@media screen and (min-width: 768px) and (max-width: 1200px) {
-  .ContactUsSection_container {
-    width: 100%;
-    padding: 48px;
-
-    place-self: initial;
   }
 }

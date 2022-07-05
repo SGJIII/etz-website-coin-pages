@@ -3,7 +3,13 @@
   id="etz-mobile"
   data-name="Section">
   <div class="EtzMobileSection_block __container">
-    <img src="assets/pattern-2.svg" class="EtzMobileSection_pattern" />
+    <picture>
+      <source
+        media="(min-width: 768px) and (max-width: 1200px)"
+        srcset="assets/pattern_tablet.svg" />
+      <source media="(max-width: 768px)" srcset="assets/pattern_mobile.svg" />
+      <img src="assets/pattern-2.svg" class="EtzMobileSection_pattern" />
+    </picture>
     <section class="EtzMobileSection_description">
       <span class="EtzMobileSection_title __subtitle-2">ETZ Mobile</span>
       <h2 class="EtzMobileSection_subTitle">Investment Platform</h2>
