@@ -49,8 +49,21 @@
     box-shadow: 0 0 10px 25px var(--bright);
   }
   .BenefitsSection_slide {
-    min-width: 370px;
+    --position: 100vw;
+
+    width: calc(100vw - 62px);
+    min-width: initial;
     padding: 0;
+
+    -webkit-transform: translateX(var(--position));
+    -moz-transform: translateX(var(--position));
+    -ms-transform: translateX(var(--position));
+    -o-transform: translateX(var(--position));
+    transform: translateX(var(--position));
+  }
+
+  .BenefitsSection_slide__shown {
+    --position: 0;
   }
   .BenefitsSection_slideImg {
     width: 24px;

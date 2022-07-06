@@ -12,22 +12,22 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
   prevPosition = 0;
   widthSlides: number[] = [];
   dots: Array<HTMLElement> | null = [];
+  slides: NodeListOf<HTMLElement> | null = null;
   dotsContainder: HTMLElement | null = null;
   containder: HTMLElement | null = null;
-  timeSlideWithoutPause = 2000;
+  timeSlideWithoutPause = 3000;
   timeSlideWithPause = 5000;
-  timeSlide = 2000;
-  __scrollId: TimeoutId = 0;
   __firstScrollId: TimeoutId = 0;
   __idScrollMotion: TimeoutId = 0;
-  __idNextSlide: TimeoutId = 0;
-  isLaunchNextSlide = false;
+  __idSliderInterval: TimeoutId = 0;
   isScrollMotion = false;
   isScrolling = false;
   isFirstSlideSwitch = true;
   isDisabledScroll = false;
   isScrollingOnLink = false;
   isStartSlide = false;
+  isLaunchSlider = false;
+  activeSlide: HTMLElement | null = null;
 
   constructor(props: string) {
     super(props);
@@ -214,7 +214,6 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
       top: this.initialOffset.top,
       behavior: "smooth",
     });
-
     this.isStartSlide = true;
   }
 
@@ -259,22 +258,24 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
       }
     }
     const isPlay = this.element?.getAttribute("data-play");
-    if (this.isLaunchNextSlide === false && (this.isStartSlide || isPlay)) {
-      this.isLaunchNextSlide = true;
-      clearTimeout(this.__idNextSlide);
-      this.__idNextSlide = setTimeout(() => {
-        this.nextSlide();
-        this.isLaunchNextSlide = false;
-        this.timeSlide = this.timeSlideWithoutPause;
-      }, this.timeSlide);
+    if ((this.isStartSlide || isPlay) && !this.isLaunchSlider) {
+      this.launchSlider();
+      return;
     }
     requestAnimationFrame(() => {
       this.watchPositionScroll();
     });
   }
 
+  launchSlider() {
+    this.isLaunchSlider = true;
+    this.__idSliderInterval = setInterval(() => {
+      this.nextSlide();
+    }, this.timeSlideWithoutPause);
+  }
+
   private createDots() {
-    const slides = this.querySelectorAll<HTMLElement>("[ name-benefits-slide]");
+    this.slides = this.querySelectorAll<HTMLElement>("[ name-benefits-slide]");
 
     this.dotsContainder = this.querySelector(
       "[name-benefits-slider-dots-container]"
@@ -287,70 +288,77 @@ class BenefitsSlider extends BodyWatcher<HTMLElement> {
 
     AddEventOrientationChange(() => {
       this.widthSlides = [];
-      slides.forEach((slide) => {
+      this.slides?.forEach((slide) => {
         calculateWidthDots(slide);
       });
     });
-    slides.forEach((slide, idx) => {
+    this.slides.forEach((slide, idx) => {
       calculateWidthDots(slide);
       const dot = this.createElement("span");
       dot.setAttribute("data-status", idx === 0 ? "active" : "idle");
       dot.setAttribute("name-benefits-slider-dot", "");
       dot.className = "BenefitsSection_dot";
       dot.addEventListener("click", () => {
-        clearTimeout(this.__idNextSlide);
-        this.timeSlide = this.timeSlideWithPause;
-        this.isLaunchNextSlide = false;
         this.changeActiveSlide(idx);
+        clearTimeout(this.__idSliderInterval);
+        setTimeout(() => {
+          this.launchSlider();
+        }, this.timeSlideWithPause);
       });
       this.dotsContainder?.appendChild(dot);
       this.dots?.push(dot);
     });
-  }
 
-  private calcPosition(idx: number) {
-    let newPositon = 0;
-    let i = 1;
-    for (const width of this.widthSlides) {
-      if (i > idx) break;
-      newPositon += width;
-      i++;
-    }
-    this.positon = newPositon;
-    return newPositon;
+    this.activeSlide = this.slides[0];
   }
 
   changePosition(step: number, progress = 0) {
-    progress += step;
+    if (this.slides === null) return;
 
-    this.containder?.setAttribute(
+    const widthContainer = this.containder?.getBoundingClientRect()?.width ?? 0;
+    const widthSlide =
+      this.slides[this.activeSlideIdx]?.getBoundingClientRect()?.width ?? 0;
+    const widthActiveSlide =
+      this.activeSlide?.getBoundingClientRect()?.width ?? 0;
+
+    const positionSlide = widthContainer + widthSlide;
+    const positionActiveSlide = widthContainer + widthActiveSlide;
+
+    this.slides[this.activeSlideIdx]?.setAttribute(
+      "style",
+      `transform: translateX(${
+        positionSlide - positionSlide * easeInOutQuad(progress)
+      }px)`
+    );
+    this.activeSlide?.setAttribute(
       "style",
       `transform: translateX(${-(
-        this.prevPosition +
-        (this.positon - this.prevPosition) * easeInOutQuad(progress)
+        0 +
+        positionActiveSlide * easeInOutQuad(progress)
       )}px)`
     );
 
+    progress += step;
     if (progress < 1) {
       requestAnimationFrame(() => this.changePosition(step, progress));
       return;
     }
-    this.prevPosition = this.positon;
-    this.containder?.setAttribute(
+
+    this.slides[this.activeSlideIdx]?.setAttribute(
       "style",
       `transform: translateX(${-this.positon}px)`
     );
+    this.activeSlide = this.slides[this.activeSlideIdx];
   }
 
   changeActiveSlide(activeIdx: number) {
+    this.activeSlideIdx = activeIdx;
     const step = 1 / 42;
-    this.calcPosition(activeIdx);
     this.changePosition(step);
     const handleStatus = (el: HTMLElement, idx: number) => {
       el.setAttribute("data-status", idx === activeIdx ? "active" : "idle");
     };
     this.dots?.forEach(handleStatus);
-    this.activeSlideIdx = activeIdx;
   }
 }
 
