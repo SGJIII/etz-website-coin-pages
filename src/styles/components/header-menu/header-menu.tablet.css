@@ -36,6 +36,14 @@
     inset: 0;
   }
 
+  .HeaderMenu_menu {
+    display: none;
+  }
+
+  .HeaderMenu_menu__mobile {
+    display: initial;
+  }
+
   .HeaderMenu_menuContainer {
     display: flex;
     justify-content: space-between;

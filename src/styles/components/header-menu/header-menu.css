@@ -1,3 +1,6 @@
+.HeaderMenu_menu__mobile {
+  display: none;
+}
 .HeaderMenu_entryIconDark {
   display: none;
 }
