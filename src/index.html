@@ -14,12 +14,12 @@
     <title>ETZ</title>
     <script type="module">
       const config = require("../package.json");
+      window.version = config.version;
       console.group("App info:");
-      if (process.env.BIULD_STATUS === "DEPLOY") {
-        console.log("Build version: " + config.version);
-      } else {
-        console.log("Build version:" + " " + "NOT FOR TESTING");
+      if (process.env.BIULD_STATUS === undefined) {
+        window.version = "NOT FOR TESTING";
       }
+      console.log("Build version: " + window.version);
       console.groupEnd();
     </script>
   </head>
@@ -55,9 +55,19 @@
     <include src="components/faq-section/index.html"></include>
     <include src="components/contact-us-section/index.html"></include>
     <include src="components/footer/index.html"></include>
-
     <script type="module">
-      const setupSize = () => {
+      if (process.env.BIULD_STATUS !== "PRODUCTION") {
+        const label = document.createElement("span");
+        label.innerText = window.version;
+        label.style.position = "fixed";
+        label.style.top = "2px";
+        label.style.left = "2px";
+        label.style.fontSize = "8px";
+        label.style.lineHeight = "10px";
+        label.style.textTransform = "lowercase";
+        document.body.appendChild(label);
+      }
+      function setupSizePage() {
         const vw = Math.max(
           document.documentElement.clientWidth || 0,
           window.innerWidth || 0
@@ -69,14 +79,13 @@
         document.documentElement.style.setProperty("--vw", `${vw}`);
         document.documentElement.style.setProperty("--vh", `${vh}`);
         document.documentElement.style.setProperty("--vh-px", `${vh}px`);
-      };
-      setupSize();
-      window.addEventListener("resize", setupSize);
+      }
+      setupSizePage();
+      window.addEventListener("resize", setupSizePage);
     </script>
     <script type="module" src="js/links/links.ts" async></script>
     <script type="module" src="js/header-menu.ts" async></script>
     <script type="module" src="js/index.ts"></script>
-    <script type="module" src="js/three.js" async></script>
-    <!-- <script type="module" src="js/benefits-slider/newVersion.ts" async></script> -->
+    <script type="module" src="js/three.js"></script>
   </body>
 </html>

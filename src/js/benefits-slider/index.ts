@@ -4,16 +4,17 @@ import { AddEventOrientationChange } from "../utils/addEventOrientationchange";
 type TimeoutId = string | number | NodeJS.Timeout | undefined;
 class BenefitsSlider {
   static activeSlideIdx = 0;
-  positon = 0;
-  widthSlides: number[] = [];
-  static dots: Array<HTMLElement> | null = [];
-  slides: NodeListOf<HTMLElement> | null = null;
-  dotsContainder: HTMLElement | null = null;
-  containder: HTMLElement | null = null;
   static timeSlideWithoutPause = 3000;
   static timeSlideWithPause = 5000;
   static __idSliderInterval: TimeoutId = 0;
   static isLaunchSlider = false;
+  static dots: Array<HTMLElement> | null = [];
+
+  positon = 0;
+  widthSlides: number[] = [];
+  slides: NodeListOf<HTMLElement> | null = null;
+  dotsContainder: HTMLElement | null = null;
+  containder: HTMLElement | null = null;
   activeSlide: HTMLElement | null = null;
 
   public init() {

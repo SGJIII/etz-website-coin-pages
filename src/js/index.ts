@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import Accordion from "./accordion";
-import BenefitsSlider from "./benefits-slider/newVersion";
+import BenefitsSlider from "./benefits-slider";
 // import SupportedCrypto from "./supported-crypto/supported-crypto-search";
 import ContactFrom from "./contact";
 import Notification from "./notification";

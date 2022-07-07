@@ -8,7 +8,7 @@ import { AddEventOrientationChange } from "./utils/addEventOrientationchange";
 import { AddEventOrientationChange } from "./utils/addEventOrientationchange";
 import { getElementOffsetTop } from "./utils/getElementOffsetTop";
 import { disableBodyScroll, enableBodyScroll } from "./utils/scroll";
-import { launchSlider } from "./benefits-slider/newVersion";
+import { launchSlider } from "./benefits-slider";
 
 const FIRST_SECTION_CLASS = ".HeaderSection";
 const SECOND_SECTION_CLASS = ".BenefitsSection";
@@ -47,7 +47,7 @@ class MobileModel {
 
   prevStatus = "start";
 
-  constructor(props) {
+  constructor() {
     this.gltfLoader = new GLTFLoader();
     this.scene = new THREE.Scene();
     this.secondSection = document.querySelector(SECOND_SECTION_CLASS);
@@ -242,17 +242,27 @@ class MobileModel {
       }
     }
 
-    this.startPositionX = window.innerWidth / 2 - 300;
+    if (window.innerHeight <= 600) {
+      this.startPositionX = window.innerWidth / 2 - window.innerHeight / 2;
+    } else {
+      this.startPositionX = window.innerWidth / 2 - 300;
+    }
   }
 
   calculateEndPosition() {
     if (window.innerWidth > window.innerHeight) {
-      this.endPositionY = 0;
-      this.endPositionX = window.innerWidth - 450;
+      if (window.innerHeight <= 600) {
+        this.endPositionY = 0;
+        this.endPositionX = window.innerWidth - window.innerHeight;
+      } else {
+        this.endPositionY = 0;
+        this.endPositionX = window.innerWidth - 450;
+      }
     } else {
       if (window.innerWidth > 1200) {
       } else if (window.innerWidth <= 768) {
         this.endPositionY = -110;
+        this.endPositionX = window.innerWidth - 450;
       } else {
         this.endPositionY = window.innerHeight / 2 - 300;
         this.endPositionX = window.innerWidth - 450;
@@ -341,26 +351,33 @@ class MobileModel {
 
     if (window.innerWidth > 768 && window.innerWidth <= 1200) {
       // Update sizes
-      sizes.width = 600;
-      sizes.height =
-        window.innerWidth < window.innerHeight ? 600 : window.innerHeight;
+      if (window.innerHeight <= 600) {
+        sizes.width = window.innerHeight;
+        sizes.height = window.innerHeight;
+      } else {
+        sizes.width = 600;
+        sizes.height = 600;
+      }
     } else {
       // Update sizes
       sizes.width = window.innerWidth;
       sizes.height = mainSection.getBoundingClientRect().height;
     }
 
-    const setSizesScene = () => {
+    const setSizesScene = (name) => {
       if (window.innerWidth > 768 && window.innerWidth <= 1200) {
         // Update sizes
-        sizes.width = 600;
-        sizes.height =
-          window.innerWidth < window.innerHeight ? 600 : window.innerHeight;
+        if (window.innerHeight <= 600) {
+          sizes.width = window.innerHeight;
+          sizes.height = window.innerHeight;
+        } else {
+          sizes.width = 600;
+          sizes.height = 600;
+        }
       } else {
         // Update sizes
         sizes.width = window.innerWidth;
-        sizes.height = sizes.height =
-          mainSection.getBoundingClientRect().height;
+        sizes.height = mainSection.getBoundingClientRect().height;
       }
 
       // Update camera
@@ -373,10 +390,12 @@ class MobileModel {
     };
     window.addEventListener("resize", () => {
       if (detectDevice()) return;
-      setSizesScene();
+      setSizesScene("resize");
     });
 
-    AddEventOrientationChange(setSizesScene);
+    AddEventOrientationChange(() => {
+      setSizesScene("orientationchange");
+    });
 
     /**
      * Camera
@@ -427,20 +446,14 @@ class MobileModel {
      */
     const slider = document.querySelector("[name-benefits-section]");
     let isStartSlider = false;
-    let prevScrollTopFrame = null;
 
     let isLeave = false;
     const tick = () => {
       let scrollTopFrame =
         document.body.scrollTop || document.documentElement.scrollTop;
-      if (scrollTopFrame === prevScrollTopFrame && prevScrollTopFrame !== 0) {
-        window.requestAnimationFrame(tick.bind(this));
-        return;
-      }
-      prevScrollTopFrame = scrollTopFrame;
+
       const launchAnimation = () => {
         mouseWheelRatio = 1;
-        slider?.setAttribute("data-play", "1");
       };
       const elapsedTime = clock.getElapsedTime();
       previousTime = elapsedTime;
@@ -459,6 +472,7 @@ class MobileModel {
         mouseWheelRatio = mouseWheelDeltaDistance / mouseWheelDistance;
       }
 
+      // Slider behavior
       if (scrollTopFrame >= mouseWheelDistance) {
         if (isStartSlider === false) {
           isStartSlider = true;
@@ -490,7 +504,6 @@ class MobileModel {
           if (isLeave === true) return;
           isLeave = true;
           launchAnimation();
-
           phoneBlock.style.transform = `translate3d(0,${
             mouseWheelDistance + this.endPositionY
           }px,0)`;
@@ -510,12 +523,10 @@ class MobileModel {
           phoneBlock.style.position = "absolute";
           return;
         }
-
         const deltaY =
           this.startPositionY +
           ((this.endPositionY - this.startPositionY) / mouseWheelDistance) *
             scrollTopFrame;
-
         phoneBlock.style.transform = `translate3d(0,${deltaY}px,0)`;
         phoneBlock.style.position = "fixed";
         isLeave = false;
@@ -523,35 +534,35 @@ class MobileModel {
 
       const handleMotionForTablet = () => {
         if (scrollTopFrame >= mouseWheelDistance) {
-          if (isLeave === true) return;
-          isLeave = true;
           launchAnimation();
           const deltaY =
             this.endPositionY - scrollTopFrame + mouseWheelDistance;
           phoneBlock.style.transform = `translate3d(${this.endPositionX}px,${deltaY}px,0)`;
+          phoneBlock.style.position = "fixed";
+          const sum = mouseWheelDistance + this.endPositionY;
+          phoneBlock.style.transform = `translate3d(${this.endPositionX}px,${sum}px,0)`;
+          phoneBlock.style.position = "absolute";
           return;
         }
-
         if (scrollStatus === "stop") {
-          if (isLeave === true) return;
-          isLeave = true;
           launchAnimation();
-          phoneBlock.style.transform = `translate3d(${this.endPositionX}px,${this.endPositionY}px,0)`;
+          phoneBlock.style.transform = `translate3d(${this.endPositionX}px,${
+            mouseWheelDistance + this.endPositionY
+          }px,0)`;
+          phoneBlock.style.position = "absolute";
           return;
         }
-
         const deltaY =
           Math.abs(this.startPositionY) +
           ((this.endPositionY - Math.abs(this.startPositionY)) /
             mouseWheelDistance) *
             scrollTopFrame;
-
         const deltaX =
           this.startPositionX +
           ((this.endPositionX - this.startPositionX) / mouseWheelDistance) *
             scrollTopFrame;
         phoneBlock.style.transform = `translate3d(${deltaX}px,${deltaY}px,0)`;
-        isLeave = false;
+        phoneBlock.style.position = "fixed";
       };
 
       if (window.innerWidth > 1200) {
