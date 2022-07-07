@@ -5,24 +5,16 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { detectDevice } from "./utils/detectDevice";
 import { AddEventOrientationChange } from "./utils/addEventOrientationchange";
-import BodyWatcher from "./utils/bodyWatcher";
 import { AddEventOrientationChange } from "./utils/addEventOrientationchange";
-let __idTrick = 0;
+import { getElementOffsetTop } from "./utils/getElementOffsetTop";
+import { disableBodyScroll, enableBodyScroll } from "./utils/scroll";
+import { launchSlider } from "./benefits-slider";
 
 const FIRST_SECTION_CLASS = ".HeaderSection";
 const SECOND_SECTION_CLASS = ".BenefitsSection";
 const MODEL_NAME = "etz_8_1.glb";
-function getElementOffsetTop(element) {
-  let offsetTop = 0;
 
-  while (element && typeof element.offsetTop === "number") {
-    offsetTop += element.offsetTop;
-    element = element.parentNode;
-  }
-
-  return offsetTop;
-}
-class MobileModel extends BodyWatcher {
+class MobileModel {
   gltfLoader = null;
   phoneMesh = null;
   videoTexture = null;
@@ -55,8 +47,7 @@ class MobileModel extends BodyWatcher {
 
   prevStatus = "start";
 
-  constructor(props) {
-    super(props);
+  constructor() {
     this.gltfLoader = new GLTFLoader();
     this.scene = new THREE.Scene();
     this.secondSection = document.querySelector(SECOND_SECTION_CLASS);
@@ -79,6 +70,13 @@ class MobileModel extends BodyWatcher {
   }
 
   checkLoader() {
+    if (video.readyState === 4 && !this.isLoadedVideoGraph) {
+      this.isLoadedVideoGraph = true;
+    }
+    if (video2.readyState === 4 && !this.isLoadedVideoFlow) {
+      this.isLoadedVideoFlow = true;
+    }
+
     if (
       this.isLoadedModel &&
       this.isLoadedVideoFlow &&
@@ -93,7 +91,10 @@ class MobileModel extends BodyWatcher {
       setTimeout(() => {
         loader.style.display = "none";
       }, 400);
+      return;
     }
+
+    window.requestAnimationFrame(this.checkLoader.bind(this));
   }
 
   setupInitialValue(gltf) {
@@ -220,6 +221,7 @@ class MobileModel extends BodyWatcher {
       this.updateAllMaterials();
 
       this.isLoadedModel = true;
+      this.checkLoader();
     });
   }
 
@@ -240,17 +242,27 @@ class MobileModel extends BodyWatcher {
       }
     }
 
-    this.startPositionX = window.innerWidth / 2 - 300;
+    if (window.innerHeight <= 600) {
+      this.startPositionX = window.innerWidth / 2 - window.innerHeight / 2;
+    } else {
+      this.startPositionX = window.innerWidth / 2 - 300;
+    }
   }
 
   calculateEndPosition() {
     if (window.innerWidth > window.innerHeight) {
-      this.endPositionY = 0;
-      this.endPositionX = window.innerWidth - 450;
+      if (window.innerHeight <= 600) {
+        this.endPositionY = 0;
+        this.endPositionX = window.innerWidth - window.innerHeight;
+      } else {
+        this.endPositionY = 0;
+        this.endPositionX = window.innerWidth - 450;
+      }
     } else {
       if (window.innerWidth > 1200) {
       } else if (window.innerWidth <= 768) {
-        this.endPositionY = -50;
+        this.endPositionY = -110;
+        this.endPositionX = window.innerWidth - 450;
       } else {
         this.endPositionY = window.innerHeight / 2 - 300;
         this.endPositionX = window.innerWidth - 450;
@@ -285,8 +297,6 @@ class MobileModel extends BodyWatcher {
   }
 
   startHandleMobileAnimation() {
-    window.cancelAnimationFrame(__idTrick);
-
     // Debug
     this.debugObject.envMapIntensity = 0.6;
 
@@ -341,26 +351,33 @@ class MobileModel extends BodyWatcher {
 
     if (window.innerWidth > 768 && window.innerWidth <= 1200) {
       // Update sizes
-      sizes.width = 600;
-      sizes.height =
-        window.innerWidth < window.innerHeight ? 600 : window.innerHeight;
+      if (window.innerHeight <= 600) {
+        sizes.width = window.innerHeight;
+        sizes.height = window.innerHeight;
+      } else {
+        sizes.width = 600;
+        sizes.height = 600;
+      }
     } else {
       // Update sizes
       sizes.width = window.innerWidth;
       sizes.height = mainSection.getBoundingClientRect().height;
     }
 
-    const setSizesScene = () => {
+    const setSizesScene = (name) => {
       if (window.innerWidth > 768 && window.innerWidth <= 1200) {
         // Update sizes
-        sizes.width = 600;
-        sizes.height =
-          window.innerWidth < window.innerHeight ? 600 : window.innerHeight;
+        if (window.innerHeight <= 600) {
+          sizes.width = window.innerHeight;
+          sizes.height = window.innerHeight;
+        } else {
+          sizes.width = 600;
+          sizes.height = 600;
+        }
       } else {
         // Update sizes
         sizes.width = window.innerWidth;
-        sizes.height = sizes.height =
-          mainSection.getBoundingClientRect().height;
+        sizes.height = mainSection.getBoundingClientRect().height;
       }
 
       // Update camera
@@ -373,10 +390,12 @@ class MobileModel extends BodyWatcher {
     };
     window.addEventListener("resize", () => {
       if (detectDevice()) return;
-      setSizesScene();
+      setSizesScene("resize");
     });
 
-    AddEventOrientationChange(setSizesScene);
+    AddEventOrientationChange(() => {
+      setSizesScene("orientationchange");
+    });
 
     /**
      * Camera
@@ -426,24 +445,16 @@ class MobileModel extends BodyWatcher {
      * GUI
      */
     const slider = document.querySelector("[name-benefits-section]");
-    const launchAnimation = () => {
-      mouseWheelRatio = 1;
-      slider?.setAttribute("data-play", "1");
-    };
+    let isStartSlider = false;
+
+    let isLeave = false;
     const tick = () => {
-      if (video.readyState === 4) {
-        this.isLoadedVideoGraph = true;
-      }
-      if (video2.readyState === 4) {
-        this.isLoadedVideoFlow = true;
-      }
-
-      this.checkLoader();
-      controls.update();
-
       let scrollTopFrame =
         document.body.scrollTop || document.documentElement.scrollTop;
 
+      const launchAnimation = () => {
+        mouseWheelRatio = 1;
+      };
       const elapsedTime = clock.getElapsedTime();
       previousTime = elapsedTime;
 
@@ -461,77 +472,97 @@ class MobileModel extends BodyWatcher {
         mouseWheelRatio = mouseWheelDeltaDistance / mouseWheelDistance;
       }
 
-      const handleMotionForMobile = () => {
-        const statusProcess = phoneBlock.getAttribute("data-status");
+      // Slider behavior
+      if (scrollTopFrame >= mouseWheelDistance) {
+        if (isStartSlider === false) {
+          isStartSlider = true;
+          disableBodyScroll(slider);
+          phoneBlock.setAttribute("data-status", "stop");
+          setTimeout(() => {
+            enableBodyScroll(slider);
+            phoneBlock.setAttribute("data-status", "start");
+          }, 1000);
+          launchSlider();
+        }
+      }
+
+      const scrollStatus = phoneBlock.getAttribute("data-status");
+
+      const handleMotionForDesktop = () => {
         if (scrollTopFrame >= mouseWheelDistance) {
+          launchAnimation();
+          phoneBlock.style.transform = `translate3d(0,${mouseWheelDistance}px,0)`;
+          phoneBlock.style.position = "absolute";
+          return;
+        }
+        phoneBlock.style.transform = ``;
+        phoneBlock.style.position = "fixed";
+      };
+
+      const handleMotionForMobile = () => {
+        if (scrollTopFrame >= mouseWheelDistance) {
+          if (isLeave === true) return;
+          isLeave = true;
           launchAnimation();
           phoneBlock.style.transform = `translate3d(0,${
             mouseWheelDistance + this.endPositionY
           }px,0)`;
           phoneBlock.style.position = "absolute";
-        } else {
-          if (statusProcess === "start") {
-            if (scrollTopFrame >= mouseWheelDistance - 50) {
-              launchAnimation();
-            }
-            this.prevStatus = statusProcess;
-            const deltaY =
-              this.startPositionY +
-              ((this.endPositionY - this.startPositionY) / mouseWheelDistance) *
-                scrollTopFrame;
-
-            phoneBlock.style.transform = `translate3d(0,${deltaY}px,0)`;
-            phoneBlock.style.position = "fixed";
-          } else if (statusProcess === "stop") {
-            this.prevStatus = statusProcess;
-            launchAnimation();
-            phoneBlock.style.transform = `translate3d(0,${this.endPositionY}px,0)`;
-            phoneBlock.style.position = "fixed";
-          }
+          return;
         }
-      };
-
-      const statusProcess = phoneBlock.getAttribute("data-status");
-
-      const handleMotionForDesktop = () => {
-        if (
-          scrollTopFrame >= mouseWheelDistance ||
-          (statusProcess === "stop" && scrollTopFrame === 0)
-        ) {
+        if (scrollTopFrame >= mouseWheelDistance - 50) {
+          if (isLeave === true) return;
+          isLeave = true;
           launchAnimation();
-          phoneBlock.style.transform = `translate3d(0,${mouseWheelDistance}px,0)`;
-          phoneBlock.style.position = "absolute";
-        } else {
-          phoneBlock.style.transform = ``;
-          phoneBlock.style.position = "fixed";
         }
+        if (scrollStatus === "stop") {
+          launchAnimation();
+          phoneBlock.style.transform = `translate3d(0,${
+            mouseWheelDistance + this.endPositionY
+          }px,0)`;
+          phoneBlock.style.position = "absolute";
+          return;
+        }
+        const deltaY =
+          this.startPositionY +
+          ((this.endPositionY - this.startPositionY) / mouseWheelDistance) *
+            scrollTopFrame;
+        phoneBlock.style.transform = `translate3d(0,${deltaY}px,0)`;
+        phoneBlock.style.position = "fixed";
+        isLeave = false;
       };
 
       const handleMotionForTablet = () => {
-        const statusProcess = phoneBlock.getAttribute("data-status");
         if (scrollTopFrame >= mouseWheelDistance) {
           launchAnimation();
           const deltaY =
             this.endPositionY - scrollTopFrame + mouseWheelDistance;
           phoneBlock.style.transform = `translate3d(${this.endPositionX}px,${deltaY}px,0)`;
-        } else {
-          if (statusProcess === "stop") {
-            launchAnimation();
-            phoneBlock.style.transform = `translate3d(${this.endPositionX}px,${this.endPositionY}px,0)`;
-          } else {
-            const deltaY =
-              Math.abs(this.startPositionY) +
-              ((this.endPositionY - Math.abs(this.startPositionY)) /
-                mouseWheelDistance) *
-                scrollTopFrame;
-
-            const deltaX =
-              this.startPositionX +
-              ((this.endPositionX - this.startPositionX) / mouseWheelDistance) *
-                scrollTopFrame;
-            phoneBlock.style.transform = `translate3d(${deltaX}px,${deltaY}px,0)`;
-          }
+          phoneBlock.style.position = "fixed";
+          const sum = mouseWheelDistance + this.endPositionY;
+          phoneBlock.style.transform = `translate3d(${this.endPositionX}px,${sum}px,0)`;
+          phoneBlock.style.position = "absolute";
+          return;
         }
+        if (scrollStatus === "stop") {
+          launchAnimation();
+          phoneBlock.style.transform = `translate3d(${this.endPositionX}px,${
+            mouseWheelDistance + this.endPositionY
+          }px,0)`;
+          phoneBlock.style.position = "absolute";
+          return;
+        }
+        const deltaY =
+          Math.abs(this.startPositionY) +
+          ((this.endPositionY - Math.abs(this.startPositionY)) /
+            mouseWheelDistance) *
+            scrollTopFrame;
+        const deltaX =
+          this.startPositionX +
+          ((this.endPositionX - this.startPositionX) / mouseWheelDistance) *
+            scrollTopFrame;
+        phoneBlock.style.transform = `translate3d(${deltaX}px,${deltaY}px,0)`;
+        phoneBlock.style.position = "fixed";
       };
 
       if (window.innerWidth > 1200) {
@@ -597,9 +628,7 @@ class MobileModel extends BodyWatcher {
       renderer.render(this.scene, camera);
 
       // Call tick again on the next frame
-      __idTrick = window.requestAnimationFrame(() => {
-        tick();
-      });
+      window.requestAnimationFrame(tick.bind(this));
     };
     tick();
   }
@@ -609,6 +638,7 @@ const mobileModel = new MobileModel("[name-mobile-model]");
 try {
   mobileModel.init();
 } catch (error) {
+  console.log(error);
   setTimeout(() => {
     mobileModel.init();
   }, 100);

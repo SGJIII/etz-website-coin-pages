@@ -1,19 +1,26 @@
 @media screen and (max-width: 768px) {
   .BenefitsSection {
     position: relative;
+    top: 0;
+    bottom: 0;
 
-    box-sizing: content-box;
-    min-height: 100vh;
+    box-sizing: border-box;
+    height: 100%;
     margin-top: 96px;
-    padding: 16px;
-    padding-top: 64px;
+    padding: 0 16px;
   }
+
   .BenefitsSection_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
     width: calc(100vw - 32px);
     height: 100vh;
 
     place-self: initial;
   }
+
   .BenefitsSection_title {
     font-size: 14px;
     font-weight: 500;
@@ -23,21 +30,24 @@
     text-align: center;
     letter-spacing: 0.1em;
   }
+
   .BenefitsSection_container h2 {
     font-size: 22px;
     font-weight: 400;
     font-style: normal;
     line-height: 26px;
 
+    margin-top: 8px;
+    margin-bottom: 32px;
+
     text-align: center;
   }
+
   .BenefitsSection_slideContainer {
     min-width: calc(100vw - 62px);
   }
-  .BenefitsSection_viewSlider {
-    position: absolute;
-    bottom: 150px;
 
+  .BenefitsSection_viewSlider {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -47,9 +57,11 @@
     margin-left: 0;
     padding: 0 15px;
   }
+
   .BenefitsSection_shadow {
     box-shadow: 0 0 10px 25px var(--bright);
   }
+
   .BenefitsSection_slide {
     --position: 100vw;
 
@@ -71,18 +83,21 @@
   }
 
   .BenefitsSection_slideImg {
-    width: 24px;
-    height: 24px;
+    display: none;
   }
+
   .BenefitsSection_dots {
     display: flex;
     justify-content: center;
 
-    margin-top: 18px;
+    margin-top: 10px;
+    margin-bottom: 81px;
   }
+
   .BenefitsSection_dot {
-    margin: 0 5px;
+    margin: 0 8px;
   }
+
   .BenefitsSection_slide span {
     text-align: center;
   }

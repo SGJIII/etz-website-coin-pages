@@ -1,4 +1,5 @@
 import WorkspaceElementAll from "../utils/workspaceElementAll";
+import { getElementOffsetTop } from "../utils/getElementOffsetTop";
 
 type Callback = () => void;
 class Links extends WorkspaceElementAll<HTMLLinkElement> {
@@ -42,9 +43,21 @@ class Links extends WorkspaceElementAll<HTMLLinkElement> {
           position = position - marginBottomMenu - heightMenu;
           break;
       }
-    } else if (window.innerWidth <= 1200) {
+    } else if (window.innerWidth <= 1200 && window.innerWidth > 768) {
       marginBottomMenu = 20;
       position = position - marginBottomMenu;
+    } else if (window.innerWidth <= 768) {
+      marginBottomMenu = 20;
+      switch (name) {
+        case "#benefits":
+          marginBottomMenu = 5;
+          position = getElementOffsetTop(element);
+          break;
+        default:
+          marginBottomMenu = 20;
+          position = position - marginBottomMenu;
+          break;
+      }
     }
 
     return position;

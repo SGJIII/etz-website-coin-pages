@@ -1,13 +1,13 @@
 import { addLinkClickCallback } from "./links/links";
 import { AddEventOrientationChange } from "./utils/addEventOrientationchange";
-import BodyWatcher from "./utils/bodyWatcher";
 import { getCoords } from "./utils/getCoords";
 import { outerHeight } from "./utils/outerHeight";
 import { outerWidth } from "./utils/outerWidth";
+import { disableBodyScroll, enableBodyScroll } from "./utils/scroll";
 
 type Props = { className: string };
 
-export default class HeaderMenu extends BodyWatcher<HTMLElement> {
+export default class HeaderMenu {
   private target: HTMLElement | null = null;
   private className = "";
   private scrollPosition = 0;
@@ -16,9 +16,9 @@ export default class HeaderMenu extends BodyWatcher<HTMLElement> {
   private sections: NodeListOf<Element>;
   private links: NodeListOf<Element>;
   private scrollDistance = 0;
+  isScrollDisabled = false;
 
   constructor(props: Props) {
-    super(props.className);
     this.firstLoad = true;
     this.className = props.className;
     this.target = document.querySelector<HTMLElement>(props.className);
@@ -62,18 +62,21 @@ export default class HeaderMenu extends BodyWatcher<HTMLElement> {
     const burger = document.querySelector<HTMLElement>(
       "[data-name=HeaderMenuBurger]"
     );
-    const menu = document.querySelector(".HeaderMenu_menu");
+    const menu = document.querySelector(".HeaderMenu_menu__mobile");
 
+    const targetElement = document.querySelector(".HeaderMenu_menu__mobile");
     burger?.addEventListener("click", () => {
       menu?.classList.toggle("HeaderMenu_menuContainer__open");
       if (menu?.classList.contains("HeaderMenu_menuContainer__open")) {
-        this.scrollBodyDisable();
+        disableBodyScroll(targetElement);
+        this.isScrollDisabled = true;
       } else {
-        this.scrollBodyEnable();
+        enableBodyScroll(targetElement);
+        this.isScrollDisabled = true;
       }
     });
     addLinkClickCallback(() => {
-      if (HeaderMenu.isScrollDisabled) {
+      if (this.isScrollDisabled) {
         burger?.click();
       }
     });

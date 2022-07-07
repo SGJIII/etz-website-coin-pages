@@ -98,7 +98,7 @@ const restoreOverflowSetting = () => {
   }
 
   if (previousBodyOverflowSetting !== undefined) {
-    document.body.style.overflow = previousBodyOverflowSetting;
+    document.body.style.overflow = "";
 
     // Restore previousBodyOverflowSetting to undefined
     // so setOverflowHidden knows it can be set again.
@@ -206,7 +206,6 @@ export const disableBodyScroll = (targetElement, options) => {
   };
 
   locks = [...locks, lock];
-
   if (isIosDevice) {
     setPositionFixed();
   } else {
