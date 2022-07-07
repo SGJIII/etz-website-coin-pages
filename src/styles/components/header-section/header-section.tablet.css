@@ -35,6 +35,13 @@
     text-align: center;
   }
   .HeaderSection_triangle {
-    /* clip-path: polygon(265% 1%, 0% 55%, 100% 100%); */
+    clip-path: polygon(265% 1%, 0% 55%, 100% 100%);
+  }
+  .HeaderSection_overflow {
+    right: -20%;
+    bottom: initial;
+    left: initial;
+
+    width: calc(100vh * 16 / 9);
   }
 }
