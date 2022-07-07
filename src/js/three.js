@@ -70,7 +70,6 @@ class MobileModel {
   }
 
   checkLoader() {
-    console.log("checkLoader");
     if (video.readyState === 4 && !this.isLoadedVideoGraph) {
       this.isLoadedVideoGraph = true;
     }
@@ -92,8 +91,6 @@ class MobileModel {
       setTimeout(() => {
         loader.style.display = "none";
       }, 400);
-      this.startHandleMobileAnimation();
-
       return;
     }
 
@@ -431,6 +428,8 @@ class MobileModel {
     const slider = document.querySelector("[name-benefits-section]");
     let isStartSlider = false;
     let prevScrollTopFrame = null;
+
+    let isLeave = false;
     const tick = () => {
       let scrollTopFrame =
         document.body.scrollTop || document.documentElement.scrollTop;
@@ -464,16 +463,16 @@ class MobileModel {
         if (isStartSlider === false) {
           isStartSlider = true;
           disableBodyScroll(slider);
+          phoneBlock.setAttribute("data-status", "stop");
           setTimeout(() => {
             enableBodyScroll(slider);
+            phoneBlock.setAttribute("data-status", "start");
           }, 1000);
           launchSlider();
         }
-        phoneBlock.setAttribute("data-status", "stop");
-      } else {
-        phoneBlock.setAttribute("data-status", "start");
       }
-      const scrollStatus = document.body.getAttribute("data-status");
+
+      const scrollStatus = phoneBlock.getAttribute("data-status");
 
       const handleMotionForDesktop = () => {
         if (scrollTopFrame >= mouseWheelDistance) {
@@ -488,6 +487,8 @@ class MobileModel {
 
       const handleMotionForMobile = () => {
         if (scrollTopFrame >= mouseWheelDistance) {
+          if (isLeave === true) return;
+          isLeave = true;
           launchAnimation();
 
           phoneBlock.style.transform = `translate3d(0,${
@@ -497,10 +498,11 @@ class MobileModel {
           return;
         }
         if (scrollTopFrame >= mouseWheelDistance - 50) {
+          if (isLeave === true) return;
+          isLeave = true;
           launchAnimation();
         }
-
-        if (scrollStatus === "freeze") {
+        if (scrollStatus === "stop") {
           launchAnimation();
           phoneBlock.style.transform = `translate3d(0,${
             mouseWheelDistance + this.endPositionY
@@ -516,10 +518,13 @@ class MobileModel {
 
         phoneBlock.style.transform = `translate3d(0,${deltaY}px,0)`;
         phoneBlock.style.position = "fixed";
+        isLeave = false;
       };
 
       const handleMotionForTablet = () => {
         if (scrollTopFrame >= mouseWheelDistance) {
+          if (isLeave === true) return;
+          isLeave = true;
           launchAnimation();
           const deltaY =
             this.endPositionY - scrollTopFrame + mouseWheelDistance;
@@ -527,7 +532,9 @@ class MobileModel {
           return;
         }
 
-        if (scrollStatus === "freeze") {
+        if (scrollStatus === "stop") {
+          if (isLeave === true) return;
+          isLeave = true;
           launchAnimation();
           phoneBlock.style.transform = `translate3d(${this.endPositionX}px,${this.endPositionY}px,0)`;
           return;
@@ -544,6 +551,7 @@ class MobileModel {
           ((this.endPositionX - this.startPositionX) / mouseWheelDistance) *
             scrollTopFrame;
         phoneBlock.style.transform = `translate3d(${deltaX}px,${deltaY}px,0)`;
+        isLeave = false;
       };
 
       if (window.innerWidth > 1200) {
@@ -608,7 +616,7 @@ class MobileModel {
       // Render
       renderer.render(this.scene, camera);
 
-      // // Call tick again on the next frame
+      // Call tick again on the next frame
       window.requestAnimationFrame(tick.bind(this));
     };
     tick();
@@ -619,6 +627,7 @@ const mobileModel = new MobileModel("[name-mobile-model]");
 try {
   mobileModel.init();
 } catch (error) {
+  console.log(error);
   setTimeout(() => {
     mobileModel.init();
   }, 100);
