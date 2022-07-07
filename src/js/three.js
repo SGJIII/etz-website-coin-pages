@@ -9,7 +9,6 @@ import { AddEventOrientationChange } from "./utils/addEventOrientationchange";
 import { getElementOffsetTop } from "./utils/getElementOffsetTop";
 import { disableBodyScroll, enableBodyScroll } from "./utils/scroll";
 import { launchSlider } from "./benefits-slider/newVersion";
-let __idTrick = 0;
 
 const FIRST_SECTION_CLASS = ".HeaderSection";
 const SECOND_SECTION_CLASS = ".BenefitsSection";
@@ -71,6 +70,14 @@ class MobileModel {
   }
 
   checkLoader() {
+    console.log("checkLoader");
+    if (video.readyState === 4 && !this.isLoadedVideoGraph) {
+      this.isLoadedVideoGraph = true;
+    }
+    if (video2.readyState === 4 && !this.isLoadedVideoFlow) {
+      this.isLoadedVideoFlow = true;
+    }
+
     if (
       this.isLoadedModel &&
       this.isLoadedVideoFlow &&
@@ -85,7 +92,12 @@ class MobileModel {
       setTimeout(() => {
         loader.style.display = "none";
       }, 400);
+      this.startHandleMobileAnimation();
+
+      return;
     }
+
+    window.requestAnimationFrame(this.checkLoader.bind(this));
   }
 
   setupInitialValue(gltf) {
@@ -212,6 +224,7 @@ class MobileModel {
       this.updateAllMaterials();
 
       this.isLoadedModel = true;
+      this.checkLoader();
     });
   }
 
@@ -277,8 +290,6 @@ class MobileModel {
   }
 
   startHandleMobileAnimation() {
-    window.cancelAnimationFrame(__idTrick);
-
     // Debug
     this.debugObject.envMapIntensity = 0.6;
 
@@ -419,19 +430,15 @@ class MobileModel {
      */
     const slider = document.querySelector("[name-benefits-section]");
     let isStartSlider = false;
+    let prevScrollTopFrame = null;
     const tick = () => {
-      if (video.readyState === 4) {
-        this.isLoadedVideoGraph = true;
-      }
-      if (video2.readyState === 4) {
-        this.isLoadedVideoFlow = true;
-      }
-
-      this.checkLoader();
-      controls.update();
-
       let scrollTopFrame =
         document.body.scrollTop || document.documentElement.scrollTop;
+      if (scrollTopFrame === prevScrollTopFrame && prevScrollTopFrame !== 0) {
+        window.requestAnimationFrame(tick.bind(this));
+        return;
+      }
+      prevScrollTopFrame = scrollTopFrame;
       const launchAnimation = () => {
         mouseWheelRatio = 1;
         slider?.setAttribute("data-play", "1");
@@ -601,10 +608,8 @@ class MobileModel {
       // Render
       renderer.render(this.scene, camera);
 
-      // Call tick again on the next frame
-      __idTrick = window.requestAnimationFrame(() => {
-        tick();
-      });
+      // // Call tick again on the next frame
+      window.requestAnimationFrame(tick.bind(this));
     };
     tick();
   }
