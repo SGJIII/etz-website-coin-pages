@@ -68,16 +68,15 @@
         );
         document.documentElement.style.setProperty("--vw", `${vw}`);
         document.documentElement.style.setProperty("--vh", `${vh}`);
+        document.documentElement.style.setProperty("--vh-px", `${vh}px`);
       };
       setupSize();
-      window.addEventListener("resize", () => {
-        setupSize();
-      });
+      window.addEventListener("resize", setupSize);
     </script>
     <script type="module" src="js/links/links.ts" async></script>
     <script type="module" src="js/header-menu.ts" async></script>
-    <script type="module" src="./js/three.js" async></script>
-    <script type="module" src="js/benefits-slider/newVersion.ts" async></script>
-    <script type="module" src="js/index.ts" async></script>
+    <script type="module" src="js/index.ts"></script>
+    <script type="module" src="js/three.js" async></script>
+    <!-- <script type="module" src="js/benefits-slider/newVersion.ts" async></script> -->
   </body>
 </html>

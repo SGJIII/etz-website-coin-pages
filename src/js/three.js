@@ -5,24 +5,17 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { detectDevice } from "./utils/detectDevice";
 import { AddEventOrientationChange } from "./utils/addEventOrientationchange";
-import BodyWatcher from "./utils/bodyWatcher";
 import { AddEventOrientationChange } from "./utils/addEventOrientationchange";
+import { getElementOffsetTop } from "./utils/getElementOffsetTop";
+import { disableBodyScroll, enableBodyScroll } from "./utils/scroll";
+import { launchSlider } from "./benefits-slider/newVersion";
 let __idTrick = 0;
 
 const FIRST_SECTION_CLASS = ".HeaderSection";
 const SECOND_SECTION_CLASS = ".BenefitsSection";
 const MODEL_NAME = "etz_8_1.glb";
-function getElementOffsetTop(element) {
-  let offsetTop = 0;
 
-  while (element && typeof element.offsetTop === "number") {
-    offsetTop += element.offsetTop;
-    element = element.parentNode;
-  }
-
-  return offsetTop;
-}
-class MobileModel extends BodyWatcher {
+class MobileModel {
   gltfLoader = null;
   phoneMesh = null;
   videoTexture = null;
@@ -56,7 +49,6 @@ class MobileModel extends BodyWatcher {
   prevStatus = "start";
 
   constructor(props) {
-    super(props);
     this.gltfLoader = new GLTFLoader();
     this.scene = new THREE.Scene();
     this.secondSection = document.querySelector(SECOND_SECTION_CLASS);
@@ -250,7 +242,7 @@ class MobileModel extends BodyWatcher {
     } else {
       if (window.innerWidth > 1200) {
       } else if (window.innerWidth <= 768) {
-        this.endPositionY = -50;
+        this.endPositionY = -110;
       } else {
         this.endPositionY = window.innerHeight / 2 - 300;
         this.endPositionX = window.innerWidth - 450;
@@ -426,10 +418,7 @@ class MobileModel extends BodyWatcher {
      * GUI
      */
     const slider = document.querySelector("[name-benefits-section]");
-    const launchAnimation = () => {
-      mouseWheelRatio = 1;
-      slider?.setAttribute("data-play", "1");
-    };
+    let isStartSlider = false;
     const tick = () => {
       if (video.readyState === 4) {
         this.isLoadedVideoGraph = true;
@@ -443,7 +432,10 @@ class MobileModel extends BodyWatcher {
 
       let scrollTopFrame =
         document.body.scrollTop || document.documentElement.scrollTop;
-
+      const launchAnimation = () => {
+        mouseWheelRatio = 1;
+        slider?.setAttribute("data-play", "1");
+      };
       const elapsedTime = clock.getElapsedTime();
       previousTime = elapsedTime;
 
@@ -461,77 +453,90 @@ class MobileModel extends BodyWatcher {
         mouseWheelRatio = mouseWheelDeltaDistance / mouseWheelDistance;
       }
 
-      const handleMotionForMobile = () => {
-        const statusProcess = phoneBlock.getAttribute("data-status");
+      if (scrollTopFrame >= mouseWheelDistance) {
+        if (isStartSlider === false) {
+          isStartSlider = true;
+          disableBodyScroll(slider);
+          setTimeout(() => {
+            enableBodyScroll(slider);
+          }, 1000);
+          launchSlider();
+        }
+        phoneBlock.setAttribute("data-status", "stop");
+      } else {
+        phoneBlock.setAttribute("data-status", "start");
+      }
+      const scrollStatus = document.body.getAttribute("data-status");
+
+      const handleMotionForDesktop = () => {
         if (scrollTopFrame >= mouseWheelDistance) {
+          launchAnimation();
+          phoneBlock.style.transform = `translate3d(0,${mouseWheelDistance}px,0)`;
+          phoneBlock.style.position = "absolute";
+          return;
+        }
+        phoneBlock.style.transform = ``;
+        phoneBlock.style.position = "fixed";
+      };
+
+      const handleMotionForMobile = () => {
+        if (scrollTopFrame >= mouseWheelDistance) {
+          launchAnimation();
+
+          phoneBlock.style.transform = `translate3d(0,${
+            mouseWheelDistance + this.endPositionY
+          }px,0)`;
+          phoneBlock.style.position = "absolute";
+          return;
+        }
+        if (scrollTopFrame >= mouseWheelDistance - 50) {
+          launchAnimation();
+        }
+
+        if (scrollStatus === "freeze") {
           launchAnimation();
           phoneBlock.style.transform = `translate3d(0,${
             mouseWheelDistance + this.endPositionY
           }px,0)`;
           phoneBlock.style.position = "absolute";
-        } else {
-          if (statusProcess === "start") {
-            if (scrollTopFrame >= mouseWheelDistance - 50) {
-              launchAnimation();
-            }
-            this.prevStatus = statusProcess;
-            const deltaY =
-              this.startPositionY +
-              ((this.endPositionY - this.startPositionY) / mouseWheelDistance) *
-                scrollTopFrame;
-
-            phoneBlock.style.transform = `translate3d(0,${deltaY}px,0)`;
-            phoneBlock.style.position = "fixed";
-          } else if (statusProcess === "stop") {
-            this.prevStatus = statusProcess;
-            launchAnimation();
-            phoneBlock.style.transform = `translate3d(0,${this.endPositionY}px,0)`;
-            phoneBlock.style.position = "fixed";
-          }
+          return;
         }
-      };
 
-      const statusProcess = phoneBlock.getAttribute("data-status");
+        const deltaY =
+          this.startPositionY +
+          ((this.endPositionY - this.startPositionY) / mouseWheelDistance) *
+            scrollTopFrame;
 
-      const handleMotionForDesktop = () => {
-        if (
-          scrollTopFrame >= mouseWheelDistance ||
-          (statusProcess === "stop" && scrollTopFrame === 0)
-        ) {
-          launchAnimation();
-          phoneBlock.style.transform = `translate3d(0,${mouseWheelDistance}px,0)`;
-          phoneBlock.style.position = "absolute";
-        } else {
-          phoneBlock.style.transform = ``;
-          phoneBlock.style.position = "fixed";
-        }
+        phoneBlock.style.transform = `translate3d(0,${deltaY}px,0)`;
+        phoneBlock.style.position = "fixed";
       };
 
       const handleMotionForTablet = () => {
-        const statusProcess = phoneBlock.getAttribute("data-status");
         if (scrollTopFrame >= mouseWheelDistance) {
           launchAnimation();
           const deltaY =
             this.endPositionY - scrollTopFrame + mouseWheelDistance;
           phoneBlock.style.transform = `translate3d(${this.endPositionX}px,${deltaY}px,0)`;
-        } else {
-          if (statusProcess === "stop") {
-            launchAnimation();
-            phoneBlock.style.transform = `translate3d(${this.endPositionX}px,${this.endPositionY}px,0)`;
-          } else {
-            const deltaY =
-              Math.abs(this.startPositionY) +
-              ((this.endPositionY - Math.abs(this.startPositionY)) /
-                mouseWheelDistance) *
-                scrollTopFrame;
-
-            const deltaX =
-              this.startPositionX +
-              ((this.endPositionX - this.startPositionX) / mouseWheelDistance) *
-                scrollTopFrame;
-            phoneBlock.style.transform = `translate3d(${deltaX}px,${deltaY}px,0)`;
-          }
+          return;
         }
+
+        if (scrollStatus === "freeze") {
+          launchAnimation();
+          phoneBlock.style.transform = `translate3d(${this.endPositionX}px,${this.endPositionY}px,0)`;
+          return;
+        }
+
+        const deltaY =
+          Math.abs(this.startPositionY) +
+          ((this.endPositionY - Math.abs(this.startPositionY)) /
+            mouseWheelDistance) *
+            scrollTopFrame;
+
+        const deltaX =
+          this.startPositionX +
+          ((this.endPositionX - this.startPositionX) / mouseWheelDistance) *
+            scrollTopFrame;
+        phoneBlock.style.transform = `translate3d(${deltaX}px,${deltaY}px,0)`;
       };
 
       if (window.innerWidth > 1200) {
