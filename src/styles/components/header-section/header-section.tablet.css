@@ -5,21 +5,30 @@
 
     height: 778px;
   }
+
+  .HeaderSection_welcomeSection {
+    overflow: hidden;
+  }
+
   .HeaderMenu_menuContainer__open {
     height: 100vh;
   }
+
   .HeaderSection_main {
     align-items: flex-start;
   }
+
   .HeaderSection_container {
     padding-top: 180px;
   }
+
   .HeaderSection_welcome {
     justify-content: center;
 
     width: 100%;
     margin-right: 0;
   }
+
   .HeaderSection_title {
     font-size: 24px;
     font-weight: 500;
@@ -27,6 +36,7 @@
 
     text-align: center;
   }
+
   .HeaderSection_description {
     font-size: 16px;
     font-weight: 400;
@@ -34,9 +44,11 @@
 
     text-align: center;
   }
+
   .HeaderSection_triangle {
     clip-path: polygon(265% 1%, 0% 55%, 100% 100%);
   }
+
   .HeaderSection_overflow {
     right: -20%;
     bottom: initial;

@@ -10,6 +10,11 @@
     color: var(--text-white);
     background: var(--gradient-main);
   }
+
+  .HeaderSection_welcomeSection {
+    overflow: hidden;
+  }
+
   .HeaderSection_overflow {
     position: absolute;
     top: 0;
