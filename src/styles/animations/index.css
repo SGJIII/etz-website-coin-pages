@@ -84,13 +84,13 @@
 
 @keyframes pulse {
   from {
-    transform: scale(0.85);
+    transform: scale(0.45);
   }
   50% {
-    transform: scale(1);
+    transform: scale(0.65);
   }
   to {
-    transform: scale(0.85);
+    transform: scale(0.45);
   }
 }
 
