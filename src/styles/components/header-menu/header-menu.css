@@ -112,6 +112,17 @@
   animation: appearance 100ms ease;
 
   border-color: var(--primary);
+  background-color: var(--bright);
+}
+
+.HeaderMenu_menu__sticky .HeaderMenu_headerGetStarted:hover {
+  color: var(--bright);
+  background-color: var(--primary);
+}
+
+.HeaderMenu_menu__sticky .HeaderMenu_headerGetStarted:active {
+  border: 2px solid transparent;
+  background-color: var(--primary-70);
 }
 
 .HeaderMenu_links {

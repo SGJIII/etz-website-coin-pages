@@ -85,10 +85,16 @@
 }
 
 .BenefitsSection_text__secondary {
+  margin-top: 8px;
+
   color: var(--dark-30);
 }
 
 .BenefitsSection_slideImg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   width: 32px;
   height: 32px;
   margin-bottom: 8px;
