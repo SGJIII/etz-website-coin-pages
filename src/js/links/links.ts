@@ -18,7 +18,7 @@ class Links extends WorkspaceElementAll<HTMLLinkElement> {
     const body = document.body.getBoundingClientRect();
     const rect = element?.getBoundingClientRect();
     let position = Math.abs((rect?.top ?? 0) - body.top);
-    const heightMenu = 106;
+    let heightMenu = 106;
     let marginBottomMenu = 0;
 
     if (window.innerWidth > 1200) {
@@ -44,26 +44,53 @@ class Links extends WorkspaceElementAll<HTMLLinkElement> {
           break;
       }
     } else if (window.innerWidth > 768 && window.innerWidth <= 1200) {
+      marginBottomMenu = 20;
+      heightMenu = 56;
       switch (name) {
         case "#benefits":
           marginBottomMenu = 5;
           position = getElementOffsetTop(element);
           break;
+        case "#etz-mobile":
+          marginBottomMenu = 0;
+          position = position - marginBottomMenu - heightMenu;
+          break;
+        case "#employers":
+          marginBottomMenu = 80;
+          position = position - marginBottomMenu - heightMenu;
+          break;
+        case "#crypto":
+          marginBottomMenu = 0;
+          heightMenu = 0;
+          position = position - marginBottomMenu - heightMenu;
+          break;
+        case "#contact-us":
+          marginBottomMenu = 0;
+          heightMenu = 0;
+          position = position - marginBottomMenu - heightMenu;
+          break;
         default:
           marginBottomMenu = 20;
-          position = position - marginBottomMenu;
+          position = position - marginBottomMenu - heightMenu;
           break;
       }
     } else if (window.innerWidth <= 768) {
       marginBottomMenu = 20;
+      heightMenu = 56;
+      const deltaYCenter = (window.innerHeight - (rect?.height ?? 0)) / 2;
       switch (name) {
         case "#benefits":
           marginBottomMenu = 5;
           position = getElementOffsetTop(element);
           break;
+        case "#etz-mobile":
+          marginBottomMenu = 10;
+          position = position - deltaYCenter;
+          position = position - marginBottomMenu - heightMenu;
+          break;
         default:
-          marginBottomMenu = 20;
-          position = position - marginBottomMenu;
+          marginBottomMenu = 10;
+          position = position - marginBottomMenu - heightMenu;
           break;
       }
     }
