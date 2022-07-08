@@ -50,7 +50,6 @@ export default class HeaderMenu {
     this.handlePositionStickyMenu();
     this.handleAnimationMenu();
     this.handleBurger();
-    console.log(window.ontouchmove);
     window.addEventListener("touchmove", this.watchScrollChange.bind(this));
     window.addEventListener("scroll", this.watchScrollChange.bind(this));
     AddEventOrientationChange(this.watchOrientationChange.bind(this));

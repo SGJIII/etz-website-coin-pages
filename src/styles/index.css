@@ -92,6 +92,24 @@ textarea::-ms-input-placeholder {
   width: 1200px;
 }
 
+.version {
+  font-size: 8px;
+  line-height: 8px;
+
+  position: fixed;
+  z-index: 5000;
+  top: 2px;
+  left: 2px;
+
+  padding: 1px 2px;
+
+  text-transform: lowercase;
+}
+.version__highlight {
+  color: white;
+  background-color: brown;
+}
+
 /* Three classes for phone animation*/
 .section_first {
   position: relative;

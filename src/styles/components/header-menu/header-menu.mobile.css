@@ -30,13 +30,23 @@
     flex-direction: column;
     justify-content: flex-start;
 
-    height: 100%;
+    height: 56px;
 
     color: var(--bright);
     background-color: transparent;
 
     inset: 0;
     -webkit-overflow-scrolling: touch;
+  }
+
+  .HeaderMenu_menuContainer__open.HeaderMenu_menu__mobile {
+    height: 100vh;
+
+    background: var(--gradient-main);
+  }
+
+  .HeaderMenu_menu__mobileSticky.HeaderMenu_menu__mobile {
+    background-color: var(--bright);
   }
 
   .HeaderMenu_menu {
@@ -54,8 +64,6 @@
 
   .HeaderMenu_menuContainer__open {
     position: fixed;
-
-    background: var(--gradient-main);
   }
 
   .HeaderMenu_menuContainer__open .HeaderMenu_linksBlockMobile {
@@ -191,7 +199,6 @@
   }
 
   .HeaderMenu_menu__mobileSticky .HeaderMenu_menuContainer {
-    background-color: var(--bright);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   }
 

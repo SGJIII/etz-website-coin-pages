@@ -35,9 +35,15 @@
     flex-direction: column;
     justify-content: flex-start;
 
+    height: 56px;
+
     color: var(--bright);
 
     inset: 0;
+  }
+
+  .HeaderMenu_menuContainer__open.HeaderMenu_menu__mobile {
+    height: 100vh;
   }
 
   .HeaderMenu_menuContainer {
