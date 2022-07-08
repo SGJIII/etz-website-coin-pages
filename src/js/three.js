@@ -256,7 +256,7 @@ class MobileModel {
         this.endPositionX = window.innerWidth - window.innerHeight;
       } else {
         this.endPositionY = 0;
-        this.endPositionX = window.innerWidth - 450;
+        this.endPositionX = window.innerWidth - 500;
       }
     } else {
       if (window.innerWidth > 1200) {
@@ -265,7 +265,7 @@ class MobileModel {
         this.endPositionX = window.innerWidth - 450;
       } else {
         this.endPositionY = window.innerHeight / 2 - 300;
-        this.endPositionX = window.innerWidth - 450;
+        this.endPositionX = window.innerWidth - 500;
       }
     }
   }
