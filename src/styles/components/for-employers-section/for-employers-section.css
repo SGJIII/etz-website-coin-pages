@@ -1,4 +1,5 @@
 .ForEmployersSection {
+  overflow: initial;
   align-items: center;
   justify-content: center;
 
@@ -75,5 +76,9 @@
 }
 
 .ForEmployersSection_description {
+  display: block;
+
+  padding-top: 8px;
+
   opacity: 0.5;
 }

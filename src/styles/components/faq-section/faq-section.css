@@ -57,15 +57,17 @@
   background: var(--primary-05);
 }
 
-.FAQSection_accordionSummary img {
+.FAQSection_accordionSummary .FAQSection_arrowIcon {
   transition: transform 300ms ease;
 }
 
-.FAQSection_accordionSummary__open img {
-  transform: scale(-1, -1);
+.FAQSection_accordionSummary__open .FAQSection_arrowIcon {
+  transform: scale(1, -1);
 }
 
 .FAQSection_accordionColumns {
+  margin-bottom: 24px;
+
   -webkit-column-count: 2;
   -moz-column-count: 2;
   column-count: 2;
@@ -91,7 +93,7 @@
   background: var(--bright);
 }
 .FAQSection_accordion__while .FAQSection_accordionDetails {
-  padding-bottom: 37px;
+  padding-bottom: 13px;
 }
 
 .FAQSection_accordion__dark .FAQSection_accordionSummary,
@@ -135,6 +137,6 @@
 .FAQSection_arrowIcon {
   align-self: center;
 
-  width: 14px;
-  height: 10px;
+  width: 32px;
+  height: 32px;
 }

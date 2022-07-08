@@ -3,6 +3,10 @@
     display: initial;
   }
 
+  .HeaderMenu_logo svg {
+    width: 94px;
+  }
+
   .HeaderSection_menu {
     box-sizing: content-box;
     height: 32px;

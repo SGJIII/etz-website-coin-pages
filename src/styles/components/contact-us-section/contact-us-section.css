@@ -121,7 +121,10 @@
 
 .ContactUsSection_formConfirmBlock {
   display: flex;
+  align-items: center;
   justify-content: flex-start;
+
+  height: 27px;
 }
 
 .ContactUsSection_checkbox {
@@ -175,9 +178,15 @@
 }
 
 .ContactUsSection_rules {
+  line-height: 30px;
+
+  height: 100%;
+
+  vertical-align: middle;
+
   color: var(--bright);
 }
 
 .ContactUsSection_submit {
-  min-width: 116px;
+  min-width: 164px;
 }

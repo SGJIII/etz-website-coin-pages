@@ -84,26 +84,26 @@
 
 @keyframes pulse {
   from {
-    transform: scale(0.85);
+    transform: scale(0.45);
   }
   50% {
-    transform: scale(1);
+    transform: scale(0.65);
   }
   to {
-    transform: scale(0.85);
+    transform: scale(0.45);
   }
 }
 
 @media screen and (max-width: 1200px) {
   @keyframes pulse {
     from {
-      transform: scale(0.65);
+      transform: scale(0.45);
     }
     50% {
-      transform: scale(0.5);
+      transform: scale(0.3);
     }
     to {
-      transform: scale(0.65);
+      transform: scale(0.45);
     }
   }
 }
