@@ -1,7 +1,7 @@
 @media screen and (max-width: 768px) {
   .ContactUsSection {
     min-height: calc(100vh + 32px);
-    margin-top: 0;
+    margin-top: 128px;
     padding: 0;
   }
 
