@@ -9,6 +9,9 @@ type Props = { className: string };
 
 export default class HeaderMenu {
   private target: HTMLElement | null = null;
+  private targetMobile: HTMLElement | null = null;
+  private targetMobileContainer: HTMLElement | null | undefined = null;
+  private burger: HTMLElement | null = null;
   private className = "";
   private scrollPosition = 0;
   private isInitialPosition = true;
@@ -24,6 +27,13 @@ export default class HeaderMenu {
     this.target = document.querySelector<HTMLElement>(props.className);
     this.sections = document.querySelectorAll(".__section");
     this.links = document.querySelectorAll(".HeaderMenu_link");
+    this.targetMobile = document.querySelector(".HeaderMenu_menu__mobile");
+    this.targetMobileContainer = this.targetMobile?.querySelector(
+      ".HeaderMenu_menuContainer"
+    );
+    this.burger = document.querySelector<HTMLElement>(
+      "[data-name=HeaderMenuBurger]"
+    );
   }
 
   /**
@@ -35,60 +45,121 @@ export default class HeaderMenu {
         `The target does not exist with the ${this.className} class`
       );
     }
-    const eventLinstener = () => {
-      this.handlePositionStickyMenu();
-    };
 
     this.target.style.display = "flex";
     this.handlePositionStickyMenu();
-
-    window.addEventListener("scroll", eventLinstener);
     this.handleAnimationMenu();
-    AddEventOrientationChange(() => {
-      this.target?.classList.remove("HeaderMenu_menu__sticky");
-      this.target?.classList.remove("HeaderMenu_menu__stickyHide");
-    });
-    window.addEventListener("resize", () => {
-      if (
-        window.innerWidth <= 1200 ||
-        (window.innerWidth < 1000 &&
-          window.matchMedia("(orientation: landscape)").matches)
-      ) {
-        this.target?.classList.remove("HeaderMenu_menu__sticky");
+    this.handleBurger();
+    console.log(window.ontouchmove);
+    window.addEventListener("touchmove", this.watchScrollChange.bind(this));
+    window.addEventListener("scroll", this.watchScrollChange.bind(this));
+    AddEventOrientationChange(this.watchOrientationChange.bind(this));
+    window.addEventListener("resize", this.watchResizeChange.bind(this));
+  }
+
+  watchOrientationChange() {
+    this.swapStateMenu();
+    this.handleStateMobileMenu();
+  }
+  watchResizeChange() {
+    this.swapStateMenu();
+    this.handleStateMobileMenu();
+  }
+  watchScrollChange() {
+    this.handlePositionStickyMenu();
+    this.handleStateMobileMenu();
+  }
+
+  menu() {
+    if (window.innerWidth <= 1200)
+      return {
+        sticky: () =>
+          this.targetMobile?.classList.add("HeaderMenu_menu__mobileSticky"),
+        unsticky: () =>
+          this.targetMobile?.classList.remove("HeaderMenu_menu__mobileSticky"),
+        open: () => {
+          this.targetMobile?.classList.add("HeaderMenu_menuContainer__open");
+          this.targetMobile?.classList.remove("HeaderMenu_menu__mobileSticky");
+        },
+        close: () => {
+          const heightMobileMenu =
+            this.targetMobileContainer?.getBoundingClientRect()?.height ?? 0;
+          this.targetMobile?.classList.remove("HeaderMenu_menuContainer__open");
+          if (this.prevScrollPosition >= heightMobileMenu) {
+            this.targetMobile?.classList.add("HeaderMenu_menu__mobileSticky");
+          }
+        },
+      };
+
+    return {
+      sticky: () => {
+        this.target?.classList.add("HeaderMenu_menu__sticky");
         this.target?.classList.remove("HeaderMenu_menu__stickyHide");
-      }
-    });
+      },
+      unsticky: () => {
+        this.target?.classList.remove("HeaderMenu_menu__sticky");
+        this.target?.classList.add("HeaderMenu_menu__stickyHide");
+      },
+      open: () => {
+        this.targetMobile?.classList.add("HeaderMenu_menuContainer__open");
+      },
+      close: () => {
+        this.targetMobile?.classList.remove("HeaderMenu_menuContainer__open");
+      },
+    };
+  }
 
-    const burger = document.querySelector<HTMLElement>(
-      "[data-name=HeaderMenuBurger]"
-    );
-    const menu = document.querySelector(".HeaderMenu_menu__mobile");
+  get isOpenMenu() {
+    if (window.innerWidth <= 1200)
+      return this.targetMobile?.classList.contains(
+        "HeaderMenu_menuContainer__open"
+      );
+  }
 
-    const targetElement = document.querySelector(".HeaderMenu_menu__mobile");
-    burger?.addEventListener("click", () => {
-      menu?.classList.toggle("HeaderMenu_menuContainer__open");
-      if (menu?.classList.contains("HeaderMenu_menuContainer__open")) {
-        disableBodyScroll(targetElement);
+  private handleStateMobileMenu() {
+    if (window.innerWidth > 1200) return;
+    this.calculatePosition();
+    const heightMobileMenu =
+      this.targetMobileContainer?.getBoundingClientRect()?.height ?? 0;
+    const phoneBlock = document.querySelector("canvas");
+    const scrollStatus = phoneBlock?.getAttribute("data-status");
+
+    if (this.scrollPosition >= heightMobileMenu) {
+      this.targetMobile?.classList.add("HeaderMenu_menu__mobileSticky");
+    } else if (scrollStatus !== "stop") {
+      this.targetMobile?.classList.remove("HeaderMenu_menu__mobileSticky");
+    }
+  }
+  prevScrollPosition = 0;
+  private handleBurger() {
+    this.burger?.addEventListener("click", () => {
+      if (!this.isOpenMenu) {
+        this.prevScrollPosition = this.scrollPosition;
+        this.menu().open();
+        disableBodyScroll(this.targetMobile);
         this.isScrollDisabled = true;
       } else {
-        enableBodyScroll(targetElement);
+        enableBodyScroll(this.targetMobile);
+        this.menu().close();
         this.isScrollDisabled = true;
       }
     });
     addLinkClickCallback(() => {
       if (this.isScrollDisabled) {
-        burger?.click();
+        this.burger?.click();
       }
     });
   }
 
+  private swapStateMenu() {
+    if (window.innerWidth <= 1200) {
+      this.target?.classList.remove("HeaderMenu_menu__sticky");
+      this.target?.classList.remove("HeaderMenu_menu__stickyHide");
+    }
+  }
+
   private handlePositionStickyMenu() {
-    if (
-      window.innerWidth <= 1200 ||
-      (window.innerWidth < 1000 &&
-        window.matchMedia("(orientation: landscape)").matches) ||
-      screen.width < 900
-    ) {
+    if (window.innerWidth <= 1200 || screen.width < 900) {
       this.target?.classList.remove("HeaderMenu_menu__sticky");
       this.target?.classList.remove("HeaderMenu_menu__stickyHide");
       return;
