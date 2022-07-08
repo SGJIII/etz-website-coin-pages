@@ -1,10 +1,10 @@
 .EtzMobileSection {
   justify-content: center;
 
-  height: 878px;
+  height: 100%;
   /* min-height: calc(100vh + var(--height-menu)); */
   /* padding: 460px 0; */
-  margin-top: var(--section-margin-top);
+  padding-top: var(--section-margin-top);
 
   --coin-position: 1px;
 }
@@ -17,15 +17,18 @@
   /*
   min-width: 938px;
   height: 1078px;*/
+  /* height: clamp(1030px, 1vh, 300px); */
+  /* max()(MIN, min()(VAL, MAX)) */
+  /* transform: scale(max(1, calc(var(--vh) / 1038), 0)); */
 
-  max-height: 874px;
-  margin-top: 120px;
-
-  transform: scale(calc((var(--vh) - 306) / var(--vh)));
+  transform: scale(clamp(0.5, calc(var(--vh) / 1038), 1));
 }
 
 .EtzMobileSection_img {
-  max-height: 874px;
+  height: 1038px;
+  /* height: clamp(1030px, 100vh, 300px); */
+  /* min-height: 100%; */
+  /* height: min(1030px, 100vh - 80px); */
 }
 
 .EtzMobileSection_coin {
@@ -102,6 +105,7 @@
   justify-content: flex-start;
 
   height: 100%;
+  min-height: 600px;
 
   justify-self: center;
 }
@@ -131,6 +135,7 @@
 
 .EtzMobileSection_description {
   min-width: 540px;
+  max-width: 540px;
 }
 
 .EtzMobileSection_pattern {

@@ -3,18 +3,21 @@
     /* overflow: initial; */
     justify-content: flex-start;
 
-    box-sizing: border-box;
+    box-sizing: content-box;
     height: 746px;
     padding: 0 16px;
+    padding-bottom: 120px;
   }
   .EtzMobileSection_block {
-    align-items: initial;
+    align-items: center;
     flex-direction: column;
-    justify-content: initial;
+    justify-content: center;
 
     width: 100%;
     height: initial;
-    padding-top: 50px;
+    margin-top: 150px;
+    padding-top: 100px;
+    padding-bottom: 100px;
 
     place-self: initial;
   }
@@ -54,21 +57,24 @@
 
     text-align: center;
   }
+
   .EtzMobileSection_mobiles {
-    top: -54px;
+    /* top: -54px;
     left: 50%;
+    height: 426px; */
+    height: 508px;
 
-    width: 367.78px;
-    min-width: initial;
-    height: 426px;
-    max-height: initial;
+    transform: translateX(25%);
+  }
 
-    transform: scale(1.24) translateX(-20%);
+  .EtzMobileSection_img {
+    /* min-height: 100%; */
+    height: 622px;
   }
 
   .EtzMobileSection_eth {
     right: 124px;
-    bottom: calc(132px - var(--coin-position));
+    bottom: calc(-91px - var(--coin-position));
   }
 
   .EtzMobileSection_btc {
@@ -77,37 +83,40 @@
   }
 
   .EtzMobileSection_ada {
-    top: calc(213px + var(--coin-position));
-    left: -34px;
+    top: calc(292px + var(--coin-position));
+    left: -121px;
   }
   .EtzMobileSection_avax {
-    top: calc(104px + var(--coin-position));
-    left: 194px;
+    top: calc(196px + var(--coin-position));
+    left: 266px;
   }
   .EtzMobileSection_bnb {
     top: calc(51px + var(--coin-position));
-    left: -52px;
+    left: -109px;
   }
   .EtzMobileSection_btc {
     top: calc(59px + var(--coin-position));
     left: 102px;
   }
   .EtzMobileSection_ftm {
-    top: calc(35px + var(--coin-position));
-    left: -41px;
+    top: calc(2px + var(--coin-position));
+    left: -155px;
   }
   .EtzMobileSection_sol {
     top: calc(-14px + var(--coin-position));
     right: 105px;
   }
   .EtzMobileSection_usdc {
-    bottom: calc(68px - var(--coin-position));
+    bottom: calc(-178px - var(--coin-position));
     left: 125px;
   }
   .EtzMobileSection_pattern {
-    /* top: 0;
-    left: initial; */
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 
-    /* transform: initial; */
+    transform: initial;
   }
 }

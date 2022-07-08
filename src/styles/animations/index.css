@@ -97,13 +97,13 @@
 @media screen and (max-width: 1200px) {
   @keyframes pulse {
     from {
-      transform: scale(0.65);
+      transform: scale(0.45);
     }
     50% {
-      transform: scale(0.5);
+      transform: scale(0.3);
     }
     to {
-      transform: scale(0.65);
+      transform: scale(0.45);
     }
   }
 }
