@@ -1,4 +1,4 @@
-@media screen and (max-width: 768px), (max-width: 1200px) {
+@media screen and (max-width: 768px) {
   .HeaderMenu_burgerBlock {
     display: initial;
   }
@@ -14,12 +14,10 @@
     position: absolute;
     z-index: -1;
 
+    width: calc(100vh * 16 / 9);
     height: 100vh;
 
     pointer-events: none;
-    /* background-image: var(--pattern-svg);
-    background-position: right;
-    background-size: 100vh; */
 
     touch-action: none;
   }
@@ -51,11 +49,12 @@
 
     width: 100%;
     height: 32px;
-    margin: 20px 0;
-    padding: 0 16px;
+    padding: 28px 16px;
   }
 
   .HeaderMenu_menuContainer__open {
+    position: fixed;
+
     background: var(--gradient-main);
   }
 
@@ -181,5 +180,26 @@
     justify-content: center;
 
     margin: 40px 0;
+  }
+
+  .HeaderMenu_menuContainer__open .HeaderMenu_linksBlockMobile {
+    padding: 0 48px;
+  }
+
+  .HeaderMenu_menu__mobileSticky {
+    position: fixed;
+  }
+
+  .HeaderMenu_menu__mobileSticky .HeaderMenu_menuContainer {
+    background-color: var(--bright);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .HeaderMenu_menu__mobileSticky .HeaderMenu_burger span {
+    background-color: var(--primary);
+  }
+
+  .HeaderMenu_menu__mobileSticky .HeaderMenu_logoLight path {
+    fill: var(--primary);
   }
 }

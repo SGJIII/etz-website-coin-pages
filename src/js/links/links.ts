@@ -43,9 +43,17 @@ class Links extends WorkspaceElementAll<HTMLLinkElement> {
           position = position - marginBottomMenu - heightMenu;
           break;
       }
-    } else if (window.innerWidth <= 1200 && window.innerWidth > 768) {
-      marginBottomMenu = 20;
-      position = position - marginBottomMenu;
+    } else if (window.innerWidth > 768 && window.innerWidth <= 1200) {
+      switch (name) {
+        case "#benefits":
+          marginBottomMenu = 5;
+          position = getElementOffsetTop(element);
+          break;
+        default:
+          marginBottomMenu = 20;
+          position = position - marginBottomMenu;
+          break;
+      }
     } else if (window.innerWidth <= 768) {
       marginBottomMenu = 20;
       switch (name) {
