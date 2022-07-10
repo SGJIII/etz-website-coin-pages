@@ -12,7 +12,7 @@ if (process.env.BIULD_STATUS !== "PRODUCTION") {
   const label = document.createElement("span");
   label.innerText = window.version;
   label.classList.add("version");
-  console.log(process.env.BIULD_STATUS);
+
   if (process.env.BIULD_STATUS === undefined) {
     label.classList.add("version__highlight");
   }
