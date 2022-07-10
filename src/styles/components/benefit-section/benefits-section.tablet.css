@@ -66,8 +66,8 @@
     --position: 0;
   }
   .BenefitsSection_slideImg {
-    width: initial;
-    height: initial;
+    width: 32px;
+    height: 32px;
   }
   .BenefitsSection_dots {
     display: flex;
