@@ -167,7 +167,7 @@
     justify-content: space-between;
 
     width: 100vw;
-    height: calc(100vh - 175px);
+    height: calc(100vh + (var(--vh-px, 0) - 100vh) - 32px);
   }
 
   .HeaderMenu_linksMobile {
