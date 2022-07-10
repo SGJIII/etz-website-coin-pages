@@ -3,3 +3,4 @@
 declare module "smoothscroll-for-websites";
 declare var uss: any;
 declare var msMatchMedia: any;
+declare var version: string;
