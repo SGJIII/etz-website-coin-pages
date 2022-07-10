@@ -31,10 +31,10 @@ class BenefitsSlider {
   }
 
   static launchSlider() {
-    BenefitsSlider.isLaunchSlider = true;
-    BenefitsSlider.__idSliderInterval = setInterval(() => {
-      BenefitsSlider.nextSlide();
-    }, BenefitsSlider.timeSlideWithoutPause);
+    // BenefitsSlider.isLaunchSlider = true;
+    // BenefitsSlider.__idSliderInterval = setInterval(() => {
+    //   BenefitsSlider.nextSlide();
+    // }, BenefitsSlider.timeSlideWithoutPause);
   }
 
   private createDots() {
