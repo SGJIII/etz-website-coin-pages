@@ -81,3 +81,9 @@
   .BenefitsSection_slide span {
   }
 }
+
+@media screen and (min-width: 768px) and (max-width: 1200px) and (max-height: 600px) {
+  .BenefitsSection {
+    padding-top: 52px;
+  }
+}

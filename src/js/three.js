@@ -252,7 +252,7 @@ class MobileModel {
   calculateEndPosition() {
     if (window.innerWidth > window.innerHeight) {
       if (window.innerHeight <= 600) {
-        this.endPositionY = 0;
+        this.endPositionY = 60;
         this.endPositionX = window.innerWidth - window.innerHeight;
       } else {
         this.endPositionY = 0;

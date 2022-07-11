@@ -48,7 +48,11 @@ class Links extends WorkspaceElementAll<HTMLLinkElement> {
       switch (name) {
         case "#benefits":
           marginBottomMenu = 5;
-          position = getElementOffsetTop(element);
+          if (window.innerHeight <= 600) {
+            position = getElementOffsetTop(element) + 32;
+          } else {
+            position = getElementOffsetTop(element);
+          }
           break;
         case "#etz-mobile":
           marginBottomMenu = 0;
