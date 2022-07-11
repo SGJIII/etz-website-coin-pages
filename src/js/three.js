@@ -355,11 +355,14 @@ class MobileModel {
 
     this.scene.add(directionalLight);
     const mainSection = document.querySelector(FIRST_SECTION_CLASS);
+
+    const innerWidth =
+      (document.documentElement.clientWidth || window.innerWidth) - 20;
     /**
      * Sizes
      */
     const sizes = {
-      width: window.innerWidth,
+      width: innerWidth,
       height: mainSection.getBoundingClientRect().height,
     };
 
@@ -381,7 +384,7 @@ class MobileModel {
         sizes.height = 300;
       } else {
         // Update sizes
-        sizes.width = window.innerWidth;
+        sizes.width = innerWidth;
         sizes.height = mainSection.getBoundingClientRect().height;
       }
     }
@@ -405,7 +408,7 @@ class MobileModel {
           sizes.width = 300;
           sizes.height = 300;
         } else {
-          sizes.width = window.innerWidth;
+          sizes.width = innerWidth;
           sizes.height = mainSection.getBoundingClientRect().height;
         }
       }
