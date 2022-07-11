@@ -106,11 +106,11 @@ class BenefitsSlider {
       if (this.slides === null) return;
       if (
         slide !== this.slides[BenefitsSlider.activeSlideIdx] ||
-        slide !== this.activeSlide
+        slide !== this.slides[BenefitsSlider.prevIdActiveSlide]
       ) {
         slide.setAttribute(
           "style",
-          `transform: translateX(${window.innerWidth})`
+          `transform: translateX(${window.innerWidth}px)`
         );
       }
     });
