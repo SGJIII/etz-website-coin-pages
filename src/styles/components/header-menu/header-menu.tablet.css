@@ -163,7 +163,7 @@
 
     width: 100vw;
     height: calc(100vh + (var(--vh-px, 0) - 100vh) - 50px);
-    min-height: 812px;
+    min-height: 512px;
     margin: 0;
   }
 
