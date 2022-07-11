@@ -1,4 +1,6 @@
-@media screen and (max-width: 768px), (max-width: 1200px) {
+@media screen and (max-width: 768px),
+  (max-width: 1200px),
+  screen and (max-width: 1200px) and (orientation: landscape) {
   .Notification {
     right: 0;
     bottom: 0;

@@ -98,6 +98,7 @@ class MobileModel {
   }
 
   setupInitialValue(gltf) {
+    console.log(window.innerWidth);
     if (window.innerWidth > 1200) {
       if (
         window.innerWidth < 1000 &&
@@ -110,11 +111,16 @@ class MobileModel {
         gltf.scene.position.set(2.2, -0.3, 0);
       }
     } else if (window.innerWidth < 768) {
-      const scaleSize = Number(window.innerHeight * 0.001421800947867).toFixed(
-        3
-      );
-      gltf.scene.scale.set(scaleSize, scaleSize, scaleSize);
-      gltf.scene.position.set(0, 0, 0);
+      if (window.matchMedia("(orientation: landscape)").matches) {
+        gltf.scene.scale.set(2, 2, 2);
+        gltf.scene.position.set(0.9, 0, 0);
+      } else {
+        const scaleSize = Number(
+          window.innerHeight * 0.001421800947867
+        ).toFixed(3);
+        gltf.scene.scale.set(scaleSize, scaleSize, scaleSize);
+        gltf.scene.position.set(0, 0, 0);
+      }
     } else {
       gltf.scene.scale.set(2, 2, 2);
       gltf.scene.position.set(0.9, 0, 0);
@@ -261,8 +267,16 @@ class MobileModel {
     } else {
       if (window.innerWidth > 1200) {
       } else if (window.innerWidth <= 768) {
-        this.endPositionY = -110;
-        this.endPositionX = window.innerWidth - 600;
+        if (
+          window.innerWidth < 768 &&
+          window.matchMedia("(orientation: landscape)").matches
+        ) {
+          this.endPositionY = -55;
+          this.endPositionX = window.innerWidth - 300;
+        } else {
+          this.endPositionY = -110;
+          this.endPositionX = window.innerWidth - 600;
+        }
       } else {
         this.endPositionY = window.innerHeight / 2 - 300;
         this.endPositionX = window.innerWidth - 600;
@@ -359,9 +373,17 @@ class MobileModel {
         sizes.height = 600;
       }
     } else {
-      // Update sizes
-      sizes.width = window.innerWidth;
-      sizes.height = mainSection.getBoundingClientRect().height;
+      if (
+        window.innerWidth < 768 &&
+        window.matchMedia("(orientation: landscape)").matches
+      ) {
+        sizes.width = 300;
+        sizes.height = 300;
+      } else {
+        // Update sizes
+        sizes.width = window.innerWidth;
+        sizes.height = mainSection.getBoundingClientRect().height;
+      }
     }
 
     const setSizesScene = (name) => {
@@ -376,8 +398,16 @@ class MobileModel {
         }
       } else {
         // Update sizes
-        sizes.width = window.innerWidth;
-        sizes.height = mainSection.getBoundingClientRect().height;
+        if (
+          window.innerWidth < 768 &&
+          window.matchMedia("(orientation: landscape)").matches
+        ) {
+          sizes.width = 300;
+          sizes.height = 300;
+        } else {
+          sizes.width = window.innerWidth;
+          sizes.height = mainSection.getBoundingClientRect().height;
+        }
       }
 
       // Update camera
@@ -568,7 +598,14 @@ class MobileModel {
       if (window.innerWidth > 1200) {
         handleMotionForDesktop();
       } else if (window.innerWidth <= 768) {
-        handleMotionForMobile();
+        if (
+          window.innerWidth < 768 &&
+          window.matchMedia("(orientation: landscape)").matches
+        ) {
+          handleMotionForTablet();
+        } else {
+          handleMotionForMobile();
+        }
       } else {
         handleMotionForTablet();
       }
