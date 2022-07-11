@@ -98,7 +98,6 @@ class MobileModel {
   }
 
   setupInitialValue(gltf) {
-    console.log(window.innerWidth);
     if (window.innerWidth > 1200) {
       if (
         window.innerWidth < 1000 &&
