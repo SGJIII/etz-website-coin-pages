@@ -41,6 +41,8 @@
     font-weight: 400;
     font-style: normal;
     line-height: 22px;
+
+    align-items: center;
   }
   .FAQSection_accordionDetailsDescription {
     font-size: 14px;
