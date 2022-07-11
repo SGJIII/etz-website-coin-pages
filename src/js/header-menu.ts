@@ -219,7 +219,8 @@ export default class HeaderMenu {
             outerHeight(firstElement) / 2;
 
           const activeElement = document
-            .querySelectorAll(`a[href="#${el.id}"]`)[0]
+            .querySelector(".HeaderMenu_menu")
+            ?.querySelectorAll(`a[href="#${el.id}"]`)[0]
             ?.closest(".HeaderMenu_link");
 
           if (
@@ -239,10 +240,13 @@ export default class HeaderMenu {
     });
   }
 
-  private handleAnimationDash(activeElement: Element | null) {
-    const dash = document.querySelector(".HeaderMenu_dash") as HTMLElement;
+  private handleAnimationDash(activeElement: Element | null | undefined) {
+    const dash = document
+      .querySelector(".HeaderMenu_menu")
+      ?.querySelector(".HeaderMenu_dash") as HTMLElement;
     const parentPos = document
-      .getElementById("HeaderMenu_links")
+      .querySelector(".HeaderMenu_menu")
+      ?.querySelector("#HeaderMenu_links")
       ?.getBoundingClientRect();
     const childPos = activeElement?.getBoundingClientRect();
 

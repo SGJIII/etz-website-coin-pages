@@ -5,18 +5,18 @@ type TimeoutId = string | number | NodeJS.Timeout | undefined;
 class BenefitsSlider {
   static activeSlideIdx = 0;
   static timeSlideWithoutPause = 3000;
-  static timeSlideWithPause = 5000;
+  static timeSlideWithPause = 2000;
   static __idSliderInterval: TimeoutId = 0;
   static __idSliderClick: TimeoutId = 0;
   static isLaunchSlider = false;
   static dots: Array<HTMLElement> | null = [];
   static prevIdActiveSlide = 0;
-  positon = 0;
-  widthSlides: number[] = [];
-  slides: NodeListOf<HTMLElement> | null = null;
-  dotsContainder: HTMLElement | null = null;
-  containder: HTMLElement | null = null;
-  activeSlide: HTMLElement | null = null;
+  static positon = 0;
+  static widthSlides: number[] = [];
+  static slides: NodeListOf<HTMLElement> | null = null;
+  static dotsContainder: HTMLElement | null = null;
+  static containder: HTMLElement | null = null;
+  static activeSlide: HTMLElement | null = null;
 
   public init() {
     this.createDots();
@@ -28,7 +28,8 @@ class BenefitsSlider {
     if (BenefitsSlider.activeSlideIdx > BenefitsSlider.dots.length - 1) {
       BenefitsSlider.activeSlideIdx = 0;
     }
-    BenefitsSlider.dots[BenefitsSlider.activeSlideIdx]?.click();
+    // BenefitsSlider.dots[BenefitsSlider.activeSlideIdx]?.click();
+    BenefitsSlider.changeActiveSlide(BenefitsSlider.activeSlideIdx);
   }
 
   static launchSlider() {
@@ -39,58 +40,62 @@ class BenefitsSlider {
   }
 
   private createDots() {
-    this.slides = document.querySelectorAll<HTMLElement>(
+    BenefitsSlider.slides = document.querySelectorAll<HTMLElement>(
       "[ name-benefits-slide]"
     );
 
-    this.dotsContainder = document.querySelector(
+    BenefitsSlider.dotsContainder = document.querySelector(
       "[name-benefits-slider-dots-container]"
     );
-    this.containder = document.querySelector(
+    BenefitsSlider.containder = document.querySelector(
       "[name-benefits-slider-container]"
     );
     const calculateWidthDots = (slide: HTMLElement) => {
       const width = slide.getBoundingClientRect().width;
-      this.widthSlides.push(width);
+      BenefitsSlider.widthSlides.push(width);
     };
 
     AddEventOrientationChange(() => {
-      this.widthSlides = [];
-      this.slides?.forEach((slide) => {
+      BenefitsSlider.widthSlides = [];
+      BenefitsSlider.slides?.forEach((slide) => {
         calculateWidthDots(slide);
       });
     });
 
-    this.slides.forEach((slide, idx) => {
+    BenefitsSlider.slides.forEach((slide, idx) => {
       calculateWidthDots(slide);
       const dot = document.createElement("span");
       dot.setAttribute("data-status", idx === 0 ? "active" : "idle");
       dot.setAttribute("name-benefits-slider-dot", "");
       dot.className = "BenefitsSection_dot";
+
       dot.addEventListener("click", () => {
-        this.changeActiveSlide(idx);
+        BenefitsSlider.changeActiveSlide(idx);
         clearTimeout(BenefitsSlider.__idSliderInterval);
         clearTimeout(BenefitsSlider.__idSliderClick);
         BenefitsSlider.__idSliderClick = setTimeout(() => {
           BenefitsSlider.launchSlider();
         }, BenefitsSlider.timeSlideWithPause);
       });
-      this.dotsContainder?.appendChild(dot);
+
+      BenefitsSlider.dotsContainder?.appendChild(dot);
       BenefitsSlider.dots?.push(dot);
     });
 
-    this.activeSlide = this.slides[0];
+    BenefitsSlider.activeSlide = BenefitsSlider.slides[0];
   }
 
-  changePosition(step: number, progress = 0) {
-    if (this.slides === null) return;
+  static changePosition(step: number, progress = 0) {
+    if (BenefitsSlider.slides === null) return;
 
-    const widthContainer = this.containder?.getBoundingClientRect()?.width ?? 0;
+    const widthContainer =
+      BenefitsSlider.containder?.getBoundingClientRect()?.width ?? 0;
     const widthSlide =
-      this.slides[BenefitsSlider.activeSlideIdx]?.getBoundingClientRect()
-        ?.width ?? 0;
+      BenefitsSlider.slides[
+        BenefitsSlider.activeSlideIdx
+      ]?.getBoundingClientRect()?.width ?? 0;
     const widthActiveSlide =
-      this.activeSlide?.getBoundingClientRect()?.width ?? 0;
+      BenefitsSlider.activeSlide?.getBoundingClientRect()?.width ?? 0;
 
     const isRigthDirection =
       BenefitsSlider.prevIdActiveSlide < BenefitsSlider.activeSlideIdx;
@@ -102,11 +107,11 @@ class BenefitsSlider {
       ? widthContainer + widthActiveSlide
       : -widthContainer - widthActiveSlide;
 
-    this.slides.forEach((slide) => {
-      if (this.slides === null) return;
+    BenefitsSlider.slides.forEach((slide) => {
+      if (BenefitsSlider.slides === null) return;
       if (
-        slide !== this.slides[BenefitsSlider.activeSlideIdx] ||
-        slide !== this.slides[BenefitsSlider.prevIdActiveSlide]
+        slide !== BenefitsSlider.slides[BenefitsSlider.activeSlideIdx] ||
+        slide !== BenefitsSlider.slides[BenefitsSlider.prevIdActiveSlide]
       ) {
         slide.setAttribute(
           "style",
@@ -115,14 +120,14 @@ class BenefitsSlider {
       }
     });
 
-    this.slides[BenefitsSlider.activeSlideIdx]?.setAttribute(
+    BenefitsSlider.slides[BenefitsSlider.activeSlideIdx]?.setAttribute(
       "style",
       `transform: translateX(${
         positionSlide - positionSlide * easeInOutQuad(progress)
       }px)`
     );
 
-    this.activeSlide?.setAttribute(
+    BenefitsSlider.activeSlide?.setAttribute(
       "style",
       `transform: translateX(${-(
         0 +
@@ -132,23 +137,26 @@ class BenefitsSlider {
 
     progress += step;
     if (progress < 1) {
-      requestAnimationFrame(() => this.changePosition(step, progress));
+      requestAnimationFrame(() =>
+        BenefitsSlider.changePosition(step, progress)
+      );
       return;
     }
 
-    this.slides[BenefitsSlider.activeSlideIdx]?.setAttribute(
+    BenefitsSlider.slides[BenefitsSlider.activeSlideIdx]?.setAttribute(
       "style",
-      `transform: translateX(${-this.positon}px)`
+      `transform: translateX(${-BenefitsSlider.positon}px)`
     );
 
-    this.activeSlide = this.slides[BenefitsSlider.activeSlideIdx];
+    BenefitsSlider.activeSlide =
+      BenefitsSlider.slides[BenefitsSlider.activeSlideIdx];
     BenefitsSlider.prevIdActiveSlide = BenefitsSlider.activeSlideIdx;
   }
 
-  changeActiveSlide(activeIdx: number) {
+  static changeActiveSlide(activeIdx: number) {
     BenefitsSlider.activeSlideIdx = activeIdx;
     const step = 1 / 42;
-    this.changePosition(step);
+    BenefitsSlider.changePosition(step);
     const handleStatus = (el: HTMLElement, idx: number) => {
       el.setAttribute("data-status", idx === activeIdx ? "active" : "idle");
     };

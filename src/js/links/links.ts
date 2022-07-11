@@ -34,9 +34,8 @@ class Links extends WorkspaceElementAll<HTMLLinkElement> {
           position = position - marginBottomMenu;
           break;
         case "#etz-mobile":
-          marginBottomMenu = 0;
-          position = position - marginBottomMenu - heightMenu;
           position = position - deltaYCenter;
+          position = position - marginBottomMenu - heightMenu / 2;
           break;
         default:
           marginBottomMenu = 64;
