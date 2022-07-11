@@ -3,7 +3,7 @@
     height: 700px;
     min-height: calc(100vh + 32px);
     margin-top: 128px;
-    padding: 0;
+    padding: 20px 0;
   }
 
   .ContactUsSection_container {
