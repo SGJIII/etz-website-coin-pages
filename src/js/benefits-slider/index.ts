@@ -108,7 +108,10 @@ class BenefitsSlider {
         slide !== this.slides[BenefitsSlider.activeSlideIdx] ||
         slide !== this.activeSlide
       ) {
-        slide.setAttribute("style", `transform: translateX(500px)`);
+        slide.setAttribute(
+          "style",
+          `transform: translateX(${window.innerWidth})`
+        );
       }
     });
 
