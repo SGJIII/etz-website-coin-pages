@@ -11,7 +11,7 @@ export default class HeaderMenu {
   private target: HTMLElement | null = null;
   private targetMobile: HTMLElement | null = null;
   private targetMobileContainer: HTMLElement | null | undefined = null;
-  private burger: HTMLElement | null = null;
+  private burger: HTMLInputElement | null = null;
   private className = "";
   private scrollPosition = 0;
   private isInitialPosition = true;
@@ -31,7 +31,7 @@ export default class HeaderMenu {
     this.targetMobileContainer = this.targetMobile?.querySelector(
       ".HeaderMenu_menuContainer"
     );
-    this.burger = document.querySelector<HTMLElement>(
+    this.burger = document.querySelector<HTMLInputElement>(
       "[data-name=HeaderMenuBurger]"
     );
   }
@@ -84,6 +84,9 @@ export default class HeaderMenu {
           const heightMobileMenu =
             this.targetMobileContainer?.getBoundingClientRect()?.height ?? 0;
           this.targetMobile?.classList.remove("HeaderMenu_menuContainer__open");
+          if (this.burger) {
+            this.burger.checked = false;
+          }
           if (this.prevScrollPosition >= heightMobileMenu) {
             this.targetMobile?.classList.add("HeaderMenu_menu__mobileSticky");
           }
@@ -144,8 +147,9 @@ export default class HeaderMenu {
       }
     });
     addLinkClickCallback(() => {
-      if (this.isScrollDisabled) {
-        this.burger?.click();
+      if (this.isOpenMenu) {
+        enableBodyScroll(this.targetMobile);
+        this.menu().close();
       }
     });
   }
