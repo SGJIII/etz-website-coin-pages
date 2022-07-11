@@ -65,6 +65,7 @@
     height: 90px;
   }
   .ContactUsSection_formFooter {
+    align-items: center;
     flex-direction: column;
   }
   .ContactUsSection_formButtonBlock {
