@@ -20,6 +20,6 @@
     "allowSyntheticDefaultImports": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["./src/**/*.ts", "src/js/utils/scroll.js"],
-  "exclude": ["node_modules", "**/*.config.js", "./js/**/*.js", "src/assets"]
+  "include": ["./src/**/*.ts", "src/js/utils/scroll.js", "src/js/version.js"],
+  "exclude": ["node_modules", "**/*.config.js", "./js/**/*.js", "src/assets", "./src/js/version.js"]
 }
