@@ -67,7 +67,10 @@ class Links extends WorkspaceElementAll<HTMLLinkElement> {
           position = position - marginBottomMenu - heightMenu;
           break;
         case "#contact-us":
-          marginBottomMenu = 0;
+          if (window.innerHeight <= 600) {
+            marginBottomMenu = 0;
+            heightMenu = -20;
+          }
           position = position - marginBottomMenu - heightMenu;
           break;
         default:

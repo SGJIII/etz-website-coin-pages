@@ -136,10 +136,12 @@ export default class HeaderMenu {
   private handleBurger() {
     this.burger?.addEventListener("click", () => {
       if (!this.isOpenMenu) {
-        this.prevScrollPosition = this.scrollPosition;
         this.menu().open();
-        disableBodyScroll(this.targetMobile);
-        this.isScrollDisabled = true;
+        setTimeout(() => {
+          this.prevScrollPosition = this.scrollPosition;
+          disableBodyScroll(this.targetMobile);
+          this.isScrollDisabled = true;
+        }, 10);
       } else {
         enableBodyScroll(this.targetMobile);
         this.menu().close();

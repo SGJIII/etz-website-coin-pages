@@ -117,7 +117,7 @@ class MobileModel {
       gltf.scene.position.set(0, 0, 0);
     } else {
       gltf.scene.scale.set(2, 2, 2);
-      gltf.scene.position.set(0, 0, 0);
+      gltf.scene.position.set(0.9, 0, 0);
     }
   }
 
@@ -245,7 +245,7 @@ class MobileModel {
     if (window.innerHeight <= 600) {
       this.startPositionX = window.innerWidth / 2 - window.innerHeight / 2;
     } else {
-      this.startPositionX = window.innerWidth / 2 - 300;
+      this.startPositionX = window.innerWidth / 2 - 400;
     }
   }
 
@@ -256,16 +256,16 @@ class MobileModel {
         this.endPositionX = window.innerWidth - window.innerHeight;
       } else {
         this.endPositionY = 0;
-        this.endPositionX = window.innerWidth - 500;
+        this.endPositionX = window.innerWidth - 600;
       }
     } else {
       if (window.innerWidth > 1200) {
       } else if (window.innerWidth <= 768) {
         this.endPositionY = -110;
-        this.endPositionX = window.innerWidth - 450;
+        this.endPositionX = window.innerWidth - 600;
       } else {
         this.endPositionY = window.innerHeight / 2 - 300;
-        this.endPositionX = window.innerWidth - 500;
+        this.endPositionX = window.innerWidth - 600;
       }
     }
   }
