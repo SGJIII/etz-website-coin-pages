@@ -200,7 +200,7 @@ export default class HeaderMenu {
       getCoords(this.links[0], "bottom left")?.x;
     dashContainer.style.width = `${widthDashContainer}px`;
 
-    window.addEventListener("scroll", () => {
+    const watchActiveSection = () => {
       this.scrollDistance = window.scrollY;
       if (window.innerWidth > 768) {
         this.sections.forEach((el) => {
@@ -237,7 +237,9 @@ export default class HeaderMenu {
           activeElement?.classList.remove("HeaderMenu_link__active");
         });
       }
-    });
+    };
+    watchActiveSection();
+    window.addEventListener("scroll", watchActiveSection.bind(this));
   }
 
   private handleAnimationDash(activeElement: Element | null | undefined) {
