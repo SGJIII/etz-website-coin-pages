@@ -1,7 +1,6 @@
 @media screen and (min-width: 768px) and (max-width: 1200px) {
   .HeaderSection {
     overflow-x: hidden;
-    overflow-y: initial;
 
     height: 778px;
   }

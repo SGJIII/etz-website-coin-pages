@@ -1,4 +1,4 @@
-@media screen and (max-width: 768px), (max-width: 1200px) {
+@media screen and (max-width: 768px) {
   .FAQSection {
     min-height: 100%;
     margin-top: var(--section-margin-top);
@@ -41,6 +41,8 @@
     font-weight: 400;
     font-style: normal;
     line-height: 22px;
+
+    align-items: center;
   }
   .FAQSection_accordionDetailsDescription {
     font-size: 14px;
@@ -90,14 +92,5 @@
   }
   .FAQSection_accordionDetails {
     padding: 0 16px;
-  }
-}
-
-@media screen and (min-width: 768px) and (max-width: 1200px) {
-  .FAQSection_container {
-    width: calc(100vw - 48px);
-    padding: 48px;
-
-    place-self: initial;
   }
 }

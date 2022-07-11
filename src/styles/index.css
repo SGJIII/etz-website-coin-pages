@@ -186,6 +186,8 @@ img:not([src]) {
   position: absolute;
   top: 0;
   right: 0;
+
+  pointer-events: none;
 }
 
 .Loader_leaves__svg {

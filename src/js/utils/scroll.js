@@ -122,6 +122,7 @@ const setPositionFixed = () =>
       document.body.style.top = `${-scrollY}px`;
       document.body.style.left = `${-scrollX}px`;
       document.body.style.width = "100vw";
+      document.body.style.overflow = "hidden";
 
       setTimeout(
         () =>
@@ -149,6 +150,7 @@ const restorePositionSetting = () => {
     document.body.style.top = previousBodyPosition.top;
     document.body.style.left = previousBodyPosition.left;
     document.body.style.width = "";
+    document.body.style.overflow = "";
 
     // Restore scroll
     window.scrollTo(x, y);

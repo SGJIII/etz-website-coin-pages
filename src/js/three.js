@@ -70,16 +70,16 @@ class MobileModel {
   }
 
   checkLoader() {
-    if (video.readyState === 4 && !this.isLoadedVideoGraph) {
+    if (video.readyState === 4) {
       this.isLoadedVideoGraph = true;
     }
-    if (video2.readyState === 4 && !this.isLoadedVideoFlow) {
-      this.isLoadedVideoFlow = true;
-    }
+    // if (video2.readyState === 4) {
+    //   this.isLoadedVideoFlow = true;
+    // }
 
     if (
       this.isLoadedModel &&
-      this.isLoadedVideoFlow &&
+      // this.isLoadedVideoFlow &&
       this.isLoadedVideoGraph
     ) {
       const loader = document.querySelector("[name-loader]");

@@ -4,6 +4,7 @@
 
     margin-top: 50px;
   }
+
   .Footer_nav {
     flex-direction: column;
 
@@ -14,6 +15,7 @@
   .Footer_nav a {
     margin-right: 0;
   }
+
   .Footer_nav .Footer_logoLink {
     width: 100px;
     margin-right: 0;
@@ -44,6 +46,7 @@
 
     margin: 0 0 16px 0;
   }
+
   .Footer_privacy {
     font-size: 12px;
     font-weight: 400;
@@ -57,9 +60,11 @@
 
     color: var(--dark-50);
   }
+
   .Footer_copyright {
     margin: 0;
   }
+
   .Footer_descriptionBlock {
     font-size: 12px;
     font-weight: 400;
@@ -84,11 +89,17 @@
   .Footer_privacy {
     margin: 32px 48px 19px;
   }
+
   .Footer_descriptionBlock {
     padding: 0 48px 40px 48px;
   }
+
   .Footer_links {
     display: flex;
     justify-content: space-between;
+  }
+
+  .Footer_nav .Footer_logoLink svg {
+    width: 70px;
   }
 }

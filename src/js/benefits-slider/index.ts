@@ -7,9 +7,10 @@ class BenefitsSlider {
   static timeSlideWithoutPause = 3000;
   static timeSlideWithPause = 5000;
   static __idSliderInterval: TimeoutId = 0;
+  static __idSliderClick: TimeoutId = 0;
   static isLaunchSlider = false;
   static dots: Array<HTMLElement> | null = [];
-
+  static prevIdActiveSlide = 0;
   positon = 0;
   widthSlides: number[] = [];
   slides: NodeListOf<HTMLElement> | null = null;
@@ -69,7 +70,8 @@ class BenefitsSlider {
       dot.addEventListener("click", () => {
         this.changeActiveSlide(idx);
         clearTimeout(BenefitsSlider.__idSliderInterval);
-        setTimeout(() => {
+        clearTimeout(BenefitsSlider.__idSliderClick);
+        BenefitsSlider.__idSliderClick = setTimeout(() => {
           BenefitsSlider.launchSlider();
         }, BenefitsSlider.timeSlideWithPause);
       });
@@ -90,8 +92,28 @@ class BenefitsSlider {
     const widthActiveSlide =
       this.activeSlide?.getBoundingClientRect()?.width ?? 0;
 
-    const positionSlide = widthContainer + widthSlide;
-    const positionActiveSlide = widthContainer + widthActiveSlide;
+    const isRigthDirection =
+      BenefitsSlider.prevIdActiveSlide < BenefitsSlider.activeSlideIdx;
+
+    const positionSlide = isRigthDirection
+      ? widthContainer + widthSlide
+      : -widthContainer - widthSlide;
+    const positionActiveSlide = isRigthDirection
+      ? widthContainer + widthActiveSlide
+      : -widthContainer - widthActiveSlide;
+
+    this.slides.forEach((slide) => {
+      if (this.slides === null) return;
+      if (
+        slide !== this.slides[BenefitsSlider.activeSlideIdx] ||
+        slide !== this.slides[BenefitsSlider.prevIdActiveSlide]
+      ) {
+        slide.setAttribute(
+          "style",
+          `transform: translateX(${window.innerWidth}px)`
+        );
+      }
+    });
 
     this.slides[BenefitsSlider.activeSlideIdx]?.setAttribute(
       "style",
@@ -99,6 +121,7 @@ class BenefitsSlider {
         positionSlide - positionSlide * easeInOutQuad(progress)
       }px)`
     );
+
     this.activeSlide?.setAttribute(
       "style",
       `transform: translateX(${-(
@@ -117,7 +140,9 @@ class BenefitsSlider {
       "style",
       `transform: translateX(${-this.positon}px)`
     );
+
     this.activeSlide = this.slides[BenefitsSlider.activeSlideIdx];
+    BenefitsSlider.prevIdActiveSlide = BenefitsSlider.activeSlideIdx;
   }
 
   changeActiveSlide(activeIdx: number) {

@@ -47,6 +47,7 @@
 
 .FAQSection_accordionSummary {
   display: flex;
+  align-items: center;
   justify-content: space-between;
 
   padding: 23px 41px;
@@ -135,7 +136,10 @@
 }
 
 .FAQSection_arrowIcon {
+  display: flex;
+  align-items: center;
   align-self: center;
+  justify-content: center;
 
   width: 32px;
   height: 32px;

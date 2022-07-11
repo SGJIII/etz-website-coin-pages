@@ -45,7 +45,7 @@ class Links extends WorkspaceElementAll<HTMLLinkElement> {
       }
     } else if (window.innerWidth > 768 && window.innerWidth <= 1200) {
       marginBottomMenu = 20;
-      heightMenu = 56;
+      heightMenu = 70;
       switch (name) {
         case "#benefits":
           marginBottomMenu = 5;
@@ -56,40 +56,36 @@ class Links extends WorkspaceElementAll<HTMLLinkElement> {
           position = position - marginBottomMenu - heightMenu;
           break;
         case "#employers":
-          marginBottomMenu = 80;
+          marginBottomMenu = 0;
           position = position - marginBottomMenu - heightMenu;
           break;
         case "#crypto":
           marginBottomMenu = 0;
-          heightMenu = 0;
           position = position - marginBottomMenu - heightMenu;
           break;
         case "#contact-us":
           marginBottomMenu = 0;
-          heightMenu = 0;
           position = position - marginBottomMenu - heightMenu;
           break;
         default:
-          marginBottomMenu = 20;
+          marginBottomMenu = 0;
           position = position - marginBottomMenu - heightMenu;
           break;
       }
     } else if (window.innerWidth <= 768) {
       marginBottomMenu = 20;
-      heightMenu = 56;
-      const deltaYCenter = (window.innerHeight - (rect?.height ?? 0)) / 2;
+      heightMenu = 76;
       switch (name) {
         case "#benefits":
           marginBottomMenu = 5;
           position = getElementOffsetTop(element);
           break;
         case "#etz-mobile":
-          marginBottomMenu = 10;
-          position = position - deltaYCenter;
+          marginBottomMenu = 0;
           position = position - marginBottomMenu - heightMenu;
           break;
         default:
-          marginBottomMenu = 10;
+          marginBottomMenu = 0;
           position = position - marginBottomMenu - heightMenu;
           break;
       }
