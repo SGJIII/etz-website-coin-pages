@@ -16,8 +16,8 @@ export default class HeaderMenu {
   private scrollPosition = 0;
   private isInitialPosition = true;
   private firstLoad = true;
-  private sections: NodeListOf<Element>;
-  private links: NodeListOf<Element>;
+  private sections: NodeListOf<HTMLElement>;
+  private links: NodeListOf<HTMLElement>;
   private scrollDistance = 0;
   isScrollDisabled = false;
 
@@ -245,10 +245,10 @@ export default class HeaderMenu {
   private handleAnimationDash(activeElement: Element | null | undefined) {
     const dash = document
       .querySelector(".HeaderMenu_menu")
-      ?.querySelector(".HeaderMenu_dash") as HTMLElement;
+      ?.querySelector<HTMLElement>(".HeaderMenu_dash");
     const parentPos = document
       .querySelector(".HeaderMenu_menu")
-      ?.querySelector("#HeaderMenu_links")
+      ?.querySelector<HTMLElement>("#HeaderMenu_links")
       ?.getBoundingClientRect();
     const childPos = activeElement?.getBoundingClientRect();
 
@@ -264,9 +264,9 @@ export default class HeaderMenu {
           getCoords(this.links[this.links.length - 1], "bottom left")?.x
         }px,0)`;
       } else {
-        dash.style.transform = `translate(-${outerWidth(
-          this.links[0] as HTMLElement
-        )}px,0)`;
+        dash.style.transform = `translate(-${
+          outerWidth(this.links[0]) * 2
+        }px,0)`;
       }
     }
     dash.style.width = `${activeElement?.clientWidth}px`;
