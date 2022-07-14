@@ -12,7 +12,29 @@
     <link rel="stylesheet" href="styles/index.mobile.css" />
     <link rel="stylesheet" href="styles/index.tablet.css" />
     <title>ETZ</title>
+    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon" />
+    <link
+      rel="apple-touch-icon"
+      sizes="256x256"
+      href="./assets/favicon-256.png" />
+    <meta property="og:title" content="ETZ" />
+    <meta property="og:image" content="./assets/frame.png" />
     <script src="./js/version.js" type="module"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-JNSD1B12W2"></script>
+    <script>
+      if (process.env.BIULD_STATUS === "PRODUCTION") {
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag("js", new Date());
+
+        gtag("config", "G-JNSD1B12W2");
+      }
+    </script>
   </head>
   <body style="overflow: hidden">
     <include src="components/loader/index.html"></include>
