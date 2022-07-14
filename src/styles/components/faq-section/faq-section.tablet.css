@@ -1,5 +1,5 @@
 @media screen and (min-width: 768px) and (max-width: 1200px),
-  screen and (max-width: 1200px) and (orientation: landscape) {
+  screen and (max-width: 896px) and (min-aspect-ratio: 13/9) {
   .FAQSection {
     min-height: 100%;
     margin-top: 120px;
