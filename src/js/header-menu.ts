@@ -11,6 +11,8 @@ export default class HeaderMenu {
   private target: HTMLElement | null = null;
   private targetMobile: HTMLElement | null = null;
   private targetMobileContainer: HTMLElement | null | undefined = null;
+  private buttonDemo: HTMLElement | null = null;
+  private buttonJoin: HTMLElement | null = null;
   private burger: HTMLInputElement | null = null;
   private className = "";
   private scrollPosition = 0;
@@ -34,6 +36,9 @@ export default class HeaderMenu {
     this.burger = document.querySelector<HTMLInputElement>(
       "[data-name=HeaderMenuBurger]"
     );
+
+    this.buttonDemo = document.querySelector("[name-button-demo]");
+    this.buttonJoin = document.querySelector("[name-button-join]");
   }
 
   /**
@@ -97,10 +102,22 @@ export default class HeaderMenu {
       sticky: () => {
         this.target?.classList.add("HeaderMenu_menu__sticky");
         this.target?.classList.remove("HeaderMenu_menu__stickyHide");
+
+        this.buttonDemo?.classList.add("Button__secondary");
+        this.buttonDemo?.classList.remove("Button__whiteSecondary");
+
+        this.buttonJoin?.classList.add("Button__primary");
+        this.buttonJoin?.classList.remove("Button__whitePrimary");
       },
       unsticky: () => {
         this.target?.classList.remove("HeaderMenu_menu__sticky");
         this.target?.classList.add("HeaderMenu_menu__stickyHide");
+
+        this.buttonDemo?.classList.add("Button__whiteSecondary");
+        this.buttonDemo?.classList.remove("Button__secondary");
+
+        this.buttonJoin?.classList.add("Button__whitePrimary");
+        this.buttonJoin?.classList.remove("Button__primary");
       },
       open: () => {
         this.targetMobile?.classList.add("HeaderMenu_menuContainer__open");
@@ -172,15 +189,17 @@ export default class HeaderMenu {
 
     this.calculatePosition();
     if (this.isInitialPosition) {
-      this.target?.classList.add("HeaderMenu_menu__sticky");
-      this.target?.classList.remove("HeaderMenu_menu__stickyHide");
+      // this.target?.classList.add("HeaderMenu_menu__sticky");
+      // this.target?.classList.remove("HeaderMenu_menu__stickyHide");
+      this.menu().sticky();
       this.firstLoad = false;
       return;
     }
 
     if (this.firstLoad) return;
-    this.target?.classList.remove("HeaderMenu_menu__sticky");
-    this.target?.classList.add("HeaderMenu_menu__stickyHide");
+    // this.target?.classList.remove("HeaderMenu_menu__sticky");
+    // this.target?.classList.add("HeaderMenu_menu__stickyHide");
+    this.menu().unsticky();
   }
 
   private calculatePosition() {
