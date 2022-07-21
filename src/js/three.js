@@ -35,7 +35,6 @@ class MobileModel {
   environmentMap = null;
   debugObject = {};
   secondSection = null;
-
   startPositionY = 0;
   startPositionX = 0;
   endPositionY = 0;
@@ -492,7 +491,7 @@ class MobileModel {
 
       const mouseWheelDistance = getElementOffsetTop(this.secondSection);
 
-      if (scrollTopFrame >= 0 && scrollTopFrame <= mouseWheelDistance) {
+      if (scrollTopFrame >= 0 && scrollTopFrame <= mouseWheelDistance - 100) {
         mouseWheelDeltaDistance = scrollTopFrame;
 
         if (mouseWheelDeltaDistance > mouseWheelDistance) {
@@ -542,7 +541,7 @@ class MobileModel {
           phoneBlock.style.position = "absolute";
           return;
         }
-        if (scrollTopFrame >= mouseWheelDistance - 50) {
+        if (scrollTopFrame >= mouseWheelDistance - 100) {
           if (isLeave === true) return;
           isLeave = true;
           launchAnimation();
