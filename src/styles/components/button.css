@@ -80,10 +80,12 @@
   background-color: var(--primary);
 }
 
-.Button__primary:hover {
-  transition: var(--transition-button);
+@media (hover: hover) {
+  .Button__primary:hover {
+    transition: var(--transition-button);
 
-  background-color: var(--primary);
+    background-color: var(--primary);
+  }
 }
 
 .Button__primary:active {
@@ -110,12 +112,14 @@
   background-color: var(--bright);
 }
 
-.Button__secondary:hover {
-  transition: var(--transition-button);
+@media (hover: hover) {
+  .Button__secondary:hover {
+    transition: var(--transition-button);
 
-  color: var(--bright);
-  border: 2px solid transparent;
-  background-color: var(--primary);
+    color: var(--bright);
+    border: 2px solid transparent;
+    background-color: var(--primary);
+  }
 }
 
 .Button__secondary:active {
@@ -153,12 +157,14 @@
   background-color: initial;
 }
 
-.Button__whiteSecondary:hover {
-  transition: var(--transition-button);
+@media (hover: hover) {
+  .Button__whiteSecondary:hover {
+    transition: var(--transition-button);
 
-  color: var(--primary);
-  border: 2px solid transparent;
-  background-color: var(--bright);
+    color: var(--primary);
+    border: 2px solid transparent;
+    background-color: var(--bright);
+  }
 }
 
 .Button__whiteSecondary:active {
@@ -187,12 +193,14 @@
   background-color: var(--bright);
 }
 
-.Button__whitePrimary:hover {
-  transition: var(--transition-button);
+@media (hover: hover) {
+  .Button__whitePrimary:hover {
+    transition: var(--transition-button);
 
-  color: var(--primary);
-  border: 2px solid var(--bright);
-  background-color: var(--bright);
+    color: var(--primary);
+    border: 2px solid var(--bright);
+    background-color: var(--bright);
+  }
 }
 
 .Button__whitePrimary:active {
