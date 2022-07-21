@@ -81,7 +81,7 @@
 }
 
 @media (hover: hover) {
-  .Button__primary:hover {
+  .Button__primary:hover:enabled:not(.Button__loading) {
     transition: var(--transition-button);
 
     background-color: var(--primary);
@@ -113,7 +113,7 @@
 }
 
 @media (hover: hover) {
-  .Button__secondary:hover {
+  .Button__secondary:hover:enabled:not(.Button__loading) {
     transition: var(--transition-button);
 
     color: var(--bright);
@@ -158,7 +158,7 @@
 }
 
 @media (hover: hover) {
-  .Button__whiteSecondary:hover {
+  .Button__whiteSecondary:hover:enabled:not(.Button__loading) {
     transition: var(--transition-button);
 
     color: var(--primary);
@@ -194,7 +194,7 @@
 }
 
 @media (hover: hover) {
-  .Button__whitePrimary:hover {
+  .Button__whitePrimary:hover:enabled:not(.Button__loading) {
     transition: var(--transition-button);
 
     color: var(--primary);
