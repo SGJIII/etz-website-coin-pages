@@ -5,3 +5,5 @@ export type HTMLElementEvent<T extends HTMLInputElement> = Omit<
   srcElement: HTMLInputElement;
   currentTarget: (EventTarget & { value?: T["value"] }) | null;
 };
+
+export type ServerError = { success: boolean; code: string; message: string };

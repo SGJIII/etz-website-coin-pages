@@ -191,3 +191,7 @@
 .ContactUsSection_submit {
   min-width: 164px;
 }
+
+.ContactUsSection__dropdown {
+  width: 100%;
+}

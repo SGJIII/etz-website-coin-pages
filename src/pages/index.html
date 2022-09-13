@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html
+  lang="en-US"
+  xmlns:og="http://opengraphprotocol.org/schema/"
+  xmlns:fb="http://www.facebook.com/2008/fbml">
+  <head>
+    <script src="../js/services/lottie.js" type="module"></script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <link rel="stylesheet" href="../styles/index.css" />
+    <link rel="stylesheet" href="../styles/index.desktop.css" />
+    <link rel="stylesheet" href="../styles/index.mobile.css" />
+    <link rel="stylesheet" href="../styles/index.tablet.css" />
+    <title>ETZ</title>
+    <link
+      rel="shortcut icon"
+      href="https://etzsoft.com/favicon.ico"
+      type="image/x-icon" />
+    <link
+      rel="apple-touch-icon"
+      sizes="16x16"
+      href="https://etzsoft.com/favicon-16.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="32x32"
+      href="https://etzsoft.com/favicon-32.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="48x48"
+      href="https://etzsoft.com/favicon-48.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="256x256"
+      href="https://etzsoft.com/favicon-256.png" />
+
+    <meta property="og:title" content="ETZ" />
+    <meta property="og:description" content="" />
+    <meta property="og:site_name" content="ETZ" />
+    <meta property="og:url" content="https://etzsoft.com" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content="https://etzsoft.com/frame.png" />
+    <meta
+      property="og:image:secure_url"
+      content="https://etzsoft.com/frame.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:height" content="504" />
+    <meta property="og:image:width" content="968" />
+    <meta name="twitter:title" content="ETZ" />
+    <meta name="twitter:image" content="https://etzsoft.com/frame.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script src="../js/version.js" type="module"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-JNSD1B12W2"></script>
+    <script>
+      if (process.env.BIULD_STATUS === "PRODUCTION") {
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag("js", new Date());
+
+        gtag("config", "G-JNSD1B12W2");
+      }
+    </script>
+  </head>
+  <body style="overflow: hidden">
+    <include src="components/loader/index.html"></include>
+    <video
+      id="video"
+      playsinline
+      muted
+      loop
+      autoplay
+      width="750"
+      height="1624"
+      src="../assets/Mobile-1-3.mp4"
+      style="display: none"></video>
+    <video
+      id="video2"
+      playsinline
+      muted
+      loop
+      autoplay
+      width="750"
+      height="1624"
+      src="../assets/Buying_Mobile-4.mp4"
+      style="display: none"></video>
+    <canvas class="webgl" name-mobile-model></canvas>
+
+    <include
+      src="components/header-menu/index.mobile.html"
+      locals='{
+      "nameStartButton": "Join the Waitlist"
+    }'></include>
+    <include
+      src="components/header-section/index.html"
+      locals='{
+      "title": "Empower your employees with a crypto SEP IRA",
+      "description": "A white glove crypto retirement service for your business. We offer institutional-grade crypto custody on your digital assets all while charging low transparent fees. Have an IRA or 401k you’d like to rollover? We can help with that as well.",
+      "nameStartButton": "Join the Waitlist"
+    }'></include>
+    <include src="components/benefits-section/index.html"></include>
+    <include
+      src="components/for-employers-section/index.html"
+      locals='{
+      "title": "For Employers"
+  }'></include>
+    <include src="components/etz-mobile-section/index.html"></include>
+    <include src="components/supported-crypto-section/index.html"></include>
+    <include src="components/faq-section/index.html"></include>
+    <include src="components/contact-us-section/employer.html"></include>
+    <include src="components/footer/index.html"></include>
+
+    <script type="module">
+      function setupSizePage() {
+        const vw = Math.max(
+          document.documentElement.clientWidth || 0,
+          window.innerWidth || 0
+        );
+        const vh = Math.max(
+          document.documentElement.clientHeight || 0,
+          window.innerHeight || 0
+        );
+        document.documentElement.style.setProperty("--vw", `${vw}`);
+        document.documentElement.style.setProperty("--vh", `${vh}`);
+        document.documentElement.style.setProperty("--vh-px", `${vh}px`);
+      }
+      setupSizePage();
+      window.addEventListener("resize", setupSizePage);
+    </script>
+    <script type="module" src="../js/links/links.ts" async></script>
+    <script type="module" src="../js/header-menu.ts" async></script>
+    <script type="module" src="../js/index.ts"></script>
+    <script type="module" src="../js/three.js"></script>
+  </body>
+</html>

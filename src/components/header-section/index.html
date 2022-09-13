@@ -7,34 +7,41 @@
     loop
     autoplay></lottie-player>
   <div class="HeaderSection_menu">
-    <include src="components/header-menu/index.html"></include>
+    <include
+      src="components/header-menu/index.html"
+      locals='{
+      "nameStartButton": "{{nameStartButton}}"
+    }'></include>
   </div>
   <div class="HeaderSection_main" data-name="Section">
     <div class="HeaderSection_container __container">
       <section class="HeaderSection_welcomeSection">
         <div class="HeaderSection_welcome">
           <div>
-            <span class="HeaderSection_title">
-              Empower your employees with a crypto SEP IRA
-            </span>
+            <span class="HeaderSection_title">{{title}}</span>
             <span
               class="HeaderSection_description"
               name-header-section-description>
-              A white glove crypto retirement service for your business. We
-              offer institutional-grade crypto custody on your digital assets
-              all while charging low transparent fees. Have an IRA or 401k you’d
-              like to rollover? We can help with that as well.
+              {{description}}
             </span>
           </div>
-          <!--Hidden until the release of other projects-->
-          <!-- <div class="HeaderSection_buttons">
-          <button class="Button Button__ghost HeaderSection_getStartedButton">
-            Get Started
-          </button>
-          <button class="Button Button__outlined HeaderSection_downloadButton">
-            Download App
-          </button>
-        </div> -->
+
+          <div class="HeaderSection_buttons">
+            <a
+              href="https://calendly.com/nash-etz/30min"
+              target="_blank"
+              class="Button Button__whiteSecondary"
+              name-button-demo>
+              Get Free DEMO
+            </a>
+            <a
+              href="#contact-us"
+              name-link
+              class="Button Button__whitePrimary"
+              name-button-join>
+              {{nameStartButton}}
+            </a>
+          </div>
         </div>
         <div class="HeaderSection_triangle"></div>
       </section>

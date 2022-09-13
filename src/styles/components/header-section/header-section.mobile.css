@@ -41,6 +41,8 @@
     padding: 0 16px;
   }
   .HeaderSection_welcome {
+    align-items: center;
+
     width: 100%;
   }
   .HeaderSection_title {
@@ -62,5 +64,22 @@
     width: 100%;
 
     text-align: center;
+  }
+
+  .HeaderSection_buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    height: 120px;
+    margin-top: 20px;
+  }
+
+  .HeaderSection_buttons a {
+    width: 200px;
+  }
+
+  .HeaderSection_buttons a:last-child {
+    margin-left: 0;
   }
 }

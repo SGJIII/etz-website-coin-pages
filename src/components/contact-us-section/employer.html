@@ -5,9 +5,9 @@
   <div class="ContactUsSection_container __container">
     <section class="ContactUsSection_card">
       <div class="ContactUsSection_formBlock">
-        <span class="ContactUsSection_title __heading-1"
-          >Join the Waitlist</span
-        >
+        <span class="ContactUsSection_title __heading-1">
+          Join the Waitlist
+        </span>
         <span class="ContactUsSection_subtitle __subtitle-1"
           >Fill out this form and we will get in touch with you</span
         >
@@ -58,15 +58,21 @@
                 <span class="Button_text">Submit</span
                 ><img
                   class="Button_loader"
-                  src="assets/white_loader_anim.svg" />
+                  src="../assets/white_loader_anim.svg" />
               </button>
             </div>
           </div>
         </div>
       </div>
       <div class="ContactUsSection_peopleImgBlock">
-        <img src="assets/people.png" class="ContactUsSection_peopleImg" />
+        <img src="../assets/people.png" class="ContactUsSection_peopleImg" />
       </div>
     </section>
   </div>
 </article>
+
+<script type="module">
+  import ContactFrom from "../js/form/employer";
+  const contactFrom = new ContactFrom();
+  contactFrom.init();
+</script>
