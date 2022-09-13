@@ -213,54 +213,21 @@ export default class HeaderMenu {
   }
 
   private handleAnimationMenu() {
-    const dashContainer = document.querySelector(
+    const dashContainer = document.querySelector<HTMLElement>(
       ".HeaderMenu_dashContainer"
-    ) as HTMLElement;
+    );
     const widthDashContainer =
       getCoords(this.links[this.links.length - 1], "bottom right")?.x -
       getCoords(this.links[0], "bottom left")?.x;
-    dashContainer.style.width = `${widthDashContainer}px`;
+    if (dashContainer) dashContainer.style.width = `${widthDashContainer}px`;
 
-    const watchActiveSection = () => {
-      this.scrollDistance = window.scrollY;
-      if (window.innerWidth > 768) {
-        this.sections.forEach((el) => {
-          const element = el as HTMLElement;
+    const pathname = window.location.pathname;
+    const activeElement = document
+      .querySelector(".HeaderMenu_menu")
+      ?.querySelector(`a[href="${pathname}"]`)
+      ?.closest(".HeaderMenu_link");
 
-          const firstElement = this.sections[0] as HTMLElement;
-          const style = getComputedStyle(element);
-          const elementStart =
-            element.offsetTop -
-            parseInt(style.marginTop) -
-            outerHeight(firstElement) / 2;
-          const elementEnd =
-            element.offsetTop +
-            element.offsetHeight +
-            parseInt(style.marginBottom) -
-            outerHeight(firstElement) / 2;
-
-          const activeElement = document
-            .querySelector(".HeaderMenu_menu")
-            ?.querySelectorAll(`a[href="#${el.id}"]`)[0]
-            ?.closest(".HeaderMenu_link");
-
-          if (
-            elementStart <= this.scrollDistance &&
-            this.scrollDistance <= elementEnd
-          ) {
-            activeElement?.classList.add("HeaderMenu_link__active");
-            activeElement?.classList.remove("HeaderMenu_link__deactive");
-
-            this.handleAnimationDash(activeElement);
-            return;
-          }
-          activeElement?.classList.add("HeaderMenu_link__deactive");
-          activeElement?.classList.remove("HeaderMenu_link__active");
-        });
-      }
-    };
-    watchActiveSection();
-    window.addEventListener("scroll", watchActiveSection.bind(this));
+    this.handleAnimationDash(activeElement);
   }
 
   private handleAnimationDash(activeElement: Element | null | undefined) {

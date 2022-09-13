@@ -110,7 +110,7 @@
 .HeaderMenu_links {
   position: relative;
 
-  margin-left: 60px;
+  margin-left: 206px;
 }
 
 #HeaderMenu_links {
@@ -134,6 +134,7 @@
   white-space: nowrap;
   letter-spacing: 0.25px;
 }
+
 .HeaderMenu_menu__sticky
   .HeaderMenu_links
   .HeaderMenu_link
@@ -283,6 +284,10 @@
   transition-property: width, transform;
   transform: translateX(-80px);
 
+  background-color: var(--bright);
+}
+
+.HeaderMenu_menu__sticky .HeaderMenu_dash {
   background-color: var(--primary);
 }
 
