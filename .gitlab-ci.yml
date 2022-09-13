@@ -53,8 +53,8 @@ variables:
 
 common:test:
   extends: .test
-  only:
-    - develop
+  # only:
+  #   - develop
 
 develop:build:
   extends: .build
@@ -63,14 +63,14 @@ develop:build:
   variables:
     API_URL: $API_URL_DEV
     BIULD_STATUS: DEV
-  only:
-    - develop
+  # only:
+  #   - develop
 
 develop:deploy:
   extends: .deploy
   needs: ["develop:build"]
-  only:
-    - develop
+  # only:
+  #   - develop
   variables:
     DEPLOY_TARGET: s3://etz-dev-landing/
     URL_AWS: http://etz-dev-landing.s3-website-us-east-1.amazonaws.com
@@ -83,14 +83,14 @@ production:build:
   variables:
     API_URL: $API_URL_PROD
     BIULD_STATUS: PRODUCTION
-  only:
-    - develop
+  # only:
+  #   - develop
 
 production:deploy:
   extends: .deploy
   needs: ["production:build"]
-  only:
-    - develop
+  # only:
+  #   - develop
   variables:
     DEPLOY_TARGET: s3://etz-production-landing/
     URL_AWS: http://etz-production-landing.s3-website-us-east-1.amazonaws.com
