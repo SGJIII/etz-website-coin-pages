@@ -2,7 +2,6 @@
 import Accordion from "./accordion";
 import BenefitsSlider from "./benefits-slider";
 // import SupportedCrypto from "./supported-crypto/supported-crypto-search";
-import ContactFrom from "./contact";
 import Notification from "./notification";
 
 const benefitsSlider = new BenefitsSlider();
@@ -13,12 +12,10 @@ const accordion = new Accordion();
 //   nameSearch: "[data-name=SupportedCryptoSearchInput]",
 //   namePagination: "[data-name=SupportedCryptoPagination]",
 // });
-const contactFrom = new ContactFrom();
 
 benefitsSlider.init();
 accordion.init();
 // supportedCrypto.init().render();
-contactFrom.init();
 
 const sec = document.querySelector<HTMLDivElement>(".EtzMobileSection");
 

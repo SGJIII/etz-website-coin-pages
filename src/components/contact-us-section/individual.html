@@ -1,0 +1,93 @@
+<article
+  class="ContactUsSection __sidePadding __section"
+  id="contact-us"
+  data-name="Section">
+  <div class="ContactUsSection_container __container">
+    <section class="ContactUsSection_card">
+      <div class="ContactUsSection_formBlock">
+        <span class="ContactUsSection_title __heading-1"> Open IRA </span>
+        <span class="ContactUsSection_subtitle __subtitle-1">
+          Fill out this form to open an ETZ IRA account
+        </span>
+
+        <div class="ContactUsSection_form" data-name="ContactUsForm">
+          <div
+            class="ContactUsSection_input ContactUsSection_input__half ContactUsSection_input__left __inputWrapper"
+            data-name="ContactUsInputName">
+            <input placeholder="First Name*" name="firstName" />
+          </div>
+          <div
+            class="ContactUsSection_input ContactUsSection_input__half ContactUsSection_input__right __inputWrapper">
+            <input placeholder="Middle Name" name="middleName" />
+          </div>
+          <div
+            class="ContactUsSection_input ContactUsSection_input__half ContactUsSection_input__left __inputWrapper"
+            data-name="ContactUsInputPhone">
+            <input placeholder="Last Name*" name="lastName" type="tel" />
+          </div>
+          <div
+            class="ContactUsSection_input ContactUsSection_input__half ContactUsSection_input__right __inputWrapper"
+            data-name="ContactUsInputEmail">
+            <input placeholder="Email*" name="email" type="email" />
+          </div>
+
+          <div class="Dropdown" id="DropdownIRA">
+            <div class="Dropdown__inputWrapper ContactUsSection__dropdown">
+              <span class="Dropdown__input Dropdown__input_placeholder"
+                >IRA Type</span
+              >
+              <img
+                src="../assets/components/dropdown/arrow.svg"
+                class="Dropdown__arrow" />
+            </div>
+            <div class="Dropdown__optionWrapper">
+              <span class="Dropdown__item" name-option value="tradIra"
+                >Traditional IRA</span
+              >
+              <span class="Dropdown__item" name-option value="rothIra"
+                >Roth IRA</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="ContactUsSection_formFooter">
+          <div class="ContactUsSection_formConfirmBlock">
+            <input
+              type="checkbox"
+              class="ContactUsSection_checkbox"
+              id="check"
+              name="check"
+              data-name="ContactUsInputCheck" />
+            <label for="check"></label>
+            <span class="ContactUsSection_rules __caption-1">
+              Yes, I'd like ETZ to contact me
+            </span>
+          </div>
+          <div class="ContactUsSection_formButtonBlock">
+            <button
+              class="Button Button__outlined ContactUsSection_submit"
+              data-name="ContactUsInputSubmit">
+              <span class="Button_text">Submit</span
+              ><img
+                class="Button_loader"
+                src="../assets/white_loader_anim.svg" />
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="ContactUsSection_peopleImgBlock">
+        <img src="../assets/people.png" class="ContactUsSection_peopleImg" />
+      </div>
+    </section>
+  </div>
+</article>
+
+<script type="module">
+  import Dropdown from "../js/dropdown.ts";
+
+  addEventListener("load", function () {
+    const dropdown = new Dropdown("#DropdownIRA");
+    dropdown.init();
+  });
+</script>

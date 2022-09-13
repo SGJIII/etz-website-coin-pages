@@ -1,7 +1,6 @@
 import { addLinkClickCallback } from "./links/links";
 import { AddEventOrientationChange } from "./utils/addEventOrientationchange";
 import { getCoords } from "./utils/getCoords";
-import { outerHeight } from "./utils/outerHeight";
 import { outerWidth } from "./utils/outerWidth";
 import { disableBodyScroll, enableBodyScroll } from "./utils/scroll";
 

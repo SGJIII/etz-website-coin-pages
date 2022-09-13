@@ -3,6 +3,7 @@
 @import url("./theme/color-scheme.css");
 @import url("./animations/index.css");
 @import url("./components/button.css");
+@import url("./components/dropdown.css");
 @import url("./components/input.css");
 
 html,
