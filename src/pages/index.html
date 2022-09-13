@@ -94,9 +94,19 @@
       style="display: none"></video>
     <canvas class="webgl" name-mobile-model></canvas>
     <include src="components/header-menu/index.mobile.html"></include>
-    <include src="components/header-section/index.html"></include>
+    <include
+      src="components/header-section/index.html"
+      locals='{
+      "title": "Empower your employees with a crypto SEP IRA",
+      "description": "A white glove crypto retirement service for your business. We offer institutional-grade crypto custody on your digital assets all while charging low transparent fees. Have an IRA or 401k you’d like to rollover? We can help with that as well.",
+      "nameStartButton": "Join the Waitlist"
+    }'></include>
     <include src="components/benefits-section/index.html"></include>
-    <include src="components/for-employers-section/index.html"></include>
+    <include
+      src="components/for-employers-section/index.html"
+      locals='{
+      "title": "For Employers"
+  }'></include>
     <include src="components/etz-mobile-section/index.html"></include>
     <include src="components/supported-crypto-section/index.html"></include>
     <include src="components/faq-section/index.html"></include>

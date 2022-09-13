@@ -93,15 +93,27 @@
       src="../assets/Buying_Mobile-4.mp4"
       style="display: none"></video>
     <canvas class="webgl" name-mobile-model></canvas>
+
     <include src="components/header-menu/index.mobile.html"></include>
-    <include src="components/header-section/index.html"></include>
+    <include
+      src="components/header-section/index.html"
+      locals='{
+      "title": "Become empowered with a crypto retirement account",
+      "description": "A white glove crypto service for your business and individuals. We offer institutuonal-grade crypto custody on your digital assets all while charging low transparent fees. Have an IRA or 401k you’d like to rollover? We can help with it as well.",
+      "nameStartButton": "Open IRA Account"
+    }'></include>
     <include src="components/benefits-section/index.html"></include>
-    <include src="components/for-employers-section/index.html"></include>
+    <include
+      src="components/for-employers-section/index.html"
+      locals='{
+      "title": "Quick Start"
+  }'></include>
     <include src="components/etz-mobile-section/index.html"></include>
     <include src="components/supported-crypto-section/index.html"></include>
     <include src="components/faq-section/index.html"></include>
     <include src="components/contact-us-section/index.html"></include>
     <include src="components/footer/index.html"></include>
+
     <script type="module">
       function setupSizePage() {
         const vw = Math.max(

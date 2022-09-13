@@ -52,6 +52,7 @@
   position: relative;
 
   display: flex;
+  flex-direction: column;
 
   width: 688px;
   /* height: 457px; */
@@ -112,8 +113,18 @@
 }
 
 .HeaderSection_buttons {
-  position: absolute;
-  bottom: 0;
+  display: flex;
+
+  height: 50px;
+  margin-top: 60px;
+}
+
+.HeaderSection_buttons a {
+  width: 205px;
+}
+
+.HeaderSection_buttons a:last-child {
+  margin-left: 20px;
 }
 
 .HeaderSection_getStartedButton {
