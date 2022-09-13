@@ -9,11 +9,13 @@ export default class Dropdown extends WorkspaceElement<HTMLElement> {
   }
 
   public init() {
-    this.element?.addEventListener("click", this.onClick.bind(this));
-    this.initValue();
-    this.initOptions();
+    window.addEventListener("load", () => {
+      this.element?.addEventListener("click", this.onClick.bind(this));
+      this.initValue();
+      this.initOptions();
 
-    this.input = this.querySelector(".Dropdown__input");
+      this.input = this.querySelector(".Dropdown__input");
+    });
   }
 
   private initValue() {
@@ -22,7 +24,7 @@ export default class Dropdown extends WorkspaceElement<HTMLElement> {
 
   private initOptions() {
     const options = this.element?.querySelectorAll("[name-option]");
-    console.log(options);
+
     options?.forEach((el) => {
       el.addEventListener("click", this.onPick.bind(this));
     });

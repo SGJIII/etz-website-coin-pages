@@ -21,6 +21,9 @@
   .HeaderSection_container {
     padding-top: 180px;
   }
+  .HeaderSection_buttons {
+    margin-top: 20px;
+  }
 
   .HeaderSection_welcome {
     align-items: center;

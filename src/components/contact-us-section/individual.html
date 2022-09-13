@@ -11,28 +11,45 @@
         </span>
 
         <div class="ContactUsSection_form" data-name="ContactUsForm">
-          <div
-            class="ContactUsSection_input ContactUsSection_input__half ContactUsSection_input__left __inputWrapper"
-            data-name="ContactUsInputName">
-            <input placeholder="First Name*" name="firstName" />
-          </div>
-          <div
-            class="ContactUsSection_input ContactUsSection_input__half ContactUsSection_input__right __inputWrapper">
-            <input placeholder="Middle Name" name="middleName" />
-          </div>
-          <div
-            class="ContactUsSection_input ContactUsSection_input__half ContactUsSection_input__left __inputWrapper"
-            data-name="ContactUsInputPhone">
-            <input placeholder="Last Name*" name="lastName" type="tel" />
-          </div>
-          <div
-            class="ContactUsSection_input ContactUsSection_input__half ContactUsSection_input__right __inputWrapper"
-            data-name="ContactUsInputEmail">
-            <input placeholder="Email*" name="email" type="email" />
-          </div>
+          <input
+            class="ContactUsSection_input ContactUsSection_input__half ContactUsSection_input__left Input"
+            placeholder="First Name*"
+            name="firstName"
+            data-input="firstName"
+            data-wrapper="firstName"
+            required />
+          <input
+            class="ContactUsSection_input ContactUsSection_input__half ContactUsSection_input__right Input"
+            placeholder="Middle Name"
+            name="middleName"
+            data-input="middleName"
+            data-wrapper="middleName" />
 
-          <div class="Dropdown" id="DropdownIRA">
-            <div class="Dropdown__inputWrapper ContactUsSection__dropdown">
+          <input
+            class="ContactUsSection_input ContactUsSection_input__half ContactUsSection_input__left Input"
+            placeholder="Last Name*"
+            name="lastName"
+            data-input="lastName"
+            data-wrapper="lastName"
+            required />
+
+          <input
+            class="ContactUsSection_input ContactUsSection_input__half ContactUsSection_input__right Input"
+            placeholder="Email*"
+            name="email"
+            type="email"
+            data-input="email"
+            data-wrapper="email"
+            required />
+
+          <div
+            class="Dropdown ContactUsSection__dropdown"
+            id="DropdownIRA"
+            data-input="type"
+            name="signUpType"
+            type="selector"
+            required>
+            <div class="Dropdown__inputWrapper" data-wrapper="type">
               <span class="Dropdown__input Dropdown__input_placeholder">
                 IRA Type
               </span>
@@ -41,38 +58,40 @@
                 class="Dropdown__arrow" />
             </div>
             <div class="Dropdown__optionWrapper">
-              <span class="Dropdown__item" name-option value="tradIra">
+              <span class="Dropdown__item" name-option value="TraditionalIra">
                 Traditional IRA
               </span>
-              <span class="Dropdown__item" name-option value="rothIra">
+              <span class="Dropdown__item" name-option value="RothIra">
                 Roth IRA
               </span>
             </div>
           </div>
-        </div>
 
-        <div class="ContactUsSection_formFooter">
-          <div class="ContactUsSection_formConfirmBlock">
-            <input
-              type="checkbox"
-              class="ContactUsSection_checkbox"
-              id="check"
-              name="check"
-              data-name="ContactUsInputCheck" />
-            <label for="check"></label>
-            <span class="ContactUsSection_rules __caption-1">
-              Yes, I'd like ETZ to contact me
-            </span>
-          </div>
-          <div class="ContactUsSection_formButtonBlock">
-            <button
-              class="Button Button__outlined ContactUsSection_submit"
-              data-name="ContactUsInputSubmit">
-              <span class="Button_text">Submit</span
-              ><img
-                class="Button_loader"
-                src="../assets/white_loader_anim.svg" />
-            </button>
+          <div class="ContactUsSection_formFooter">
+            <div class="Input__checkbox">
+              <input
+                type="checkbox"
+                class="Input_checkboxValue"
+                id="check"
+                name="check"
+                data-name="ContactUsInputCheck"
+                data-input="check"
+                required />
+              <label for="check" data-wrapper="check"></label>
+              <span class="Input_label __caption-1">
+                Yes, I'd like ETZ to contact me
+              </span>
+            </div>
+            <div class="ContactUsSection_formButtonBlock">
+              <button
+                class="Button Button__outlined ContactUsSection_submit"
+                data-name="ContactUsInputSubmit">
+                <span class="Button_text">Submit</span
+                ><img
+                  class="Button_loader"
+                  src="../assets/white_loader_anim.svg" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -85,9 +104,11 @@
 
 <script type="module">
   import Dropdown from "../js/dropdown.ts";
+  import ContactFrom from "../js/form/individual.ts";
 
-  addEventListener("load", function () {
-    const dropdown = new Dropdown("#DropdownIRA");
-    dropdown.init();
-  });
+  const dropdown = new Dropdown("#DropdownIRA");
+  const contactFrom = new ContactFrom("[data-name=ContactUsForm]");
+
+  dropdown.init();
+  contactFrom.init();
 </script>

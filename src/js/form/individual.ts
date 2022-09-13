@@ -1,27 +1,19 @@
 import { API } from "../api";
-import { HTMLElementEvent } from "../../types/index";
 import * as yup from "yup";
 import "yup-phone";
-import { generateMessage, MessageType, dismissMessage } from "../notification";
+import { generateMessage, MessageType } from "../notification";
+import WorkspaceElement from "../../js/utils/workspaceElement";
+import { checkAxiosError } from "../../js/utils/checkAxiosError";
 
-type DataForm = {
-  check: boolean;
-  companyPosition: string;
-  email: string;
-  name: string;
-  note: string;
-  phone: string;
-};
-
-enum InputId {
-  ContactUsInputCheck = "ContactUsInputCheck",
-  ContactUsInputName = "ContactUsInputName",
-  ContactUsInputEmail = "ContactUsInputEmail",
-  ContactUsInputPhone = "ContactUsInputPhone",
+enum ID {
+  required,
+  success,
+  commonError,
 }
-class ContactFrom {
+
+export default class IndividualFrom extends WorkspaceElement<HTMLElement> {
   private buttonSubmit: HTMLButtonElement | null = null;
-  private inputElements: HTMLInputElement[] = [];
+  private inputElements: NodeListOf<HTMLInputElement> | null = null;
 
   private schema = yup.object().shape({
     email: yup
@@ -29,10 +21,13 @@ class ContactFrom {
       .required("Please fill in all the required fields")
       .email("Please provide a valid email address")
       .max(255),
-    name: yup.string().required("Please fill in all the required fields"),
-    phone: yup.string(),
-    companyPosition: yup.string(),
-    note: yup.string(),
+    firstName: yup.string().required("Please fill in all the required fields"),
+    lastName: yup.string().required("Please fill in all the required fields"),
+    middleName: yup.string().optional(),
+    signUpType: yup
+      .string()
+      .nullable()
+      .required("Please fill in all the required fields"),
     check: yup
       .boolean()
       .oneOf([true], "Please fill in all the required fields"),
@@ -40,207 +35,133 @@ class ContactFrom {
 
   public init() {
     window.addEventListener("load", () => {
-      this.buttonSubmit = document.querySelector<HTMLButtonElement>(
-        "[data-name=ContactUsInputSubmit]"
-      );
-      const inputs = Array.from(
-        document.querySelectorAll<HTMLInputElement>(
-          "[data-name=ContactUsForm] input"
-        )
-      );
-      const textareas = Array.from(
-        document.querySelectorAll<HTMLInputElement>(
-          "[data-name=ContactUsForm] textarea"
-        )
-      );
-
-      this.inputElements = [...inputs, ...textareas];
-
-      // const handleValidateInput = (el: HTMLInputElement) => (e: Event) => {
-      //   const event = e as HTMLElementEvent<HTMLInputElement>;
-
-      //   if (event.currentTarget?.value === undefined) return;
-      //   this.validateField(
-      //     event.srcElement.name,
-      //     event.srcElement.type === "checkbox"
-      //       ? el.checked
-      //       : event.currentTarget?.value
-      //   );
-      // };
-      // this.inputElements.forEach((el) => {
-      //   el.addEventListener("change", handleValidateInput(el));
-      //   el.addEventListener("focusout", handleValidateInput(el));
-      // });
-
-      this.buttonSubmit?.addEventListener("click", async (event) => {
-        event.preventDefault();
-        try {
-          this.buttonSubmit?.classList.add("Button__loading");
-          await this.handleSumbit();
-        } finally {
-          this.buttonSubmit?.classList.remove("Button__loading");
-        }
-      });
-
-      document
-        .querySelector<HTMLInputElement>(".ContactUsSection_form")
-        ?.addEventListener("keyup", (e) => {
-          if (e.key === "Enter" && !e.shiftKey) {
-            this.buttonSubmit?.click();
-          }
-        });
+      this.initInputElements();
+      this.initButtonSubmit();
     });
   }
 
-  private async handleSumbit() {
-    const data = this.inputElements.reduce<DataForm>(
-      (acc, input) => {
-        switch (input.type) {
-          case "text":
-          case "textarea":
-          case "email":
-          case "tel":
-            return {
-              ...acc,
-              [input.name]: input.value,
-            };
-          case "checkbox":
-            return {
-              ...acc,
-              [input.name]: input.checked,
-            };
-          default:
-            return acc;
-        }
-      },
-      {
-        check: false,
-        companyPosition: "",
-        email: "",
-        name: "",
-        note: "",
-        phone: "",
-      }
+  private initInputElements() {
+    this.inputElements = this.querySelectorAll<HTMLInputElement>(
+      "[data-name=ContactUsForm] [data-input]"
     );
 
-    const isValid = await this.validateData(data);
-    if (isValid === false) return;
-    await this.sendData(data);
-  }
-
-  private async sendData(data: DataForm) {
-    const res = await API.post("/landing/contact", data);
-    if (!res?.data?.success) return;
-
-    // if (this.buttonSubmit) this.buttonSubmit.disabled = true;
-
-    generateMessage({
-      id: "success",
-      text: "Thanks for messaging us! Our manager will contact you soon",
-      type: MessageType.success,
+    this.inputElements.forEach((element) => {
+      element.addEventListener("click", () => {
+        this.turnOffError(element);
+      });
     });
   }
 
-  private async validateData(data: DataForm) {
-    for (const key of Object.keys(this.schema.fields)) {
-      const path = key as keyof DataForm;
+  private initButtonSubmit() {
+    const buttonSubmit = this.querySelector<HTMLButtonElement>(
+      "[data-name=ContactUsInputSubmit]"
+    );
 
-      this.validateField<DataForm>(path, data[path]);
-    }
-
-    const isValid = await this.schema.isValid(data);
-    if (isValid) {
-      Object.keys(InputId).forEach((idInput) => {
-        dismissMessage(idInput);
-        this.turnOffError(
-          `[data-name=${idInput}]`,
-          idInput === InputId.ContactUsInputCheck
-            ? "ContactUsSection_checkbox__error"
-            : undefined
-        );
-      });
-    }
-
-    return isValid;
+    this.buttonSubmit = buttonSubmit;
+    if (buttonSubmit === null) return null;
+    buttonSubmit.addEventListener("click", this.onSubmit.bind(this));
   }
 
-  private validateField<T extends DataForm, K extends keyof T = keyof T>(
-    path: string,
-    value: T[K]
-  ) {
-    const errorParams = (
-      key: string
-    ):
-      | [id: string | number, selector: string, className?: string | undefined]
-      | null => {
-      switch (key) {
-        case "check":
-          return [
-            // InputId.ContactUsInputCheck,
-            "requiere",
-            "[data-name=ContactUsInputCheck]",
-            "ContactUsSection_checkbox__error",
-          ];
-        case "email":
-          return [
-            // InputId.ContactUsInputEmail,
-            "requiere",
-            "[data-name=ContactUsInputEmail]",
-          ];
+  private async onSubmit(event: Event) {
+    event.preventDefault();
+    try {
+      this.buttonSubmit?.classList.add("Button__loading");
+      const [isValid, data] = await this.validateValues();
+      if (isValid === false) return;
 
-        case "name":
-          return [
-            // InputId.ContactUsInputName,
-            "requiere",
-            "[data-name=ContactUsInputName]",
-          ];
+      const res = isValid ? await API.post("/landing/sign-up", data) : null;
 
-        case "phone":
-          return [
-            InputId.ContactUsInputPhone,
-            "requiere",
-            "[data-name=ContactUsInputPhone]",
-          ];
-        default:
-          return null;
+      if (res) {
+        generateMessage({
+          text: "Thanks for messaging us! Our manager will contact you soon",
+          type: MessageType.success,
+          id: ID.success,
+        });
       }
-    };
+    } catch (e) {
+      const error = checkAxiosError(e);
 
-    const paramsForError = errorParams(path);
-    if (!paramsForError) return;
-    yup
-      .reach(this.schema, path)
-      .validate(value)
-      .then(() => {
-        this.turnOffError(paramsForError[1], paramsForError[2]);
-      })
-      .catch(this.handleError(...paramsForError));
+      if (error) {
+        generateMessage({
+          text: error.response?.data.message ?? "",
+          type: MessageType.error,
+          id: ID.commonError,
+        });
+      }
+    } finally {
+      this.buttonSubmit?.classList.remove("Button__loading");
+    }
   }
 
-  public turnOnError(selector: string, className?: string) {
-    const element = document.querySelector(selector);
-    element?.classList.add(className ?? "ContactUsSection_input__error");
+  private getValues() {
+    const data: Record<string, unknown> = {};
+
+    this.inputElements?.forEach(async (element) => {
+      if (element.type === "checkbox")
+        return (data[element.name] = element.checked);
+
+      const value = element.value ?? element.getAttribute("value");
+      const name = element.name ?? element.getAttribute("name");
+
+      return (data[name] = value);
+    });
+
+    return data;
   }
 
-  public turnOffError(selector: string, className?: string) {
-    const element = document.querySelector(selector);
-    element?.classList.remove(className ?? "ContactUsSection_input__error");
+  private async validateValues() {
+    const values = this.getValues();
+
+    this.inputElements?.forEach(async (element) => {
+      if (element.type === "checkbox") {
+        yup
+          .reach(this.schema, element.name)
+          .validate(element.checked)
+          .catch((e: { message: string }) => {
+            this.turnOnError(element);
+            generateMessage({
+              text: e.message,
+              type: MessageType.error,
+              id: ID.required,
+            });
+          });
+      } else if (element.getAttribute("type") === "selector") {
+        yup
+          .reach(this.schema, element.name ?? element.getAttribute("name"))
+          .validate(element.value ?? element.getAttribute("value"))
+          .catch((e: { message: string }) => {
+            this.turnOnError(element);
+            generateMessage({
+              text: e.message,
+              type: MessageType.error,
+              id: ID.required,
+            });
+          });
+      } else {
+        yup
+          .reach(this.schema, element.name)
+          .validate(element.value)
+          .catch((e: { message: string }) => {
+            this.turnOnError(element);
+            generateMessage({
+              text: e.message,
+              type: MessageType.error,
+              id: ID.required,
+            });
+          });
+      }
+    });
+    const isValid = await this.schema.isValidSync(values);
+    return [isValid, values];
   }
 
-  private handleError(
-    id: string | number,
-    selector: string,
-    className?: string
-  ) {
-    return (e: { message: string }) => {
-      this.turnOnError(selector, className);
-      generateMessage({
-        text: e.message,
-        type: MessageType.error,
-        id: id,
-      });
-    };
+  // Move to saparate class
+  public turnOnError(element: HTMLInputElement) {
+    element?.classList.add("Input_error");
+  }
+
+  // Move to saparate class
+  public turnOffError(element: HTMLInputElement) {
+    element?.classList.remove("Input_error");
   }
 }
-
-export default ContactFrom;

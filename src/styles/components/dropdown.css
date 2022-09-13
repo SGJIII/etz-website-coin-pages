@@ -91,3 +91,7 @@
 .Dropdown_open .Dropdown__arrow {
   transform: rotate(-180deg) translateY(50%);
 }
+
+.Dropdown.Input_error .Dropdown__inputWrapper {
+  border-color: var(--negative);
+}
