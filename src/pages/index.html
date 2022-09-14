@@ -110,13 +110,19 @@
     <include
       src="components/for-employers-section/index.html"
       locals='{
-      "title": "For Employers"
-  }'></include>
+      "title": "For Employers",
+      "id": "employers"
+    }'></include>
     <include src="components/etz-mobile-section/index.html"></include>
     <include src="components/supported-crypto-section/index.html"></include>
     <include src="components/faq-section/index.html"></include>
     <include src="components/contact-us-section/employer.html"></include>
-    <include src="components/footer/index.html"></include>
+    <include
+      src="components/footer/index.html"
+      locals='{
+      "nameStartButton": "For Employers",
+      "linkStartButton": "#employers"
+    }'></include>
 
     <script type="module">
       function setupSizePage() {
