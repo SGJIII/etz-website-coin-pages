@@ -58,7 +58,7 @@ class Links extends WorkspaceElementAll<HTMLLinkElement> {
           marginBottomMenu = 0;
           position = position - marginBottomMenu - heightMenu;
           break;
-        case "#employers":
+        case "#quick-start":
           marginBottomMenu = 0;
           position = position - marginBottomMenu - heightMenu;
           break;
