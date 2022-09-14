@@ -2,10 +2,9 @@
 import Accordion from "./accordion";
 import BenefitsSlider from "./benefits-slider";
 // import SupportedCrypto from "./supported-crypto/supported-crypto-search";
-import Notification from "./notification";
 
 const benefitsSlider = new BenefitsSlider();
-new Notification();
+
 const accordion = new Accordion();
 // const supportedCrypto = new SupportedCrypto({
 //   nameContainer: "[data-name=SupportedCryptoTable]",
