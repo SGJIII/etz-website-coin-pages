@@ -94,6 +94,8 @@ class Notification {
   }
 }
 
+new Notification();
+
 export default Notification;
 export const generateMessage = Notification.generateMessage;
 export const dismissMessage = Notification.dismissMessage;
