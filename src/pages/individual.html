@@ -110,13 +110,19 @@
     <include
       src="components/for-employers-section/index.html"
       locals='{
-      "title": "Quick Start"
-  }'></include>
+      "title": "Quick Start",
+      "id": "quick-start"
+    }'></include>
     <include src="components/etz-mobile-section/index.html"></include>
     <include src="components/supported-crypto-section/index.html"></include>
     <include src="components/faq-section/index.html"></include>
     <include src="components/contact-us-section/individual.html"></include>
-    <include src="components/footer/index.html"></include>
+    <include
+      src="components/footer/index.html"
+      locals='{
+      "nameStartButton": "Quick start",
+      "linkStartButton": "#quick-start"
+    }'></include>
 
     <script type="module">
       function setupSizePage() {
