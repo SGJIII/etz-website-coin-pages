@@ -221,9 +221,12 @@ export default class HeaderMenu {
     if (dashContainer) dashContainer.style.width = `${widthDashContainer}px`;
 
     const pathname = window.location.pathname;
+
     const activeElement = document
       .querySelector(".HeaderMenu_menu")
-      ?.querySelector(`a[href="${pathname}"]`)
+      ?.querySelector(
+        `a[href="${pathname === "/" ? pathname : pathname.replace("/", "")}"]`
+      )
       ?.closest(".HeaderMenu_link");
 
     this.handleAnimationDash(activeElement);
