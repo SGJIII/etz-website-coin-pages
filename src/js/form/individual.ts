@@ -60,6 +60,14 @@ export default class IndividualFrom extends WorkspaceElement<HTMLElement> {
     this.buttonSubmit = buttonSubmit;
     if (buttonSubmit === null) return null;
     buttonSubmit.addEventListener("click", this.onSubmit.bind(this));
+
+    document
+      .querySelector<HTMLInputElement>(".ContactUsSection_form")
+      ?.addEventListener("keyup", (e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+          this.buttonSubmit?.click();
+        }
+      });
   }
 
   private async onSubmit(event: Event) {
