@@ -16,6 +16,9 @@ export default class Dropdown extends WorkspaceElement<HTMLElement> {
 
       this.input = this.querySelector(".Dropdown__input");
     });
+
+    window.addEventListener("click", this.onClickOutside.bind(this));
+    window.removeEventListener("click", this.onClickOutside.bind(this));
   }
 
   private initValue() {
@@ -32,6 +35,19 @@ export default class Dropdown extends WorkspaceElement<HTMLElement> {
 
   private onClick() {
     this.element?.classList.toggle("Dropdown_open");
+  }
+
+  private onClickOutside(e: Event) {
+    if (e.target instanceof Element) {
+      const target = e.target;
+      const dropdown = target == this.element || this.element?.contains(target);
+      const dropdownOpened = this.element?.classList.contains("Dropdown_open");
+
+      if (!dropdown && dropdownOpened) {
+        e.preventDefault();
+        this.element?.classList.toggle("Dropdown_open");
+      }
+    }
   }
 
   private onPick(e: Event) {
