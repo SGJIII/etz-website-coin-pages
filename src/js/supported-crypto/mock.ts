@@ -9,31 +9,11 @@ const mockData = [
     tag: "ETH",
     url: "support-crypto/eth_ic.svg",
   },
-  // {
-  //   name: "Binance Coin",
-  //   tag: "BNB",
-  //   url: "support-crypto/bnb_ic.svg",
-  // },
   {
-    name: "USD Coin",
-    tag: "USDC",
+    name: "Chainlink",
+    tag: "LINK",
     url: "support-crypto/usdc_ic.svg",
   },
-  // {
-  //   name: "Solana",
-  //   tag: "SOL",
-  //   url: "support-crypto/sol_ic.svg",
-  // },
-  // {
-  //   name: "Ripple",
-  //   tag: "XRP",
-  //   url: "support-crypto/xrp_ic.svg",
-  // },
-  // {
-  //   name: "Terra",
-  //   tag: "LUNA",
-  //   url: "support-crypto/luna_ic.svg",
-  // },
   {
     name: "Cardano",
     tag: "ADA",
@@ -47,6 +27,16 @@ const mockData = [
   {
     name: "Litecoin",
     tag: "LTC",
+    url: "support-crypto/ltc_ic.svg",
+  },
+  {
+    name: "Stellar",
+    tag: "XLM",
+    url: "support-crypto/ltc_ic.svg",
+  },
+  {
+    name: "Solana",
+    tag: "SOL",
     url: "support-crypto/ltc_ic.svg",
   },
 ];
