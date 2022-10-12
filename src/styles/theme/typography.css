@@ -14,17 +14,6 @@
   line-height: 52px;
 }
 
-.__heading-2 {
-  font-size: 44px;
-  font-weight: 400;
-  font-style: normal;
-  line-height: 48px;
-
-  text-align: center;
-
-  color: var(--dark);
-}
-
 h2 {
   font-size: 44px;
   font-weight: 400;
