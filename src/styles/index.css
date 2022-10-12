@@ -5,6 +5,7 @@
 @import url("./components/button.css");
 @import url("./components/dropdown.css");
 @import url("./components/input.css");
+@import url("./components/popup/index.css");
 
 html,
 body {
