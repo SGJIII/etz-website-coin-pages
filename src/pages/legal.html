@@ -85,56 +85,16 @@
     </script>
   </head>
   <body style="overflow: hidden">
-    <include src="components/loader/index.html"></include>
-    <video
-      id="video"
-      playsinline
-      muted
-      loop
-      autoplay
-      width="750"
-      height="1624"
-      src="../assets/Mobile-1-3.mp4"
-      style="display: none"></video>
-    <video
-      id="video2"
-      playsinline
-      muted
-      loop
-      autoplay
-      width="750"
-      height="1624"
-      src="../assets/Buying_Mobile-4.mp4"
-      style="display: none"></video>
-    <canvas class="webgl" name-mobile-model></canvas>
-
-    <script src="../js/notification.ts" type="module"></script>
-    <include
-      src="components/header-menu/index.mobile.html"
-      locals='{
-      "nameStartButton": "Get started"
-    }'></include>
-    <include
-      src="components/header-section/index.html"
-      locals='{
-      "title": "Empower your employees with a crypto SEP IRA",
-      "description": "A white glove crypto retirement service for your business. We offer institutional-grade crypto custody on your digital assets all while charging low transparent fees. Have an IRA or 401k you’d like to rollover? We can help with that as well.",
-      "nameStartButton": "Get started"
-    }'></include>
-    <include src="components/benefits-section/index.html"></include>
-    <include src="components/for-employers-section/index.html"></include>
-
-    <include src="components/etz-mobile-section/index.html"></include>
-    <include src="components/supported-crypto-section/index.html"></include>
-    <include src="components/faq-section/index.html"></include>
-    <include src="components/contact-us-section/employer.html"></include>
-    <include
-      src="components/footer/index.html"
-      locals='{
-      "nameStartButton": "For Employers",
-      "linkStartButton": "#employers"
-    }'></include>
-
+    <article class="Legal __container" data-name="root">
+      <!-- <section>
+        <h1 class="__heading-1">Legal</h1>
+        <div>
+          <h2 class="__subtitle-1">ETZ documents</h2>
+          <a class="__paragraph-1">Electronic Communications Agreement <img src='../assets/union.svg'/></a>
+        </div>
+      </section> -->
+    </article>
+    <script async src="../js/legal.ts" type="module"></script>
     <script type="module">
       function setupSizePage() {
         const vw = Math.max(
@@ -152,10 +112,5 @@
       setupSizePage();
       window.addEventListener("resize", setupSizePage);
     </script>
-    <script type="module" src="../js/links/links.ts" async></script>
-    <script type="module" src="../js/header-menu.ts" async></script>
-    <script type="module" src="../js/index.ts"></script>
-    <script type="module" src="../js/three.js"></script>
-    <script type="module" src="../js/downloadApp.ts"></script>
   </body>
 </html>

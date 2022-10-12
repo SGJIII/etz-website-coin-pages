@@ -5,6 +5,7 @@
 @import url("./components/button.css");
 @import url("./components/dropdown.css");
 @import url("./components/input.css");
+@import url("./components/popup/index.css");
 
 html,
 body {
@@ -228,4 +229,31 @@ img:not([src]) {
 
     height: 100vh;
   }
+}
+
+.Legal {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.Legal__section {
+  display: flex;
+  align-items: left;
+  flex-direction: column;
+}
+
+.Legal__subTitle {
+  font-size: 24px;
+
+  margin: 38px 0 22px 0;
+}
+
+.Legal__link {
+  margin: 10px 0;
+
+  color: var(--dark-70);
+}
+
+.Legal__icon {
+  margin: -2px 10px;
 }

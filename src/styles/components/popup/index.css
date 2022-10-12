@@ -1,0 +1,69 @@
+.PopUp {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  visibility: hidden;
+
+  transition: opacity 300ms ease-in-out;
+
+  opacity: 0;
+}
+
+.PopUp_show {
+  visibility: visible;
+
+  opacity: 1;
+}
+
+.PopUp__overflow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  background-color: var(--dark-10);
+}
+
+.PopUp__paper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 800px;
+  height: 600px;
+
+  transform: translate(-50%, -50%);
+
+  border-radius: 20px;
+  background: var(--bright);
+}
+
+.PopUp__headerModal {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.PopUp__bodyModal {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.PopUp__iconExit {
+  width: 32px;
+  height: 32px;
+  margin: 20px;
+
+  cursor: pointer;
+}
+
+.PopUp__qrCodeSection {
+  display: flex;
+
+  margin-top: 36px;
+}
