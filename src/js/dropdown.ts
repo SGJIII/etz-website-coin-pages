@@ -66,4 +66,10 @@ export default class Dropdown extends WorkspaceElement<HTMLElement> {
     this.input.innerHTML = label;
     this.input.classList.remove("Dropdown__input_placeholder");
   }
+
+  public resetValue() {
+    this.setValue("", "");
+    if (this.input) this.input.innerHTML = "IRA Type";
+    this.input?.classList.add("Dropdown__input_placeholder");
+  }
 }
