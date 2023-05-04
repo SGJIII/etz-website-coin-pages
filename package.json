@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "parcel serve  --open --host localhost --port 5140",
-    "build": "rimraf build && parcel build --dist-dir build --public-url ./",
+    "build": "rimraf build && parcel build --dist-dir build",
     "prepare": "husky install",
     "check:tsc": "tsc --noemit -t es5 ./src/**/*.ts",
     "check:lint": "eslint ./src --ext .js,.ts",
