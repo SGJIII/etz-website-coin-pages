@@ -10,6 +10,7 @@
     margin-top: 120px;
     padding: 0 16px;
   }
+
   .EtzMobileSection_block {
     align-items: initial;
     flex-direction: column;
@@ -21,11 +22,13 @@
 
     place-self: initial;
   }
+
   .EtzMobileSection_description {
     z-index: 50;
 
     min-width: initial;
   }
+
   .EtzMobileSection_title {
     font-size: 14px;
     font-weight: 500;
@@ -35,6 +38,7 @@
     text-align: center;
     letter-spacing: 0.1em;
   }
+
   .EtzMobileSection_subTitle {
     font-size: 22px;
     font-weight: 400;
@@ -47,16 +51,18 @@
     text-align: center;
   }
 
+  .EtzMobileSection_textContainer {
+    padding: 0;
+    text-align: center;
+  }
+
   .EtzMobileSection_text {
     font-size: 18px;
     font-weight: 400;
     font-style: normal;
     line-height: 22px;
-
-    padding: 0;
-
-    text-align: center;
   }
+
   .EtzMobileSection_mobiles {
     /* top: -54px;
     left: 50%;
@@ -86,26 +92,32 @@
     top: calc(213px + var(--coin-position));
     left: -175px;
   }
+
   .EtzMobileSection_avax {
     top: calc(104px + var(--coin-position));
     left: 165px;
   }
+
   .EtzMobileSection_bnb {
     top: calc(-8px + var(--coin-position));
     left: -171px;
   }
+
   .EtzMobileSection_btc {
     top: calc(21px + var(--coin-position));
     left: 24px;
   }
+
   .EtzMobileSection_ftm {
     top: calc(-52px + var(--coin-position));
     left: -177px;
   }
+
   .EtzMobileSection_sol {
     top: calc(-14px + var(--coin-position));
     right: 43px;
   }
+
   .EtzMobileSection_usdc {
     bottom: calc(-64px - var(--coin-position));
     left: 12px;
