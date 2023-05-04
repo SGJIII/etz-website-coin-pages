@@ -4,6 +4,8 @@ import "yup-phone";
 import { generateMessage, MessageType } from "../notification";
 import WorkspaceElement from "../../js/utils/workspaceElement";
 import { checkAxiosError } from "../../js/utils/checkAxiosError";
+import { resetField } from "../utils/resetField";
+import Dropdown from "../dropdown";
 
 enum ID {
   required,
@@ -13,6 +15,7 @@ enum ID {
 
 export default class IndividualFrom extends WorkspaceElement<HTMLElement> {
   private buttonSubmit: HTMLButtonElement | null = null;
+  private inputIraType: Dropdown | null = null;
   private inputElements: NodeListOf<HTMLInputElement> | null = null;
 
   private schema = yup.object().shape({
@@ -38,6 +41,9 @@ export default class IndividualFrom extends WorkspaceElement<HTMLElement> {
       this.initInputElements();
       this.initButtonSubmit();
     });
+
+    this.inputIraType = new Dropdown("#DropdownIRA");
+    this.inputIraType.init();
   }
 
   private initInputElements() {
@@ -85,6 +91,8 @@ export default class IndividualFrom extends WorkspaceElement<HTMLElement> {
           type: MessageType.success,
           id: ID.success,
         });
+        this.inputElements?.forEach(resetField(["type"]));
+        this.inputIraType?.resetValue();
       }
     } catch (e) {
       const error = checkAxiosError(e);

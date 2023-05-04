@@ -1,8 +1,8 @@
 import { API } from "../api";
-import { HTMLElementEvent } from "../../types/index";
 import * as yup from "yup";
 import "yup-phone";
 import { generateMessage, MessageType, dismissMessage } from "../notification";
+import { resetField } from "../utils/resetField";
 
 type DataForm = {
   check: boolean;
@@ -77,6 +77,7 @@ class ContactFrom {
         try {
           this.buttonSubmit?.classList.add("Button__loading");
           await this.handleSumbit();
+          this.inputElements.forEach(resetField());
         } finally {
           this.buttonSubmit?.classList.remove("Button__loading");
         }
