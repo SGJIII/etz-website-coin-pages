@@ -3,8 +3,8 @@
   "version": "1.1.10-1",
   "private": true,
   "scripts": {
-    "dev": "parcel serve src/pages/* --open --host localhost --port 5140",
-    "build": "rimraf build && parcel build src/pages/* --dist-dir build --public-url ./",
+    "dev": "parcel serve  --open --host localhost --port 5140",
+    "build": "rimraf build && parcel build --dist-dir build --public-url ./",
     "prepare": "husky install",
     "check:tsc": "tsc --noemit -t es5 ./src/**/*.ts",
     "check:lint": "eslint ./src --ext .js,.ts",
@@ -22,6 +22,12 @@
   "staticFiles": {
     "staticPath": "src/assets"
   },
+  "source": [
+    "src/pages/index.html",
+    "src/pages/individual.html",
+    "src/pages/legal.html",
+    "src/pages/.well-known/change-password.html"
+  ],
   "devDependencies": {
     "@alienlebarge/stylelint-config": "^3.1.6",
     "@types/node": "^17.0.41",
