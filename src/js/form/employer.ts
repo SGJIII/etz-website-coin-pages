@@ -77,7 +77,6 @@ class ContactFrom {
         try {
           this.buttonSubmit?.classList.add("Button__loading");
           await this.handleSumbit();
-          this.inputElements.forEach(resetField());
         } finally {
           this.buttonSubmit?.classList.remove("Button__loading");
         }
@@ -131,8 +130,11 @@ class ContactFrom {
 
   private async sendData(data: DataForm) {
     const res = await API.post("/landing/contact", data);
-    if (!res?.data?.success) return;
+    if (!res?.data?.success) {
+      return;
+    }
 
+    this.inputElements.forEach(resetField());
     // if (this.buttonSubmit) this.buttonSubmit.disabled = true;
 
     generateMessage({
