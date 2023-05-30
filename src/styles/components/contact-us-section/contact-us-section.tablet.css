@@ -18,12 +18,15 @@
     height: initial;
     padding: 48px 32px;
   }
+
   .ContactUsSection_peopleImgBlock {
     display: none;
   }
+
   .ContactUsSection_input {
     width: 100%;
   }
+
   .ContactUsSection_input__left {
     margin-right: 8px;
   }
@@ -31,19 +34,28 @@
   .ContactUsSection_input__right {
     margin-left: 0;
   }
-  .ContactUsSection_input__half {
+
+  .ContactUsSection_input__half,
+  .ContactUsSection_input__3Quarters,
+  .ContactUsSection_input__1Quarters {
     flex-basis: 265px;
     flex-grow: 0;
 
     min-width: calc(50% - 4px);
     margin-bottom: 16px;
   }
+
   .ContactUsSection_formBlock {
     flex-basis: initial;
     flex-grow: initial;
 
     max-width: initial;
   }
+
+  .ContactUsSection_form {
+    max-width: inherit;
+  }
+
   .ContactUsSection_title {
     font-size: 24px;
     font-weight: 500;
@@ -54,6 +66,7 @@
 
     text-align: left;
   }
+
   .ContactUsSection_subtitle {
     font-size: 18px;
     font-weight: 400;
@@ -62,10 +75,12 @@
 
     text-align: left;
   }
+
   .ContactUsSection_textarea {
     width: 100%;
     height: 90px;
   }
+
   .ContactUsSection_formFooter {
     display: flex;
     align-items: center;
@@ -74,6 +89,7 @@
 
     margin-top: 32px;
   }
+
   .ContactUsSection_formButtonBlock {
     align-self: center;
   }

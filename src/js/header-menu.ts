@@ -225,7 +225,7 @@ export default class HeaderMenu {
     const activeElement = document
       .querySelector(".HeaderMenu_menu")
       ?.querySelector(
-        `a[href="${pathname === "/" ? pathname : pathname.replace("/", "")}"]`
+        `a[href$="${pathname === "/" ? pathname : pathname.replace("/", "")}"]`
       )
       ?.closest(".HeaderMenu_link");
 

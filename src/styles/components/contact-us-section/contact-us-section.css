@@ -21,7 +21,7 @@
 }
 
 .ContactUsSection_formBlock {
-  flex-basis: 550px;
+  flex-basis: 620px;
   flex-grow: 0;
 
   max-width: 70%;
@@ -48,6 +48,7 @@
   flex-wrap: wrap;
 
   width: 100%;
+  max-width: 550px;
 }
 
 .ContactUsSection_form input,
@@ -69,6 +70,21 @@
   flex-grow: 0;
 
   min-width: 265px;
+  margin-bottom: 16px;
+}
+
+.ContactUsSection_input__3Quarters {
+  flex-basis: 397px;
+  flex-grow: 0;
+
+  min-width: 397px;
+  margin-bottom: 16px;
+}
+.ContactUsSection_input__1Quarters {
+  flex-basis: 133px;
+  flex-grow: 0;
+
+  min-width: 133px;
   margin-bottom: 16px;
 }
 

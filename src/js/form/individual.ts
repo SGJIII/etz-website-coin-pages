@@ -119,7 +119,7 @@ export default class IndividualFrom extends WorkspaceElement<HTMLElement> {
       const value = element.value ?? element.getAttribute("value");
       const name = element.name ?? element.getAttribute("name");
 
-      return (data[name] = value);
+      return (data[name] = value !== "" ? value : undefined);
     });
 
     return data;
