@@ -197,8 +197,8 @@
   }
 
   .HeaderMenu_buttonsMobile a {
+    width: 226px;
     display: grid;
-
     margin-bottom: 16px;
   }
 
