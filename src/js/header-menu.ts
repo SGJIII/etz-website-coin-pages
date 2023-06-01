@@ -53,6 +53,7 @@ export default class HeaderMenu {
     this.target.style.display = "flex";
     this.handlePositionStickyMenu();
     this.handleAnimationMenu();
+    this.handleMobileMenuActiveTab();
     this.handleBurger();
     window.addEventListener("touchmove", this.watchScrollChange.bind(this));
     window.addEventListener("scroll", this.watchScrollChange.bind(this));
@@ -230,6 +231,25 @@ export default class HeaderMenu {
       ?.closest(".HeaderMenu_link");
 
     this.handleAnimationDash(activeElement);
+  }
+
+  private handleMobileMenuActiveTab() {
+    const activeItemClass = "HeaderMenu_linkMobile__active";
+
+    const pathname = window.location.pathname;
+
+    const allMenuLinks = this.targetMobile?.querySelectorAll(
+      ".HeaderMenu_linkMobile"
+    );
+
+    const activeElement = this.targetMobile?.querySelector(
+      `a.HeaderMenu_linkMobile[href$="${
+        pathname === "/" ? pathname : pathname.replace("/", "")
+      }"]`
+    );
+
+    allMenuLinks?.forEach((item) => item.classList.remove(activeItemClass));
+    activeElement?.classList.add(activeItemClass);
   }
 
   private handleAnimationDash(activeElement: Element | null | undefined) {
