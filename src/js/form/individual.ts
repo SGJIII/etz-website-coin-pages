@@ -34,6 +34,32 @@ export default class IndividualFrom extends WorkspaceElement<HTMLElement> {
     check: yup
       .boolean()
       .oneOf([true], "Please fill in all the required fields"),
+    promoCode: yup.string().test({
+      name: "validate-postcode",
+      test: (value, ctx) => {
+        if ((value ? value.length : 0) > 0) {
+          const postCodeScheme = yup
+            .string()
+            .min(4, "The code you entered must be at least 4 characters")
+            .matches(
+              /^[A-Z0-9-]+$/,
+              "The code you entered must contain only letters or numbers"
+            );
+
+          try {
+            postCodeScheme.validateSync(value);
+
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          } catch (err: any) {
+            return ctx.createError({
+              message: err?.message,
+              path: "promoCode",
+            });
+          }
+        }
+        return true;
+      },
+    }),
   });
 
   public init() {
