@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import Accordion from "./accordion";
 import BenefitsSlider from "./benefits-slider";
+import { calculatePositionLink } from "./links/links";
 // import SupportedCrypto from "./supported-crypto/supported-crypto-search";
 
 const benefitsSlider = new BenefitsSlider();
@@ -84,4 +85,14 @@ function windowSizeChanged() {
           ", initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
       );
   }
+}
+
+// Show #hash with correct position
+if (location.hash !== "") {
+  addEventListener("load", function () {
+    window.scrollTo({
+      top: calculatePositionLink(location.hash),
+      behavior: "auto",
+    });
+  });
 }
