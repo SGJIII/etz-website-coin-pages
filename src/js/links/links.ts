@@ -12,7 +12,7 @@ class Links extends WorkspaceElementAll<HTMLLinkElement> {
     Links.arrayCallback.push(callback);
   }
 
-  private calculatePositionLink(name: string | null) {
+  public static calculatePositionLink(name: string | null) {
     if (name === null) return 0;
     const element = document.querySelector(name);
     const body = document.body.getBoundingClientRect();
@@ -105,11 +105,44 @@ class Links extends WorkspaceElementAll<HTMLLinkElement> {
     return position;
   }
 
+  private isHrefToOwnAnchor(href: string): boolean {
+    const splitted = href.split("#");
+
+    if (splitted.length < 2) {
+      return false;
+    }
+
+    if (splitted[0] === "") {
+      return true;
+    }
+
+    const hrefPage =
+      splitted[0] === "/" ? splitted[0] : splitted[0].replace("/", "");
+
+    const pathname =
+      location.pathname === "/"
+        ? location.pathname
+        : location.pathname.replace("/", "");
+
+    return pathname === hrefPage;
+  }
+
+  private getHashFromHref(href: string): string {
+    const splitted = href.split("#");
+    return splitted[1] ? `#${splitted[1]}` : "";
+  }
+
   public initClickEvent(_self: Links) {
     this.elements?.forEach((link) => {
       const href = link.getAttribute("href");
       link.addEventListener("click", function (e) {
+        if (!_self.isHrefToOwnAnchor(href ?? "")) {
+          return;
+        }
         e.preventDefault();
+
+        const hash = _self.getHashFromHref(href ?? "");
+
         Links.arrayCallback.forEach((callback) => {
           if (typeof callback === "function") {
             callback();
@@ -117,7 +150,7 @@ class Links extends WorkspaceElementAll<HTMLLinkElement> {
         });
         const isInstantScroll = link.getAttribute("data-scroll");
         window.scrollTo({
-          top: _self.calculatePositionLink(href),
+          top: Links.calculatePositionLink(hash),
           behavior: isInstantScroll ? "auto" : "smooth",
         });
       });
@@ -129,3 +162,4 @@ const links = new Links("[name-link]");
 links.init();
 
 export const addLinkClickCallback = Links.addLinkClickCallback;
+export const calculatePositionLink = Links.calculatePositionLink;
