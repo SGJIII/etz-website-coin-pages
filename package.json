@@ -1,6 +1,6 @@
 {
   "name": "etz",
-  "version": "v1.1.14",
+  "version": "v1.1.15",
   "private": true,
   "scripts": {
     "dev": "parcel serve  --open --host localhost --port 5140",
