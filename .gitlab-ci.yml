@@ -62,7 +62,7 @@ develop:build:
   when: manual
   variables:
     API_URL: $API_URL_DEV
-    BIULD_STATUS: DEV
+    BUILD_STATUS: DEV
   # only:
   #   - develop
 
@@ -82,7 +82,7 @@ production:build:
   when: manual
   variables:
     API_URL: $API_URL_PROD
-    BIULD_STATUS: PRODUCTION
+    BUILD_STATUS: PRODUCTION
   # only:
   #   - develop
 
