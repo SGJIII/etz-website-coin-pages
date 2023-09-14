@@ -2,7 +2,6 @@
   align-items: center;
   justify-content: center;
 
-  height: 730px;
   margin-top: 106px;
 }
 
@@ -88,8 +87,7 @@
   flex-wrap: wrap;
 
   width: 1200px;
-  height: 597px;
-  /* height: 386px; */
+  height: 658px;
   margin-top: 12px;
   padding: 23px 54px;
 
@@ -155,6 +153,7 @@
 
   text-align: center;
 }
+
 .SupportedCryptoSection_placeholder {
   display: flex;
   align-items: center;
@@ -162,12 +161,14 @@
 
   height: 100%;
 }
+
 .SupportedCryptoSection_placeholderPerson {
   width: 60px;
   margin-right: 34px;
 
   transform: rotate(-5deg);
 }
+
 .SupportedCryptoSection_placeholderCloud {
   position: relative;
 
@@ -180,6 +181,7 @@
   border-radius: 20px;
   background: var(--primary-05);
 }
+
 .SupportedCryptoSection_placeholderCloud span {
   display: -webkit-box;
   overflow: hidden;
@@ -189,6 +191,7 @@
 
   -webkit-line-clamp: 15;
 }
+
 .SupportedCryptoSection_placeholderCloud::after {
   position: absolute;
   top: 50%;
