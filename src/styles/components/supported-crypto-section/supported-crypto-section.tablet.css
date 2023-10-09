@@ -39,8 +39,7 @@
     flex-flow: column wrap;
 
     width: calc(100vw - 32px);
-    height: initial;
-    height: 486px;
+    height: 532px;
     margin-top: 40px;
     padding: 23px 8px;
 
