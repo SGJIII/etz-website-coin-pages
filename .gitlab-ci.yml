@@ -74,6 +74,8 @@ develop:deploy:
   variables:
     DEPLOY_TARGET: s3://etz-dev-landing/
     URL_AWS: http://etz-dev-landing.s3-website-us-east-1.amazonaws.com
+    AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID_DEV
+    AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY_DEV
   when: on_success
 
 production:build:
@@ -94,4 +96,6 @@ production:deploy:
   variables:
     DEPLOY_TARGET: s3://etz-production-landing/
     URL_AWS: http://etz-production-landing.s3-website-us-east-1.amazonaws.com
+    AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID_PROD
+    AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY_PROD
   when: on_success
