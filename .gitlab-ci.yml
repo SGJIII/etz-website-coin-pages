@@ -78,6 +78,28 @@ develop:deploy:
     AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY_DEV
   when: on_success
 
+qa:build:
+  extends: .build
+  needs: ["common:test"]
+  when: manual
+  variables:
+    API_URL: $API_URL_QA
+    BUILD_STATUS: DEV
+  # only:
+  #   - develop
+
+qa:deploy:
+  extends: .deploy
+  needs: ["qa:build"]
+  # only:
+  #   - develop
+  variables:
+    DEPLOY_TARGET: s3://etz-qa-landing/
+    URL_AWS: http://etz-qa-landing.s3-website-us-east-1.amazonaws.com
+    AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID_DEV
+    AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY_DEV
+  when: on_success
+
 production:build:
   extends: .build
   needs: ["common:test"]
