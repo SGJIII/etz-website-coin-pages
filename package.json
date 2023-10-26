@@ -24,7 +24,7 @@
   },
   "source": [
     "src/pages/index.html",
-    "src/pages/individual.html",
+    "src/pages/employers.html",
     "src/pages/legal.html",
     "src/pages/.well-known/change-password.html"
   ],
