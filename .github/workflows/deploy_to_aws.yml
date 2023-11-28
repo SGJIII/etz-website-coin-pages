@@ -3,33 +3,29 @@ name: Deploy to AWS
 on: workflow_dispatch
 
 jobs:
-  test:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
       with:
         ref: ${{vars.DEPLOY_BRANCH}}
+    - name: Create env file
+      run: |
+        touch .env
+        echo API_URL=${{vars.API_URL}} >> .env
+        echo BUILD_STATUS=${{vars.BUILD_STATUS}} >> .env
     - uses: actions/setup-node@v4
       with:
         node-version: 14.17.0
         cache: 'yarn'
-    - yarn install
+    - run: yarn install
     - run: yarn check:tsc
     - run: yarn check:lint
-
-  build:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
     - run: yarn build
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
     - uses: aws-actions/configure-aws-credentials@v4
       with:
         aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}}
         aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
         aws-region: ${{vars.AWS_REGION}}
     - run: aws s3 sync ./build s3://${{vars.AWS_S3_BUCKET}}/ --delete
+    - run: aws cloudfront create-invalidation --distribution-id ${{vars.AWS_CLOUDFRONT_DISTR}} --paths "/*"
