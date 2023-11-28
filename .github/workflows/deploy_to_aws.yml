@@ -1,0 +1,19 @@
+name: Deploy to AWS
+
+on: workflow_dispatch
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        ref: ${{vars.DEPLOY_BRANCH}}
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 14.17.0
+        cache: 'yarn'
+    - run: yarn check:tsc
+    - run: yarn check:lint
+    - run: yarn build
