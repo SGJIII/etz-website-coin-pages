@@ -23,7 +23,11 @@
           <div
             class="ContactUsSection_input ContactUsSection_input__half ContactUsSection_input__left __inputWrapper"
             data-name="ContactUsInputEmail">
-            <input placeholder="Email*" name="email" type="email" />
+            <input
+              placeholder="Email*"
+              name="email"
+              type="email"
+              oninput="this.value = this.value.toLowerCase()" />
           </div>
           <div
             class="ContactUsSection_input ContactUsSection_input__half ContactUsSection_input__right __inputWrapper"
