@@ -67,13 +67,22 @@
     justify-content: flex-start;
 
     width: initial;
-    margin: 32px 16px 8px;
+    margin: 32px 16px 0;
 
     color: var(--dark-50);
   }
 
   .Footer_copyright {
-    margin: 24px 0;
+    margin-top: 24px;
+  }
+
+  .Footer_address {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 18px;
+
+    width: initial;
+    margin: 24px 16px 24px;
   }
 
   .Footer_descriptionBlock {
