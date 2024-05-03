@@ -55,6 +55,12 @@
   color: var(--dark-50);
 }
 
+.Footer_address {
+  width: 1200px;
+
+  color: var(--dark-50);
+}
+
 .Footer_verticalDivider {
   margin: 0 10px;
 }
