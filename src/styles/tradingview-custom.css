@@ -1,0 +1,42 @@
+.coin-details {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 20px;
+}
+
+.coin-details img {
+  display: block;
+  margin: 20px auto;
+}
+
+#tradingview-embed-container {
+  position: relative;
+  margin-top: -150px; /* Adjust this value as needed to overlap with the blue section */
+  z-index: 10;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 1000px; /* Ensure it has margins on the sides */
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px; /* Adjust this value as needed */
+}
+
+/* Ensure the widget takes up the full width and height of the container */
+.tradingview-widget-container {
+  width: 100%;
+  height: 100%;
+  max-width: 960px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tradingview-widget-container__widget {
+  width: 100%;
+  height: 100%;
+}

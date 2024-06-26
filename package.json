@@ -3,7 +3,7 @@
   "version": "v1.1.21",
   "private": true,
   "scripts": {
-    "dev": "parcel serve  --open --host localhost --port 5140",
+    "dev": "parcel build --dist-dir dist && node server.js",
     "build": "rimraf build && parcel build --dist-dir build",
     "prepare": "husky install",
     "check:tsc": "tsc --noemit -t es5 ./src/**/*.ts",
@@ -20,13 +20,16 @@
   },
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "staticFiles": {
-    "staticPath": "src/assets"
+    "staticPath": "src/assets",
+    "staticOutDir": "."
   },
   "source": [
     "src/pages/index.html",
     "src/pages/employers.html",
     "src/pages/legal.html",
-    "src/pages/.well-known/change-password.html"
+    "src/pages/.well-known/change-password.html",
+    "src/pages/assets.html",
+    "src/pages/coin.html"
   ],
   "devDependencies": {
     "@alienlebarge/stylelint-config": "^3.1.6",
@@ -54,8 +57,11 @@
     "typescript": "^4.6.3"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.43.5",
     "axios": "^0.27.2",
+    "express": "^4.19.2",
     "lil-gui": "^0.16.1",
+    "markdown-it": "^14.1.0",
     "smoothscroll-polyfill": "^0.4.4",
     "three": "^0.140.2",
     "universalsmoothscroll": "^5.1.2",
