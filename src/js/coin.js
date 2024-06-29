@@ -50,14 +50,11 @@ export const renderCoinPage = async () => {
   document.getElementById(
     "coin-title"
   ).textContent = `${coinData.coin_name} Roth IRA, ${coinData.coin_name} SEP IRA, ${coinData.coin_name} Traditional IRA | ETZ Soft `;
-  document.getElementById(
-    "coin-heading"
-  ).textContent = `${coinData.coin_name} IRA`;
 
   const tradingViewEmbed = document.getElementById("tradingview-embed");
   tradingViewEmbed.innerHTML = `
     <!-- TradingView Widget BEGIN -->
-    <div class="tradingview-widget-container" style="height:100%;width:100%">
+    <div class="tradingview-widget-container">
       <div class="tradingview-widget-container__widget" style="height:100%;width:100%"></div>
       <div class="tradingview-widget-copyright">
         <a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank">
@@ -74,12 +71,12 @@ export const renderCoinPage = async () => {
     "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
   script.async = true;
   script.innerHTML = JSON.stringify({
-    autosize: true,
+    fullscreen: true,
     symbol: `COINBASE:${coinData.coin_base}USD`,
     interval: "D",
     timezone: "Etc/UTC",
     theme: "light",
-    style: "2",
+    style: "3",
     locale: "en",
     backgroundColor: "rgba(255, 255, 255, 1)",
     gridColor: "rgba(42, 46, 57, 0)",

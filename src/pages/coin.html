@@ -89,6 +89,9 @@
     <canvas class="webgl" name-mobile-model></canvas>
     <script src="../js/notification.ts" type="module"></script>
     <include
+      src="components/header-menu/index.mobile.html"
+      locals="{}"></include>
+    <include
       src="components/header-section/index.html"
       locals='{"title": "{{coin_title}}", "description": ""}'></include>
     <div id="tradingview-embed-container">
@@ -99,8 +102,7 @@
       class="__section __sidePadding ContentSection"
       style="height: auto">
       <div class="coin-details">
-        <h1 id="coin-heading">{{coin_title}}</h1>
-        <div id="coin-content"></div>
+        <div id="coin-content" class="coin-content"></div>
       </div>
     </article>
     <include src="components/footer/index.html" locals="{}"></include>
