@@ -72,7 +72,7 @@ export const renderCoinPage = async () => {
   script.async = true;
   script.innerHTML = JSON.stringify({
     fullscreen: true,
-    symbol: `COINBASE:${coinData.coin_base}USD`,
+    symbol: `CRYPTO:${coinData.coin_base}USD`,
     interval: "D",
     timezone: "Etc/UTC",
     theme: "light",
