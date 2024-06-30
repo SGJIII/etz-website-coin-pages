@@ -12,7 +12,7 @@ const md = new markdownIt();
 const fetchCoinData = async (coinName) => {
   const { data, error } = await supabase
     .from("coins")
-    .select("*")
+    .select("*") // Fetch all columns including is_prime
     .eq("coin_name", coinName)
     .single();
 
@@ -36,10 +36,9 @@ const fetchCoinPrice = async (coinbaseProductId) => {
 };
 
 export const renderCoinPage = async () => {
-  const coinName = document.location.pathname
-    .split("/")
-    .pop()
-    .replace(".html", "");
+  const coinName = decodeURIComponent(
+    document.location.pathname.split("/").pop().replace(".html", "")
+  );
   const coinData = await fetchCoinData(coinName);
 
   if (!coinData) {
@@ -72,7 +71,7 @@ export const renderCoinPage = async () => {
   script.async = true;
   script.innerHTML = JSON.stringify({
     fullscreen: true,
-    symbol: `CRYPTO:${coinData.coin_base}USD`,
+    symbol: coinData.tradingview_symbol, // Use tradingview_symbol from the database
     interval: "D",
     timezone: "Etc/UTC",
     theme: "light",
@@ -91,4 +90,30 @@ export const renderCoinPage = async () => {
 
   const coinContent = document.getElementById("coin-content");
   coinContent.innerHTML = md.render(coinData.ai_content);
+
+  // Add the button based on is_prime
+  const buttonContainer = document.createElement("div");
+  buttonContainer.style.textAlign = "center";
+  buttonContainer.style.marginTop = "20px";
+
+  const button = document.createElement("a");
+  button.href = "https://etz.app.link/YM4SdypaQKb";
+  button.textContent = coinData.is_prime ? "Buy Now" : "Request";
+  button.style.display = "inline-block";
+  button.style.padding = "15px 75px";
+  button.style.background = "linear-gradient(45deg, #226DFF, #2891FF)";
+  button.style.color = "white";
+  button.style.fontFamily = "'Rubik', sans-serif";
+  button.style.fontWeight = "600";
+  button.style.borderRadius = "10px";
+  button.style.textDecoration = "none";
+  button.style.marginTop = "50px";
+  button.style.fontSize = "Larger";
+
+  buttonContainer.appendChild(button);
+  coinContent.appendChild(buttonContainer);
 };
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderCoinPage();
+});

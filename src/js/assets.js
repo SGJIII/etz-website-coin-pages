@@ -24,9 +24,6 @@ const fetchData = async () => {
   const { data, error } = await supabase
     .from("coins")
     .select("*")
-    .not("logo_url", "is", null)
-    .not("ai_content", "is", null)
-    .not("coin_base", "is", null)
     .order("market_cap_rank", { ascending: true });
 
   if (error) {

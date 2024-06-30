@@ -14,7 +14,7 @@ const injectMetaData = (html, coinName) => {
 };
 
 app.get('/:coinName.html', (req, res) => {
-  const coinName = req.params.coinName;
+  const coinName = decodeURIComponent(req.params.coinName); // Decode the coin name
   const filePath = path.join(__dirname, 'dist', 'coin.html');
   
   fs.readFile(filePath, 'utf8', (err, html) => {
