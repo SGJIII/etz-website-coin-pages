@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../styles/index.desktop.css" />
     <link rel="stylesheet" href="../styles/index.mobile.css" />
     <link rel="stylesheet" href="../styles/index.tablet.css" />
+    <link rel="stylesheet" href="../styles/coins.css" />
     <link rel="stylesheet" href="../styles/assets.css" />
     <title>Assets</title>
     <style id="antiClickjack">
@@ -93,42 +94,48 @@
     <include
       src="components/header-section/index.html"
       locals='{"title": "Assets", "description": ""}'></include>
-    <article
-      id="content"
-      class="__section __sidePadding ContentSection"
-      style="height: auto">
-      <div class="coin-list">
-        <h1>Assets</h1>
-        <div class="table-container" style="overflow-y: auto">
-          <table id="assets-table">
-            <thead>
-              <tr>
-                <th>Rank</th>
-                <th>Logo</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>24hr Change</th>
-                <th>24hr Trading Volume</th>
-                <th>Buy</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
+    <div class="table-wrapper">
+      <article
+        id="content"
+        class="__section __sidePadding ContentSection"
+        style="height: auto">
+        <div class="coin-list">
+          <div class="table-container" style="overflow-y: auto">
+            <table id="assets-table">
+              <thead>
+                <tr>
+                  <th class="name-column">Name</th>
+                  <th class="price-column">Price</th>
+                  <th class="buy-column">Buy</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
         </div>
-      </div>
-    </article>
+      </article>
+    </div>
     <include src="components/footer/index.html" locals="{}"></include>
     <script type="module">
-      import { populateTable } from "../js/assets.js";
+      import { fetchData, populateTable } from "../js/assets.js";
 
-      document.addEventListener("DOMContentLoaded", () => {
+      document.addEventListener("DOMContentLoaded", async () => {
+        const tableBody = document.querySelector("#assets-table tbody");
+
+        // Fetch data as soon as the DOM is loaded
+        const data = fetchData();
+        console.log("Data fetching started");
+
+        // Hide the loader after 3 seconds
         setTimeout(() => {
           const loaderContainer = document.getElementById("loader-container");
           if (loaderContainer) {
             loaderContainer.style.display = "none";
           }
-          populateTable();
         }, 3000);
+
+        // Populate the table with fetched data
+        await populateTable(await data, tableBody);
       });
     </script>
     <script type="module">
