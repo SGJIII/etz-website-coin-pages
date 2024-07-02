@@ -29,7 +29,8 @@
     "src/pages/legal.html",
     "src/pages/.well-known/change-password.html",
     "src/pages/assets.html",
-    "src/pages/coin.html"
+    "src/pages/coin.html",
+    "src/pages/founders.html"
   ],
   "devDependencies": {
     "@alienlebarge/stylelint-config": "^3.1.6",
