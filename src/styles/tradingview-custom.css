@@ -61,7 +61,7 @@
 
 #tradingview-embed-container {
   position: relative;
-  margin-top: -500px; /* Adjust this value as needed to overlap with the blue section */
+  margin-top: -450px; /* Adjust this value as needed to overlap with the blue section */
   z-index: 10;
   background-color: white;
   padding: 20px;

@@ -170,13 +170,13 @@
 /* New styles for the table wrapper */
 .table-wrapper {
   position: relative;
-  top: -450px; /* Adjust this value as needed to move the table up */
+  top: -400px; /* Adjust this value as needed to move the table up */
   margin: 0 auto; /* Center the table wrapper */
   background: white; /* Ensure background color for the table wrapper */
   padding: 20px; /* Add padding around the table */
   border-radius: 10px; /* Add rounded corners if desired */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-  width: 50%; /* Adjust width as needed */
+  width: 60%; /* Adjust width as needed */
   max-width: 1200px; /* Ensure the table doesn't get too wide */
   z-index: 10; /* Ensure the table wrapper is on top of other elements */
 }
