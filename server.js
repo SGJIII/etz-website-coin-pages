@@ -6,6 +6,19 @@ const port = 5140;
 
 app.use(express.static('dist'));
 
+// Serve sitemap.xml
+app.get('/sitemap.xml', (req, res) => {
+  const filePath = path.join(__dirname, 'dist', 'sitemap.xml');
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    if (err) {
+      res.status(500).send('Server Error');
+      return;
+    }
+    res.header('Content-Type', 'application/xml');
+    res.send(data);
+  });
+});
+
 // Function to replace placeholders with actual data
 const injectMetaData = (html, coinName) => {
   return html.replace(/{{coin_name}}/g, coinName)

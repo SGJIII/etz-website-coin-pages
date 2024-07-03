@@ -1,13 +1,10 @@
 /* Existing styles */
-/*
 .HeaderSection {
-    height: 80vh !important;
+  height: 80vh !important;
 }
 
-*/
-
 .HeaderSection_title {
-  height: 50vh !important;
+  height: 20vh !important;
 }
 
 /* Make all images circular */
@@ -110,14 +107,14 @@
   width: 25%;
   color: gray;
   font-size: large;
-  padding-right: 150px;
+  padding-right: 100px;
   padding-left: 100px;
 }
 
 #assets-table td.price-column {
   text-align: right;
   width: 25%;
-  padding-right: 150px;
+  padding-right: 100px;
   padding-left: 100px;
   font-size: large;
 }
@@ -134,6 +131,20 @@
   justify-content: center;
   align-items: center;
   width: 150px; /* Set a fixed width */
+}
+
+#assets-table th.change-column {
+  text-align: right;
+  width: 25%;
+  color: gray;
+  font-size: large;
+  padding-right: 150px;
+  padding-left: 100px;
+}
+
+#assets-table td.change-column {
+  text-align: right;
+  padding-right: 150px;
 }
 
 #assets-table tr:hover {
@@ -167,16 +178,41 @@
   z-index: -1; /* Ensure buy button stays on top */
 }
 
+/* Styles for positive and negative changes */
+.positive-change::before {
+  content: "▲";
+  color: green;
+  margin-right: 5px;
+}
+
+.positive-change {
+  color: green;
+}
+
+.negative-change::before {
+  content: "▼";
+  color: red;
+  margin-right: 5px;
+}
+
+.negative-change {
+  color: red;
+}
+
+.no-change {
+  color: gray;
+}
+
 /* New styles for the table wrapper */
 .table-wrapper {
   position: relative;
-  top: -400px; /* Adjust this value as needed to move the table up */
+  top: -250px; /* Adjust this value as needed to move the table up */
   margin: 0 auto; /* Center the table wrapper */
   background: white; /* Ensure background color for the table wrapper */
   padding: 20px; /* Add padding around the table */
   border-radius: 10px; /* Add rounded corners if desired */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-  width: 60%; /* Adjust width as needed */
+  width: 77%; /* Adjust width as needed */
   max-width: 1200px; /* Ensure the table doesn't get too wide */
   z-index: 10; /* Ensure the table wrapper is on top of other elements */
 }

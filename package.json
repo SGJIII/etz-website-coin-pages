@@ -3,8 +3,8 @@
   "version": "v1.1.21",
   "private": true,
   "scripts": {
-    "dev": "parcel build --dist-dir dist && node server.js",
-    "build": "rimraf build && parcel build --dist-dir build",
+    "dev": "node src/js/generateSitemap.js && parcel build --dist-dir dist && node server.js",
+    "build": "rimraf build && parcel build --dist-dir build && node src/js/generateSitemap.js",
     "prepare": "husky install",
     "check:tsc": "tsc --noemit -t es5 ./src/**/*.ts",
     "check:lint": "eslint ./src --ext .js,.ts",
