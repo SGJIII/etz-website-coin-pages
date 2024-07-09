@@ -50,6 +50,20 @@ export const renderCoinPage = async () => {
     "coin-title"
   ).textContent = `${coinData.coin_name} Roth IRA, ${coinData.coin_name} SEP IRA, ${coinData.coin_name} Traditional IRA | ETZ Soft `;
 
+  // Inject meta tags dynamically
+  document
+    .querySelector('meta[property="og:title"]')
+    .setAttribute("content", `${coinData.coin_name} IRAs`);
+  document
+    .querySelector('meta[property="og:description"]')
+    .setAttribute("content", `Learn more about ${coinData.coin_name}`);
+  document
+    .querySelector('meta[property="og:url"]')
+    .setAttribute("content", `https://etzsoft.com/${coinData.coin_name}.html`);
+  document
+    .querySelector('meta[name="twitter:title"]')
+    .setAttribute("content", `${coinData.coin_name} IRAs`);
+
   const tradingViewEmbed = document.getElementById("tradingview-embed");
   tradingViewEmbed.innerHTML = `
     <!-- TradingView Widget BEGIN -->
