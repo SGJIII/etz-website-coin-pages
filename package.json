@@ -3,8 +3,9 @@
   "version": "v1.1.21",
   "private": true,
   "scripts": {
+    "prebuild": "cp src/_redirects dist/_redirects",
     "dev": "node src/js/generateSitemap.js && parcel build --dist-dir dist && node server.js",
-    "build": "rimraf build && parcel build --dist-dir dist && node src/js/generateSitemap.js",
+    "build": "rimraf dist && parcel build --dist-dir dist && node src/js/generateSitemap.js && cp src/_redirects dist/_redirects",
     "prepare": "husky install",
     "check:tsc": "tsc --noemit -t es5 ./src/**/*.ts",
     "check:lint": "eslint ./src --ext .js,.ts",
