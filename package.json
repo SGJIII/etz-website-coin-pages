@@ -3,7 +3,7 @@
   "version": "v1.1.21",
   "private": true,
   "scripts": {
-    "prebuild": "cp src/_redirects dist/_redirects",
+    "prebuild": "mkdir -p dist && cp src/_redirects dist/_redirects",
     "dev": "node src/js/generateSitemap.js && parcel build --dist-dir dist && node server.js",
     "build": "rimraf dist && parcel build --dist-dir dist && node src/js/generateSitemap.js && cp src/_redirects dist/_redirects",
     "prepare": "husky install",
