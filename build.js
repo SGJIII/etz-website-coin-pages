@@ -1,11 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
-
 const apiEndpoint = 'https://blog.etzsoft.com/wp-json/wp/v2/posts';
 
 const fetchBlogPosts = async () => {
+    const fetch = (await import('node-fetch')).default;
     try {
         const response = await fetch(apiEndpoint);
         if (!response.ok) {
@@ -19,59 +18,52 @@ const fetchBlogPosts = async () => {
     }
 };
 
-const generateBlogPages = async () => {
+const populateBlogList = async () => {
     const posts = await fetchBlogPosts();
-    const blogListHtml = posts.map(post => `
-        <div class="blog-post">
+    const blogListContent = posts.map(post => 
+        `<div class="blog-post">
             <h2><a href="/blog/${post.slug}.html">${post.title.rendered}</a></h2>
             <p>${post.excerpt.rendered}</p>
-        </div>
-    `).join('');
+        </div>`
+    ).join('');
 
-    const blogListPage = `
-        <!DOCTYPE html>
-        <html lang="en-US">
-        <head>
-            <meta charset="UTF-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <link rel="stylesheet" href="../styles/index.css" />
-            <link rel="stylesheet" href="../styles/index.desktop.css" />
-            <link rel="stylesheet" href="../styles/index.mobile.css" />
-            <link rel="stylesheet" href="../styles/blog.css" />
-            <title>Blog</title>
-        </head>
-        <body>
-            <div id="blog-list">${blogListHtml}</div>
-        </body>
-        </html>
+    const blogListTemplate = `
+        <article id="blog-list">
+            ${blogListContent}
+        </article>
     `;
 
-    fs.writeFileSync(path.join(__dirname, 'dist', 'blog.html'), blogListPage);
+    const blogListDir = path.join(__dirname, 'dist', 'blog');
+    if (!fs.existsSync(blogListDir)) {
+        fs.mkdirSync(blogListDir, { recursive: true });
+    }
 
-    posts.forEach(post => {
-        const postPage = `
-            <!DOCTYPE html>
-            <html lang="en-US">
-            <head>
-                <meta charset="UTF-8" />
-                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                <link rel="stylesheet" href="../styles/index.css" />
-                <link rel="stylesheet" href="../styles/index.desktop.css" />
-                <link rel="stylesheet" href="../styles/index.mobile.css" />
-                <link rel="stylesheet" href="../styles/blog.css" />
-                <title>${post.title.rendered}</title>
-            </head>
-            <body>
-                <div id="post-content">${post.content.rendered}</div>
-            </body>
-            </html>
+    fs.writeFileSync(path.join(blogListDir, 'index.html'), blogListTemplate);
+};
+
+const populateBlogPosts = async () => {
+    const posts = await fetchBlogPosts();
+
+    posts.forEach(async (post) => {
+        const blogPostContent = `
+            <div id="post-content">
+                <h1>${post.title.rendered}</h1>
+                <div>${post.content.rendered}</div>
+            </div>
         `;
-        const postDir = path.join(__dirname, 'dist', 'blog');
-        if (!fs.existsSync(postDir)){
+
+        const postDir = path.join(__dirname, 'dist', 'blog', post.slug);
+        if (!fs.existsSync(postDir)) {
             fs.mkdirSync(postDir, { recursive: true });
         }
-        fs.writeFileSync(path.join(postDir, `${post.slug}.html`), postPage);
+
+        fs.writeFileSync(path.join(postDir, 'index.html'), blogPostContent);
     });
+};
+
+const generateBlogPages = async () => {
+    await populateBlogList();
+    await populateBlogPosts();
 };
 
 generateBlogPages();

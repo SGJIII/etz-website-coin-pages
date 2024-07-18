@@ -3,9 +3,9 @@
   "version": "v1.1.21",
   "private": true,
   "scripts": {
-    "prebuild": "mkdir -p dist && cp src/_redirects dist/_redirects && node build.js",
+    "prebuild": "mkdir -p dist && cp src/_redirects dist/_redirects && node build.js && cp src/robots.txt dist/robots.txt",
     "dev": "node src/js/generateSitemap.js && parcel build --dist-dir dist && node server.js",
-    "build": "rimraf dist && yarn prebuild && parcel build --dist-dir dist && node src/js/generateSitemap.js && cp src/_redirects dist/_redirects",
+    "build": "rimraf dist && yarn prebuild && parcel build --dist-dir dist && node src/js/generateSitemap.js && cp src/_redirects dist/_redirects && cp src/robots.txt dist/robots.txt",
     "prepare": "husky install",
     "check:tsc": "tsc --noemit -t es5 ./src/**/*.ts",
     "check:lint": "eslint ./src --ext .js,.ts",

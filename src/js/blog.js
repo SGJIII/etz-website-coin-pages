@@ -25,12 +25,11 @@ export const renderBlogPosts = async () => {
 
   blogList.innerHTML = posts
     .map(
-      (post) => `
-        <div class="blog-post">
+      (post) =>
+        `<div class="blog-post">
             <h2><a href="/blog/${post.slug}.html">${post.title.rendered}</a></h2>
             <p>${post.excerpt.rendered}</p>
-        </div>
-    `
+        </div>`
     )
     .join("");
 };

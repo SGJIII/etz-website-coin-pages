@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html
+  lang="en-US"
+  xmlns:og="http://opengraphprotocol.org/schema/"
+  xmlns:fb="http://www.facebook.com/2008/fbml">
   <head>
-    <script src="../js/services/lottie.js" type="module"></script>
-    <script type="module" src="../js/blog.js"></script>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta
@@ -11,94 +12,42 @@
     <link rel="stylesheet" href="../styles/index.css" />
     <link rel="stylesheet" href="../styles/index.desktop.css" />
     <link rel="stylesheet" href="../styles/index.mobile.css" />
-    <title>Blog</title>
-    <style id="antiClickjack">
-      body {
-        display: none !important;
-      }
-    </style>
-    <script type="text/javascript">
-      if (self === top) {
-        var antiClickjack = document.getElementById("antiClickjack");
-        antiClickjack.parentNode.removeChild(antiClickjack);
-      } else {
-        top.location = self.location;
-      }
-    </script>
-    <link
-      rel="shortcut icon"
-      href="https://etzsoft.com/favicon.ico"
-      type="image/x-icon" />
-    <link
-      rel="apple-touch-icon"
-      sizes="16x16"
-      href="https://etzsoft.com/favicon-16.png" />
-    <link
-      rel="apple-touch-icon"
-      sizes="32x32"
-      href="https://etzsoft.com/favicon-32.png" />
-    <link
-      rel="apple-touch-icon"
-      sizes="48x48"
-      href="https://etzsoft.com/favicon-48.png" />
-    <link
-      rel="apple-touch-icon"
-      sizes="256x256"
-      href="https://etzsoft.com/favicon-256.png" />
+    <link rel="stylesheet" href="../styles/index.tablet.css" />
+    <link rel="stylesheet" href="../styles/blog.css" />
+    <!-- Include the new blog stylesheet -->
+    <title>ETZ Blog</title>
+    <script src="../js/version.js" type="module"></script>
   </head>
   <body>
     <div id="loader-container">
       <include src="components/loader/index.html"></include>
     </div>
-    <canvas class="webgl" name-mobile-model></canvas>
     <script src="../js/notification.ts" type="module"></script>
     <include
       src="components/header-menu/index.mobile.html"
       locals="{}"></include>
-    <include
-      src="components/header-section/index.html"
-      locals='{"title": "Blog", "description": ""}'></include>
-    <article
-      id="content"
-      class="__section __sidePadding ContentSection"
-      style="height: auto">
-      <div class="blog-list" id="blog-list">
-        <!-- Blog posts will be inserted here -->
-      </div>
+    <include src="components/header-section/index.html" locals="{}"></include>
+    <article class="blog-container">
+      <!-- Changed div to article -->
+      <include src="components/blog-list/index.html"></include>
     </article>
     <include src="components/footer/index.html" locals="{}"></include>
-    <script type="module">
-      import { renderBlogPosts } from "../js/blog.js";
-
-      document.addEventListener("DOMContentLoaded", () => {
-        setTimeout(() => {
-          const loaderContainer = document.getElementById("loader-container");
-          if (loaderContainer) {
-            loaderContainer.style.display = "none";
-          }
-          renderBlogPosts();
-        }, 3000);
-      });
-    </script>
-    <script type="module">
-      function setUpSizePage() {
-        const vw = Math.max(
-          document.documentElement.clientWidth || 0,
-          window.innerWidth || 0
-        );
-        const vh = Math.max(
-          document.documentElement.clientHeight || 0,
-          window.innerHeight || 0
-        );
-        document.documentElement.style.setProperty("--vw", `${vw}px`);
-        document.documentElement.style.setProperty("--vh", `${vh}px`);
-        document.documentElement.style.setProperty("--vh-px", `${vh}px`);
-      }
-      setUpSizePage();
-      window.addEventListener("resize", setUpSizePage);
-    </script>
     <script type="module" src="../js/links/links.ts" async></script>
     <script type="module" src="../js/header-menu.ts" async></script>
-    <script type="module" src="../js/index.ts" async></script>
+    <script type="module" src="../js/blog.js"></script>
+    <script>
+      // Hide the loader after 1 second and ensure content is displayed
+      setTimeout(() => {
+        const loaderContainer = document.getElementById("loader-container");
+        if (loaderContainer) {
+          loaderContainer.style.display = "none";
+        }
+        const blogList = document.getElementById("blog-list");
+        if (blogList) {
+          blogList.style.display = "block";
+          blogList.style.visibility = "visible";
+        }
+      }, 1000);
+    </script>
   </body>
 </html>
