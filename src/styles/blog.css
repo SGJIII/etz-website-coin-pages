@@ -10,8 +10,12 @@ body {
   line-height: 1.5;
   margin: 0;
   padding: 0;
-  background-color: #f9f9f9;
+  background-color: #ffffff;
   overflow: auto; /* Ensure body is scrollable */
+}
+
+.HeaderSection {
+  height: 84vh;
 }
 
 /* Blog page container */

@@ -14,8 +14,8 @@
     <link rel="stylesheet" href="../styles/index.mobile.css" />
     <link rel="stylesheet" href="../styles/index.tablet.css" />
     <link rel="stylesheet" href="../styles/blog.css" />
-    <!-- Include the new blog stylesheet -->
     <title>ETZ Blog</title>
+    <script src="../js/services/lottie.js" type="module"></script>
     <script src="../js/version.js" type="module"></script>
   </head>
   <body>
@@ -26,9 +26,10 @@
     <include
       src="components/header-menu/index.mobile.html"
       locals="{}"></include>
-    <include src="components/header-section/index.html" locals="{}"></include>
+    <include
+      src="components/header-section/index.html"
+      locals='{"title": "ETZ - Blog", "description": ""}'></include>
     <article class="blog-container">
-      <!-- Changed div to article -->
       <include src="components/blog-list/index.html"></include>
     </article>
     <include src="components/footer/index.html" locals="{}"></include>
@@ -36,7 +37,6 @@
     <script type="module" src="../js/header-menu.ts" async></script>
     <script type="module" src="../js/blog.js"></script>
     <script>
-      // Hide the loader after 1 second and ensure content is displayed
       setTimeout(() => {
         const loaderContainer = document.getElementById("loader-container");
         if (loaderContainer) {
