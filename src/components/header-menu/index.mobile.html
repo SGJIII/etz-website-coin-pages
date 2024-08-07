@@ -7,31 +7,25 @@
     </a>
     <div class="HeaderMenu_links">
       <div id="HeaderMenu_links">
-        <div class="HeaderMenu_link">
-          <a href="./employers.html" name-native-link>
-            <span class="HeaderMenu_linkText__black">For Employers</span>
-          </a>
+        <div class="HeaderMenu_link dropdown">
+          <button class="dropbtn">Who We Serve</button>
+          <div class="dropdown-content">
+            <a href="/" name-native-link>For Individuals</a>
+            <a href="./founders.html" name-native-link>For Founders</a>
+            <a href="./employers.html" name-native-link>For Employers</a>
+          </div>
         </div>
-
-        <div class="HeaderMenu_link">
-          <a href="/" name-native-link>
-            <span class="HeaderMenu_linkText__black">For Individuals</span>
-          </a>
-        </div>
-
         <div class="HeaderMenu_link">
           <a href="./assets.html" name-native-link>
             <span class="HeaderMenu_linkText__black">Assets</span>
           </a>
         </div>
-
         <div class="HeaderMenu_link">
-          <a href="./founders.html" name-native-link>
-            <span class="HeaderMenu_linkText__black">Founders</span>
+          <a href="./blog.html" name-native-link>
+            <span class="HeaderMenu_linkText__black">Blog</span>
           </a>
         </div>
       </div>
-
       <div class="HeaderMenu_dashContainer">
         <div class="HeaderMenu_dash"></div>
       </div>
@@ -43,7 +37,6 @@
           Open Individual IRA
         </span>
       </a>
-
       <!-- <span class="HeaderMenu_buttonLink">
         <div class="HeaderMenu_buttonIcon HeaderMenu_entryIconDark">
           <include src="assets/entry-dark.svg"> </include>
@@ -54,7 +47,6 @@
         Sign In
       </span> -->
     </span>
-
     <div class="HeaderMenu_burgerBlock">
       <input
         type="checkbox"
@@ -70,20 +62,30 @@
   </div>
   <div class="HeaderMenu_linksBlockMobile">
     <div class="HeaderMenu_linksMobile">
-      <a class="HeaderMenu_linkMobile __mobile-accent-2" href="/">
-        For Individuals
-      </a>
-      <a class="HeaderMenu_linkMobile __mobile-accent-2" href="./founders.html">
-        For Founders
-      </a>
-      <a
-        class="HeaderMenu_linkMobile __mobile-accent-2"
-        href="./employers.html">
-        For Employers
-      </a>
-      <a class="HeaderMenu_linkMobile __mobile-accent-2" href="./assets.html">
-        Assets
-      </a>
+      <div class="dropdown">
+        <button class="dropbtn">Who We Serve</button>
+        <div class="dropdown-content">
+          <a class="HeaderMenu_linkMobile __mobile-accent-2" href="/"
+            >For Individuals</a
+          >
+          <a
+            class="HeaderMenu_linkMobile __mobile-accent-2"
+            href="./founders.html"
+            >For Founders</a
+          >
+          <a
+            class="HeaderMenu_linkMobile __mobile-accent-2"
+            href="./employers.html"
+            >For Employers</a
+          >
+        </div>
+      </div>
+      <a class="HeaderMenu_linkMobile __mobile-accent-2" href="./assets.html"
+        >Assets</a
+      >
+      <a class="HeaderMenu_linkMobile __mobile-accent-2" href="./blog.html"
+        >Blog</a
+      >
     </div>
     <div class="HeaderMenu_buttonsMobile">
       <!-- Removed Get Free Employer DEMO button -->
@@ -97,12 +99,12 @@
       </a>
     </div>
   </div>
-
   <lottie-player
     src="/leaves/Leaves_web.json"
     class="Loader_leaves Loader_leaves__web HeaderMenu_overflow"
     background="transparent"
     speed="1"
     loop
-    autoplay></lottie-player>
+    autoplay>
+  </lottie-player>
 </header>
