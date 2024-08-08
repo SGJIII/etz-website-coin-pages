@@ -1,3 +1,5 @@
+/* src/styles/assets.css */
+
 /* Existing styles */
 .HeaderSection {
   height: 80vh !important;
@@ -219,4 +221,74 @@
 
 #content {
   min-width: auto !important;
+  overflow-x: scroll;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  .HeaderSection {
+    height: 60vh !important;
+  }
+
+  .HeaderSection_title {
+    height: 15vh !important;
+  }
+
+  .table-wrapper {
+    width: 100%; /* Full width for mobile */
+    padding: 10px; /* Reduce padding for mobile */
+    overflow-x: auto; /* Allow horizontal scrolling */
+  }
+
+  #assets-table {
+    display: block;
+    width: 100%; /* Allow the table to expand */
+  }
+
+  #assets-table th,
+  #assets-table td {
+    padding: 10px 15px; /* Reduce padding for mobile */
+    white-space: normal; /* Prevent text wrapping */
+  }
+
+  #assets-table th,
+  #assets-table td {
+    min-width: 150px; /* Minimum width for columns */
+  }
+
+  #assets-table th.name-column,
+  #assets-table td.name-column {
+    position: sticky;
+    left: 0;
+    background: white;
+    z-index: 5;
+  }
+
+  #assets-table th.name-column {
+    width: 150px; /* Adjust as needed */
+  }
+
+  #assets-table td.name-column {
+    width: 150px; /* Adjust as needed */
+    padding-right: 0px; /* Add padding to prevent overlap */
+  }
+
+  #assets-table td.price-column {
+    padding-left: 572px;
+  }
+
+  .coin-logo {
+    height: 25px; /* Reduce logo size for mobile */
+    width: 25px; /* Reduce logo size for mobile */
+    margin-right: 5px; /* Reduce margin for mobile */
+  }
+
+  .coin-name {
+    font-size: medium; /* Reduce font size for mobile */
+  }
+
+  .buy-button {
+    padding: 5px 10px; /* Reduce padding for mobile */
+    font-size: 14px; /* Reduce font size for mobile */
+  }
 }
